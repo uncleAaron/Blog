@@ -83,18 +83,18 @@
 <meta name="keywords" content="Java,并发编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第3章 Java内存模型">
-<meta property="og:url" content="https://uncleaaron.github.io/Blog/2018/05/29/第3章 Java内存模型/index.html">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/2018/05/29/Java并发编程艺术/第3章 Java内存模型/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
 <meta property="og:description" content="第3章 Java内存模型内存模型 内存模型中的顺序一致性，重排序以及顺序一致性内存模型 同步原语：synchronized，volatile，final 一、Java内存模型的基础1.1. 并发编程模型的两个关键问题（通信、同步）： 线程之间如何通信 线程之间如何同步  线程之间通信机制有两种：共享内存、消息传递 同步：程序中用于控制不同线程间操作发生相对顺序的机制。 两种并发模型：  共享内存：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/05/29/第3章%20Java内存模型/static/图3-1%20Java内存模型的抽象结构示意图.jpg">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/05/29/Java并发编程艺术/第3章%20Java内存模型/static/图3-1%20Java内存模型的抽象结构示意图.jpg">
 <meta property="og:image" content="d:/茸茸/文档/学习/myGitbooks/JAVA并发编程艺术精度笔记/static/图3-2%20顺序一致性内存模型的视图.jpg">
-<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/05/29/第3章%20Java内存模型/static/图3-3%20JMM的设计示意图.png">
-<meta property="og:updated_time" content="2018-06-05T13:13:47.432Z">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/05/29/Java并发编程艺术/第3章%20Java内存模型/static/图3-3%20JMM的设计示意图.png">
+<meta property="og:updated_time" content="2018-06-05T13:24:47.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第3章 Java内存模型">
 <meta name="twitter:description" content="第3章 Java内存模型内存模型 内存模型中的顺序一致性，重排序以及顺序一致性内存模型 同步原语：synchronized，volatile，final 一、Java内存模型的基础1.1. 并发编程模型的两个关键问题（通信、同步）： 线程之间如何通信 线程之间如何同步  线程之间通信机制有两种：共享内存、消息传递 同步：程序中用于控制不同线程间操作发生相对顺序的机制。 两种并发模型：  共享内存：">
-<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/2018/05/29/第3章%20Java内存模型/static/图3-1%20Java内存模型的抽象结构示意图.jpg">
+<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/2018/05/29/Java并发编程艺术/第3章%20Java内存模型/static/图3-1%20Java内存模型的抽象结构示意图.jpg">
 
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="https://uncleaaron.github.io/Blog/2018/05/29/第3章 Java内存模型/"/>
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/2018/05/29/Java并发编程艺术/第3章 Java内存模型/"/>
 
 
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/05/29/第3章 Java内存模型/">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/05/29/Java并发编程艺术/第3章 Java内存模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron.H">
@@ -599,7 +599,7 @@ op1->op2(right)->op3->op4</textarea><textarea id="flowchart-2-options" style="di
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/2018/05/28/第2章 Java并发编程机制的底层实现原理/" rel="next" title="第2章 Java并发编程机制的底层实现原理">
+              <a href="/Blog/2018/05/28/Java并发编程艺术/第2章 Java并发编程机制的底层实现原理/" rel="next" title="第2章 Java并发编程机制的底层实现原理">
                 <i class="fa fa-chevron-left"></i> 第2章 Java并发编程机制的底层实现原理
               </a>
             
@@ -609,7 +609,7 @@ op1->op2(right)->op3->op4</textarea><textarea id="flowchart-2-options" style="di
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/2018/06/01/第4章 Java并发编程基础/" rel="prev" title="第4章 Java并发编程基础">
+              <a href="/Blog/2018/06/01/Java并发编程艺术/第4章 Java并发编程基础/" rel="prev" title="第4章 Java并发编程基础">
                 第4章 Java并发编程基础 <i class="fa fa-chevron-right"></i>
               </a>
             
