@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="12345678910111213st=&amp;gt;start: ��ʼe=&amp;gt;end: ��¼io1=&amp;gt;inputoutput: �����û�������sub1=&amp;gt;subroutine: ���ݿ��ѯ����cond=&amp;gt;condition: �Ƿ��д��û�cond2=&amp;gt;condition: �����Ƿ���ȷop=&amp;gt;operation: �����û��">
+<meta name="description" content="st=&amp;gt;start: ��ʼ e=&amp;gt;end: ��¼ io1=&amp;gt;inputoutput: �����û������� sub1=&amp;gt;subroutine: ���ݿ��ѯ���� cond=&amp;gt;condition: �Ƿ��д��û� cond2=&amp;gt;condition: �����Ƿ���ȷ op=&amp;gt;operation: �����û���Ϣ  st-&amp;gt;io1-&amp;gt;sub1-&amp;gt;cond cond(y">
 <meta property="og:type" content="article">
 <meta property="og:title" content="StormAaron">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/2018/06/05/test/index.html">
 <meta property="og:site_name" content="StormAaron">
-<meta property="og:description" content="12345678910111213st=&amp;gt;start: ��ʼe=&amp;gt;end: ��¼io1=&amp;gt;inputoutput: �����û�������sub1=&amp;gt;subroutine: ���ݿ��ѯ����cond=&amp;gt;condition: �Ƿ��д��û�cond2=&amp;gt;condition: �����Ƿ���ȷop=&amp;gt;operation: �����û��">
+<meta property="og:description" content="st=&amp;gt;start: ��ʼ e=&amp;gt;end: ��¼ io1=&amp;gt;inputoutput: �����û������� sub1=&amp;gt;subroutine: ���ݿ��ѯ���� cond=&amp;gt;condition: �Ƿ��д��û� cond2=&amp;gt;condition: �����Ƿ���ȷ op=&amp;gt;operation: �����û���Ϣ  st-&amp;gt;io1-&amp;gt;sub1-&amp;gt;cond cond(y">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-05T12:09:12.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="StormAaron">
-<meta name="twitter:description" content="12345678910111213st=&amp;gt;start: ��ʼe=&amp;gt;end: ��¼io1=&amp;gt;inputoutput: �����û�������sub1=&amp;gt;subroutine: ���ݿ��ѯ����cond=&amp;gt;condition: �Ƿ��д��û�cond2=&amp;gt;condition: �����Ƿ���ȷop=&amp;gt;operation: �����û��">
+<meta name="twitter:description" content="st=&amp;gt;start: ��ʼ e=&amp;gt;end: ��¼ io1=&amp;gt;inputoutput: �����û������� sub1=&amp;gt;subroutine: ���ݿ��ѯ���� cond=&amp;gt;condition: �Ƿ��д��û� cond2=&amp;gt;condition: �����Ƿ���ȷ op=&amp;gt;operation: �����û���Ϣ  st-&amp;gt;io1-&amp;gt;sub1-&amp;gt;cond cond(y">
 
 
 
@@ -299,7 +299,21 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: ��ʼ</span><br><span class="line">e=&gt;end: ��¼</span><br><span class="line">io1=&gt;inputoutput: �����û�������</span><br><span class="line">sub1=&gt;subroutine: ���ݿ��ѯ����</span><br><span class="line">cond=&gt;condition: �Ƿ��д��û�</span><br><span class="line">cond2=&gt;condition: �����Ƿ���ȷ</span><br><span class="line">op=&gt;operation: �����û���Ϣ</span><br><span class="line"></span><br><span class="line">st-&gt;io1-&gt;sub1-&gt;cond</span><br><span class="line">cond(yes,right)-&gt;cond2</span><br><span class="line">cond(no)-&gt;io1(right)</span><br><span class="line">cond2(yes,right)-&gt;op-&gt;e</span><br><span class="line">cond2(no)-&gt;io1</span><br></pre></td></tr></table></figure>
+        <div id="flowchart-0" class="flow-chart"></div>
+
+<p><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: ��ʼ
+e=>end: ��¼
+io1=>inputoutput: �����û�������
+sub1=>subroutine: ���ݿ��ѯ����
+cond=>condition: �Ƿ��д��û�
+cond2=>condition: �����Ƿ���ȷ
+op=>operation: �����û���Ϣ
+
+st->io1->sub1->cond
+cond(yes,right)->cond2
+cond(no)->io1(right)
+cond2(yes,right)->op->e
+cond2(no)->io1</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
 
       
     </div>

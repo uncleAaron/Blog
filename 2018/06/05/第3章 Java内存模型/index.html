@@ -336,7 +336,8 @@
 <p><strong>实质</strong>：线程A在向线程B发消息，而且<strong>必须经过主内存</strong>。</p>
 <p><u>JMM通过控制主内存与每个线程的本地内存之间的交互，来为Java程序员提供内存可见性保证。</u></p>
 <h3 id="1-3-从源代码到指令序列的重排序"><a href="#1-3-从源代码到指令序列的重排序" class="headerlink" title="1.3. 从源代码到指令序列的重排序"></a>1.3. 从源代码到指令序列的重排序</h3><p>为了提高执行程序的性能，编译器和处理器常常会对指令做重排序(3种)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">op1=&gt;operation: 源代码</span><br><span class="line">op2=&gt;operation: 1：编译器</span><br><span class="line">优化重排序</span><br><span class="line">op3=&gt;operation: 2：指令级</span><br><span class="line">并行重排序</span><br><span class="line">op4=&gt;operation: 3：内存系统</span><br><span class="line">重排序</span><br><span class="line">op5=&gt;operation: 4：最终执行的指令序列</span><br><span class="line"></span><br><span class="line">op1(right)-&gt;op2(right)-&gt;op3(right)-&gt;op4(right)-&gt;op5</span><br></pre></td></tr></table></figure>
+<div id="flowchart-0" class="flow-chart"></div>
+
 <ol>
 <li>编译器优化的重排序。编译器在不改变单线程程序语义的前提下，重新安排语句执行顺序。</li>
 <li>指令级并行的重排序。处理器采用指令级并行技术将多条指令重叠执行。（如无数据依赖可改变执行顺序）</li>
@@ -357,7 +358,8 @@
 <li><strong>传递性</strong>：如果A happens-before B，且B happens-before C，那么A happens-before C</li>
 </ul>
 <p>happens-before与JMM的关系：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">op1=&gt;start: 程序员</span><br><span class="line">op2=&gt;operation: happens-before 规则</span><br><span class="line">(JMM呈现给程序员的视图部分）</span><br><span class="line">op3=&gt;operation: 禁止某种类型的</span><br><span class="line">编译器/处理器重排序</span><br><span class="line">( JMM的实现 )</span><br><span class="line">op4=&gt;operation: 处理器/编译器重排序规则</span><br><span class="line">(JMM定义的规则)</span><br><span class="line"></span><br><span class="line">op1(right)-&gt;op2(right)-&gt;op3(right)-&gt;op4</span><br></pre></td></tr></table></figure>
+<div id="flowchart-1" class="flow-chart"></div>
+
 <h2 id="二、重排序"><a href="#二、重排序" class="headerlink" title="二、重排序"></a>二、重排序</h2><p>重排序是指编译器和处理器优化程序性能而对指令序列进行重新排序的一种手段。</p>
 <h3 id="2-1-数据依赖性"><a href="#2-1-数据依赖性" class="headerlink" title="2.1. 数据依赖性"></a>2.1. 数据依赖性</h3><p>两个操作访问同一个变量，其中一个是写操作，则存在数据依赖性。</p>
 <p>分为：</p>
@@ -411,7 +413,8 @@
 <p>根据volatile规则：2 happens-before 3</p>
 <p>根据happens-before的传递性：1 happens-before 4</p>
 <p>也就是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">op1=&gt;operation: 1: 线程A修改共享变量</span><br><span class="line">op2=&gt;operation: 2: 线程A写volatile变量</span><br><span class="line">op3=&gt;operation: 3: 线程B读同一个volatile变量</span><br><span class="line">op4=&gt;operation: 4: 线程B读共享变量</span><br><span class="line"></span><br><span class="line">op1-&gt;op2(right)-&gt;op3-&gt;op4</span><br></pre></td></tr></table></figure>
+<div id="flowchart-2" class="flow-chart"></div>
+
 <p>A写了一个volatile变量之后，B读同一个volatile变量。</p>
 <p>A线程在写volatile变量之前所有可见的共享变量，在B线程读了同一个volatile变量之后，立即变得对B线程可见。（这句话可以用下面的内存语义结合内存模型理解）</p>
 <ul>
@@ -518,7 +521,30 @@
 <h3 id="9-1-JMM的内存可见性保证："><a href="#9-1-JMM的内存可见性保证：" class="headerlink" title="9.1. JMM的内存可见性保证："></a>9.1. JMM的内存可见性保证：</h3><ul>
 <li>单线程程序：单线程程序不会出现内存可见性问题。</li>
 <li>正确同步的多线程程序：正确同步的多线程程序的执行见具有顺序一致性（程序的执行结果与顺序一致性内存模型中的结果相同）（JMM用限制重排序来保证）</li>
-<li>未同步/未正确同步的多线程程序：最小安全性保障：线程执行时读取到的值，要么是之前某个线程写入的值，要么是默认值（0，null，false）</li>
+<li>未同步/未正确同步的多线程程序：最小安全性保障：线程执行时读取到的值，要么是之前某个线程写入的值，要么是默认值（0，null，false）<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">op1=>operation: 源代码
+op2=>operation: 1：编译器
+优化重排序
+op3=>operation: 2：指令级
+并行重排序
+op4=>operation: 3：内存系统
+重排序
+op5=>operation: 4：最终执行的指令序列
+
+op1(right)->op2(right)->op3(right)->op4(right)->op5</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">op1=>start: 程序员
+op2=>operation: happens-before 规则
+(JMM呈现给程序员的视图部分）
+op3=>operation: 禁止某种类型的
+编译器/处理器重排序
+( JMM的实现 )
+op4=>operation: 处理器/编译器重排序规则
+(JMM定义的规则)
+
+op1(right)->op2(right)->op3(right)->op4</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script><textarea id="flowchart-2-code" style="display: none">op1=>operation: 1: 线程A修改共享变量
+op2=>operation: 2: 线程A写volatile变量
+op3=>operation: 3: 线程B读同一个volatile变量
+op4=>operation: 4: 线程B读共享变量
+
+op1->op2(right)->op3->op4</textarea><textarea id="flowchart-2-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-2-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-2-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-2", options);</script></li>
 </ul>
 
       
