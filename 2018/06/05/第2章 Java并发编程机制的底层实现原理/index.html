@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/StormAaron.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/StormAaron.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/StormAaron.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/StormAaron.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/StormAaron.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/StormAaron.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/StormAaron.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第2章 Java并发编程机制的底层实现原理一、volatilevolatile是轻量级的synchronized，它在多处理器开发中保证了共享变量的“可见性”。（当一个程序修改一个共享变量时，另外一个线程能读到这个修改的值） Java规范定义：允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。 volatile使用恰当的话，它比synchroniz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="StormAaron">
+<meta property="og:url" content="https://github.com/uncleAaron/StormAaron.github.io/2018/06/05/第2章 Java并发编程机制的底层实现原理/index.html">
+<meta property="og:site_name" content="StormAaron">
+<meta property="og:description" content="第2章 Java并发编程机制的底层实现原理一、volatilevolatile是轻量级的synchronized，它在多处理器开发中保证了共享变量的“可见性”。（当一个程序修改一个共享变量时，另外一个线程能读到这个修改的值） Java规范定义：允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。 volatile使用恰当的话，它比synchroniz">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-28T09:09:32.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="StormAaron">
+<meta name="twitter:description" content="第2章 Java并发编程机制的底层实现原理一、volatilevolatile是轻量级的synchronized，它在多处理器开发中保证了共享变量的“可见性”。（当一个程序修改一个共享变量时，另外一个线程能读到这个修改的值） Java规范定义：允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。 volatile使用恰当的话，它比synchroniz">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/StormAaron.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/uncleAaron/StormAaron.github.io/2018/06/05/第2章 Java并发编程机制的底层实现原理/"/>
+
+
+
+
+
+  <title> | StormAaron</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/StormAaron.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StormAaron</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/StormAaron.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/StormAaron.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/uncleAaron/StormAaron.github.io/StormAaron.github.io/2018/06/05/第2章 Java并发编程机制的底层实现原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/StormAaron.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-05T19:48:35+08:00">
+                2018-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第2章-Java并发编程机制的底层实现原理"><a href="#第2章-Java并发编程机制的底层实现原理" class="headerlink" title="第2章 Java并发编程机制的底层实现原理"></a>第2章 Java并发编程机制的底层实现原理</h1><h2 id="一、volatile"><a href="#一、volatile" class="headerlink" title="一、volatile"></a>一、volatile</h2><p>volatile是<strong>轻量级的synchronized，它在多处理器开发中保证了共享变量的“可见性”。</strong>（<strong>当一个程序修改一个共享变量时，另外一个线程能读到这个修改的值</strong>）</p>
+<p>Java规范定义：允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。</p>
+<p>volatile使用恰当的话，它比synchronized的使用和执行成本更低，因为它<strong>不会引起线程上下文切换和调度。</strong></p>
+<h3 id="volatile原理"><a href="#volatile原理" class="headerlink" title="volatile原理"></a>volatile原理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 对volatile进行写操作 */</span></span><br><span class="line">instance = <span class="keyword">new</span> Singleton();		<span class="comment">//instance是volatile变量</span></span><br></pre></td></tr></table></figure>
+<p>转化成汇编代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x01a3de1d: movb $0x0,0x1004800(%esi)</span><br><span class="line">0x01a3de24: lock addl $0x0,(%esp)</span><br></pre></td></tr></table></figure></p>
+<p>有volatile变量修饰的共享变量进行写操作的额时候会多出第二行汇编代码。<br>Lock前缀的指令在多核处理器下会发生两件事：</p>
+<ol>
+<li>Lock前缀指令会引起处理器缓存回写到内存。</li>
+<li>一个处理器的缓存回写到内存会使在其他CPU里的该缓存数据无效（个人理解：可以保证数据一致性）</li>
+</ol>
+<h4 id="volatile使用优化"><a href="#volatile使用优化" class="headerlink" title="volatile使用优化"></a>volatile使用优化</h4><p>例：JDK7的并发包新增的队列集合类LinkedTransferQueue在使用volatile变量时，采用追加字节的方式来优化队列出入队的性能。他将共享变量追加到64字节，原因是现在许多CPU缓存行的大小是64字节宽，不支持部分填充缓存行， 当一个处理器试图修改缓存行的时候会将整个缓存行锁定，若字节数小于64，则头尾节点可能会缓存到同一个缓存行，这样会互相锁定降低修改效率。</p>
+<h2 id="二、synchronized"><a href="#二、synchronized" class="headerlink" title="二、synchronized"></a>二、synchronized</h2><p>利用 <strong>synchronized</strong>实现同步的基础：<strong>Java中的每一个对象都可以作为锁</strong>，具体表现为以下三种形式：</p>
+<ul>
+<li>对于<strong>普通同步方法</strong>：锁是当前<strong>实例对象</strong>。</li>
+<li>对于<strong>静态同步方法</strong>：锁是<strong>当前类的Class对象</strong>。</li>
+<li>对于<strong>同步方法块</strong>：锁是<strong>synchronized括号里配置的对象</strong>。</li>
+</ul>
+<p>而<strong>synchronized用的锁是存在Java对象头里的</strong></p>
+<h3 id="2-1-Java对象头"><a href="#2-1-Java对象头" class="headerlink" title="2.1. Java对象头"></a>2.1. Java对象头</h3><p>synchronized用的锁是存在Java对象头里的</p>
+<p>对象头里的Mark Word默认存对象的HashCode，分代年龄和锁标记位</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">锁状态</th>
+<th style="text-align:center">25bit</th>
+<th style="text-align:center">4bit</th>
+<th style="text-align:center">1bit 是否偏向锁</th>
+<th style="text-align:center">2bit 锁标志位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">重量级锁</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">指向互斥量（重量级锁）的指针</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td style="text-align:center">轻量锁</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">指向栈中锁的指针</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">00</td>
+</tr>
+<tr>
+<td style="text-align:center">偏向锁</td>
+<td style="text-align:center">线程ID</td>
+<td style="text-align:center">对象分代年龄对象分代年龄</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">01</td>
+</tr>
+<tr>
+<td style="text-align:center">无锁状态</td>
+<td style="text-align:center">对象的HashCode</td>
+<td style="text-align:center">对象分代年龄</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">11</td>
+</tr>
+<tr>
+<td style="text-align:center">GC标记</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">空</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">11</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-2-锁的升级和对比"><a href="#2-2-锁的升级和对比" class="headerlink" title="2.2. 锁的升级和对比"></a>2.2. 锁的升级和对比</h3><p>为了减少获得锁和释放锁的性能消耗，引入“偏向锁”和“轻量级锁”</p>
+<p>锁从低到高的4个状态：无锁 –&gt; 偏向锁 –&gt; 轻量级锁 –&gt; 重量级锁</p>
+<p>这几个状态会随着竞争逐渐升级（不可以降级，目的是为了提高获得/释放锁的效率）</p>
+<h4 id="1-偏向锁"><a href="#1-偏向锁" class="headerlink" title="1. 偏向锁"></a>1. 偏向锁</h4><p>存在现象：大多数情况下，锁不仅不存在多线程竞争，而且总是由同一个线程多次获得，为了让线程获得锁的代价更低而引入偏向锁。</p>
+<p>原理：当一个线程访问同步块并获取锁时，会在对象头和栈帧中的锁记录里存储锁偏向的线程ID，以后该线程在进出同步块时不需要进行CAS操作来加锁或解锁，只需要简单的测试一下对象头的MarkWord里是否存储着指向当前线程的偏向锁。（偏向锁在Java6和Java7内是默认启用的）</p>
+<p>撤销偏向锁：直到竞争出现才会释放锁。流程：①暂停拥有偏向锁的线程 ②解锁，将线程ID设置为空 ③恢复线程</p>
+<p><em>（注意撤销偏向锁与解锁不同：撤销偏向锁是指将偏向锁的偏向线程改为别的线程或空，解锁是释放锁）</em></p>
+<h4 id="2-轻量级锁"><a href="#2-轻量级锁" class="headerlink" title="2. 轻量级锁"></a>2. 轻量级锁</h4><p>加锁：JVM在当前线程的栈帧中创建用于存储锁的空间，并拷贝对象头中的MarkWord到锁记录中，再由线程尝试将对象头中的MarkWord替换为指向锁的指针。成功则获得锁，失败则有竞争，线程会采用自旋来获得锁（消耗CPU，为了避免无用的自旋，有必要升级为重量级锁）</p>
+<p>解锁：使用CAS将拷贝的MarkWord替换回对象头。如果成功，表示没有竞争发生；如果失败，则当前锁存在竞争，锁会膨胀成重量级锁。</p>
+<h4 id="3-重量级锁"><a href="#3-重量级锁" class="headerlink" title="3. 重量级锁"></a>3. 重量级锁</h4><p>线程试图获取重量级锁的时候，都会被阻塞，当持有锁的线程释放锁后会唤醒这些线程，然后进行新一轮的竞争</p>
+<h4 id="锁的优缺点和对比"><a href="#锁的优缺点和对比" class="headerlink" title="锁的优缺点和对比"></a>锁的优缺点和对比</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">锁</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+<th style="text-align:center">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">偏向锁</td>
+<td style="text-align:center">加锁解锁不需要额外的消耗，和非同步的方法执行只有纳秒级的差距</td>
+<td style="text-align:center">如果线程间存在锁竞争，会带来额外的锁撤销的消耗</td>
+<td style="text-align:center">适用于只有一个线程访问同步块的场景</td>
+</tr>
+<tr>
+<td style="text-align:center">轻量级锁</td>
+<td style="text-align:center">竞争的线程不会阻塞，提高了程序的响应速度</td>
+<td style="text-align:center">如果始终得不到锁竞争的线程，使用自旋会消耗CPU</td>
+<td style="text-align:center">追求响应时间<br>同步块执行速度非常快</td>
+</tr>
+<tr>
+<td style="text-align:center">重量级锁</td>
+<td style="text-align:center">线程竞争不使用自旋，不消耗CPU</td>
+<td style="text-align:center">线程阻塞，响应时间慢</td>
+<td style="text-align:center">追求吞吐量<br>同步块执行速度较长</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三、原子操作的实现原理"><a href="#三、原子操作的实现原理" class="headerlink" title="三、原子操作的实现原理"></a>三、原子操作的实现原理</h2><h4 id="3-1-实现方法："><a href="#3-1-实现方法：" class="headerlink" title="3.1. 实现方法："></a>3.1. 实现方法：</h4><ol>
+<li>缓存加锁/总线加锁：保证基本内存操作原子性</li>
+<li>缓存锁定/总线锁定：保证跨缓存行或跨页表访问等复杂的内存操作的原子性</li>
+</ol>
+<h4 id="3-2-Java中实现原子操作"><a href="#3-2-Java中实现原子操作" class="headerlink" title="3.2. Java中实现原子操作"></a>3.2. Java中实现原子操作</h4><p>从Java1.5开始，JDK并发包里提供了一些类来支持原子操作，如AtomicBoolean（用原子方式更新的boolean值）、AtomicInteger、AtomicLong等。</p>
+<h5 id="3-2-1-使用循环CAS实现原子操作"><a href="#3-2-1-使用循环CAS实现原子操作" class="headerlink" title="3.2.1. 使用循环CAS实现原子操作"></a>3.2.1. 使用循环CAS实现原子操作</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">AtomicInteger atomicI = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">* 使用CAS实现线程安全计数器</span></span><br><span class="line"><span class="comment">* CAS:Compare and set(switch)</span></span><br><span class="line"><span class="comment">* 在操作前先比较旧值有没有变化，没变化才换成新值，否则不替换（可以保证数据一致性）</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">safeCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (;;)&#123;</span><br><span class="line">        <span class="keyword">int</span> i = atomicI.get();</span><br><span class="line">        <span class="comment">//CAS操作(旧值,新值)：旧值相同才替换为新值，否则不替换</span></span><br><span class="line">        <span class="keyword">boolean</span> suc = atomicI.compareAndSet(i, i++);</span><br><span class="line">        <span class="keyword">if</span> (suc) &#123;</span><br><span class="line">            <span class="keyword">break</span>; <span class="comment">//修改成功则break，否则继续循环到操作成功（可能会由于长时间不成功带来巨额开销）</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 非线程安全计数器 */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">count</span><span class="params">()</span></span>&#123;</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-2-2-使用锁实现原子操作"><a href="#3-2-2-使用锁实现原子操作" class="headerlink" title="3.2.2. 使用锁实现原子操作"></a>3.2.2. 使用锁实现原子操作</h5><p>锁机制保证了只有获得锁的线程才能操作锁定的内存区域（但其实Java除了偏向锁，其他的锁都用了循环CAS的机制获取和释放锁）</p>
+<h5 id="3-2-3-CAS实现原子操作的三大问题："><a href="#3-2-3-CAS实现原子操作的三大问题：" class="headerlink" title="3.2.3. CAS实现原子操作的三大问题："></a>3.2.3. CAS实现原子操作的三大问题：</h5><ol>
+<li><p>ABA问题。一个值反复从A到B，B到A，使用CAS检查时以为没有变化，实际上却发生了变化。</p>
+<p>解决思路：使用版本号</p>
+<p>JDK的Atomic包里提供了AtomicStampedRefence来解决ABA问题</p>
+</li>
+<li><p>循环时间长开销大。如果CAS长时间不成功，CPU开销会很大。</p>
+</li>
+<li><p>只能保证一个共享变量的原子操作。</p>
+<p>解决办法：</p>
+<ol>
+<li>使用锁</li>
+<li>将多个共享变量合并成一个共享变量来操作。JDK提供了AtomicReference，把多个变量放在同一个对象里进行CAS操作。</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/StormAaron.github.io/2018/06/05/第1章 并发编程的挑战/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/StormAaron.github.io/2018/06/05/第3章 Java内存模型/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/StormAaron.github.io/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第2章-Java并发编程机制的底层实现原理"><span class="nav-number">1.</span> <span class="nav-text">第2章 Java并发编程机制的底层实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、volatile"><span class="nav-number">1.1.</span> <span class="nav-text">一、volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile原理"><span class="nav-number">1.1.1.</span> <span class="nav-text">volatile原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile使用优化"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">volatile使用优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、synchronized"><span class="nav-number">1.2.</span> <span class="nav-text">二、synchronized</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Java对象头"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. Java对象头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-锁的升级和对比"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. 锁的升级和对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-偏向锁"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1. 偏向锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-轻量级锁"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2. 轻量级锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-重量级锁"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">3. 重量级锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#锁的优缺点和对比"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">锁的优缺点和对比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、原子操作的实现原理"><span class="nav-number">1.3.</span> <span class="nav-text">三、原子操作的实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-实现方法："><span class="nav-number">1.3.0.1.</span> <span class="nav-text">3.1. 实现方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Java中实现原子操作"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">3.2. Java中实现原子操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-使用循环CAS实现原子操作"><span class="nav-number">1.3.0.2.1.</span> <span class="nav-text">3.2.1. 使用循环CAS实现原子操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-2-使用锁实现原子操作"><span class="nav-number">1.3.0.2.2.</span> <span class="nav-text">3.2.2. 使用锁实现原子操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-3-CAS实现原子操作的三大问题："><span class="nav-number">1.3.0.2.3.</span> <span class="nav-text">3.2.3. CAS实现原子操作的三大问题：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/StormAaron.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/StormAaron.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/StormAaron.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/StormAaron.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/StormAaron.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/StormAaron.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/StormAaron.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/StormAaron.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/StormAaron.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/StormAaron.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/StormAaron.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/StormAaron.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/StormAaron.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
