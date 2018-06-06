@@ -301,6 +301,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/Blog/categories/Java并发编程艺术/" itemprop="url" rel="index">
+                    <span itemprop="name">Java并发编程艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -471,7 +493,18 @@
       
         
           
-            
+            <h1 id="第4章-Java并发编程基础"><a href="#第4章-Java并发编程基础" class="headerlink" title="第4章 Java并发编程基础"></a>第4章 Java并发编程基础</h1><h2 id="一、线程"><a href="#一、线程" class="headerlink" title="一、线程"></a>一、线程</h2><p>线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。</p>
+<p>实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。</p>
+<h3 id="1-1-线程优先级-priority"><a href="#1-1-线程优先级-priority" class="headerlink" title="1.1. 线程优先级(priority)"></a>1.1. 线程优先级(priority)</h3><p>现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次分配。</p>
+<p><strong>线程优先级决定分配到的时间片和处理器资源多少的线程属性。优先级高的线程分配的时间片数量更多。</strong></p>
+<p>Java线程中使用一个整型的变量priority来控制优先级，范围是1~10，线程构建的时候使用setPriority(int)修改优先级，优先级默认是5。</p>
+<p>设置线程优先级的原则：</p>
+<ul>
+<li>针对频繁阻塞（休眠或I/O操作）的线程需要设置较高优先级。</li>
+<li>偏重计算（需要较多CPU时间）的线程设置较低优先级，从而避免处理器被独占。</li>
+</ul>
+<p>但实际上有些JVM或者操作系统会无视Priority的设定，所以<strong>线程优先级不能作为程序正确性的依赖</strong>。</p>
+
           
         
       
