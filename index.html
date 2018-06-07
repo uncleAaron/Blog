@@ -492,6 +492,10 @@
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s: 简短模式</span><br><span class="line">user: 指定用户</span><br></pre></td></tr></table></figure>
 <hr>
+<h3 id="whoami"><a href="#whoami" class="headerlink" title="whoami"></a>whoami</h3><p>显示当前用户名</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># whoami</span></span><br></pre></td></tr></table></figure>
+<hr>
 <h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>显示用户信息</p>
 <p><strong>语法：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># id [选项]</span></span><br></pre></td></tr></table></figure>
@@ -499,6 +503,16 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g: 只显示GID</span><br><span class="line">-u: 只显示UID</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="su"><a href="#su" class="headerlink" title="su"></a>su</h3><p>切换用户身份</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># su [选项] [username]</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-l: 同时切换用户主目录</span><br><span class="line">-: 同时切换环境变量</span><br><span class="line">-m: 保留环境变量</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><p>以root身份执行指令</p>
+<p><strong>权限：</strong>在 /etc/sudoers 中有出现的使用者</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sudo command</span></span><br></pre></td></tr></table></figure>
+<hr>
 
           
         
