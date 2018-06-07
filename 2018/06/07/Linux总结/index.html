@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/Blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/Blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/Blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/Blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/Blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/Blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="-Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux总结1. Linux目录   目录 功能 记忆     /bin 常用系统程序目录 binary   /boot 开技设定目录 boot   /dev 系统设备装置文件目录 device   /etc 系统配置文件，尤其是passwd，shadow文件 Edit Text Configuration   /home 系统使用者的目录    /lib Linux执行或编译程序函数库的目录">
+<meta name="keywords" content="-Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux总结">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/2018/06/07/Linux总结/index.html">
+<meta property="og:site_name" content="StormAaron的技术站">
+<meta property="og:description" content="Linux总结1. Linux目录   目录 功能 记忆     /bin 常用系统程序目录 binary   /boot 开技设定目录 boot   /dev 系统设备装置文件目录 device   /etc 系统配置文件，尤其是passwd，shadow文件 Edit Text Configuration   /home 系统使用者的目录    /lib Linux执行或编译程序函数库的目录">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-07T03:41:57.713Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux总结">
+<meta name="twitter:description" content="Linux总结1. Linux目录   目录 功能 记忆     /bin 常用系统程序目录 binary   /boot 开技设定目录 boot   /dev 系统设备装置文件目录 device   /etc 系统配置文件，尤其是passwd，shadow文件 Edit Text Configuration   /home 系统使用者的目录    /lib Linux执行或编译程序函数库的目录">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/Blog/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/2018/06/07/Linux总结/"/>
+
+
+
+
+
+  <title>Linux总结 | StormAaron的技术站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/Blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StormAaron的技术站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/Blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/Blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/Blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/Blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/Blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/06/07/Linux总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T00:05:10+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux总结"><a href="#Linux总结" class="headerlink" title="Linux总结"></a>Linux总结</h1><h2 id="1-Linux目录"><a href="#1-Linux目录" class="headerlink" title="1. Linux目录"></a>1. Linux目录</h2><table>
+<thead>
+<tr>
+<th>目录</th>
+<th>功能</th>
+<th>记忆</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/bin</td>
+<td>常用系统程序目录</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>/boot</td>
+<td>开技设定目录</td>
+<td>boot</td>
+</tr>
+<tr>
+<td>/dev</td>
+<td>系统设备装置文件目录</td>
+<td>device</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>系统配置文件，尤其是passwd，shadow文件</td>
+<td>Edit Text Configuration</td>
+</tr>
+<tr>
+<td>/home</td>
+<td>系统使用者的目录</td>
+<td></td>
+</tr>
+<tr>
+<td>/lib</td>
+<td>Linux执行或编译程序函数库的目录</td>
+<td>Libary</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>软驱和光驱接入挂载的地方</td>
+<td></td>
+</tr>
+<tr>
+<td>/proc</td>
+<td>系统核心与程序的一些信息</td>
+<td></td>
+</tr>
+<tr>
+<td>/tmp</td>
+<td>临时文件目录</td>
+<td>Temporary 临时的</td>
+</tr>
+<tr>
+<td>/sbin</td>
+<td>系统管理员常用指令集</td>
+<td></td>
+</tr>
+<tr>
+<td>/usr</td>
+<td>/usr/sbin 系统管理员常用指令集<br>/usr/bin 一般执行文件摆放的地方</td>
+<td></td>
+</tr>
+<tr>
+<td>/var</td>
+<td>摆放系统日志文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="系统启动或关闭"><a href="#系统启动或关闭" class="headerlink" title="系统启动或关闭"></a>系统启动或关闭</h2><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>暂时更改系统运行级别</p>
+<p><strong>权限：</strong>root</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># init [0123456]</span></span><br></pre></td></tr></table></figure>
+<p><strong>重要参数</strong></p>
+<p>0：关机级别</p>
+<p>1：单用户运行级别</p>
+<p>2：多用户</p>
+<p>3：多用户，字符模式</p>
+<p>4：用户自定义</p>
+<p>5：图形界面</p>
+<p>6：重启</p>
+<hr>
+<h3 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h3><p>关闭或重启系统</p>
+<p><strong>权限：</strong>root</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># shutdown [选项] [时间] [警告信息]</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-r: shutdown之后重启</span><br><span class="line">-h: 关机后不重启</span><br></pre></td></tr></table></figure>
+<p><strong>时间：</strong>now 或者 +时间值</p>
+<hr>
+<h3 id="poweroff"><a href="#poweroff" class="headerlink" title="poweroff"></a>poweroff</h3><p>关闭系统和关闭电源</p>
+<p><strong>权限：</strong>所有用户</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># poweroff [选项]</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p: 关闭计算机后再关闭电源</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="用户和组管理"><a href="#用户和组管理" class="headerlink" title="用户和组管理"></a>用户和组管理</h2><p>超级用户：UID 0    （默认为root）</p>
+<p>系统用户：UID 100以下</p>
+<p>普通用户：UID 500+</p>
+<p>/etc/passwd：账号文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aaron:x:1002:1002:aaron:/home/aaron:/bin/bash</span><br><span class="line">用户名:加密密码:用户ID:组ID:用户信息:用户主目录:登陆Shell</span><br><span class="line">（默认创建用户下，GID会和UID相同）</span><br></pre></td></tr></table></figure>
+<p>/etc/shadow：口令文件</p>
+<p>/etc/group：用户组信息文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aaron:x:500:a1,a2</span><br><span class="line">组名:密码:GID:用户列表（逗号分隔）</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="useradd"><a href="#useradd" class="headerlink" title="useradd"></a>useradd</h3><p>添加用户</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useradd [选项] [参数] &lt;newUsername&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项/参数：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d: 指定主目录	(directory)</span><br><span class="line">-u: 指定UID		(UID)</span><br><span class="line">-g: 指定用户组	(group)</span><br><span class="line">-G: 指定用户组列表	(Groups)</span><br><span class="line">-s: 指定Shell		(Shell)</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useradd aaron</span></span><br></pre></td></tr></table></figure>
+<p>默认条件下：系统自动分配一个500以上的UID和GID，默认创建一个与UID同名的GID组，默认在home目录下创建同名文件夹为主目录。</p>
+<hr>
+<h3 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h3><p>修改密码（root可以修改所有的密码，普通用户只能修改自己的密码）</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># passwd [选项] &lt;Username&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="usermod"><a href="#usermod" class="headerlink" title="usermod"></a>usermod</h3><p>修改用户属性</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># usermod [选项] [参数] &lt;Username&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项/参数：</strong>（同useradd）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d: 指定主目录	(directory)</span><br><span class="line">-u: 指定UID		(UID)</span><br><span class="line">-g: 指定用户组	(group)</span><br><span class="line">-G: 指定用户组列表	(Groups)</span><br><span class="line">-s: 指定Shell		(Shell)</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="userdel"><a href="#userdel" class="headerlink" title="userdel"></a>userdel</h3><p>删除用户</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># userdel [选项] &lt;Username&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r: 删除用户的同时删除主目录</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="组管理"><a href="#组管理" class="headerlink" title="组管理"></a>组管理</h3><hr>
+<h3 id="groupadd"><a href="#groupadd" class="headerlink" title="groupadd"></a>groupadd</h3><p>添加用户组</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># groupadd [选项] &lt;GroupName&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g: 设定组ID</span><br><span class="line">-r: 添加系统组(GID小于500)</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd -g 501 worker</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="groupmod"><a href="#groupmod" class="headerlink" title="groupmod"></a>groupmod</h3><p>修改组属性</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># groupmod [选项] &lt;GroupName&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g GID：设定组ID</span><br><span class="line">-n &lt;GroupName&gt;: 设定新组名</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="账号查看"><a href="#账号查看" class="headerlink" title="账号查看"></a>账号查看</h3><hr>
+<h3 id="who"><a href="#who" class="headerlink" title="who"></a>who</h3><p>显示系统中有哪些用户正在使用</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># who [选项]</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-u: 显示详细的用户状态</span><br><span class="line">-H: 显示表头</span><br><span class="line">-a: 显示所有用户</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ who -uH</span><br><span class="line">NAME     LINE         TIME             IDLE          PID COMMENT</span><br><span class="line">aaron    pts/0        2018-06-07 11:35   .         21837 (125.88.24.125)</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="w"><a href="#w" class="headerlink" title="w"></a>w</h3><p>显示系统中用户使用情况，是who的增强版</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># w [选项] [user]</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s: 简短模式</span><br><span class="line">user: 指定用户</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>显示用户信息</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># id [选项]</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g: 只显示GID</span><br><span class="line">-u: 只显示UID</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="su"><a href="#su" class="headerlink" title="su"></a>su</h3><p>切换用户身份</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/Linux/" rel="tag"># -Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Blog/2018/06/06/Java并发编程艺术/第5章-Java中的锁/" rel="next" title="第5章 Java中的锁">
+                <i class="fa fa-chevron-left"></i> 第5章 Java中的锁
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Aaron.H</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/Blog/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/Blog/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/Blog/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux总结"><span class="nav-number">1.</span> <span class="nav-text">Linux总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux目录"><span class="nav-number">1.1.</span> <span class="nav-text">1. Linux目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统启动或关闭"><span class="nav-number">1.2.</span> <span class="nav-text">系统启动或关闭</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#init"><span class="nav-number">1.2.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shutdown"><span class="nav-number">1.2.2.</span> <span class="nav-text">shutdown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poweroff"><span class="nav-number">1.2.3.</span> <span class="nav-text">poweroff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户和组管理"><span class="nav-number">1.3.</span> <span class="nav-text">用户和组管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#useradd"><span class="nav-number">1.3.1.</span> <span class="nav-text">useradd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#passwd"><span class="nav-number">1.3.2.</span> <span class="nav-text">passwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usermod"><span class="nav-number">1.3.3.</span> <span class="nav-text">usermod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userdel"><span class="nav-number">1.3.4.</span> <span class="nav-text">userdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组管理"><span class="nav-number">1.3.5.</span> <span class="nav-text">组管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groupadd"><span class="nav-number">1.3.6.</span> <span class="nav-text">groupadd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groupmod"><span class="nav-number">1.3.7.</span> <span class="nav-text">groupmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#账号查看"><span class="nav-number">1.3.8.</span> <span class="nav-text">账号查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#who"><span class="nav-number">1.3.9.</span> <span class="nav-text">who</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#w"><span class="nav-number">1.3.10.</span> <span class="nav-text">w</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#id"><span class="nav-number">1.3.11.</span> <span class="nav-text">id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#su"><span class="nav-number">1.3.12.</span> <span class="nav-text">su</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron.H</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/Blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/Blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

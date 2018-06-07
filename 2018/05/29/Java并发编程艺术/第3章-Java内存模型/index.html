@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/05/29/Java并发编程艺术/第3章-Java内存模型/图3-1%20Java内存模型的抽象结构示意图.jpg">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/05/29/Java并发编程艺术/第3章-Java内存模型/图3-2%20顺序一致性内存模型的视图.jpg">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/05/29/Java并发编程艺术/第3章-Java内存模型/图3-3%20JMM的设计示意图.png">
-<meta property="og:updated_time" content="2018-06-06T07:05:07.376Z">
+<meta property="og:updated_time" content="2018-06-06T14:43:17.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第3章 Java内存模型">
 <meta name="twitter:description" content="第3章 Java内存模型内存模型 内存模型中的顺序一致性，重排序以及顺序一致性内存模型 同步原语：synchronized，volatile，final 一、Java内存模型的基础1.1. 并发编程模型的两个关键问题（通信、同步）： 线程之间如何通信 线程之间如何同步  线程之间通信机制有两种：共享内存、消息传递 同步：程序中用于控制不同线程间操作发生相对顺序的机制。 两种并发模型：  共享内存：">
@@ -450,6 +450,7 @@
 <h3 id="3-3-Java同步程序的顺序一致性效果"><a href="#3-3-Java同步程序的顺序一致性效果" class="headerlink" title="3.3. Java同步程序的顺序一致性效果"></a>3.3. Java同步程序的顺序一致性效果</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SynchronizedExample</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span> </span>&#123;		<span class="comment">//获得锁</span></span><br><span class="line">        a = <span class="number">1</span>;</span><br><span class="line">        flag = <span class="keyword">true</span>;</span><br><span class="line">    &#125;									<span class="comment">//释放锁</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span></span>&#123;	<span class="comment">//获得锁</span></span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;				<span class="comment">//临界区，其内可以重排序（JMM会在临界区创建顺序一致性模型内存视图）</span></span><br><span class="line">            <span class="keyword">int</span> i = a;			<span class="comment">//由于监视器互斥执行的特性，</span></span><br><span class="line">            ......				<span class="comment">//其他线程无法得知该线程访问临界区内的重排序</span></span><br><span class="line">        &#125;						<span class="comment">//这种重排序能够提高执行效率而且保证执行结果</span></span><br><span class="line">    &#125;								<span class="comment">//释放锁</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="3-4-未同步程序的执行特性"><a href="#3-4-未同步程序的执行特性" class="headerlink" title="3.4. 未同步程序的执行特性"></a>3.4. 未同步程序的执行特性</h3><p>对于未同步或未正确同步的多线程程序，JMM只提供最小安全性：线程执行读到的值，要么是之前某线程写入的值，要么是默认值（0，Null，False），JMM只保证线程读取到的值不会无中生有冒出来。</p>
 <h2 id="四、volatile"><a href="#四、volatile" class="headerlink" title="四、volatile"></a>四、volatile</h2><p><u>volatile可以看作为使用同一个锁对volatile变量进行单个读或写做了同步。</u></p>
+<p>volatile可以告知程序任何对该变量的访问必须要从共享内存中获取，并且其修改必须同步刷新到共享内存，以保证该变量在线程之间的可见性。</p>
 <p>volatile变量的特性：</p>
 <ul>
 <li><strong>可见性</strong>：对一个volatile变量的<strong>读，总是能看到（任意线程）对这个volatile变量最后的写入</strong>。</li>
@@ -720,7 +721,7 @@ op1->op2(right)->op3->op4</textarea><textarea id="flowchart-2-options" style="di
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -742,7 +743,7 @@ op1->op2(right)->op3->op4</textarea><textarea id="flowchart-2-options" style="di
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

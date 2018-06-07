@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="StormAaron的技术站">
 <meta property="og:description" content="第4章 Java并发编程基础一、线程线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。 实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。 1.1. 线程优先级(priority)现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-06T07:53:36.341Z">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/01/Java并发编程艺术/第4章-Java并发编程基础/图4-1%20Java线程状态变迁.jpg">
+<meta property="og:updated_time" content="2018-06-06T16:04:03.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第4章 Java并发编程基础">
 <meta name="twitter:description" content="第4章 Java并发编程基础一、线程线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。 实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。 1.1. 线程优先级(priority)现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次">
+<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/2018/06/01/Java并发编程艺术/第4章-Java并发编程基础/图4-1%20Java线程状态变迁.jpg">
 
 
 
@@ -363,7 +365,89 @@
 <li>偏重计算（需要较多CPU时间）的线程设置较低优先级，从而避免处理器被独占。</li>
 </ul>
 <p>但实际上有些JVM或者操作系统会无视Priority的设定，所以<strong>线程优先级不能作为程序正确性的依赖</strong>。</p>
-
+<h3 id="1-2-线程的状态"><a href="#1-2-线程的状态" class="headerlink" title="1.2. 线程的状态"></a>1.2. 线程的状态</h3><p><strong>表4-1 Java线程的状态（6种）</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">状态名称</th>
+<th style="text-align:center">状态</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>NEW</strong></td>
+<td style="text-align:center"><strong>初始态</strong></td>
+<td style="text-align:left">线程被构建，但是还没调用start()方法</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>RUNNABLE</strong></td>
+<td style="text-align:center"><strong>运行态</strong></td>
+<td style="text-align:left">Java线程将操作系统中的就绪态和运行态统称为“运行中”</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>BLOCKED</strong></td>
+<td style="text-align:center"><strong>阻塞态</strong></td>
+<td style="text-align:left">线程阻塞于锁（调用同步方法时没获取到锁）（注意：阻塞在current包的Lock接口中的线程是等待态而不是阻塞态）</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>WAITING</strong></td>
+<td style="text-align:center"><strong>等待态</strong></td>
+<td style="text-align:left">线程wait()后，当前线程需要等待其他线程做出一些特定动作（通知或中断）才能返回到运行态</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>TIME_WAITING</strong></td>
+<td style="text-align:center"><strong>超时等待态</strong></td>
+<td style="text-align:left">可以在指定时间内自行返回的特殊WAITING<br>（其他线程在规定时间内未回复的话则自行返回进行下一步操作）</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>TERMINGATED</strong></td>
+<td style="text-align:center"><strong>终止态</strong></td>
+<td style="text-align:left">表示当前线程已经执行完毕</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/Blog/2018/06/01/Java并发编程艺术/第4章-Java并发编程基础/图4-1 Java线程状态变迁.jpg" alt="图4-1 Java线程状态变迁"></p>
+<h3 id="1-3-Daemon线程-守护线程"><a href="#1-3-Daemon线程-守护线程" class="headerlink" title="1.3. Daemon线程(守护线程)"></a>1.3. Daemon线程(守护线程)</h3><p>Daemon线程是一种支持型线程，主要被用作程序的后台调度和支持性工作。</p>
+<p>使用threadA.setDaemon(true)将线程设置为Daemon线程（Daemon需要在启动线程前设置）</p>
+<ul>
+<li><strong>当JVM中不存在非Daemon线程的时候，JVM会退出。</strong>此时不一定会执行Daemon线程中的finally块，因此不能依靠Daemon线程中的finally来确保逻辑正确。</li>
+</ul>
+<h2 id="二、启动和终止线程"><a href="#二、启动和终止线程" class="headerlink" title="二、启动和终止线程"></a>二、启动和终止线程</h2><h3 id="2-1-构造线程"><a href="#2-1-构造线程" class="headerlink" title="2.1. 构造线程"></a>2.1. 构造线程</h3><p><strong>运行线程之前首先要构造一个线程对象，并且初始化线程属性</strong>。如线程所属的线程组、线程优先级、是否Daemon线程等信息。</p>
+<p>在Thread.init()的源代码中，新构造的线程对象是由其parent线程来进行空间分配的，而<strong>child线程继承了parent的属性</strong>是否为Daemon、优先级和加载资源的contextClassLoader以及科技城ThreadLocal，同时分配一个唯一的线程ID。</p>
+<h3 id="2-2-启动线程"><a href="#2-2-启动线程" class="headerlink" title="2.2. 启动线程"></a>2.2. 启动线程</h3><ul>
+<li>调用<strong>start()</strong>方法即可启动。</li>
+</ul>
+<p>含义：当前线程（parent线程）同步告知JVM，只要线程规划器空闲，应立即启动调用start()方法的线程。</p>
+<h3 id="2-3-中断（interrupt）"><a href="#2-3-中断（interrupt）" class="headerlink" title="2.3. 中断（interrupt）"></a>2.3. 中断（interrupt）</h3><p><strong>中断可以理解为线程的一个标志位属性</strong>。它表示一个运行中的线程是否被其他的线程<strong><u>通知</u></strong>进行了中断操作（不不会终止线程）。</p>
+<p><strong>interrupt()</strong>：其他线程通过调用该线程的interrupt()方法对其进行中断操作。</p>
+<p><strong>isInterrupted()</strong>：线程通过检查自身是否被中断来响应，通过调用isInterrupted() 来判断是否被中断。</p>
+<p><strong>Thread.interrupted()</strong>：复位当前线程的中断标志位（重置为false）。</p>
+<p>如果线程已经处于结束态，则即使该线程被中断过，其中断标志位依旧是false。</p>
+<p><strong>InterruptedException</strong>：当线程处于阻塞状态（因被调用了wait()，join()，sleep()而进入阻塞）时，调用interrupt() ，因为没有占用CPU运行的线程是不可能给自己中断状态置位的，JVM会先清楚中断标志位，然后产生InterruptedException异常（不会终止线程）。（可以利用接收这个异常终止阻塞的线程）</p>
+<h3 id="2-4-安全地终止线程"><a href="#2-4-安全地终止线程" class="headerlink" title="2.4. 安全地终止线程"></a>2.4. 安全地终止线程</h3><h4 id="2-4-1-终止处于运行状态的线程"><a href="#2-4-1-终止处于运行状态的线程" class="headerlink" title="2.4.1. 终止处于运行状态的线程"></a>2.4.1. 终止处于运行状态的线程</h4><ul>
+<li><p>利用中断状态标志位，做中断操作来取消或停止任务。</p>
+</li>
+<li><p>使用boolean变量控制是否需要停止任务并终止该线程</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner</span> <span class="title">implments</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> i;</span><br><span class="line">    privatge <span class="keyword">volatile</span> <span class="keyword">boolean</span> on = <span class="keyword">true</span>;	<span class="comment">//volatile的boolean控制标志</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// boolean变量为真时继续执行</span></span><br><span class="line">        <span class="comment">// 线程没被中断(Isterrupted()返回false)之前继续执行</span></span><br><span class="line">        <span class="comment">// 当外部执行cancel()或interrupt()时终止线程</span></span><br><span class="line">        <span class="keyword">while</span> (on &amp;&amp; !Thread.currentThread().isInterrupted() ) &#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// boolean取消操作，供外部终止线程使用</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        on = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-4-2-终止处于“阻塞状态”的线程"><a href="#2-4-2-终止处于“阻塞状态”的线程" class="headerlink" title="2.4.2. 终止处于“阻塞状态”的线程"></a>2.4.2. 终止处于“阻塞状态”的线程</h4><ul>
+<li><p>同样用interrupt()：</p>
+<p>当线程由于被调用了sleep(), wait(), join()等方法而进入阻塞状态；若此时调用线程的interrupt()将线程的中断标记设为true。由于处于阻塞状态，中断标记会被清除，同时产生一个InterruptedException异常。 </p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 执行任务...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;  </span><br><span class="line">        <span class="comment">// 由于产生InterruptedException异常，退出while(true)循环，线程终止！</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-废弃的suspend-、resume-、和stop"><a href="#2-5-废弃的suspend-、resume-、和stop" class="headerlink" title="2.5. 废弃的suspend()、resume()、和stop()"></a>2.5. 废弃的suspend()、resume()、和stop()</h3><p>suspend：暂停</p>
+<p>resume：恢复</p>
+<p>stop：终止</p>
+<p>由于强制操作导致的资源不完全释放的副作用（死锁等），所以废弃。建议用回以上的等待/通知的机制替代。</p>
+<h2 id="三、线程间通信"><a href="#三、线程间通信" class="headerlink" title="三、线程间通信"></a>三、线程间通信</h2><p>让线程之间能后互相配合的完成工作。</p>
+<h3 id="3-1-volatile和synchronized关键字"><a href="#3-1-volatile和synchronized关键字" class="headerlink" title="3.1. volatile和synchronized关键字"></a>3.1. volatile和synchronized关键字</h3><p>在程序执行过程中，每个线程可以拥有变量的拷贝，而且看到的不一定是最新的变量值，这时候就需要volatile和synchronized关键字。</p>
+<p>volatile可以告知程序任何对该变量的访问必须要从共享内存中获取，并且其修改必须同步刷新到共享内存，以保证该变量在线程之间的可见性。</p>
+<p>synchronized确保同一时刻只能有一个线程处于方法或者同步块中，保证了线程对变量访问的可见性和排他性。</p>
+<p>每个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，执行方法的线程必须先获取到该对象的监视器才能进去同步块或者同步方法，没有获取到监视器的线程将会被阻塞在入口，进入BLOCKED状态和同步队列（释放操作会唤醒同步队列中的线程，使其重新尝试获取监视器）。</p>
+<h2 id="3-2-等待-通知机制"><a href="#3-2-等待-通知机制" class="headerlink" title="3.2.等待/通知机制"></a>3.2.等待/通知机制</h2>
       
     </div>
     
@@ -484,7 +568,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -506,7 +590,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -539,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章-Java并发编程基础"><span class="nav-number">1.</span> <span class="nav-text">第4章 Java并发编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、线程"><span class="nav-number">1.1.</span> <span class="nav-text">一、线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-线程优先级-priority"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1. 线程优先级(priority)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章-Java并发编程基础"><span class="nav-number">1.</span> <span class="nav-text">第4章 Java并发编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、线程"><span class="nav-number">1.1.</span> <span class="nav-text">一、线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-线程优先级-priority"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1. 线程优先级(priority)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-线程的状态"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2. 线程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Daemon线程-守护线程"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3. Daemon线程(守护线程)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、启动和终止线程"><span class="nav-number">1.2.</span> <span class="nav-text">二、启动和终止线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-构造线程"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. 构造线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-启动线程"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. 启动线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-中断（interrupt）"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. 中断（interrupt）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-安全地终止线程"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. 安全地终止线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-终止处于运行状态的线程"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">2.4.1. 终止处于运行状态的线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-终止处于“阻塞状态”的线程"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2.4.2. 终止处于“阻塞状态”的线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-废弃的suspend-、resume-、和stop"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. 废弃的suspend()、resume()、和stop()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、线程间通信"><span class="nav-number">1.3.</span> <span class="nav-text">三、线程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-volatile和synchronized关键字"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1. volatile和synchronized关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-等待-通知机制"><span class="nav-number">1.4.</span> <span class="nav-text">3.2.等待/通知机制</span></a></li></ol></li></ol></div>
             
 
           </div>
