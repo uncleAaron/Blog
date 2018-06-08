@@ -635,6 +635,75 @@
 <p>个人理解：</p>
 <p><img src="/Blog/2018/06/07/Linux总结/硬链接和软链接图示.png" alt="硬链接和软链接图示"></p>
 <hr>
+<h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>改变目录或文件的权限</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod [选项] &lt;mode&gt; &lt;文件名或目录&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-R：递归对目录下的所有子文件与子目录进行相同的权限变更</span><br></pre></td></tr></table></figure>
+<p><strong>权限修改：</strong></p>
+<ol>
+<li>用数字修改</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4:r</span><br><span class="line">2:w</span><br><span class="line">1:x</span><br><span class="line">例如775就是rwxrwxr-x</span><br><span class="line">示例：chmod 775 file.txt</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>用指令修改权限</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">u：所有者user</span><br><span class="line">g：组group</span><br><span class="line">o：其他other</span><br><span class="line">+：增加权限</span><br><span class="line">-：取消权限</span><br><span class="line">示例：chmod g+w,o+w,o-r file.txt</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>改变指定目录或文件(用-R)的所属用户、所属组</p>
+<p><strong>权限：</strong>root</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown [选项] 用户名[：组名] 文件或目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-R：递归对子文件或目录操作</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h3><p>改变文件/目录的所属组</p>
+<p><strong>权限：</strong>所有使用者</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chgrp [选项] 组名 文件或目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-R：递归对子文件或目录操作</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="文字显示-文件操作"><a href="#文字显示-文件操作" class="headerlink" title="文字显示/文件操作"></a>文字显示/文件操作</h2><hr>
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>显示文件内容</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat [选项] 文件名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-n：显示行号</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="more"><a href="#more" class="headerlink" title="more"></a>more</h3><p>分页显示文件内容</p>
+<p>b上一页，空格下一页，回车下一行，</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more [选项参数] 文件名</span><br></pre></td></tr></table></figure>
+<p><strong>选项参数：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-&lt;数字&gt;：指定每屏显示的行数</span><br><span class="line">+&lt;数字&gt;：从指定数字的行开始显示</span><br><span class="line">-c：不进行滚屏操作。每次刷新这个屏幕</span><br><span class="line">-s：将多个空行压缩成一行</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="less"><a href="#less" class="headerlink" title="less"></a>less</h3><p>分页显示文件内容，与more十分相似，不同的是less命令允许用户向前或向后浏览文件，而more命令只能向前浏览。more读的时候会全部加载，而less部分加载，所以less有时候会更快。</p>
+<p>PageUp键上翻页，PageDown向下翻。Q键退出。 </p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less [选项] 文件</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-n：显示行号</span><br><span class="line">-s：多个空行压缩成一行</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="head"><a href="#head" class="headerlink" title="head"></a>head</h3><p>显示文件前N行内容或前N个字节，默认为前10行</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head [选项] 文件</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-n&lt;数字&gt; ：显示前N行</span><br><span class="line">-c&lt;数字&gt; ：显示前N个字节</span><br><span class="line">-v：同时显示文件名</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h3><p>显示文件后N行内容或前N个字节，默认为前10行</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail [选项] 文件</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-n&lt;数字&gt; ：显示后N行</span><br><span class="line">-c&lt;数字&gt; ：显示后N个字节</span><br><span class="line">-v：同时显示文件名</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h3><hr>
+<h3 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h3><hr>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h3><hr>
+<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><hr>
+<h3 id="cal"><a href="#cal" class="headerlink" title="cal"></a>cal</h3><hr>
+<h3 id="date"><a href="#date" class="headerlink" title="date"></a>date</h3><hr>
+<p>### </p>
 
           
         
