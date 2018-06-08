@@ -572,11 +572,68 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch [选项] 文件1 [文件2...]</span><br></pre></td></tr></table></figure>
 <p>不加选项的话修改时间记录为当前系统时间</p>
 <hr>
-<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>删除文件或目录（删除目录要 -r）</p>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p><strong>删除</strong>文件或目录（删除目录要 -r）</p>
 <p><strong>语法：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm [选项] 文件名或目录名</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-r：递归删除目录一下文件</span><br><span class="line">-i：删除前逐一询问</span><br><span class="line">-f：即使属性为只读，也直接删除，无需逐一确认</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-r：递归删除目录一下文件</span><br><span class="line">-i：交互模式，删除前逐一询问（interactive）</span><br><span class="line">-f：强制模式，即使属性为只读，也直接删除，无需逐一确认（force）</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><p><strong>复制</strong>文件或目录（目录用 -a）</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp [选项] 源文件或目录 目标文件或目录</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-a：复制目录时使用，保留链接、文件属性，且递归复制目录下所有内容，相当于-pdr</span><br><span class="line">-p：复制属性</span><br><span class="line">-d：复制链接的话，只复制链接而非期文件</span><br><span class="line">-r：递归复制目录</span><br><span class="line">-i：覆盖之前询问</span><br><span class="line">-f：覆盖且不询问</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p><strong>移动</strong>或<strong>更名</strong>指定的文件或目录</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv [选项] 源文件或目录 目标文件或目录</span><br></pre></td></tr></table></figure>
+<p><strong>mv参数设置与运行结果：</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令格式</th>
+<th>运行结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mv  文件名  文件名</td>
+<td>将源文件名改为目标文件名</td>
+</tr>
+<tr>
+<td>mv  文件名  目录名</td>
+<td>移动文件到目录</td>
+</tr>
+<tr>
+<td>mv  目录名  目录名</td>
+<td>目标目录存在，将源目录移动到目标目录<br>目标目录不存在，则改名</td>
+</tr>
+<tr>
+<td>mv  目录名  文件名</td>
+<td>错误</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-i：交互模式，覆盖询问</span><br><span class="line">-f：强制模式，覆盖不提示</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p>从指定目录开始递归查找文件，并可以对其进行操作</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find 起始目录 &lt;选项查找条件&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-name &lt;name&gt;：正则匹配字符串（-iname 忽略大小写）</span><br><span class="line">-<span class="built_in">type</span> &lt;d/c/b/p/f/l/s&gt;：文件类型</span><br><span class="line">-ls：详细列出所找到的文件</span><br><span class="line">-<span class="built_in">exec</span>：执行期间不询问；用&#123;&#125;表示找到的文件，对其进行命令操作，命令末尾必须以 <span class="string">"\;"</span> 结束</span><br><span class="line">-ok：同<span class="built_in">exec</span>，但会询问。</span><br><span class="line">-size &lt;n&gt;：文件大小是n，可用b，c（char），k(kB)表示</span><br><span class="line">对查询条件做逻辑运算：</span><br><span class="line">-a：与</span><br><span class="line">-o：或</span><br><span class="line">！：非</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># find ~ -name &quot;test*&quot; -ls -exec rm &#123;&#125; \;</span><br><span class="line">393291    0 -rw-rw-r--   1 aaron    aaron           0 Jun  8 13:40 /home/aaron/test3</span><br><span class="line">393290    0 -rw-rw-r--   1 aaron    aaron           0 Jun  8 13:40 /home/aaron/test2</span><br><span class="line">393236    0 -rw-rw-r--   1 aaron    aaron           0 Jun  8 13:40 /home/aaron/test1</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h3><p>为源文件创建一个链接，但不复制源文件</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln [选项] 源对象 目的对象</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s：进行软链接</span><br><span class="line">不用-s：进行硬链接</span><br></pre></td></tr></table></figure>
+<p><strong>硬链接</strong>：文件的副本（别名），同时两者存在连接关系，<strong>修改其中一个另一个也会一同被修改，删除一个，另一个不受影响</strong>。两者在<strong>硬盘上只有一份数据</strong>，只存在于同一个文件系统中。</p>
+<p><strong>软链接</strong>：<strong>一个快捷方式</strong>，是一个内容指向另一个文件位置的特殊文件。删了源文件就没用了。可以跨越文件系统。</p>
+<p>个人理解：</p>
+<p><img src="/Blog/2018/06/07/Linux总结/硬链接和软链接图示.png" alt="硬链接和软链接图示"></p>
 <hr>
 
           
