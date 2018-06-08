@@ -403,7 +403,7 @@
 <h2 id="系统启动或关闭"><a href="#系统启动或关闭" class="headerlink" title="系统启动或关闭"></a>系统启动或关闭</h2><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>暂时更改系统运行级别</p>
 <p><strong>权限：</strong>root</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># init [0123456]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init [0123456]</span><br></pre></td></tr></table></figure>
 <p><strong>重要参数</strong></p>
 <p>0：关机级别</p>
 <p>1：单用户运行级别</p>
@@ -416,7 +416,7 @@
 <h3 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h3><p>关闭或重启系统</p>
 <p><strong>权限：</strong>root</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># shutdown [选项] [时间] [警告信息]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown [选项] [时间] [警告信息]</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-r: shutdown之后重启</span><br><span class="line">-h: 关机后不重启</span><br></pre></td></tr></table></figure>
 <p><strong>时间：</strong>now 或者 +时间值</p>
@@ -424,7 +424,7 @@
 <h3 id="poweroff"><a href="#poweroff" class="headerlink" title="poweroff"></a>poweroff</h3><p>关闭系统和关闭电源</p>
 <p><strong>权限：</strong>所有用户</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># poweroff [选项]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">poweroff [选项]</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p: 关闭计算机后再关闭电源</span><br></pre></td></tr></table></figure>
 <hr>
@@ -439,7 +439,7 @@
 <hr>
 <h3 id="useradd"><a href="#useradd" class="headerlink" title="useradd"></a>useradd</h3><p>添加用户</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useradd [选项] [参数] &lt;newUsername&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd [选项] [参数] &lt;newUsername&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>选项/参数：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d: 指定主目录	(directory)</span><br><span class="line">-u: 指定UID		(UID)</span><br><span class="line">-g: 指定用户组	(group)</span><br><span class="line">-G: 指定用户组列表	(Groups)</span><br><span class="line">-s: 指定Shell		(Shell)</span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
@@ -448,24 +448,24 @@
 <hr>
 <h3 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h3><p>修改密码（root可以修改所有的密码，普通用户只能修改自己的密码）</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># passwd [选项] &lt;Username&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd [选项] &lt;Username&gt;</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="usermod"><a href="#usermod" class="headerlink" title="usermod"></a>usermod</h3><p>修改用户属性</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># usermod [选项] [参数] &lt;Username&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod [选项] [参数] &lt;Username&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>选项/参数：</strong>（同useradd）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d: 指定主目录	(directory)</span><br><span class="line">-u: 指定UID		(UID)</span><br><span class="line">-g: 指定用户组	(group)</span><br><span class="line">-G: 指定用户组列表	(Groups)</span><br><span class="line">-s: 指定Shell		(Shell)</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="userdel"><a href="#userdel" class="headerlink" title="userdel"></a>userdel</h3><p>删除用户</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># userdel [选项] &lt;Username&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel [选项] &lt;Username&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r: 删除用户的同时删除主目录</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="组管理"><a href="#组管理" class="headerlink" title="组管理"></a>组管理</h3><hr>
 <h3 id="groupadd"><a href="#groupadd" class="headerlink" title="groupadd"></a>groupadd</h3><p>添加用户组</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># groupadd [选项] &lt;GroupName&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd [选项] &lt;GroupName&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g: 设定组ID</span><br><span class="line">-r: 添加系统组(GID小于500)</span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
@@ -473,14 +473,14 @@
 <hr>
 <h3 id="groupmod"><a href="#groupmod" class="headerlink" title="groupmod"></a>groupmod</h3><p>修改组属性</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># groupmod [选项] &lt;GroupName&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod [选项] &lt;GroupName&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g GID：设定组ID</span><br><span class="line">-n &lt;GroupName&gt;: 设定新组名</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="账号查看"><a href="#账号查看" class="headerlink" title="账号查看"></a>账号查看</h3><hr>
 <h3 id="who"><a href="#who" class="headerlink" title="who"></a>who</h3><p>显示系统中有哪些用户正在使用</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># who [选项]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">who [选项]</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-u: 显示详细的用户状态</span><br><span class="line">-H: 显示表头</span><br><span class="line">-a: 显示所有用户</span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
@@ -488,30 +488,95 @@
 <hr>
 <h3 id="w"><a href="#w" class="headerlink" title="w"></a>w</h3><p>显示系统中用户使用情况，是who的增强版</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># w [选项] [user]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w [选项] [user]</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s: 简短模式</span><br><span class="line">user: 指定用户</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="whoami"><a href="#whoami" class="headerlink" title="whoami"></a>whoami</h3><p>显示当前用户名</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># whoami</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>显示用户信息</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># id [选项]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id [选项]</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g: 只显示GID</span><br><span class="line">-u: 只显示UID</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="su"><a href="#su" class="headerlink" title="su"></a>su</h3><p>切换用户身份</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># su [选项] [username]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su [选项] [username]</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-l: 同时切换用户主目录</span><br><span class="line">-: 同时切换环境变量</span><br><span class="line">-m: 保留环境变量</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><p>以root身份执行指令</p>
 <p><strong>权限：</strong>在 /etc/sudoers 中有出现的使用者</p>
 <p><strong>语法：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sudo command</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">command</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>/etc/shells: 查看系统支持的shell</p>
+<p>一般shell都在/bin/xxx目录下（xx为shell名，例如/bin/bash ）</p>
+<p>root 提示符# 其他用户提示符$</p>
+<h2 id="输入-输出重定向"><a href="#输入-输出重定向" class="headerlink" title="输入/输出重定向"></a>输入/输出重定向</h2><h3 id="文件描述符（0-1-2）"><a href="#文件描述符（0-1-2）" class="headerlink" title="文件描述符（0, 1, 2）"></a>文件描述符（0, 1, 2）</h3><p>0：标准输入</p>
+<p>1：标准输出</p>
+<p>2：标准错误输出</p>
+<h3 id="重定向控制符"><a href="#重定向控制符" class="headerlink" title="重定向控制符"></a>重定向控制符</h3><p>&lt; 文件 ：输入重定向控制符，输入内容从文件获取</p>
+<p>> 文件：输出重定向控制符（覆盖）</p>
+<p>>> 文件：输出重定向控制符（追加）</p>
+<h3 id="重定向高级用法"><a href="#重定向高级用法" class="headerlink" title="重定向高级用法"></a>重定向高级用法</h3><ul>
+<li>文件描述符[0,1,2] 重定向控制符[&gt;,&lt;,&lt;&lt;] 文件</li>
+</ul>
+<p>例：重定向标准输出到文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> xxx 1&gt;文件</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p><strong>符号：</strong>“|”</p>
+<p>用于连接进程，通过管道连接的进程可以同时运行，并且随着数据流在她们之间传递可以自动地进行协调。</p>
+<hr>
+<h2 id="文件与目录"><a href="#文件与目录" class="headerlink" title="文件与目录"></a>文件与目录</h2><h3 id="文件权限属性"><a href="#文件权限属性" class="headerlink" title="文件权限属性"></a>文件权限属性</h3><p><img src="/Blog/2018/06/07/Linux总结/文件权限属性.png" alt="文件权限属性"></p>
+<p>文件类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-：普通文件</span><br><span class="line">d：目录</span><br><span class="line">l：链接文件</span><br><span class="line">p：管道文件</span><br></pre></td></tr></table></figure>
+<p>权限码（rwx）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r = 4	<span class="comment"># 读</span></span><br><span class="line">w = 2	<span class="comment"># 写</span></span><br><span class="line">x = 1	<span class="comment"># 执行</span></span><br><span class="line">- = 0	<span class="comment"># 无权限</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>显示指定目录下的目录和文件</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls [选项] 目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a：显示隐藏文件（<span class="string">"."</span>开头）</span><br><span class="line">-l：列出文件详细信息</span><br><span class="line">-S：以文件大小排序</span><br><span class="line">-t：以时间排序</span><br><span class="line">-i：显示索引节点</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l</span><br><span class="line">-drwxr-xr-x	1	root	root	969	May	29	17:02	dir1</span><br><span class="line">文件权限:链接数:拥有者:所属组:文件大小(B):修改日期:文件名</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><p>切换工作目录</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> 目录名</span><br></pre></td></tr></table></figure>
+<p><strong>参数：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~ : 用户主目录</span><br><span class="line">. : 当前目录</span><br><span class="line">.. : 父目录</span><br><span class="line">- : 返回上一次目录</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>查看当前工作目录</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h3><p>创建目录</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir [选项] 目录</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-p：确保目录名称存在，不存在则创建一个</span><br><span class="line">-m：在创建目录的同时设置目录的权限</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h3><p>删除<strong>空目录</strong></p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmdir [-p] 目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p：当子目录被删除后也成为空目录时，也一并删除</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h3><p>用于修改文件的时间属性，包括存取时间和更改时间。<strong>若文件不存在，系统会建立一个新的文件</strong> </p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch [选项] 文件1 [文件2...]</span><br></pre></td></tr></table></figure>
+<p>不加选项的话修改时间记录为当前系统时间</p>
+<hr>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>删除文件或目录（删除目录要 -r）</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm [选项] 文件名或目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-r：递归删除目录一下文件</span><br><span class="line">-i：删除前逐一询问</span><br><span class="line">-f：即使属性为只读，也直接删除，无需逐一确认</span><br></pre></td></tr></table></figure>
 <hr>
 
           
