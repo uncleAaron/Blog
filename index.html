@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/06/11/Linux/Linux-Vi/">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/06/11/Linux/Vim简易笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron.H">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/Blog/2018/06/11/Linux/Linux-Vi/" itemprop="url">Linux Vi</a></h1>
+                <a class="post-title-link" href="/Blog/2018/06/11/Linux/Vim简易笔记/" itemprop="url">Linux Vi</a></h1>
         
 
         <div class="post-meta">
@@ -300,6 +300,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/Blog/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -330,7 +352,41 @@
       
         
           
-            <p><img src="/Blog/2018/06/11/Linux/Linux-Vi/C:/Users/Rong Rong/Desktop/Vi.png" alt="Vi"></p>
+            <p><img src="/Blog/2018/06/11/Linux/Vim简易笔记/Vi.png" alt="Vi"></p>
+<h2 id="末行模式（进出、搜索、替换）"><a href="#末行模式（进出、搜索、替换）" class="headerlink" title="末行模式（进出、搜索、替换）"></a>末行模式（进出、搜索、替换）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:w	<span class="comment"># 保存</span></span><br><span class="line">:w filename	<span class="comment"># 另存为</span></span><br><span class="line">:q	<span class="comment"># 退出</span></span><br><span class="line">:q!	<span class="comment"># 退出不保存</span></span><br><span class="line">:wq	<span class="comment"># 退出保存</span></span><br><span class="line">:x	<span class="comment"># 加密保存</span></span><br></pre></td></tr></table></figure>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/&lt;pattern&gt;	<span class="comment"># 从光标向下搜索</span></span><br><span class="line">?&lt;pattern&gt;	<span class="comment"># 从光标向上搜索</span></span><br></pre></td></tr></table></figure>
+<p>n：向下遍历光标</p>
+<p>N：向上遍历光标</p>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>(:s/x/y普通替换本行第一个。最后加/g替换本行全部 , :%s/x/y 替换全部行第一个，这基础上加/g替换全文)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:s/old/new		<span class="comment"># 替换本行首次出现的old</span></span><br><span class="line">:s/old/new/g	<span class="comment"># 替换本行全部</span></span><br><span class="line">:%s/old/new/g	<span class="comment"># 替换全文（全部行全部）</span></span><br><span class="line">:n,m s/old/new/g	<span class="comment">#替换n-m行的全部old</span></span><br></pre></td></tr></table></figure>
+<h2 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">h</th>
+<th style="text-align:center">j</th>
+<th style="text-align:center">k</th>
+<th style="text-align:center">l</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">左</td>
+<td style="text-align:center">下</td>
+<td style="text-align:center">上</td>
+<td style="text-align:center">右</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">k j h l	<span class="comment"># 上下左右</span></span><br><span class="line">0	<span class="comment"># 行首</span></span><br><span class="line">^	<span class="comment"># 行首</span></span><br><span class="line">$	<span class="comment"># 行尾</span></span><br><span class="line">w	<span class="comment"># 下一个字首</span></span><br><span class="line">b	<span class="comment"># 当前字首，已经在字首则到上个字首</span></span><br><span class="line">e	<span class="comment"># 当前字尾，已经在字尾则到下个字尾</span></span><br><span class="line">nw	<span class="comment"># 右移n字</span></span><br><span class="line">nb	<span class="comment"># 左移n字</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">H	<span class="comment"># 当前屏幕最顶端（Highest）</span></span><br><span class="line">nH	<span class="comment"># 当前屏第n行</span></span><br><span class="line">gg	<span class="comment"># 文首</span></span><br><span class="line">G	<span class="comment"># 文末</span></span><br><span class="line">n+	<span class="comment"># 后跳n行</span></span><br><span class="line">n-	<span class="comment"># 前跳n行</span></span><br><span class="line">nG	<span class="comment"># 跳到第n行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(	<span class="comment"># 本句首</span></span><br><span class="line">)	<span class="comment"># 下一句首</span></span><br><span class="line">&#123;	<span class="comment"># 本段首</span></span><br><span class="line">&#125;	<span class="comment"># 本段末</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+b	<span class="comment"># 向上翻一页(back)</span></span><br><span class="line">Ctrl+f	<span class="comment"># 向下翻一页（front）</span></span><br><span class="line">Ctrl+u	<span class="comment"># 向前翻半页（up）</span></span><br><span class="line">Ctrl+d	<span class="comment"># 向下翻半页（down）</span></span><br></pre></td></tr></table></figure>
+<h2 id="编辑指令"><a href="#编辑指令" class="headerlink" title="编辑指令"></a>编辑指令</h2><h3 id="删除（x-d）"><a href="#删除（x-d）" class="headerlink" title="删除（x, d）"></a>删除（x, d）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x	<span class="comment"># 删除字符</span></span><br><span class="line">nx	<span class="comment"># 删除从光标开始的n个字符</span></span><br><span class="line">dd	<span class="comment"># 删除行</span></span><br><span class="line">ndd	<span class="comment">#删除包括当前行的n行</span></span><br></pre></td></tr></table></figure>
+<h3 id="复制（y）"><a href="#复制（y）" class="headerlink" title="复制（y）"></a>复制（y）</h3><p>可配合光标移动使用（w, n, ^, $）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yy	<span class="comment">#当前行复制</span></span><br><span class="line">nyy	<span class="comment">#n行复制</span></span><br><span class="line">yw	<span class="comment">#复制到到字胃</span></span><br><span class="line">nyw	<span class="comment">#复制光标及其后的n个单词</span></span><br><span class="line">y^	<span class="comment">#复制光标到行首</span></span><br><span class="line">y$	<span class="comment">#复制光标到行尾</span></span><br></pre></td></tr></table></figure>
+<h3 id="粘贴（p）"><a href="#粘贴（p）" class="headerlink" title="粘贴（p）"></a>粘贴（p）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p	<span class="comment"># 光标后粘贴</span></span><br><span class="line">P	<span class="comment"># 光标前粘贴</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销（u）"><a href="#撤销（u）" class="headerlink" title="撤销（u）"></a>撤销（u）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u	<span class="comment"># 撤销一步</span></span><br><span class="line">U	<span class="comment"># 撤销本行操作(其实是增加了全局操作，会被u撤销)</span></span><br></pre></td></tr></table></figure>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="行号"><a href="#行号" class="headerlink" title="行号"></a>行号</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:<span class="built_in">set</span> nu		<span class="comment"># 显示行号</span></span><br><span class="line">:<span class="built_in">set</span> nonu	<span class="comment"># 取消显示行号</span></span><br><span class="line">:nu		<span class="comment"># 取得该行行号</span></span><br></pre></td></tr></table></figure>
 
           
         
@@ -420,6 +476,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/Blog/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -872,7 +950,25 @@
 <h2 id="联机、帮助指令"><a href="#联机、帮助指令" class="headerlink" title="联机、帮助指令"></a>联机、帮助指令</h2><h3 id="man"><a href="#man" class="headerlink" title="man"></a>man</h3><hr>
 <h3 id="info"><a href="#info" class="headerlink" title="info"></a>info</h3><hr>
 <h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><hr>
-<h3 id="每条命令的–help选项参数"><a href="#每条命令的–help选项参数" class="headerlink" title="每条命令的–help选项参数"></a>每条命令的–help选项参数</h3>
+<h3 id="每条命令的–help选项参数"><a href="#每条命令的–help选项参数" class="headerlink" title="每条命令的–help选项参数"></a>每条命令的–help选项参数</h3><h2 id="文本格式转换"><a href="#文本格式转换" class="headerlink" title="文本格式转换"></a>文本格式转换</h2><h3 id="unix2dos-dos2unix"><a href="#unix2dos-dos2unix" class="headerlink" title="unix2dos, dos2unix"></a>unix2dos, dos2unix</h3><table>
+<thead>
+<tr>
+<th>系统</th>
+<th>换行符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>windows</td>
+<td>^M^J<br>（回车换行）</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>^J</td>
+</tr>
+</tbody>
+</table>
+
           
         
       
@@ -2287,7 +2383,7 @@ op1->op2(right)->op3->op4</textarea><textarea id="flowchart-2-options" style="di
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
