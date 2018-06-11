@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/Blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/Blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/Blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/Blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/Blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/Blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="-Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux总结1. Linux目录   目录 功能 记忆     /bin 常用系统程序目录 binary   /boot 开技设定目录 boot   /dev 系统设备装置文件目录 device   /etc 系统配置文件，尤其是passwd，shadow文件 Edit Text Configuration   /home 系统使用者的目录    /lib Linux执行或编译程序函数库的目录">
+<meta name="keywords" content="-Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux总结">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/2018/06/07/Linux/Linux总结/index.html">
+<meta property="og:site_name" content="StormAaron的技术站">
+<meta property="og:description" content="Linux总结1. Linux目录   目录 功能 记忆     /bin 常用系统程序目录 binary   /boot 开技设定目录 boot   /dev 系统设备装置文件目录 device   /etc 系统配置文件，尤其是passwd，shadow文件 Edit Text Configuration   /home 系统使用者的目录    /lib Linux执行或编译程序函数库的目录">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/07/Linux/Linux总结/文件权限属性.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/07/Linux/Linux总结/硬链接和软链接图示.png">
+<meta property="og:updated_time" content="2018-06-11T06:37:07.683Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux总结">
+<meta name="twitter:description" content="Linux总结1. Linux目录   目录 功能 记忆     /bin 常用系统程序目录 binary   /boot 开技设定目录 boot   /dev 系统设备装置文件目录 device   /etc 系统配置文件，尤其是passwd，shadow文件 Edit Text Configuration   /home 系统使用者的目录    /lib Linux执行或编译程序函数库的目录">
+<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/2018/06/07/Linux/Linux总结/文件权限属性.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/Blog/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/2018/06/07/Linux/Linux总结/"/>
+
+
+
+
+
+  <title>Linux总结 | StormAaron的技术站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/Blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StormAaron的技术站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/Blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/Blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/Blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/Blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/Blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/06/07/Linux/Linux总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T00:05:10+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux总结"><a href="#Linux总结" class="headerlink" title="Linux总结"></a>Linux总结</h1><h2 id="1-Linux目录"><a href="#1-Linux目录" class="headerlink" title="1. Linux目录"></a>1. Linux目录</h2><table>
+<thead>
+<tr>
+<th>目录</th>
+<th>功能</th>
+<th>记忆</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/bin</td>
+<td>常用系统程序目录</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>/boot</td>
+<td>开技设定目录</td>
+<td>boot</td>
+</tr>
+<tr>
+<td>/dev</td>
+<td>系统设备装置文件目录</td>
+<td>device</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>系统配置文件，尤其是passwd，shadow文件</td>
+<td>Edit Text Configuration</td>
+</tr>
+<tr>
+<td>/home</td>
+<td>系统使用者的目录</td>
+<td></td>
+</tr>
+<tr>
+<td>/lib</td>
+<td>Linux执行或编译程序函数库的目录</td>
+<td>Libary</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>软驱和光驱接入挂载的地方</td>
+<td></td>
+</tr>
+<tr>
+<td>/proc</td>
+<td>系统核心与程序的一些信息</td>
+<td></td>
+</tr>
+<tr>
+<td>/tmp</td>
+<td>临时文件目录</td>
+<td>Temporary 临时的</td>
+</tr>
+<tr>
+<td>/sbin</td>
+<td>系统管理员常用指令集</td>
+<td></td>
+</tr>
+<tr>
+<td>/usr</td>
+<td>/usr/sbin 系统管理员常用指令集<br>/usr/bin 一般执行文件摆放的地方</td>
+<td></td>
+</tr>
+<tr>
+<td>/var</td>
+<td>摆放系统日志文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="系统启动或关闭"><a href="#系统启动或关闭" class="headerlink" title="系统启动或关闭"></a>系统启动或关闭</h2><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>暂时更改系统运行级别</p>
+<p><strong>权限：</strong>root</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init [0123456]</span><br></pre></td></tr></table></figure>
+<p><strong>重要参数</strong></p>
+<p>0：关机级别</p>
+<p>1：单用户运行级别</p>
+<p>2：多用户</p>
+<p>3：多用户，字符模式</p>
+<p>4：用户自定义</p>
+<p>5：图形界面</p>
+<p>6：重启</p>
+<hr>
+<h3 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h3><p>关闭或重启系统</p>
+<p><strong>权限：</strong>root</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown [选项] [时间] [警告信息]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-r: shutdown之后重启</span><br><span class="line">-h: 关机后不重启</span><br></pre></td></tr></table></figure>
+<p><strong>时间：</strong>now 或者 +时间值</p>
+<hr>
+<h3 id="poweroff"><a href="#poweroff" class="headerlink" title="poweroff"></a>poweroff</h3><p>关闭系统和关闭电源</p>
+<p><strong>权限：</strong>所有用户</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">poweroff [选项]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p: 关闭计算机后再关闭电源</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="用户和组管理"><a href="#用户和组管理" class="headerlink" title="用户和组管理"></a>用户和组管理</h2><p>超级用户：UID 0    （默认为root）</p>
+<p>系统用户：UID 100以下</p>
+<p>普通用户：UID 500+</p>
+<p>/etc/passwd：账号文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aaron:x:1002:1002:aaron:/home/aaron:/bin/bash</span><br><span class="line">用户名:加密密码:用户ID:组ID:用户信息:用户主目录:登陆Shell</span><br><span class="line">（默认创建用户下，GID会和UID相同）</span><br></pre></td></tr></table></figure>
+<p>/etc/shadow：口令文件</p>
+<p>/etc/group：用户组信息文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aaron:x:500:a1,a2</span><br><span class="line">组名:密码:GID:用户列表（逗号分隔）</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="useradd"><a href="#useradd" class="headerlink" title="useradd"></a>useradd</h3><p>添加用户</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd [选项] [参数] &lt;newUsername&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>选项/参数：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d: 指定主目录	(directory)</span><br><span class="line">-u: 指定UID		(UID)</span><br><span class="line">-g: 指定用户组	(group)</span><br><span class="line">-G: 指定用户组列表	(Groups)</span><br><span class="line">-s: 指定Shell		(Shell)</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># useradd aaron</span></span><br></pre></td></tr></table></figure>
+<p>默认条件下：系统自动分配一个500以上的UID和GID，默认创建一个与UID同名的GID组，默认在home目录下创建同名文件夹为主目录。</p>
+<hr>
+<h3 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h3><p>修改密码（root可以修改所有的密码，普通用户只能修改自己的密码）</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd [选项] &lt;Username&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="usermod"><a href="#usermod" class="headerlink" title="usermod"></a>usermod</h3><p>修改用户属性</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod [选项] [参数] &lt;Username&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>选项/参数：</strong>（同useradd）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d: 指定主目录	(directory)</span><br><span class="line">-u: 指定UID		(UID)</span><br><span class="line">-g: 指定用户组	(group)</span><br><span class="line">-G: 指定用户组列表	(Groups)</span><br><span class="line">-s: 指定Shell		(Shell)</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="userdel"><a href="#userdel" class="headerlink" title="userdel"></a>userdel</h3><p>删除用户</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel [选项] &lt;Username&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r: 删除用户的同时删除主目录</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="组管理"><a href="#组管理" class="headerlink" title="组管理"></a>组管理</h3><hr>
+<h3 id="groupadd"><a href="#groupadd" class="headerlink" title="groupadd"></a>groupadd</h3><p>添加用户组</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd [选项] &lt;GroupName&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g: 设定组ID</span><br><span class="line">-r: 添加系统组(GID小于500)</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd -g 501 worker</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="groupmod"><a href="#groupmod" class="headerlink" title="groupmod"></a>groupmod</h3><p>修改组属性</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod [选项] &lt;GroupName&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g GID：设定组ID</span><br><span class="line">-n &lt;GroupName&gt;: 设定新组名</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="账号查看"><a href="#账号查看" class="headerlink" title="账号查看"></a>账号查看</h3><hr>
+<h3 id="who"><a href="#who" class="headerlink" title="who"></a>who</h3><p>显示系统中有哪些用户正在使用</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">who [选项]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-u: 显示详细的用户状态</span><br><span class="line">-H: 显示表头</span><br><span class="line">-a: 显示所有用户</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ who -uH</span><br><span class="line">NAME     LINE         TIME             IDLE          PID COMMENT</span><br><span class="line">aaron    pts/0        2018-06-07 11:35   .         21837 (125.88.24.125)</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="w"><a href="#w" class="headerlink" title="w"></a>w</h3><p>显示系统中用户使用情况，是who的增强版</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w [选项] [user]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s: 简短模式</span><br><span class="line">user: 指定用户</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="whoami"><a href="#whoami" class="headerlink" title="whoami"></a>whoami</h3><p>显示当前用户名</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>显示用户信息</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id [选项]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g: 只显示GID</span><br><span class="line">-u: 只显示UID</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="su"><a href="#su" class="headerlink" title="su"></a>su</h3><p>切换用户身份</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su [选项] [username]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-l: 同时切换用户主目录</span><br><span class="line">-: 同时切换环境变量</span><br><span class="line">-m: 保留环境变量</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><p>以root身份执行指令</p>
+<p><strong>权限：</strong>在 /etc/sudoers 中有出现的使用者</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">command</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>/etc/shells: 查看系统支持的shell</p>
+<p>一般shell都在/bin/xxx目录下（xx为shell名，例如/bin/bash ）</p>
+<p>root 提示符# 其他用户提示符$</p>
+<h2 id="输入-输出重定向"><a href="#输入-输出重定向" class="headerlink" title="输入/输出重定向"></a>输入/输出重定向</h2><h3 id="文件描述符（0-1-2）"><a href="#文件描述符（0-1-2）" class="headerlink" title="文件描述符（0, 1, 2）"></a>文件描述符（0, 1, 2）</h3><p>0：标准输入</p>
+<p>1：标准输出</p>
+<p>2：标准错误输出</p>
+<h3 id="重定向控制符"><a href="#重定向控制符" class="headerlink" title="重定向控制符"></a>重定向控制符</h3><p>&lt; 文件 ：输入重定向控制符，输入内容从文件获取</p>
+<p>> 文件：输出重定向控制符（覆盖）</p>
+<p>>> 文件：输出重定向控制符（追加）</p>
+<h3 id="重定向高级用法"><a href="#重定向高级用法" class="headerlink" title="重定向高级用法"></a>重定向高级用法</h3><ul>
+<li>文件描述符[0,1,2] 重定向控制符[&gt;,&lt;,&lt;&lt;] 文件</li>
+</ul>
+<p>例：重定向标准输出到文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> xxx 1&gt;文件</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p><strong>符号：</strong>“|”</p>
+<p>用于连接进程，通过管道连接的进程可以同时运行，并且随着数据流在她们之间传递可以自动地进行协调。</p>
+<hr>
+<h2 id="文件与目录"><a href="#文件与目录" class="headerlink" title="文件与目录"></a>文件与目录</h2><h3 id="文件权限属性"><a href="#文件权限属性" class="headerlink" title="文件权限属性"></a>文件权限属性</h3><p><img src="/Blog/2018/06/07/Linux/Linux总结/文件权限属性.png" alt="文件权限属性"></p>
+<p>文件类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-：普通文件</span><br><span class="line">d：目录</span><br><span class="line">l：链接文件</span><br><span class="line">p：管道文件</span><br></pre></td></tr></table></figure>
+<p>权限码（rwx）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r = 4	<span class="comment"># 读</span></span><br><span class="line">w = 2	<span class="comment"># 写</span></span><br><span class="line">x = 1	<span class="comment"># 执行</span></span><br><span class="line">- = 0	<span class="comment"># 无权限</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>显示指定目录下的目录和文件</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls [选项] 目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a：显示隐藏文件（<span class="string">"."</span>开头）</span><br><span class="line">-l：列出文件详细信息</span><br><span class="line">-S：以文件大小排序</span><br><span class="line">-t：以时间排序</span><br><span class="line">-i：显示索引节点</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l</span><br><span class="line">-drwxr-xr-x	1	root	root	969	May	29	17:02	dir1</span><br><span class="line">文件权限:链接数:拥有者:所属组:文件大小(B):修改日期:文件名</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><p>切换工作目录</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> 目录名</span><br></pre></td></tr></table></figure>
+<p><strong>参数：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~ : 用户主目录</span><br><span class="line">. : 当前目录</span><br><span class="line">.. : 父目录</span><br><span class="line">- : 返回上一次目录</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>查看当前工作目录</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h3><p>创建目录</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir [选项] 目录</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-p：确保目录名称存在，不存在则创建一个</span><br><span class="line">-m：在创建目录的同时设置目录的权限</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h3><p>删除<strong>空目录</strong></p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmdir [-p] 目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p：当子目录被删除后也成为空目录时，也一并删除</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h3><p>用于修改文件的时间属性，包括存取时间和更改时间。<strong>若文件不存在，系统会建立一个新的文件</strong> </p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch [选项] 文件1 [文件2...]</span><br></pre></td></tr></table></figure>
+<p>不加选项的话修改时间记录为当前系统时间</p>
+<hr>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p><strong>删除</strong>文件或目录（删除目录要 -r）</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm [选项] 文件名或目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-r：递归删除目录一下文件</span><br><span class="line">-i：交互模式，删除前逐一询问（interactive）</span><br><span class="line">-f：强制模式，即使属性为只读，也直接删除，无需逐一确认（force）</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><p><strong>复制</strong>文件或目录（目录用 -a）</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp [选项] 源文件或目录 目标文件或目录</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-a：复制目录时使用，保留链接、文件属性，且递归复制目录下所有内容，相当于-pdr</span><br><span class="line">-p：复制属性</span><br><span class="line">-d：复制链接的话，只复制链接而非期文件</span><br><span class="line">-r：递归复制目录</span><br><span class="line">-i：覆盖之前询问</span><br><span class="line">-f：覆盖且不询问</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p><strong>移动</strong>或<strong>更名</strong>指定的文件或目录</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv [选项] 源文件或目录 目标文件或目录</span><br></pre></td></tr></table></figure>
+<p><strong>mv参数设置与运行结果：</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令格式</th>
+<th>运行结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mv  文件名  文件名</td>
+<td>将源文件名改为目标文件名</td>
+</tr>
+<tr>
+<td>mv  文件名  目录名</td>
+<td>移动文件到目录</td>
+</tr>
+<tr>
+<td>mv  目录名  目录名</td>
+<td>目标目录存在，将源目录移动到目标目录<br>目标目录不存在，则改名</td>
+</tr>
+<tr>
+<td>mv  目录名  文件名</td>
+<td>错误</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-i：交互模式，覆盖询问</span><br><span class="line">-f：强制模式，覆盖不提示</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p>从指定目录开始递归查找文件，并可以对其进行操作</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find 起始目录 &lt;选项查找条件&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-name &lt;name&gt;：正则匹配字符串（-iname 忽略大小写）</span><br><span class="line">-<span class="built_in">type</span> &lt;d/c/b/p/f/l/s&gt;：文件类型</span><br><span class="line">-ls：详细列出所找到的文件</span><br><span class="line">-<span class="built_in">exec</span>：执行期间不询问；用&#123;&#125;表示找到的文件，对其进行命令操作，命令末尾必须以 <span class="string">"\;"</span> 结束</span><br><span class="line">-ok：同<span class="built_in">exec</span>，但会询问。</span><br><span class="line">-size &lt;n&gt;：文件大小是n，可用b，c（char），k(kB)表示</span><br><span class="line">对查询条件做逻辑运算：</span><br><span class="line">-a：与</span><br><span class="line">-o：或</span><br><span class="line">！：非</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># find ~ -name &quot;test*&quot; -ls -exec rm &#123;&#125; \;</span><br><span class="line">393291    0 -rw-rw-r--   1 aaron    aaron           0 Jun  8 13:40 /home/aaron/test3</span><br><span class="line">393290    0 -rw-rw-r--   1 aaron    aaron           0 Jun  8 13:40 /home/aaron/test2</span><br><span class="line">393236    0 -rw-rw-r--   1 aaron    aaron           0 Jun  8 13:40 /home/aaron/test1</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h3><p>为源文件创建一个链接，但不复制源文件</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln [选项] 源对象 目的对象</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s：进行软链接</span><br><span class="line">不用-s：进行硬链接</span><br></pre></td></tr></table></figure>
+<p><strong>硬链接</strong>：文件的副本（别名），同时两者存在连接关系，<strong>修改其中一个另一个也会一同被修改，删除一个，另一个不受影响</strong>。两者在<strong>硬盘上只有一份数据</strong>，只存在于同一个文件系统中。</p>
+<p><strong>软链接</strong>：<strong>一个快捷方式</strong>，是一个内容指向另一个文件位置的特殊文件。删了源文件就没用了。可以跨越文件系统。</p>
+<p>个人理解：</p>
+<p><img src="/Blog/2018/06/07/Linux/Linux总结/硬链接和软链接图示.png" alt="硬链接和软链接图示"></p>
+<hr>
+<h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>改变目录或文件的权限</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod [选项] &lt;mode&gt; &lt;文件名或目录&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-R：递归对目录下的所有子文件与子目录进行相同的权限变更</span><br></pre></td></tr></table></figure>
+<p><strong>权限修改：</strong></p>
+<ol>
+<li>用数字修改</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4:r</span><br><span class="line">2:w</span><br><span class="line">1:x</span><br><span class="line">例如775就是rwxrwxr-x</span><br><span class="line">示例：chmod 775 file.txt</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>用指令修改权限</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">u：所有者user</span><br><span class="line">g：组group</span><br><span class="line">o：其他other</span><br><span class="line">+：增加权限</span><br><span class="line">-：取消权限</span><br><span class="line">示例：chmod g+w,o+w,o-r file.txt</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>改变指定目录或文件(用-R)的所属用户、所属组</p>
+<p><strong>权限：</strong>root</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown [选项] 用户名[：组名] 文件或目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-R：递归对子文件或目录操作</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h3><p>改变文件/目录的所属组</p>
+<p><strong>权限：</strong>所有使用者</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chgrp [选项] 组名 文件或目录名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-R：递归对子文件或目录操作</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="文字显示-文件操作"><a href="#文字显示-文件操作" class="headerlink" title="文字显示/文件操作"></a>文字显示/文件操作</h2><hr>
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>显示文件内容</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat [选项] 文件名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-n：显示行号</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="more"><a href="#more" class="headerlink" title="more"></a>more</h3><p>分页显示文件内容</p>
+<p>b上一页，空格下一页，回车下一行，</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more [选项参数] 文件名</span><br></pre></td></tr></table></figure>
+<p><strong>选项参数：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-&lt;数字&gt;：指定每屏显示的行数</span><br><span class="line">+&lt;数字&gt;：从指定数字的行开始显示</span><br><span class="line">-c：不进行滚屏操作。每次刷新这个屏幕</span><br><span class="line">-s：将多个空行压缩成一行</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="less"><a href="#less" class="headerlink" title="less"></a>less</h3><p>分页显示文件内容，与more十分相似，不同的是less命令允许用户向前或向后浏览文件，而more命令只能向前浏览。more读的时候会全部加载，而less部分加载，所以less有时候会更快。</p>
+<p>PageUp键上翻页，PageDown向下翻。Q键退出。 </p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less [选项] 文件</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-n：显示行号</span><br><span class="line">-s：多个空行压缩成一行</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="head"><a href="#head" class="headerlink" title="head"></a>head</h3><p>显示文件前N行内容或前N个字节，默认为前10行</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head [选项] 文件</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-n&lt;数字&gt; ：显示前N行</span><br><span class="line">-c&lt;数字&gt; ：显示前N个字节</span><br><span class="line">-v：同时显示文件名</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h3><p>显示文件后N行内容或前N个字节，默认为前10行</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail [选项] 文件</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-n&lt;数字&gt; ：显示后N行</span><br><span class="line">-c&lt;数字&gt; ：显示后N个字节</span><br><span class="line">-v：同时显示文件名</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h3><p>从文件中过滤或提取特定内容并显示</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut [选项] 文件名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-d&lt;分隔符&gt;：指定分隔符号（可用引号包起来）</span><br><span class="line">-f&lt;list&gt;：指定提取的列（可以是-f1，也可以是 -f2-5，-f2,4 这样的范围）</span><br><span class="line">-c&lt;list&gt;：仅显示行中指定范围的字符</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]<span class="comment"># cut -f2,4 -d";" test.txt </span></span><br><span class="line">Name Mark</span><br><span class="line">tom 69</span><br><span class="line">jack 71</span><br><span class="line">alex 68</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h3><p>（wordcount）统计一个文件多少字/字节/行</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc [选项] 文件名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-c：只显示字节Bytes数；（char（字节)）</span><br><span class="line">-l：只显示列数；（line）</span><br><span class="line">-w：只显示字数。（word）</span><br><span class="line">无参数默认统计行、字、字节数</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h3><p>对输出的内容进行排序（不改变文件）</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort [选项] 文件名</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-r：反向排序(reverse)</span><br><span class="line">-n：数字排序（number）</span><br><span class="line">-f：不区分大小写</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>显示文字</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> [选项] 字符串</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-n：最后不换行</span><br><span class="line">-e：输出一个空行</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="cal"><a href="#cal" class="headerlink" title="cal"></a>cal</h3><p>日历显示</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cal [选项] [[月] 年]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">无参数则本月日历</span><br><span class="line">-y：显示今年日历</span><br><span class="line">-m：周一为第一天</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="date"><a href="#date" class="headerlink" title="date"></a>date</h3><p>显示系统时间 或 设定系统时间</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date [选项] [+format]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-d &lt;dateStr&gt;：显示 字符串所指的日期与时间。字符串须加双引号；</span><br><span class="line">-s &lt;dateStr&gt;：设置 字符串表示的日期与时间。字符串须加双引号；</span><br></pre></td></tr></table></figure>
+<p><strong>日期格式字符串列表</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">%H 小时，24小时制（00~23）</span><br><span class="line">%I 小时，12小时制（01~12）</span><br><span class="line">%k 小时，24小时制（0~23）</span><br><span class="line">%l 小时，12小时制（1~12）</span><br><span class="line">%M 分钟（00~59）</span><br><span class="line">%p 显示出AM或PM</span><br><span class="line">%r 显示时间，12小时制（hh:mm:ss %p）</span><br><span class="line">%s 从1970年1月1日00:00:00到目前经历的秒数</span><br><span class="line">%S 显示秒（00~59）</span><br><span class="line">%T 显示时间，24小时制（hh:mm:ss）</span><br><span class="line">%X 显示时间的格式（%H:%M:%S）</span><br><span class="line">%Z 显示时区，日期域（CST）</span><br><span class="line">%a 星期的简称（Sun~Sat）</span><br><span class="line">%A 星期的全称（Sunday~Saturday）</span><br><span class="line">%b 月的简称（Jan~Dec）</span><br><span class="line">%B 月的全称（January~December）</span><br><span class="line">%c 日期和时间（Tue Nov 20 14:12:58 2012）</span><br><span class="line">%d 一个月的第几天（01~31）</span><br><span class="line">%x,%D 日期（mm/dd/yy）</span><br><span class="line">%j 一年的第几天（001~366）</span><br><span class="line">%m 月份（01~12）</span><br><span class="line">%w 一个星期的第几天（0代表星期天）</span><br><span class="line">%W 一年的第几个星期（00~53，星期一为第一天）</span><br><span class="line">%y 年的最后两个数字（00-99）</span><br><span class="line">%Y 完整年份(0000-9999)</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<p>格式化输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">date +<span class="string">"%Y-%m-%d"</span></span><br><span class="line">2009-12-07</span><br></pre></td></tr></table></figure>
+<p>设置时间：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">date -s 20120523               //设置成20120523，这样会把具体时间设置成空00:00:00</span><br><span class="line">date -s 01:01:01               //设置具体时间，不会对日期做更改</span><br><span class="line">date -s <span class="string">"01:01:01 2012-05-23"</span>  //这样可以设置全部时间</span><br></pre></td></tr></table></figure>
+<hr>
+<p>###grep</p>
+<p>行搜索工具</p>
+<p>-v不包含</p>
+<hr>
+<h3 id="tr"><a href="#tr" class="headerlink" title="tr"></a>tr</h3><p>对标准输入的字符进行替换、压缩和删除 </p>
+<hr>
+<h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><hr>
+<h2 id="联机、帮助指令"><a href="#联机、帮助指令" class="headerlink" title="联机、帮助指令"></a>联机、帮助指令</h2><h3 id="man"><a href="#man" class="headerlink" title="man"></a>man</h3><hr>
+<h3 id="info"><a href="#info" class="headerlink" title="info"></a>info</h3><hr>
+<h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><hr>
+<h3 id="每条命令的–help选项参数"><a href="#每条命令的–help选项参数" class="headerlink" title="每条命令的–help选项参数"></a>每条命令的–help选项参数</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/Linux/" rel="tag"># -Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Blog/2018/06/06/Java并发编程艺术/第5章-Java中的锁/" rel="next" title="第5章 Java中的锁">
+                <i class="fa fa-chevron-left"></i> 第5章 Java中的锁
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/2018/06/11/Linux/Linux-Vi/" rel="prev" title="Linux Vi">
+                Linux Vi <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Aaron.H</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/Blog/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/Blog/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/Blog/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux总结"><span class="nav-number">1.</span> <span class="nav-text">Linux总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux目录"><span class="nav-number">1.1.</span> <span class="nav-text">1. Linux目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统启动或关闭"><span class="nav-number">1.2.</span> <span class="nav-text">系统启动或关闭</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#init"><span class="nav-number">1.2.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shutdown"><span class="nav-number">1.2.2.</span> <span class="nav-text">shutdown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poweroff"><span class="nav-number">1.2.3.</span> <span class="nav-text">poweroff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户和组管理"><span class="nav-number">1.3.</span> <span class="nav-text">用户和组管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#useradd"><span class="nav-number">1.3.1.</span> <span class="nav-text">useradd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#passwd"><span class="nav-number">1.3.2.</span> <span class="nav-text">passwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usermod"><span class="nav-number">1.3.3.</span> <span class="nav-text">usermod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userdel"><span class="nav-number">1.3.4.</span> <span class="nav-text">userdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组管理"><span class="nav-number">1.3.5.</span> <span class="nav-text">组管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groupadd"><span class="nav-number">1.3.6.</span> <span class="nav-text">groupadd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groupmod"><span class="nav-number">1.3.7.</span> <span class="nav-text">groupmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#账号查看"><span class="nav-number">1.3.8.</span> <span class="nav-text">账号查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#who"><span class="nav-number">1.3.9.</span> <span class="nav-text">who</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#w"><span class="nav-number">1.3.10.</span> <span class="nav-text">w</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#whoami"><span class="nav-number">1.3.11.</span> <span class="nav-text">whoami</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#id"><span class="nav-number">1.3.12.</span> <span class="nav-text">id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#su"><span class="nav-number">1.3.13.</span> <span class="nav-text">su</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sudo"><span class="nav-number">1.3.14.</span> <span class="nav-text">sudo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell"><span class="nav-number">1.4.</span> <span class="nav-text">Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入-输出重定向"><span class="nav-number">1.5.</span> <span class="nav-text">输入/输出重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件描述符（0-1-2）"><span class="nav-number">1.5.1.</span> <span class="nav-text">文件描述符（0, 1, 2）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向控制符"><span class="nav-number">1.5.2.</span> <span class="nav-text">重定向控制符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向高级用法"><span class="nav-number">1.5.3.</span> <span class="nav-text">重定向高级用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道"><span class="nav-number">1.5.4.</span> <span class="nav-text">管道</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件与目录"><span class="nav-number">1.6.</span> <span class="nav-text">文件与目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限属性"><span class="nav-number">1.6.1.</span> <span class="nav-text">文件权限属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls"><span class="nav-number">1.6.2.</span> <span class="nav-text">ls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cd"><span class="nav-number">1.6.3.</span> <span class="nav-text">cd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd"><span class="nav-number">1.6.4.</span> <span class="nav-text">pwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mkdir"><span class="nav-number">1.6.5.</span> <span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rmdir"><span class="nav-number">1.6.6.</span> <span class="nav-text">rmdir</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#touch"><span class="nav-number">1.6.7.</span> <span class="nav-text">touch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rm"><span class="nav-number">1.6.8.</span> <span class="nav-text">rm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cp"><span class="nav-number">1.6.9.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv"><span class="nav-number">1.6.10.</span> <span class="nav-text">mv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">1.6.11.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ln"><span class="nav-number">1.6.12.</span> <span class="nav-text">ln</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chmod"><span class="nav-number">1.6.13.</span> <span class="nav-text">chmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chown"><span class="nav-number">1.6.14.</span> <span class="nav-text">chown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chgrp"><span class="nav-number">1.6.15.</span> <span class="nav-text">chgrp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文字显示-文件操作"><span class="nav-number">1.7.</span> <span class="nav-text">文字显示/文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cat"><span class="nav-number">1.7.1.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#more"><span class="nav-number">1.7.2.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less"><span class="nav-number">1.7.3.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#head"><span class="nav-number">1.7.4.</span> <span class="nav-text">head</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tail"><span class="nav-number">1.7.5.</span> <span class="nav-text">tail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cut"><span class="nav-number">1.7.6.</span> <span class="nav-text">cut</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wc"><span class="nav-number">1.7.7.</span> <span class="nav-text">wc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">1.7.8.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#echo"><span class="nav-number">1.7.9.</span> <span class="nav-text">echo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cal"><span class="nav-number">1.7.10.</span> <span class="nav-text">cal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#date"><span class="nav-number">1.7.11.</span> <span class="nav-text">date</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tr"><span class="nav-number">1.7.12.</span> <span class="nav-text">tr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar"><span class="nav-number">1.7.13.</span> <span class="nav-text">tar</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联机、帮助指令"><span class="nav-number">1.8.</span> <span class="nav-text">联机、帮助指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#man"><span class="nav-number">1.8.1.</span> <span class="nav-text">man</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#info"><span class="nav-number">1.8.2.</span> <span class="nav-text">info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#help"><span class="nav-number">1.8.3.</span> <span class="nav-text">help</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#每条命令的–help选项参数"><span class="nav-number">1.8.4.</span> <span class="nav-text">每条命令的–help选项参数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron.H</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/Blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/Blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
