@@ -387,6 +387,7 @@
 <h3 id="粘贴（p）"><a href="#粘贴（p）" class="headerlink" title="粘贴（p）"></a>粘贴（p）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p	<span class="comment"># 光标后粘贴</span></span><br><span class="line">P	<span class="comment"># 光标前粘贴</span></span><br></pre></td></tr></table></figure>
 <h3 id="撤销（u）"><a href="#撤销（u）" class="headerlink" title="撤销（u）"></a>撤销（u）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u	<span class="comment"># 撤销一步</span></span><br><span class="line">U	<span class="comment"># 撤销本行操作(其实是增加了全局操作，会被u撤销)</span></span><br></pre></td></tr></table></figure>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="行号"><a href="#行号" class="headerlink" title="行号"></a>行号</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:<span class="built_in">set</span> nu		<span class="comment"># 显示行号</span></span><br><span class="line">:<span class="built_in">set</span> nonu	<span class="comment"># 取消显示行号</span></span><br><span class="line">:nu		<span class="comment"># 取得该行行号</span></span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>Vim编辑异常退出后，会无法正常进行编辑，这时候就要删除一个同名的.swap文件，即可编辑。</p>
 
           
         
@@ -528,7 +529,7 @@
       
         
           
-            <h1 id="Linux总结"><a href="#Linux总结" class="headerlink" title="Linux总结"></a>Linux总结</h1><h2 id="1-Linux目录"><a href="#1-Linux目录" class="headerlink" title="1. Linux目录"></a>1. Linux目录</h2><table>
+            <h1 id="Linux目录"><a href="#Linux目录" class="headerlink" title="Linux目录"></a>Linux目录</h1><table>
 <thead>
 <tr>
 <th>目录</th>
@@ -598,7 +599,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="系统启动或关闭"><a href="#系统启动或关闭" class="headerlink" title="系统启动或关闭"></a>系统启动或关闭</h2><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>暂时更改系统运行级别</p>
+<h1 id="系统启动或关闭"><a href="#系统启动或关闭" class="headerlink" title="系统启动或关闭"></a>系统启动或关闭</h1><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>暂时更改系统运行级别</p>
 <p><strong>权限：</strong>root</p>
 <p><strong>语法：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init [0123456]</span><br></pre></td></tr></table></figure>
@@ -626,7 +627,7 @@
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p: 关闭计算机后再关闭电源</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="用户和组管理"><a href="#用户和组管理" class="headerlink" title="用户和组管理"></a>用户和组管理</h2><p>超级用户：UID 0    （默认为root）</p>
+<h1 id="用户和组管理"><a href="#用户和组管理" class="headerlink" title="用户和组管理"></a>用户和组管理</h1><h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><p>超级用户：UID 0    （默认为root）</p>
 <p>系统用户：UID 100以下</p>
 <p>普通用户：UID 500+</p>
 <p>/etc/passwd：账号文件</p>
@@ -660,7 +661,7 @@
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r: 删除用户的同时删除主目录</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="组管理"><a href="#组管理" class="headerlink" title="组管理"></a>组管理</h3><hr>
+<h2 id="组管理"><a href="#组管理" class="headerlink" title="组管理"></a>组管理</h2><hr>
 <h3 id="groupadd"><a href="#groupadd" class="headerlink" title="groupadd"></a>groupadd</h3><p>添加用户组</p>
 <p><strong>语法：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd [选项] &lt;GroupName&gt;</span><br></pre></td></tr></table></figure>
@@ -675,7 +676,7 @@
 <p><strong>选项：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g GID：设定组ID</span><br><span class="line">-n &lt;GroupName&gt;: 设定新组名</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="账号查看"><a href="#账号查看" class="headerlink" title="账号查看"></a>账号查看</h3><hr>
+<h2 id="账号查看"><a href="#账号查看" class="headerlink" title="账号查看"></a>账号查看</h2><hr>
 <h3 id="who"><a href="#who" class="headerlink" title="who"></a>who</h3><p>显示系统中有哪些用户正在使用</p>
 <p><strong>语法：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">who [选项]</span><br></pre></td></tr></table></figure>
@@ -714,28 +715,28 @@
 <h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>/etc/shells: 查看系统支持的shell</p>
 <p>一般shell都在/bin/xxx目录下（xx为shell名，例如/bin/bash ）</p>
 <p>root 提示符# 其他用户提示符$</p>
-<h2 id="输入-输出重定向"><a href="#输入-输出重定向" class="headerlink" title="输入/输出重定向"></a>输入/输出重定向</h2><h3 id="文件描述符（0-1-2）"><a href="#文件描述符（0-1-2）" class="headerlink" title="文件描述符（0, 1, 2）"></a>文件描述符（0, 1, 2）</h3><p>0：标准输入</p>
+<h1 id="输入-输出重定向"><a href="#输入-输出重定向" class="headerlink" title="输入/输出重定向"></a>输入/输出重定向</h1><h2 id="文件描述符（0-1-2）"><a href="#文件描述符（0-1-2）" class="headerlink" title="文件描述符（0, 1, 2）"></a>文件描述符（0, 1, 2）</h2><p>0：标准输入</p>
 <p>1：标准输出</p>
 <p>2：标准错误输出</p>
-<h3 id="重定向控制符"><a href="#重定向控制符" class="headerlink" title="重定向控制符"></a>重定向控制符</h3><p>&lt; 文件 ：输入重定向控制符，输入内容从文件获取</p>
+<h2 id="重定向控制符"><a href="#重定向控制符" class="headerlink" title="重定向控制符"></a>重定向控制符</h2><p>&lt; 文件 ：输入重定向控制符，输入内容从文件获取</p>
 <p>> 文件：输出重定向控制符（覆盖）</p>
 <p>>> 文件：输出重定向控制符（追加）</p>
-<h3 id="重定向高级用法"><a href="#重定向高级用法" class="headerlink" title="重定向高级用法"></a>重定向高级用法</h3><ul>
+<h2 id="重定向高级用法"><a href="#重定向高级用法" class="headerlink" title="重定向高级用法"></a>重定向高级用法</h2><ul>
 <li>文件描述符[0,1,2] 重定向控制符[&gt;,&lt;,&lt;&lt;] 文件</li>
 </ul>
 <p>例：重定向标准输出到文件中</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> xxx 1&gt;文件</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p><strong>符号：</strong>“|”</p>
+<h1 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h1><p><strong>符号：</strong>“|”</p>
 <p>用于连接进程，通过管道连接的进程可以同时运行，并且随着数据流在她们之间传递可以自动地进行协调。</p>
 <hr>
-<h2 id="文件与目录"><a href="#文件与目录" class="headerlink" title="文件与目录"></a>文件与目录</h2><h3 id="文件权限属性"><a href="#文件权限属性" class="headerlink" title="文件权限属性"></a>文件权限属性</h3><p><img src="/Blog/2018/06/07/Linux/Linux总结/文件权限属性.png" alt="文件权限属性"></p>
+<h1 id="文件与目录"><a href="#文件与目录" class="headerlink" title="文件与目录"></a>文件与目录</h1><h2 id="文件权限属性"><a href="#文件权限属性" class="headerlink" title="文件权限属性"></a>文件权限属性</h2><p><img src="/Blog/2018/06/07/Linux/Linux总结/文件权限属性.png" alt="文件权限属性"></p>
 <p>文件类型：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-：普通文件</span><br><span class="line">d：目录</span><br><span class="line">l：链接文件</span><br><span class="line">p：管道文件</span><br></pre></td></tr></table></figure>
 <p>权限码（rwx）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r = 4	<span class="comment"># 读</span></span><br><span class="line">w = 2	<span class="comment"># 写</span></span><br><span class="line">x = 1	<span class="comment"># 执行</span></span><br><span class="line">- = 0	<span class="comment"># 无权限</span></span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>显示指定目录下的目录和文件</p>
+<h2 id="文件-目录-属性操作"><a href="#文件-目录-属性操作" class="headerlink" title="文件/目录/属性操作"></a>文件/目录/属性操作</h2><h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>显示指定目录下的目录和文件</p>
 <p><strong>语法：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls [选项] 目录名</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
@@ -942,15 +943,49 @@
 <hr>
 <p>###grep</p>
 <p>行搜索工具</p>
-<p>-v不包含</p>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-v	<span class="comment"># 不包含</span></span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="tr"><a href="#tr" class="headerlink" title="tr"></a>tr</h3><p>对标准输入的字符进行替换、压缩和删除 </p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tr [选项] 字符串1 字符串2</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-d	<span class="comment"># 删除字符1中出现的输入字符</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ tr <span class="string">'a-z'</span> <span class="string">'A-Z'</span> &lt; works.txt</span><br><span class="line">LINUX</span><br><span class="line">UNIX</span><br><span class="line">MAC OS</span><br><span class="line"></span><br><span class="line">$ cat works.txt | tr <span class="string">"abc"</span> <span class="string">"xyz"</span></span><br><span class="line">Linux</span><br><span class="line">Unix</span><br><span class="line">Mxz OS</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><hr>
-<h2 id="联机、帮助指令"><a href="#联机、帮助指令" class="headerlink" title="联机、帮助指令"></a>联机、帮助指令</h2><h3 id="man"><a href="#man" class="headerlink" title="man"></a>man</h3><hr>
-<h3 id="info"><a href="#info" class="headerlink" title="info"></a>info</h3><hr>
-<h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><hr>
-<h3 id="每条命令的–help选项参数"><a href="#每条命令的–help选项参数" class="headerlink" title="每条命令的–help选项参数"></a>每条命令的–help选项参数</h3><h2 id="文本格式转换"><a href="#文本格式转换" class="headerlink" title="文本格式转换"></a>文本格式转换</h2><h3 id="unix2dos-dos2unix"><a href="#unix2dos-dos2unix" class="headerlink" title="unix2dos, dos2unix"></a>unix2dos, dos2unix</h3><table>
+<h2 id="压缩指令"><a href="#压缩指令" class="headerlink" title="压缩指令"></a>压缩指令</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar [选项] 目录或文件</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-zcvf	<span class="comment"># 压缩</span></span><br><span class="line">-zxvf	<span class="comment"># 解压</span></span><br><span class="line">-z	<span class="comment"># 用gzip压缩/解压(.gz)</span></span><br><span class="line">-c	<span class="comment"># 打包（create）</span></span><br><span class="line">-x	<span class="comment"># 解压</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip [选项] 文件名</span><br></pre></td></tr></table></figure>
+<p><strong>压缩：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip File</span><br></pre></td></tr></table></figure>
+<p><strong>解压：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -d file.gz</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="unzip"><a href="#unzip" class="headerlink" title="unzip"></a>unzip</h3><p>解压zip文件</p>
+<p><strong>解压：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -x File.zip</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="联机、帮助指令"><a href="#联机、帮助指令" class="headerlink" title="联机、帮助指令"></a>联机、帮助指令</h2><p>获取命令的帮助</p>
+<h3 id="man"><a href="#man" class="headerlink" title="man"></a>man</h3><p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man [选项] 命令或配置文件</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man ls</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="info"><a href="#info" class="headerlink" title="info"></a>info</h3><p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info &lt;命令名&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">help</span> [命令名]</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="–help参数"><a href="#–help参数" class="headerlink" title="–help参数"></a>–help参数</h3><p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;命令&gt; --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="文本格式转换"><a href="#文本格式转换" class="headerlink" title="文本格式转换"></a>文本格式转换</h2><h3 id="unix2dos-dos2unix"><a href="#unix2dos-dos2unix" class="headerlink" title="unix2dos, dos2unix"></a>unix2dos, dos2unix</h3><table>
 <thead>
 <tr>
 <th>系统</th>
@@ -960,15 +995,124 @@
 <tbody>
 <tr>
 <td>windows</td>
-<td>^M^J<br>（回车换行）</td>
+<td>^M^J<br>(回车换行)</td>
 </tr>
 <tr>
 <td>Linux</td>
-<td>^J</td>
+<td>^J<br>(换行)</td>
 </tr>
 </tbody>
 </table>
-
+<h1 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h1><h3 id="磁盘设备描述"><a href="#磁盘设备描述" class="headerlink" title="磁盘设备描述"></a>磁盘设备描述</h3><p>前两个字母：设备类型</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hd	<span class="comment"># IDE硬盘</span></span><br><span class="line">sd	<span class="comment"># SCSI硬盘(U盘)</span></span><br></pre></td></tr></table></figure>
+<p>第三个字母：设备编号</p>
+<p>数字：分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sda2：第1块SCSI硬盘的第1个分区</span><br><span class="line">sdb1：第2块SCSI硬盘的第1个分区</span><br></pre></td></tr></table></figure>
+<h3 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h3><ol>
+<li><p><strong>FAT</strong></p>
+<p>早期<strong>Windows</strong>的文件系统</p>
+</li>
+<li><p><strong>NTFS</strong></p>
+<p>目前<strong>Windows</strong>普遍的文件系统</p>
+</li>
+<li><p><strong>Ext</strong></p>
+<p><strong>Linux</strong>引入的可扩展文件系统</p>
+</li>
+<li><p><strong>VFS</strong></p>
+<p><strong>Linux的虚拟文件系统</strong>，（接口层），屏蔽不同的文件系统，实现对各种文件系统的支持。</p>
+</li>
+</ol>
+<h3 id="fdisk-l"><a href="#fdisk-l" class="headerlink" title="fdisk -l"></a>fdisk -l</h3><p>查看本机硬盘及分区情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ fdisk -l</span><br><span class="line"></span><br><span class="line">Disk /dev/vda: 42.9 GB, 42949672960 bytes, 83886080 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disk label <span class="built_in">type</span>: dos</span><br><span class="line">Disk identifier: 0x0008de3e</span><br><span class="line"></span><br><span class="line">Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/vda1   *        2048    83884031    41940992   83  Linux</span><br></pre></td></tr></table></figure>
+<h3 id="mount-挂载设备"><a href="#mount-挂载设备" class="headerlink" title="mount 挂载设备"></a>mount 挂载设备</h3><p>挂载设备</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount [选项] 设备名 挂载点</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-t &lt;文件系统类型&gt;</span><br><span class="line">-o &lt;选项&gt; 如ro, rw, auto, iocharset等</span><br></pre></td></tr></table></figure>
+<h3 id="挂载过程"><a href="#挂载过程" class="headerlink" title="挂载过程"></a>挂载过程</h3><ol>
+<li><strong>获取设备名</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line">查看设备名</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>建立挂载点目录</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/目录名</span><br><span class="line">建立mnt目录下的挂载点</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>mount 命令挂载</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount 设备名 挂载点</span><br></pre></td></tr></table></figure>
+<h3 id="umount-卸载设备命令"><a href="#umount-卸载设备命令" class="headerlink" title="umount 卸载设备命令"></a>umount 卸载设备命令</h3><p>卸载挂载的设备</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount 挂载点/设备名</span><br></pre></td></tr></table></figure>
+<h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><h3 id="mkfs"><a href="#mkfs" class="headerlink" title="mkfs"></a>mkfs</h3><p>格式化硬盘分区（创建文件系统）(mkFileSystem)</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t 文件系统 设备名</span><br></pre></td></tr></table></figure>
+<h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><p>查看磁盘使用情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df [选项]</span><br></pre></td></tr></table></figure>
+<h3 id="du"><a href="#du" class="headerlink" title="du"></a>du</h3><p>统计目录或文件所占磁盘空间大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df [选项] 目录名</span><br></pre></td></tr></table></figure>
+<h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><p><strong>交互进程：</strong>由Shell启动的进程</p>
+<p><strong>守护进程：</strong>在后台运行的进程</p>
+<p><strong>批处理进程：</strong>管理进程的序列</p>
+<p>进程的属性：PID, PPID(父进程ID), UID, GID, 状态, 优先级, 资源占用</p>
+<p>杀终止父进程会连带终止子进程</p>
+<p>系统的第一个进程init(PID=1)（所有进程的父进程）</p>
+<h2 id="线程操作"><a href="#线程操作" class="headerlink" title="线程操作"></a>线程操作</h2><h3 id="手工启动线程"><a href="#手工启动线程" class="headerlink" title="手工启动线程"></a>手工启动线程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxx &amp;	<span class="comment"># 后台运行程序加"&amp;"</span></span><br></pre></td></tr></table></figure>
+<h3 id="at"><a href="#at" class="headerlink" title="at"></a>at</h3><p>指定时间执行命令序列</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">at [选项] TIME</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>显示瞬间进程动态（另外，top指令可以动态监控进程）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps [选项]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-e	<span class="comment"># 显示所有进程</span></span><br><span class="line">-a	<span class="comment"># 显示所有进程，包括其他用户的进程</span></span><br><span class="line">-x	<span class="comment"># 显示所有控制终端的进程</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="pstree"><a href="#pstree" class="headerlink" title="pstree"></a>pstree</h3><p>以树状结构显示系统中的所有进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree [选项] [PID|User]</span><br></pre></td></tr></table></figure>
+<p>可以指定显示指定PID的信息 或 指定User的进程信息</p>
+<hr>
+<h3 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h3><p>结束进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> [-s signal] PID</span><br><span class="line"><span class="built_in">kill</span> -l	<span class="comment"># 列出所有可用的信号</span></span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-s signal	<span class="comment"># 指定信号。重启(1)，强制杀死(9)，结束(10)</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="jobs"><a href="#jobs" class="headerlink" title="jobs"></a>jobs</h3><p>查看后台进程</p>
+<h3 id="ctrl-Z"><a href="#ctrl-Z" class="headerlink" title="ctrl+Z"></a>ctrl+Z</h3><p>挂起当前线程</p>
+<h3 id="fg"><a href="#fg" class="headerlink" title="fg"></a>fg</h3><p>前台执行进程</p>
+<p><code>fg PID</code></p>
+<h3 id="bg"><a href="#bg" class="headerlink" title="bg"></a>bg</h3><p>后台执行进程</p>
+<hr>
+<h2 id="crontab-周期性执行程序"><a href="#crontab-周期性执行程序" class="headerlink" title="crontab 周期性执行程序"></a>crontab 周期性执行程序</h2><p>周期性执行程序</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab [-u user] &#123;-l | -r | -e&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-e	<span class="comment"># 编辑时程表</span></span><br><span class="line">-r	<span class="comment"># 删除目前时程表</span></span><br><span class="line">-l	<span class="comment"># 列出目前时程表</span></span><br></pre></td></tr></table></figure>
+<h3 id="crontab文件编写"><a href="#crontab文件编写" class="headerlink" title="crontab文件编写"></a>crontab文件编写</h3><p><strong>格式：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f1 f2 f3 f4 f5 program</span><br><span class="line">m, h, d-M, M-y, d-W program</span><br><span class="line">分钟 小时 月中的天 月 周中的天 program</span><br></pre></td></tr></table></figure>
+<p><strong>特殊格式：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*		<span class="comment"># 每个时间点都要执行</span></span><br><span class="line">a-b		<span class="comment"># a-b时间点内都要执行</span></span><br><span class="line">*/n		<span class="comment"># 每n个时间点都要执行1次</span></span><br><span class="line">a,b,c	<span class="comment"># 第a,b,c,个时间点要执行</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">每个月每天的12点都要执行wall hello</span><br><span class="line">0 12 * * * wall hello</span><br><span class="line">在12月内，每天早上6点到12点中的每3个小时，每个20分钟执行一次command</span><br><span class="line">*/20 6-12/3 * 12 * command</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="系统监视"><a href="#系统监视" class="headerlink" title="系统监视"></a>系统监视</h1><h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><p>动态监视进程和信息指令（进化版的ps）</p>
+<p><strong>操作：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">space	<span class="comment"># 刷新</span></span><br><span class="line">h		<span class="comment"># 帮助</span></span><br><span class="line">k		<span class="comment"># 杀死某进程</span></span><br><span class="line">u		<span class="comment"># 显示指定用户</span></span><br><span class="line">P		<span class="comment"># 按CPU使用情况排序</span></span><br><span class="line">q		<span class="comment"># 退出</span></span><br></pre></td></tr></table></figure>
+<h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p>内存查看命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free [选项]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-b	<span class="comment"># B字节单位显示</span></span><br><span class="line">-k	<span class="comment"># KB单位</span></span><br><span class="line">-m	<span class="comment"># MB单位</span></span><br></pre></td></tr></table></figure>
+<h2 id="日志监视"><a href="#日志监视" class="headerlink" title="日志监视"></a>日志监视</h2><p>日志存放于/var/log目录下</p>
+<h2 id="系统初始化"><a href="#系统初始化" class="headerlink" title="系统初始化"></a>系统初始化</h2><h4 id="BIOS初始化"><a href="#BIOS初始化" class="headerlink" title="BIOS初始化"></a>BIOS初始化</h4><p>加载和引导设备，启动操作系统</p>
+<h4 id="内核初始化"><a href="#内核初始化" class="headerlink" title="内核初始化"></a>内核初始化</h4><ol>
+<li>硬件设备检测</li>
+<li>设备驱动初始化</li>
+<li>只读挂载文件系统</li>
+<li>启动第一个进程init（PID=1，所有进程的父进程，失去父进程的子进程都以init作为父进程）</li>
+</ol>
+<h4 id="确定系统运行级别"><a href="#确定系统运行级别" class="headerlink" title="确定系统运行级别"></a>确定系统运行级别</h4><p>init读取配置文件<strong>/etc/inittab</strong></p>
+<p>修改系统默认运行级别：修改其中数字</p>
+<p><code>id:5:initdefault</code></p>
+<h4 id="运行初始化脚本"><a href="#运行初始化脚本" class="headerlink" title="运行初始化脚本"></a>运行初始化脚本</h4><h4 id="运行用户自定义脚本"><a href="#运行用户自定义脚本" class="headerlink" title="运行用户自定义脚本"></a>运行用户自定义脚本</h4><p>修改/etc/rc.d/rc.local</p>
+<h4 id="激活控制台"><a href="#激活控制台" class="headerlink" title="激活控制台"></a>激活控制台</h4><h4 id="启动界面"><a href="#启动界面" class="headerlink" title="启动界面"></a>启动界面</h4><h1 id="网络管理"><a href="#网络管理" class="headerlink" title="网络管理"></a>网络管理</h1>
           
         
       
