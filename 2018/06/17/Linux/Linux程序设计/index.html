@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Shell程序设计">
+<meta name="description" content="Shell程序设计bash程序执行步骤 编辑保存vi 赋可执行权限chmod ./filename.sh执行  bash程序结构# file.sh 123456789#!/bin/bash		****Shell类型****# 注释# 函数定义function funn() &amp;#123;    &amp;#125;....	# 主过程 变量定义变量1变量=值	# &quot;=&quot;两边不能留空格 变量都会被默认成字符串">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux程序设计">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/2018/06/17/Linux/Linux程序设计/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="Shell程序设计">
+<meta property="og:description" content="Shell程序设计bash程序执行步骤 编辑保存vi 赋可执行权限chmod ./filename.sh执行  bash程序结构# file.sh 123456789#!/bin/bash		****Shell类型****# 注释# 函数定义function funn() &amp;#123;    &amp;#125;....	# 主过程 变量定义变量1变量=值	# &quot;=&quot;两边不能留空格 变量都会被默认成字符串">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-20T01:18:39.070Z">
+<meta property="og:updated_time" content="2018-06-22T09:20:29.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux程序设计">
-<meta name="twitter:description" content="Shell程序设计">
+<meta name="twitter:description" content="Shell程序设计bash程序执行步骤 编辑保存vi 赋可执行权限chmod ./filename.sh执行  bash程序结构# file.sh 123456789#!/bin/bash		****Shell类型****# 注释# 函数定义function funn() &amp;#123;    &amp;#125;....	# 主过程 变量定义变量1变量=值	# &quot;=&quot;两边不能留空格 变量都会被默认成字符串">
 
 
 
@@ -352,7 +352,43 @@
       
 
       
-        <h1 id="Shell程序设计"><a href="#Shell程序设计" class="headerlink" title="Shell程序设计"></a>Shell程序设计</h1>
+        <h1 id="Shell程序设计"><a href="#Shell程序设计" class="headerlink" title="Shell程序设计"></a>Shell程序设计</h1><h2 id="bash程序执行步骤"><a href="#bash程序执行步骤" class="headerlink" title="bash程序执行步骤"></a>bash程序执行步骤</h2><ol>
+<li>编辑保存<code>vi</code></li>
+<li>赋可执行权限<code>chmod</code></li>
+<li><code>./filename.sh</code>执行</li>
+</ol>
+<h2 id="bash程序结构"><a href="#bash程序结构" class="headerlink" title="bash程序结构"></a>bash程序结构</h2><p># file.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/bash		****Shell类型****</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注释</span></span><br><span class="line"><span class="comment"># 函数定义</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">funn</span></span>() &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">....	<span class="comment"># 主过程</span></span><br></pre></td></tr></table></figure>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="定义变量"><a href="#定义变量" class="headerlink" title="定义变量"></a>定义变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">变量=值	<span class="comment"># "="两边不能留空格</span></span><br></pre></td></tr></table></figure>
+<p>变量都会被默认成字符串</p>
+<h3 id="引用变量"><a href="#引用变量" class="headerlink" title="引用变量"></a>引用变量</h3><p>用户自定义变量要加<code>$</code>，加<code>{}</code>可以同其他字符分开（建议添加）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;xxx&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="双引号"><a href="#双引号" class="headerlink" title="双引号"></a>双引号</h4><p><strong>会替换</strong><code>$</code><strong>变量</strong>成值。参数中包含空格也要用双引号。</p>
+<h4 id="单引号"><a href="#单引号" class="headerlink" title="单引号"></a>单引号</h4><p><strong>字符串</strong>值，不会替换<code>$</code>变量</p>
+<h4 id="倒引号"><a href="#倒引号" class="headerlink" title="倒引号 "></a>倒引号 <code></code></h4><p><strong>替换命令</strong>为其执行结果</p>
+<h3 id="特定变量"><a href="#特定变量" class="headerlink" title="特定变量"></a>特定变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$@</span>		<span class="comment"># 参数列表（数组）</span></span><br><span class="line">$*		<span class="comment"># 参数列表（字符串）</span></span><br><span class="line"><span class="variable">$#</span>		<span class="comment"># 参数个数</span></span><br><span class="line"><span class="variable">$n</span>		<span class="comment"># 位置参数$1，$2，$3...$n</span></span><br><span class="line"><span class="variable">$0</span>		<span class="comment"># 本脚本文件名</span></span><br><span class="line">$$		<span class="comment"># 本程序进程号</span></span><br><span class="line">$?		<span class="comment"># 上一条命令或函数的返回值</span></span><br><span class="line"><span class="variable">$HOME</span>	<span class="comment"># 用户主目录</span></span><br></pre></td></tr></table></figure>
+<h2 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h2><h3 id="expr-命令"><a href="#expr-命令" class="headerlink" title="expr 命令"></a>expr 命令</h3><p>计算算术表达式，支持 <code>+</code>、<code>-</code>、<code>\*</code>、<code>/</code>、<code>%</code>（<em>要<code></code>\</em><code></code>进行转移，否则会错误）</p>
+<p>支持<code>|</code>，<code>&amp;</code>，<code>&gt;</code>，<code>&gt;=</code>，<code>!=</code>，<code>=</code>等逻辑运算，<code>|</code>,<code>&gt;</code>,<code>&lt;</code>要用<code>\</code>转义才能使用</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expr arg</span><br></pre></td></tr></table></figure>
+<p>数字符 和 符号 间要<strong>空格</strong></p>
+<p>要改变运算次序的话需要使用<code></code>倒引号</p>
+<figure class="highlight plain"><figcaption><span>`expr 5 \* 7` + 5```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">### let 命令</span><br><span class="line"></span><br><span class="line">**语法**：给a赋值（语法中**不用空格**！）</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">let a=(5+7)/3</span><br></pre></td></tr></table></figure>
+<h3 id="…-运算"><a href="#…-运算" class="headerlink" title="$((…))运算"></a>$((…))运算</h3><p>直接运算得出结果</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> $((5+7))</span><br></pre></td></tr></table></figure>
+<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p><strong>0真，1假</strong>（与熟知C语言判断相反）</p>
+<p><strong>语法：</strong>注意！<strong>中括号</strong>两边<strong>要空格</strong>！！！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ 条件判断语句 ]</span><br></pre></td></tr></table></figure>
+<p><strong>多重条件判断组合</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-a	<span class="comment"># 与</span></span><br><span class="line">-o	<span class="comment"># 或</span></span><br><span class="line">!	<span class="comment"># 非</span></span><br></pre></td></tr></table></figure>
+<p><strong>算术比较：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a -eq b		<span class="comment"># 相等（equal）</span></span><br><span class="line">a -ne b		<span class="comment"># 不相等（not equal）</span></span><br><span class="line">a -gt b		<span class="comment"># a大于b（greater then）</span></span><br><span class="line">a -ge b		<span class="comment"># a大于等于b（greater equal）</span></span><br><span class="line">a -lt b		<span class="comment"># a小于b（less then）</span></span><br><span class="line">a -le b		<span class="comment"># a小于或等于b（less equal）</span></span><br><span class="line">!expr		<span class="comment"># 假则真，真则假</span></span><br></pre></td></tr></table></figure>
+<p><strong>字符比较：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = s2		<span class="comment"># 字符串相同</span></span><br><span class="line">s1 != s2	<span class="comment"># 字符串不同</span></span><br><span class="line">-n str1		<span class="comment"># 字符串不为空</span></span><br><span class="line">-z str1		<span class="comment"># 字符串为空</span></span><br></pre></td></tr></table></figure>
+<p><strong>文件判断</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-d file		<span class="comment"># 是目录</span></span><br><span class="line">-e file		<span class="comment"># 存在</span></span><br><span class="line">-f file		<span class="comment"># 是文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="if-语句"><a href="#if-语句" class="headerlink" title="if 语句"></a>if 语句</h3>
       
     </div>
     
@@ -391,6 +427,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/2018/06/20/软件体系结构/" rel="prev" title="软件体系结构复习">
+                软件体系结构复习 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -467,7 +507,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -489,7 +529,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -522,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell程序设计"><span class="nav-number">1.</span> <span class="nav-text">Shell程序设计</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell程序设计"><span class="nav-number">1.</span> <span class="nav-text">Shell程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bash程序执行步骤"><span class="nav-number">1.1.</span> <span class="nav-text">bash程序执行步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash程序结构"><span class="nav-number">1.2.</span> <span class="nav-text">bash程序结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">1.3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">定义变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用变量"><span class="nav-number">1.3.2.</span> <span class="nav-text">引用变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#双引号"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">双引号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单引号"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">单引号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒引号"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">倒引号 </span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特定变量"><span class="nav-number">1.3.3.</span> <span class="nav-text">特定变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术运算"><span class="nav-number">1.4.</span> <span class="nav-text">算术运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#expr-命令"><span class="nav-number">1.4.1.</span> <span class="nav-text">expr 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#…-运算"><span class="nav-number">1.4.2.</span> <span class="nav-text">$((…))运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件判断"><span class="nav-number">1.5.</span> <span class="nav-text">条件判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if-语句"><span class="nav-number">1.5.1.</span> <span class="nav-text">if 语句</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
