@@ -339,17 +339,15 @@
 <h2 id="进程视图"><a href="#进程视图" class="headerlink" title="进程视图"></a>进程视图</h2><p>画出一个流程的从前端到后端的各个可能产生关系的进程调用关系。</p>
 <p>系统集成人员</p>
 <h2 id="场景视图"><a href="#场景视图" class="headerlink" title="场景视图"></a>场景视图</h2><p>某个功能场景下，从用户操作到系统内部顺序的整个过程描述</p>
-<h1 id="软件体系结构"><a href="#软件体系结构" class="headerlink" title="软件体系结构"></a>软件体系结构</h1><p>软件体系结构是对系统的高层设计，是指系统的基本组织结构，包括</p>
-<p>组成系统的<strong>构件</strong>、<strong>构件之间的连接关系</strong>、以及系统需满足的<strong>约束</strong>、原则等。</p>
-<h1 id="软件体系结构风格"><a href="#软件体系结构风格" class="headerlink" title="软件体系结构风格"></a>软件体系结构风格</h1><p>软件体系结构风格是描述某一特定应用领域中系统组织方式的惯用模式。</p>
+<h1 id="软件体系结构"><a href="#软件体系结构" class="headerlink" title="软件体系结构"></a>软件体系结构</h1><p>软件体系结构是对系统的高层设计，是指<strong>系统的基本组织结构</strong>，包括：组成系统的<strong>构件</strong>、<strong>构件之间的连接关系</strong>、以及系统需满足的<strong>约束</strong>、原则等。</p>
+<h1 id="软件体系结构风格"><a href="#软件体系结构风格" class="headerlink" title="软件体系结构风格"></a>软件体系结构风格</h1><p>软件体系结构风格是<strong>对软件体系结构的分类</strong>，<strong>总结和描述</strong>一类<strong>系统组织方式</strong>的惯用模式。</p>
 <p>体系结构风格定义一个<strong>词汇表</strong>和<strong>一组约束</strong>。</p>
-<p><strong>词汇表</strong>：包含<strong>构件</strong>和<strong>连接件</strong>类型，</p>
+<p><strong>词汇表</strong>：包含<strong>构件</strong>和<strong>连接件</strong>类型</p>
 <p><strong>约束</strong>：指出系统是<strong>如何将这些构件和连接件组合</strong>起来的。</p>
 <p>体系结构风格<strong>反映</strong>了众多系统所<strong>共有的结构</strong>和语义特性，并<strong>指导</strong>如何将各个模块<strong>有效地组织成一个完整的系统</strong>。</p>
 <h2 id="面向对象设计风格"><a href="#面向对象设计风格" class="headerlink" title="面向对象设计风格"></a>面向对象设计风格</h2><p>这种风格建立在数据抽象和面向对象的基础上，数据的表示方法和它们的相应操作封装在一个抽象数据类型或对象中。</p>
 <p>这种风格的构件是对象，或者说是抽象数据类型的实例。对象是一种被称作管理者的构件，因为它负责保持资源的完整性。对象是通过函数和过程的调用来交互的。</p>
-<h2 id="结构化设计风格"><a href="#结构化设计风格" class="headerlink" title="结构化设计风格"></a>结构化设计风格</h2><p>模块化？非结构化？</p>
-<p>模块化设计，采用自顶向下的方法，将问题划分为多个相对独立、功能单一的模块，以功能块为单位进行程序设计，实现其求解算法的方法称为模块化。降低了程序复杂度，提高代码的重用性，使程序易于调试和维护、扩充。</p>
+<h2 id="结构化设计风格"><a href="#结构化设计风格" class="headerlink" title="结构化设计风格"></a>结构化设计风格</h2><p>模块化设计，采用自顶向下的方法，将问题划分为多个相对独立、功能单一的模块，以功能块为单位进行程序设计，实现其求解算法的方法称为模块化。降低了程序复杂度，提高代码的重用性，使程序易于调试和维护、扩充。</p>
 <h2 id="管道过滤器风格"><a href="#管道过滤器风格" class="headerlink" title="管道过滤器风格"></a>管道过滤器风格</h2><p>每个<strong>构件（过滤器）</strong>都<strong>有一组输入和输出</strong>，构件读输入的数据流，经过<strong>内部处理</strong>，然后<strong>产生输出</strong>数据流。这里的构件被称为<strong>过滤器</strong>，这种风格的<strong>连接件</strong>是数据流传输的<strong>管道</strong>，将一个<strong>过滤器的输出传到另一过滤器的输入</strong>。</p>
 <p><code>过滤器 → 管道 → 过滤器</code></p>
 <h2 id="层次风格"><a href="#层次风格" class="headerlink" title="层次风格"></a>层次风格</h2><p>层次系统组织成一个层次结构，<strong>每一层为上层服务，并作为下层客户</strong>。在一些层次系统中，<strong>内部的层只对相邻的层可见。</strong>这种风格支持基于可增加抽象层的设计。允许将一个复杂问题分解成一个增量<strong>步骤序列的实现</strong>。</p>
@@ -595,7 +593,29 @@ D(right)->C(bottom)->B(bottom)->A</textarea><textarea id="flowchart-0-options" s
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = s2		<span class="comment"># 字符串相同</span></span><br><span class="line">s1 != s2	<span class="comment"># 字符串不同</span></span><br><span class="line">-n str1		<span class="comment"># 字符串不为空</span></span><br><span class="line">-z str1		<span class="comment"># 字符串为空</span></span><br></pre></td></tr></table></figure>
 <p><strong>文件判断</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-d file		<span class="comment"># 是目录</span></span><br><span class="line">-e file		<span class="comment"># 存在</span></span><br><span class="line">-f file		<span class="comment"># 是文件</span></span><br></pre></td></tr></table></figure>
-<h3 id="if-语句"><a href="#if-语句" class="headerlink" title="if 语句"></a>if 语句</h3>
+<h3 id="if-分支语句"><a href="#if-分支语句" class="headerlink" title="if 分支语句"></a>if 分支语句</h3><p><strong>结构：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ 条件1 ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	命令</span><br><span class="line"><span class="keyword">elif</span> [ 条件2 ]; <span class="keyword">then</span></span><br><span class="line">	命令</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	命令</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h3 id="case-模式匹配-分支语句"><a href="#case-模式匹配-分支语句" class="headerlink" title="case 模式匹配 分支语句"></a>case 模式匹配 分支语句</h3><p><strong>结构：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> 条件1 <span class="keyword">in</span></span><br><span class="line">模式n)</span><br><span class="line">	命令n</span><br><span class="line">	;;</span><br><span class="line">*)	<span class="comment">#default</span></span><br><span class="line">	命令</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p><strong>模式匹配配对符：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?		<span class="comment"># 任意一个字符</span></span><br><span class="line">*		<span class="comment"># 任意字符串</span></span><br><span class="line">[]		<span class="comment"># 括号中的任意字符</span></span><br><span class="line">[!]		<span class="comment"># 不在括号中的任意字符</span></span><br><span class="line">&#123;c1,c2&#125;	<span class="comment"># 和c1或者c2匹配都可</span></span><br></pre></td></tr></table></figure>
+<h3 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h3><p><strong>结构：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量 [<span class="keyword">in</span> 列表]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	命令</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>可用 <code>in 1,2,3,4...</code>或者默认使用<code>in $@</code>。其中<code>$@</code>是参数数组</p>
+<h3 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h3><p><strong>结构：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>/until [ 条件 ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	命令</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p><strong>结构：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">function</span>] 函数名()&#123;</span><br><span class="line">    命令</span><br><span class="line">    [<span class="built_in">return</span> xx]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果最后不使用return返回，函数返回的就是最后一条命令的返回值</li>
+</ul>
+<h2 id="C-in-Linux"><a href="#C-in-Linux" class="headerlink" title="C in Linux"></a>C in Linux</h2><h3 id="gcc编译过程"><a href="#gcc编译过程" class="headerlink" title="gcc编译过程"></a>gcc编译过程</h3><p><img src="/Blog/2018/06/17/Linux/Linux程序设计/Linux总结/gcc编译过程.png" alt="gcc编译过程"></p>
+<h3 id="gcc命令"><a href="#gcc命令" class="headerlink" title="gcc命令"></a>gcc命令</h3><p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc [选项] [filename]</span><br></pre></td></tr></table></figure>
+<p><strong>选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-c		<span class="comment"># 编译.c文件生成.o文件，不生成可执行文件</span></span><br><span class="line">-o filename	<span class="comment"># 指定生成文件名称为filename，不设这个选项则默认为filename.xx（根据编译阶段生成后缀文件）</span></span><br><span class="line">-Ldirname	<span class="comment"># 在编译时增加搜索库的目录</span></span><br><span class="line">-lname		<span class="comment"># 在编译时装在名为libname.a的函数库，需要存在于系统预设目录或-L设置的目录。</span></span><br><span class="line">-g		<span class="comment"># 加入调试信息</span></span><br><span class="line">-E		<span class="comment"># 生成.i预处理文件</span></span><br><span class="line">-S		<span class="comment"># 生成.s汇编文件</span></span><br></pre></td></tr></table></figure>
+<p>总结：在编译过程中。除非使用了”-c”，“-S”,或”-E”选项(或者编译错误阻止了完整的过程)，否则统一完整链接步骤。</p>
+
           
         
       
@@ -935,7 +955,7 @@ D(right)->C(bottom)->B(bottom)->A</textarea><textarea id="flowchart-0-options" s
 <tr>
 <td>/dev</td>
 <td>系统设备装置文件目录</td>
-<td>device</td>
+<td>device  /dev/null 垃圾箱</td>
 </tr>
 <tr>
 <td>/etc</td>
