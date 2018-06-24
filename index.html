@@ -259,6 +259,213 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/06/20/课程学习/软件体系结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Blog/2018/06/20/课程学习/软件体系结构/" itemprop="url">软件体系结构复习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T00:05:10+08:00">
+                2018-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="4-1视图"><a href="#4-1视图" class="headerlink" title="4+1视图"></a>4+1视图</h1><h2 id="逻辑视图"><a href="#逻辑视图" class="headerlink" title="逻辑视图"></a>逻辑视图</h2><p>功能需求（功能调用关系）(可以根据菜单设计)</p>
+<p>最终用户</p>
+<h2 id="物理视图"><a href="#物理视图" class="headerlink" title="物理视图"></a>物理视图</h2><p>拓扑结构</p>
+<p>系统工程人员</p>
+<h2 id="开发视图"><a href="#开发视图" class="headerlink" title="开发视图"></a>开发视图</h2><p>软件各层模块设计（页面-业务-底层(DB,网络,安全…)）</p>
+<p>编程人员</p>
+<h2 id="进程视图"><a href="#进程视图" class="headerlink" title="进程视图"></a>进程视图</h2><p>画出一个流程的从前端到后端的各个可能产生关系的进程调用关系。</p>
+<p>系统集成人员</p>
+<h2 id="场景视图"><a href="#场景视图" class="headerlink" title="场景视图"></a>场景视图</h2><p>某个功能场景下，从用户操作到系统内部顺序的整个过程描述</p>
+<h1 id="软件体系结构"><a href="#软件体系结构" class="headerlink" title="软件体系结构"></a>软件体系结构</h1><p>软件体系结构是对系统的高层设计，是指<strong>系统的基本组织结构</strong>，包括：组成系统的<strong>构件</strong>、<strong>构件之间的连接关系</strong>、以及系统需满足的<strong>约束</strong>、原则等。</p>
+<h1 id="软件体系结构风格"><a href="#软件体系结构风格" class="headerlink" title="软件体系结构风格"></a>软件体系结构风格</h1><p>软件体系结构风格是<strong>对软件体系结构的分类</strong>，<strong>总结和描述</strong>一类<strong>系统组织方式</strong>的惯用模式。</p>
+<p>体系结构风格定义一个<strong>词汇表</strong>和<strong>一组约束</strong>。</p>
+<p><strong>词汇表</strong>：包含<strong>构件</strong>和<strong>连接件</strong>类型</p>
+<p><strong>约束</strong>：指出系统是<strong>如何将这些构件和连接件组合</strong>起来的。</p>
+<p>体系结构风格<strong>反映</strong>了众多系统所<strong>共有的结构</strong>和语义特性，并<strong>指导</strong>如何将各个模块<strong>有效地组织成一个完整的系统</strong>。</p>
+<h2 id="面向对象设计风格"><a href="#面向对象设计风格" class="headerlink" title="面向对象设计风格"></a>面向对象设计风格</h2><p>这种风格建立在数据抽象和面向对象的基础上，<strong>数据的表示</strong>和<strong>操作封装</strong>在一个<strong>抽象数据类型或对象</strong>中。</p>
+<p>这种风格的<strong>构件是对象</strong>，或者说是抽象数据类型的实例。对象是一种被称作管理者的构件，因为它负责保持资源的完整性。对象是<strong>通过函数和过程的调用来交互</strong>的。</p>
+<h2 id="结构化设计风格"><a href="#结构化设计风格" class="headerlink" title="结构化设计风格"></a>结构化设计风格</h2><p>模块化设计，采用<strong>自顶向下</strong>的方法，将<strong>问题划分</strong>为多个<strong>相对独立、功能单一的模块</strong>，以<strong>功能块为单位进行程序设计</strong>。降低了<strong>程序复杂度</strong>，提高<strong>代码的重用性</strong>，使程序<strong>易于调试和维护、扩充</strong>。</p>
+<h2 id="管道过滤器风格"><a href="#管道过滤器风格" class="headerlink" title="管道过滤器风格"></a>管道过滤器风格</h2><p>每个<strong>构件（过滤器）</strong>都<strong>有一组输入和输出</strong>，构件读输入的数据流，经过<strong>内部处理</strong>，然后<strong>产生输出</strong>数据流。这里的构件被称为<strong>过滤器</strong>，这种风格的<strong>连接件</strong>是数据流传输的<strong>管道</strong>，将一个<strong>过滤器的输出传到另一过滤器的输入</strong>。</p>
+<p><code>过滤器 → 管道 → 过滤器</code></p>
+<h2 id="层次风格"><a href="#层次风格" class="headerlink" title="层次风格"></a>层次风格</h2><p>层次系统组织成一个层次结构，<strong>每一层为上层服务，并作为下层客户</strong>。在一些层次系统中，<strong>内部的层只对相邻的层可见。</strong>这种风格支持基于可增加抽象层的设计。允许将一个复杂问题分解成一个增量<strong>步骤序列的实现</strong>。</p>
+<p><strong>构件</strong>在一些层实现了虚拟机 </p>
+<p><strong>连接件</strong>通过决定<strong>层间如何交互</strong>的协议来定义</p>
+<p>拓扑<strong>约束</strong>包括对<strong>相邻层间交互</strong>的约束。 </p>
+<p>//由于每一层最多只影响两层，同时只要给相邻层提供相同的接口，允许每层用不同的方法实现，同样为软件重用提供了强大的支持。</p>
+<h2 id="CS风格"><a href="#CS风格" class="headerlink" title="CS风格"></a>CS风格</h2><p>C/S软件体系结构是基于资源不对等，且<strong>为实现共享</strong>而提出来的。</p>
+<p>C/S体系结构<strong>定义了工作站如何与服务器相连，以实现数据和应用分布到多个处理机上</strong>。 </p>
+<p>C/S体系结构有三个主要组成部分：<strong>数据库服务器</strong>、<strong>客户端程序</strong> 和 <strong>网络</strong>。</p>
+<p><strong>客户端</strong>，服务请求者。<strong>不共享任何资源</strong>，但需要<strong>获取服务器</strong>的<strong>内容</strong>或<strong>功能</strong>。 </p>
+<p><strong>服务器</strong>运行一个或多个服务器计划，与客户<strong>分享他们的资源</strong>。  </p>
+<h2 id="BS风格"><a href="#BS风格" class="headerlink" title="BS风格"></a>BS风格</h2><p>浏览器/服务器（B/S）风格就是上述三层C/S结构的一种实现方式，其具体结构为：<strong>浏览器</strong>/<strong>Web服务器</strong>/<strong>数据库服务器</strong>。B/S体系结构主要是利用不断成熟的<strong>WWW浏览器技术</strong>，结合<strong>浏览器的多种脚本语言</strong>，用<strong>通用浏览器</strong>就实现了原来需要复杂的专用软件才能实现的强大功能，并<strong>节约了开发成本</strong>。</p>
+<h2 id="CS、BS混合风格"><a href="#CS、BS混合风格" class="headerlink" title="CS、BS混合风格"></a>CS、BS混合风格</h2><p>CS和BS各有优缺点，标准在不同地方也有不同的地位，使用习惯不同，还有遗留代码，所以会使用混合</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><ol>
+<li>对<strong>扩展是开放的</strong>。模块的<strong>行为可以扩展</strong>，当需求改变时，可以对模块进行扩展，<strong>增加新的功能</strong>。</li>
+<li>对<strong>修改是封闭的</strong>。在对模块行为进行扩展时，<strong>不允许修改模块中已经存在的类的源代码</strong>。</li>
+</ol>
+<h2 id="接口编程"><a href="#接口编程" class="headerlink" title="接口编程"></a>接口编程</h2><p>所有的<strong>定义与实现分离</strong>。把业务抽象出来，具体实现通过该接口的实现完成。</p>
+<p>在一个面向对象的系统中，系统的各种功能是由许许多多的不同对象协作完成的。在这种情况下，各个对象<strong>内部实现显得不那么重要</strong>；而各个对象之间的<strong>协作关系</strong>则成为<strong>系统设计的关键</strong>。小到不同类之间的<strong>通信</strong>，大到各模块之间的<strong>交互</strong>，是系统设计的主要工作内容。</p>
+<p>好处：<strong>业务逻辑清晰</strong>，代码易懂，<strong>方便扩展</strong>，可维护性强，符合<strong>开闭原则</strong> 。</p>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><p>设计模式是对<strong>软件设计经验的总结</strong>，是对软件设计中<strong>反复出现的设计问题的成功解决方案</strong>的描述。设计模式可以用于软件体系结构的设计，以实现体系结构级的<strong>设计复用</strong>。设计模式可以使设计者<strong>更加方便地借鉴并直接使用</strong>已经经过证实的成功设计方案，不必花时间进行重复设计。帮助设计者<strong>更快更好地完成软件系统的设计工作</strong>。</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>无论是单例还是多例，对象属性和方法都不static。</p>
+<p>而static的应该是获取单例/多例对象相关的方法或属性，</p>
+<p><strong>构造器</strong>都应该是<strong>私有的</strong>，因为不允许从getInstance外的其他方式构造对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChairMan</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> ChairMan chairmanInstance;	<span class="comment">//单例对象</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="comment">// 私有构造器，因为不允许外部初始化。</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">ChairMan</span><span class="params">(String name)</span></span>&#123; <span class="keyword">this</span>.name = name; &#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	* 单例在第一次调用时初始化单例的static对象，后续不允许初始化。</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> ChairMan <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (chairmanInstance == <span class="keyword">null</span>) &#123;	<span class="comment">//检查是否已经被初始化，未初始化则创建，否则已存在，跳过</span></span><br><span class="line">			chairmanInstance = <span class="keyword">new</span> ChairMan(<span class="string">"习近平"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> chairmanInstance;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//对象实例方法，不静态处理</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> name; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123; <span class="keyword">this</span>.name = name; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> name + <span class="keyword">super</span>.toString(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多例模式"><a href="#多例模式" class="headerlink" title="多例模式"></a>多例模式</h2><p>多个对象在类加载时就已经进行内部初始化，通过getInstance从static对象中获取对象，在构造器中限制类初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Marshal</span> </span>&#123;</span><br><span class="line">    <span class="comment">//用一个Map对象存放多例的对象，以便用key随机查找</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Marshal&gt; marshalInstances = <span class="keyword">new</span> HashMap&lt;String, Marshal&gt;();</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;	<span class="comment">//已初始化对象的数量，在构造方法中自增</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_COUNT = <span class="number">5</span>;	<span class="comment">//限制的多例对象数量上限，在构造方法中限制，超出则异常</span></span><br><span class="line">	</span><br><span class="line">    <span class="keyword">private</span> String name;	<span class="comment">//实例对象的属性，不采取static</span></span><br><span class="line">    </span><br><span class="line">	<span class="comment">//类加载时执行代码块，初始化多个对象</span></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		String[] marshals = &#123;<span class="string">"陈毅"</span>,<span class="string">"罗荣桓"</span>,<span class="string">"徐向前"</span>,<span class="string">"聂荣臻"</span>,<span class="string">"叶剑英"</span>,<span class="string">"刘德华"</span>&#125;;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line">			<span class="keyword">for</span> (String name : marshals) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				marshalInstances.put(name,<span class="keyword">new</span> Marshal(name));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception ex) &#123; System.out.println(ex); &#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">// 构造器</span></span><br><span class="line">    <span class="comment">// 是私有的，因为不允许外部初始化</span></span><br><span class="line">    <span class="comment">// 并通过已存在多例对象数量和已设上限来禁止超出上限数量后的初始化。</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Marshal</span><span class="params">(String name)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (count &gt;= MAX_COUNT) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"不可继续创建新的元帅"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">this</span>.name = name;</span><br><span class="line">			count ++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 从Map中获取多例对象</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Marshal <span class="title">getInstance</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> marshalInstances.get(name);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//对象实例方法，不用静态处理</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> name + <span class="string">"元帅"</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> name; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123; <span class="keyword">this</span>.name = name; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="简单工厂方法模式"><a href="#简单工厂方法模式" class="headerlink" title="简单工厂方法模式"></a>简单工厂方法模式</h2><p>思想：在工厂类中用一个switch-case分辨需要的是哪一个类的对象，用一个父类型的引用获取新建的子类型对象。</p>
+<p><img src="/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-简单工厂模式.png" alt="工厂模式-简单工厂模式"></p>
+<p>缺点：</p>
+<ol>
+<li>工厂类必须知道怎么样创建每个子类的对象，所以每次增加产品的时候，都需要修改工厂类代码，不符合开闭原则。</li>
+<li>简单工厂类的工厂方法是静态的，不能被继承，只能是一个单独的类。</li>
+</ol>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p><img src="/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-工厂模式.png" alt="工厂模式-工厂模式"></p>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><p>对同结构的产品抽象成父类，不同的公司工厂生产其对应的产品。</p>
+<p>有两种情况：</p>
+<p><strong>拓展产品不符合开闭原则</strong></p>
+<p><strong>拓展工厂符合开闭原则</strong></p>
+<p><img src="/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-抽象工厂模式.png" alt="工厂模式-抽象工厂模式"></p>
+<h2 id="安全组合模式"><a href="#安全组合模式" class="headerlink" title="安全组合模式"></a>安全组合模式</h2><p><img src="/Blog/2018/06/20/课程学习/软件体系结构/组合模式-安全组合模式.png" alt="组合模式-安全组合模式"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span>  </span></span><br><span class="line"><span class="class"></span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="comment">/** </span></span><br><span class="line"><span class="comment">         *           composite1 </span></span><br><span class="line"><span class="comment">         *           /      \ </span></span><br><span class="line"><span class="comment">         *        leaf1   composite2 </span></span><br><span class="line"><span class="comment">         *                  /   \ </span></span><br><span class="line"><span class="comment">         *               leaf2  leaf3         </span></span><br><span class="line"><span class="comment">         *                </span></span><br><span class="line"><span class="comment">         * */</span>  </span><br><span class="line">        Component leaf1=<span class="keyword">new</span> Leaf();  </span><br><span class="line">        Component leaf2=<span class="keyword">new</span> Leaf();  </span><br><span class="line">        Component leaf3=<span class="keyword">new</span> Leaf();  </span><br><span class="line">        Composite composite1=<span class="keyword">new</span> Composite();  </span><br><span class="line">        Composite composite2=<span class="keyword">new</span> Composite();  </span><br><span class="line">          </span><br><span class="line">        composite2.add(leaf2);  </span><br><span class="line">        composite2.add(leaf3);  </span><br><span class="line">        composite1.add(leaf1);  </span><br><span class="line">        composite1.add(composite2);  </span><br><span class="line">          </span><br><span class="line">        composite1.doSomething();  </span><br><span class="line">          </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="一致型组合模式"><a href="#一致型组合模式" class="headerlink" title="一致型组合模式"></a>一致型组合模式</h2><p>与安全组合模式的区别在于所有的构建类都有相同的接口，各个类在接口上是没有区别的，客户端可以等同对待所有的对象。不必区分叶子节点和树枝节点，不需要强制类型转换。</p>
+<p>缺点在于不够安全，Leaf(Person)需要屏蔽一些方法，并且抛出适当的异常。这样在客户类调用Leaf方法的时候可以做到部分方法可以什么都不做。</p>
+<p><img src="/Blog/2018/06/20/课程学习/软件体系结构/组合模式-一致性组合模式.png" alt="组合模式-安全组合模式"></p>
+<h2 id="对象适配器模式"><a href="#对象适配器模式" class="headerlink" title="对象适配器模式"></a>对象适配器模式</h2><p><img src="/Blog/2018/06/20/课程学习/软件体系结构/适配器模式-对象适配器.png" alt="适配器模式-类适配器"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对象适配器模式的适配器类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Ps2</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 依赖于USB类，在构造时存放一个USB的实例引用（这里体现了“对象”适配器模式）</span></span><br><span class="line">    <span class="keyword">private</span> Usb usb;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Usb usb)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.usb = usb;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//Target类的方法重写，调用了USB类的方法返回。（这里体现了适配）</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">isPs2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        usb.isUsb();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Clienter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Ps2 p = <span class="keyword">new</span> Adapter(<span class="keyword">new</span> Usber());	<span class="comment">//这里实例Target类时在Adaptor构造器里传入实例</span></span><br><span class="line">        p.isPs2();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类适配器模式"><a href="#类适配器模式" class="headerlink" title="类适配器模式"></a>类适配器模式</h2><p><img src="/Blog/2018/06/20/课程学习/软件体系结构/适配器模式-类适配器.png" alt="适配器模式-类适配器"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">extends</span> <span class="title">Usber</span> <span class="keyword">implements</span> <span class="title">Ps2</span> </span>&#123;	</span><br><span class="line">    <span class="comment">//这里继承了被适配类USB，可以直接作为USB被构造和使用USB的方法</span></span><br><span class="line">    <span class="comment">//由于实现了Target类，同时也可以作为Target类使用，但是实现是USB类的方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">isPs2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        isUsb();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Clienter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//直接作为Adapter被实例化，因为是继承了USB，所以不需要new USB，直接作为USB</span></span><br><span class="line">        Ps2 p = <span class="keyword">new</span> Adapter();	</span><br><span class="line">        p.isPs2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ORM模式"><a href="#ORM模式" class="headerlink" title="ORM模式"></a>ORM模式</h2><p>对象-关系映射（Object Relational Mapping），把对象映射到关系模型数据库结构中去。在操作对象的时候，不需要再去和复杂的SQL语句打交道，只需简单的操作实体对象的属性和方法。</p>
+<p>ORM技术是在对象和关系之间提供了一条桥梁，对象数据和数据库中的关系型的数据通过ORM来相互转化 。</p>
+<div id="flowchart-0" class="flow-chart"></div>
+
+<h2 id="IOC模式"><a href="#IOC模式" class="headerlink" title="IOC模式"></a>IOC模式</h2><p>控制反转</p>
+<p>IoC模式，系统中通过<strong>IoC容器</strong>来<strong>管理对象</strong>的<strong>生命周期</strong>、<strong>依赖关系</strong>等，使程序的配置和依赖性规范<strong>与实际的代码分开</strong>。<strong>通过文本配置</strong>文件进行<strong>程序组件间相互关系</strong>的配置，而<strong>不用修改编译具体的代码</strong>。</p>
+<p>IoC是把以前在工厂方法里写死的对象生成代码，改变为由XML文件来定义，<strong>利用Java反射，根据XML生成相应的对象</strong>。也就是把工厂和对象生成这两者独立分隔开来，目的就是提高灵活性和可维护性。</p>
+<p>// IOC模式把耦合从代码中移出去，放到统一的XML 文件中，通过一个容器在需要的时候把这个依赖关系形成，即把需要的接口实现注入到需要它的类中，也就是所谓“依赖注入DI”。</p>
+<h2 id="Spring框架基本原理和使用"><a href="#Spring框架基本原理和使用" class="headerlink" title="Spring框架基本原理和使用"></a>Spring框架基本原理和使用</h2><p>Spring在Spring上下文中存放bean对象，对象在配置文件中声明。</p>
+<p>使用时先从配置文件中获取上下文，然后可以用上下文content.getBean()获取bean对象。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span> <span class="comment">&lt;!-- 省略beans引用的头信息 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"teacher"</span> <span class="attr">class</span>=<span class="string">"cn.edu.scau.cmi.huangyanrong.spring.domain.Teacher"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"liangzaoqing"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"梁早清"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"gender"</span> <span class="attr">value</span>=<span class="string">"男"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"student"</span> <span class="attr">class</span>=<span class="string">"cn.edu.scau.cmi.huangyanrong.spring.domain.Student"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"huangyanrong"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"黄彦荣"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"gender"</span> <span class="attr">value</span>=<span class="string">"男"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"tutor"</span> <span class="attr">ref</span>=<span class="string">"teacher"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span> </span>&#123;</span><br><span class="line">		ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"codes/spring/config/applicationContext.xml"</span>);</span><br><span class="line">		Student student = (Student)context.getBean(<span class="string">"student"</span>);</span><br><span class="line">		System.out.println(student);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Hibernate框架基本原理和使用"><a href="#Hibernate框架基本原理和使用" class="headerlink" title="Hibernate框架基本原理和使用"></a>Hibernate框架基本原理和使用</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"domain.Course"</span> <span class="attr">table</span>=<span class="string">"course"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"java.lang.Long"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"assigned"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">type</span>=<span class="string">"java.lang.String"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"students"</span> <span class="attr">inverse</span>=<span class="string">"true"</span> <span class="attr">table</span>=<span class="string">"select"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"course"</span> <span class="attr">not-null</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">many-to-many</span> <span class="attr">entity-name</span>=<span class="string">"domain.Student"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"student"</span> <span class="attr">not-null</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">many-to-many</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">A=>operation: 数据库连接工具类
+B=>operation: DAO类
+C=>operation: Service业务类
+D=>operation: Client
+D(right)->C(bottom)->B(bottom)->A</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/06/20/软件体系结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -606,17 +813,72 @@ D(right)->C(bottom)->B(bottom)->A</textarea><textarea id="flowchart-0-options" s
 <p>可用 <code>in 1,2,3,4...</code>或者默认使用<code>in $@</code>。其中<code>$@</code>是参数数组</p>
 <h3 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h3><p><strong>结构：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>/until [ 条件 ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	命令</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p><strong>结构：</strong></p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p><strong>结构：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">function</span>] 函数名()&#123;</span><br><span class="line">    命令</span><br><span class="line">    [<span class="built_in">return</span> xx]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>如果最后不使用return返回，函数返回的就是最后一条命令的返回值</li>
 </ul>
-<h2 id="C-in-Linux"><a href="#C-in-Linux" class="headerlink" title="C in Linux"></a>C in Linux</h2><h3 id="gcc编译过程"><a href="#gcc编译过程" class="headerlink" title="gcc编译过程"></a>gcc编译过程</h3><p><img src="/Blog/2018/06/17/Linux/Linux程序设计/Linux总结/gcc编译过程.png" alt="gcc编译过程"></p>
-<h3 id="gcc命令"><a href="#gcc命令" class="headerlink" title="gcc命令"></a>gcc命令</h3><p><strong>语法：</strong></p>
+<h1 id="C-in-Linux"><a href="#C-in-Linux" class="headerlink" title="C in Linux"></a>C in Linux</h1><h2 id="gcc编译过程"><a href="#gcc编译过程" class="headerlink" title="gcc编译过程"></a>gcc编译过程</h2><p><img src="/Blog/2018/06/17/Linux/Linux程序设计/Linux总结/gcc编译过程.png" alt="gcc编译过程"></p>
+<h2 id="gcc命令"><a href="#gcc命令" class="headerlink" title="gcc命令"></a>gcc命令</h2><p><strong>语法：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc [选项] [filename]</span><br></pre></td></tr></table></figure>
 <p><strong>选项：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-c		<span class="comment"># 编译.c文件生成.o文件，不生成可执行文件</span></span><br><span class="line">-o filename	<span class="comment"># 指定生成文件名称为filename，不设这个选项则默认为filename.xx（根据编译阶段生成后缀文件）</span></span><br><span class="line">-Ldirname	<span class="comment"># 在编译时增加搜索库的目录</span></span><br><span class="line">-lname		<span class="comment"># 在编译时装在名为libname.a的函数库，需要存在于系统预设目录或-L设置的目录。</span></span><br><span class="line">-g		<span class="comment"># 加入调试信息</span></span><br><span class="line">-E		<span class="comment"># 生成.i预处理文件</span></span><br><span class="line">-S		<span class="comment"># 生成.s汇编文件</span></span><br></pre></td></tr></table></figure>
-<p>总结：在编译过程中。除非使用了”-c”，“-S”,或”-E”选项(或者编译错误阻止了完整的过程)，否则统一完整链接步骤。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-c			<span class="comment"># 编译.c文件生成.o文件，不生成可执行文件</span></span><br><span class="line">-o filename	<span class="comment"># 指定生成文件名称为filename。不设这个选项则默认为filename.xx（根据编译阶段生成后缀文件）</span></span><br><span class="line">-Idir		<span class="comment"># 在编译时增加搜索头文件的目录</span></span><br><span class="line">-Ldir		<span class="comment"># 在编译时增加搜索库的目录</span></span><br><span class="line">-lname		<span class="comment"># 在编译时装在名为libname.a的函数库，需要存在于系统预设目录或-L设置的目录。</span></span><br><span class="line">-g			<span class="comment"># 加入调试信息</span></span><br><span class="line">-E			<span class="comment"># 生成.i预处理文件</span></span><br><span class="line">-S			<span class="comment"># 生成.s汇编文件</span></span><br></pre></td></tr></table></figure>
+<p>总结：在编译过程中。除非使用了”-c”，“-S”,或”-E”选项(或者编译错误阻止了完整的过程)，否则统一完整链接步骤。 </p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p><strong>分步编译</strong></p>
+<p>先用<code>-c</code>,<code>-S</code>,<code>-E</code>中断编译过程，生成中间文件，再用<code>gcc 中间文件</code>完成编译</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -c hello.c -o hello.o</span><br><span class="line">gcc -c say_hello.c -o say_hello.o</span><br><span class="line">gcc hello.o say_hello.o -o hello</span><br></pre></td></tr></table></figure>
+<p><strong>一步编译</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.c say_hello.c -o hello</span><br></pre></td></tr></table></figure>
+<p><strong>使用<code>-Idirname</code>增加搜索头文件目录</strong></p>
+<p>示例：</p>
+<p>当前目录为./hello.c    ./functions/say_hello.h    ./functions/say_hello.c</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.c <span class="built_in">functions</span>/say_hello.c -o hello -Ifunctions</span><br></pre></td></tr></table></figure>
+<h2 id="make-软件维护工具"><a href="#make-软件维护工具" class="headerlink" title="make 软件维护工具"></a>make 软件维护工具</h2><h3 id="makefile文件"><a href="#makefile文件" class="headerlink" title="makefile文件"></a>makefile文件</h3><p><strong>格式：</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">目标文件: 依赖项列表</span></span><br><span class="line">	命令</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>依赖项可以不写.h文件，但一定要写清.c文件的路径</p>
+<p>示例：</p>
+<p>当前目录为./hello.c    ./functions/say_hello.h    ./functions/say_hello.c</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">hello:hello.o say_hello.o</span></span><br><span class="line">	gcc hello.o say_hello.o -o hello</span><br><span class="line"><span class="section">hello.o:hello.c say_hello.h</span></span><br><span class="line">	gcc -c hello.c -o hello.o -Ifunctions</span><br><span class="line"><span class="section">say_hello.o:functions/say_hello.c</span></span><br><span class="line">	gcc -c functions/say_hello.c -o say_hello.o -Ifunctions</span><br></pre></td></tr></table></figure>
+<p>makefile可以使用变量宏命令<code>${}</code></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CC=-Wall-c</span><br><span class="line"><span class="section">hello:$&#123;CC&#125;</span></span><br><span class="line">	.......</span><br></pre></td></tr></table></figure>
+<h3 id="使用makefile"><a href="#使用makefile" class="headerlink" title="使用makefile"></a>使用makefile</h3><p>在存放makefile文件的目录下使用：<code>make</code></p>
+<h2 id="调试工具-gdb"><a href="#调试工具-gdb" class="headerlink" title="调试工具 gdb"></a>调试工具 gdb</h2><ol>
+<li>设置断点</li>
+<li>监视变量</li>
+<li>单步执行</li>
+<li>修改变量值</li>
+</ol>
+<p><strong>进入gdb：</strong><code>gdb</code></p>
+<h3 id="使用gdb"><a href="#使用gdb" class="headerlink" title="使用gdb"></a>使用gdb</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file		<span class="comment"># 装入可执行文件</span></span><br><span class="line">list		<span class="comment"># 查看源代码</span></span><br><span class="line">quit		<span class="comment"># 退出gdb</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行程序</span></span><br><span class="line"><span class="built_in">break</span> &lt;line&gt;	<span class="comment"># 设置断点</span></span><br><span class="line">next		<span class="comment"># 单步执行</span></span><br><span class="line">step		<span class="comment"># 单步执行到函数内部</span></span><br><span class="line">run			<span class="comment"># 执行程序</span></span><br><span class="line"><span class="built_in">kill</span>		<span class="comment"># 终止正在调试的程序</span></span><br><span class="line"><span class="comment"># 监视变量</span></span><br><span class="line">watch		<span class="comment"># 监视变量</span></span><br><span class="line"><span class="built_in">print</span>		<span class="comment"># 打印变量</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数库"><a href="#函数库" class="headerlink" title="函数库"></a>函数库</h2><h3 id="静态函数库"><a href="#静态函数库" class="headerlink" title="静态函数库"></a>静态函数库</h3><p><strong>库文件名</strong>：<code>libxxxxx.a</code></p>
+<p>静态函数库文件比较大，因为整个函数库的所有代码都会被整合编译到目标代码中，所以使用静态库编译后的程序不需要外部函数库支持，因为都已经编译进去了。但是如果今天函数库改变了就需要重新编译。</p>
+<p><strong>创建</strong></p>
+<p>编译生成.o文件：<code>gcc -c pr1.c pr2.c</code></p>
+<p>链接静态库：<code>ar -rsv libpr.a pr1.o pr2.o</code></p>
+<p><strong>使用</strong></p>
+<p>加载库文件编译：<code>gcc -o main main.c -L./ -lpr</code></p>
+<h3 id="动态函数库"><a href="#动态函数库" class="headerlink" title="动态函数库"></a>动态函数库</h3><p><strong>库文件名：</strong><code>libxxxx.so</code></p>
+<p>动态函数库在编译时没有被编译进目标代码中，当程序执行到时才会调用函数里的相应函数。所以使用动态函数库产生的可执行文件较小。</p>
+<p><strong>创建</strong></p>
+<p>生成动态库：<code>gcc -fpic -shared -o libpr.so pr1.c pr2.c</code></p>
+<p><strong>使用</strong></p>
+<p>调用动态库：<code>gcc -o main_so main.c ./libpr.so</code></p>
+<h1 id="GTK"><a href="#GTK" class="headerlink" title="GTK+"></a>GTK+</h1><h2 id="GTK-控件"><a href="#GTK-控件" class="headerlink" title="GTK+控件"></a>GTK+控件</h2><p><strong>GtkWidget</strong>：GTK控件的父类，所有控件按照此类型返回</p>
+<p>创建控件：<code>GtkWidget * gtk_xxxx_new(GtkNodeType type 或者 void)</code></p>
+<p>设置xxx：<code>void gtk_xxx_set_xxx(GtkNode *xxx, XX message)</code></p>
+<p>读取xxx：<code>xx gtk_xxx_get_xxx(GtkNode *xxx)</code></p>
+<p>存放进窗体：<code>gtk_container_add(GTK_CONTAINER(windowxx), xxxx)</code></p>
+<p>显示窗体：<code>gtk_widget_show_all(window)</code></p>
+<p>界面布局采用横向<code>hbox</code>和纵向<code>vbox</code></p>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gtk/gtk.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    GtkWidget *window, *button;	<span class="comment">//声明window和button为GtkWidget，后面使用需要类型转换</span></span><br><span class="line">    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);	<span class="comment">// 初始化window变量为GTK....类型</span></span><br><span class="line">    gtk_window_set_title(GTK_WINDOW(window), <span class="string">"HELLO WORLD"</span>);	<span class="comment">//这里用的大写是类型转换</span></span><br><span class="line">    button = gtk_button_new_with_label(<span class="string">"Hello World"</span>);	<span class="comment">// 初始化button变量为button类型</span></span><br><span class="line">    gtk_container_add(GTK_CONTAINER(window)， button)	<span class="comment">//类型转换成Container，button放入window</span></span><br><span class="line">    gtk_widget_show_all(window);</span><br><span class="line">    gtk_main();</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="回调函数、信号"><a href="#回调函数、信号" class="headerlink" title="回调函数、信号"></a>回调函数、信号</h2><p>GTK+用信号（signal）和回调函数（callback）处理外部事件。</p>
+<h3 id="信号与回调函数绑定"><a href="#信号与回调函数绑定" class="headerlink" title="信号与回调函数绑定"></a>信号与回调函数绑定</h3><p>采用<code>g_signal_connect</code>函数来完成信号和回调函数绑定。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g_signal_connect(gpointer *object,	<span class="comment">// 连接信号的对象</span></span><br><span class="line">                <span class="keyword">const</span> gchar *name,	<span class="comment">// 信号名</span></span><br><span class="line">                Gcallback func,		<span class="comment">// 回调函数名</span></span><br><span class="line">                gpointer user_data)	<span class="comment">// 回调函数参数的指针</span></span><br></pre></td></tr></table></figure>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p>回调函数的<strong>函数原型</strong>（用户自己定义）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">callback_func</span><span class="params">(GtkWidget *widget,	<span class="comment">// 发出信号的控件的指针</span></span></span></span><br><span class="line"><span class="function"><span class="params">              gpointer callback_data)</span><span class="comment">// 传递进函数的数据</span></span></span><br></pre></td></tr></table></figure>
 
           
         
@@ -2878,137 +3140,13 @@ op1->op2(right)->op3->op4</textarea><textarea id="flowchart-2-options" style="di
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/05/20/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Aaron.H">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/Blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="StormAaron的技术站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Blog/2018/05/20/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T20:46:25+08:00">
-                2018-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/Blog/page/2/">2</a><a class="extend next" rel="next" href="/Blog/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -3052,7 +3190,7 @@ op1->op2(right)->op3->op4</textarea><textarea id="flowchart-2-options" style="di
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
