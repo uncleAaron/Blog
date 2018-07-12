@@ -88,7 +88,7 @@
 <meta property="og:description" content="第4章 Java并发编程基础一、线程线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。 实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。 1.1. 线程优先级(priority)现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/01/Java并发编程艺术/第4章-Java并发编程基础/图4-1%20Java线程状态变迁.jpg">
-<meta property="og:updated_time" content="2018-06-06T16:04:03.010Z">
+<meta property="og:updated_time" content="2018-07-12T07:29:39.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第4章 Java并发编程基础">
 <meta name="twitter:description" content="第4章 Java并发编程基础一、线程线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。 实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。 1.1. 线程优先级(priority)现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次">
@@ -444,10 +444,10 @@
 <p>由于强制操作导致的资源不完全释放的副作用（死锁等），所以废弃。建议用回以上的等待/通知的机制替代。</p>
 <h2 id="三、线程间通信"><a href="#三、线程间通信" class="headerlink" title="三、线程间通信"></a>三、线程间通信</h2><p>让线程之间能后互相配合的完成工作。</p>
 <h3 id="3-1-volatile和synchronized关键字"><a href="#3-1-volatile和synchronized关键字" class="headerlink" title="3.1. volatile和synchronized关键字"></a>3.1. volatile和synchronized关键字</h3><p>在程序执行过程中，每个线程可以拥有变量的拷贝，而且看到的不一定是最新的变量值，这时候就需要volatile和synchronized关键字。</p>
-<p>volatile可以告知程序任何对该变量的访问必须要从共享内存中获取，并且其修改必须同步刷新到共享内存，以保证该变量在线程之间的可见性。</p>
+<p>volatile可以告知程序任何对该变量的访问必须要从共享内存中获取，并且其修改必须同步刷新到共享内存，以保证该变量在线程之间的可见性。（不保证原子性）</p>
 <p>synchronized确保同一时刻只能有一个线程处于方法或者同步块中，保证了线程对变量访问的可见性和排他性。</p>
 <p>每个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，执行方法的线程必须先获取到该对象的监视器才能进去同步块或者同步方法，没有获取到监视器的线程将会被阻塞在入口，进入BLOCKED状态和同步队列（释放操作会唤醒同步队列中的线程，使其重新尝试获取监视器）。</p>
-<h2 id="3-2-等待-通知机制"><a href="#3-2-等待-通知机制" class="headerlink" title="3.2.等待/通知机制"></a>3.2.等待/通知机制</h2>
+<h2 id="3-2-等待-通知机制"><a href="#3-2-等待-通知机制" class="headerlink" title="3.2.等待/通知机制"></a>3.2.等待/通知机制</h2><p sytle="color:red;">一群蠢货</p>
       
     </div>
     
