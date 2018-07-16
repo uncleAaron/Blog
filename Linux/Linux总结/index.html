@@ -93,13 +93,13 @@
 <meta property="og:site_name" content="StormAaron的技术站">
 <meta property="og:description" content="前言 根据自己的记忆和理解方式，总结了最近学习和接触到的Linux理论和指令。 涉及Linux目录，文件管理，系统，设备管理，进程管理，网络管理，用户管理等。 （此外，Vi使用 以及 Shell脚本编写在别篇）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://uncleaaron.github.io/Blog/Linux/Linux/Linux总结/文件权限属性.png">
-<meta property="og:image" content="https://uncleaaron.github.io/Blog/Linux/Linux/Linux总结/硬链接和软链接图示.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/Linux/Linux总结/文件权限属性.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/Linux/Linux总结/硬链接和软链接图示.png">
 <meta property="og:updated_time" content="2018-07-16T11:50:53.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux总结">
 <meta name="twitter:description" content="前言 根据自己的记忆和理解方式，总结了最近学习和接触到的Linux理论和指令。 涉及Linux目录，文件管理，系统，设备管理，进程管理，网络管理，用户管理等。 （此外，Vi使用 以及 Shell脚本编写在别篇）">
-<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/Linux/Linux/Linux总结/文件权限属性.png">
+<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/Linux/Linux总结/文件权限属性.png">
 
 
 
@@ -608,7 +608,7 @@
 <h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p><strong>符号：</strong><code>&quot;|&quot;</code></p>
 <p>用于连接进程，通过管道连接的进程可以同时运行，并且随着数据流在她们之间传递可以自动地进行协调。</p>
 <hr>
-<h1 id="文件与目录"><a href="#文件与目录" class="headerlink" title="文件与目录"></a>文件与目录</h1><h2 id="文件权限属性"><a href="#文件权限属性" class="headerlink" title="文件权限属性"></a>文件权限属性</h2><p><img src="/Blog/Linux/Linux/Linux总结/文件权限属性.png" alt="文件权限属性"></p>
+<h1 id="文件与目录"><a href="#文件与目录" class="headerlink" title="文件与目录"></a>文件与目录</h1><h2 id="文件权限属性"><a href="#文件权限属性" class="headerlink" title="文件权限属性"></a>文件权限属性</h2><p><img src="/Blog/Linux/Linux总结/文件权限属性.png" alt="文件权限属性"></p>
 <p>文件类型：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-：普通文件</span><br><span class="line">d：目录</span><br><span class="line">l：链接文件</span><br><span class="line">p：管道文件</span><br></pre></td></tr></table></figure>
 <p>权限码（rwx）：</p>
@@ -710,7 +710,7 @@
 <p><strong>硬链接</strong>：文件的副本（别名），同时两者存在连接关系，<strong>修改其中一个另一个也会一同被修改，删除一个，另一个不受影响</strong>。两者在<strong>硬盘上只有一份数据</strong>，只存在于同一个文件系统中。</p>
 <p><strong>软链接</strong>：<strong>一个快捷方式</strong>，是一个内容指向另一个文件位置的特殊文件。删了源文件就没用了。可以跨越文件系统。</p>
 <p>个人理解：</p>
-<p><img src="/Blog/Linux/Linux/Linux总结/硬链接和软链接图示.png" alt="硬链接和软链接图示"></p>
+<p><img src="/Blog/Linux/Linux总结/硬链接和软链接图示.png" alt="硬链接和软链接图示"></p>
 <hr>
 <h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>改变目录或文件的权限</p>
 <p><strong>语法：</strong></p>
