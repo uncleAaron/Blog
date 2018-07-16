@@ -88,7 +88,7 @@
 <meta property="og:description" content="第4章 Java并发编程基础一、线程线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。 实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。 1.1. 线程优先级(priority)现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/01/Java并发编程艺术/第4章-Java并发编程基础/图4-1%20Java线程状态变迁.jpg">
-<meta property="og:updated_time" content="2018-07-12T07:29:39.693Z">
+<meta property="og:updated_time" content="2018-07-16T03:18:56.641Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第4章 Java并发编程基础">
 <meta name="twitter:description" content="第4章 Java并发编程基础一、线程线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。 实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。 1.1. 线程优先级(priority)现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次">
@@ -447,7 +447,44 @@
 <p>volatile可以告知程序任何对该变量的访问必须要从共享内存中获取，并且其修改必须同步刷新到共享内存，以保证该变量在线程之间的可见性。（不保证原子性）</p>
 <p>synchronized确保同一时刻只能有一个线程处于方法或者同步块中，保证了线程对变量访问的可见性和排他性。</p>
 <p>每个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，执行方法的线程必须先获取到该对象的监视器才能进去同步块或者同步方法，没有获取到监视器的线程将会被阻塞在入口，进入BLOCKED状态和同步队列（释放操作会唤醒同步队列中的线程，使其重新尝试获取监视器）。</p>
-<h2 id="3-2-等待-通知机制"><a href="#3-2-等待-通知机制" class="headerlink" title="3.2.等待/通知机制"></a>3.2.等待/通知机制</h2><p sytle="color:red;">一群蠢货</p>
+<h2 id="3-2-等待-通知机制"><a href="#3-2-等待-通知机制" class="headerlink" title="3.2.等待/通知机制"></a>3.2.等待/通知机制</h2><p>简单的生产者/消费者模式：一个线程修改了一个对象的值，而另一个线程感知到了变化，进而进行相应操作（开始于一个生产者线程，执行于另一个消费者线程）。隔离了做什么(What)和怎么做(How)，在功能上解耦。</p>
+<p>相关方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>notify()</td>
+<td>通知一个在对象上等待的线程，使其从wait()方法返回，前提是本线程已获得该对象的锁</td>
+<td>notify不代表被通知线程获得锁，需要等notify的主动线程释放锁后，才有机会获得锁</td>
+</tr>
+<tr>
+<td>notifyAll()</td>
+<td>通知所有等待在该对象上的锁</td>
+<td>通知后，所有在该对象上wait()的线程进入同步队列依次等待获取锁的机会</td>
+</tr>
+<tr>
+<td>wait()</td>
+<td>本线程进入WAITING状态，只有等待别的线程通知或被中断才可返回</td>
+<td>调用wait后，该线程会释放锁</td>
+</tr>
+<tr>
+<td>wait(long)</td>
+<td>超时等待。n毫秒后若没有通知的话就自主返回</td>
+<td></td>
+</tr>
+<tr>
+<td>wait(long, int)</td>
+<td>纳秒超时等待</td>
+</tr>
+</tbody>
+</table>
+
       
     </div>
     
@@ -568,7 +605,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
