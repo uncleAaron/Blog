@@ -85,20 +85,20 @@
 
 
 
-<meta name="description" content="第4章 Java并发编程基础一、线程线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。 实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。 1.1. 线程优先级(priority)现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次">
+<meta name="description" content="前言 本章主要讲解Java的线程Thread，线程的6个状态，Daemon守护线程，线程的生存周期操作（构造、启动、中断、终止），以及线程的几种通信方式：volatile和synchronized提供的内存可见性保障，等待/通知机制wait/notify，管道流，Thread.join() 以及 ThreadLocal变量。 最后还示例了线程池、数据库连接池的简单实现，篇幅较大，暂时未补充，需要自">
 <meta name="keywords" content="Java,并发编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第4章 Java并发编程基础">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/Java并发编程艺术/Java并发编程艺术/第4章-Java并发编程基础/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="第4章 Java并发编程基础一、线程线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。 实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。 1.1. 线程优先级(priority)现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次">
+<meta property="og:description" content="前言 本章主要讲解Java的线程Thread，线程的6个状态，Daemon守护线程，线程的生存周期操作（构造、启动、中断、终止），以及线程的几种通信方式：volatile和synchronized提供的内存可见性保障，等待/通知机制wait/notify，管道流，Thread.join() 以及 ThreadLocal变量。 最后还示例了线程池、数据库连接池的简单实现，篇幅较大，暂时未补充，需要自">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/01/Java并发编程艺术/第4章-Java并发编程基础/图4-1%20Java线程状态变迁.jpg">
-<meta property="og:updated_time" content="2018-07-16T08:19:16.227Z">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/Java并发编程艺术/Java并发编程艺术/第4章-Java并发编程基础/图4-1%20Java线程状态变迁.jpg">
+<meta property="og:updated_time" content="2018-07-16T12:00:50.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第4章 Java并发编程基础">
-<meta name="twitter:description" content="第4章 Java并发编程基础一、线程线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。 实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。 1.1. 线程优先级(priority)现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次">
-<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/2018/06/01/Java并发编程艺术/第4章-Java并发编程基础/图4-1%20Java线程状态变迁.jpg">
+<meta name="twitter:description" content="前言 本章主要讲解Java的线程Thread，线程的6个状态，Daemon守护线程，线程的生存周期操作（构造、启动、中断、终止），以及线程的几种通信方式：volatile和synchronized提供的内存可见性保障，等待/通知机制wait/notify，管道流，Thread.join() 以及 ThreadLocal变量。 最后还示例了线程池、数据库连接池的简单实现，篇幅较大，暂时未补充，需要自">
+<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/Java并发编程艺术/Java并发编程艺术/第4章-Java并发编程基础/图4-1%20Java线程状态变迁.jpg">
 
 
 
@@ -354,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,319
+                  3,438
                 </span>
               
 
@@ -391,7 +391,12 @@
       
 
       
-        <h1 id="第4章-Java并发编程基础"><a href="#第4章-Java并发编程基础" class="headerlink" title="第4章 Java并发编程基础"></a>第4章 Java并发编程基础</h1><h2 id="一、线程"><a href="#一、线程" class="headerlink" title="一、线程"></a>一、线程</h2><p>线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>本章主要讲解Java的线程Thread，线程的6个状态，Daemon守护线程，线程的生存周期操作（构造、启动、中断、终止），以及线程的几种通信方式：volatile和synchronized提供的内存可见性保障，等待/通知机制wait/notify，管道流，Thread.join() 以及 ThreadLocal变量。</p>
+<p>最后还示例了线程池、数据库连接池的简单实现，篇幅较大，暂时未补充，需要自己阅读书本。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="第4章-Java并发编程基础"><a href="#第4章-Java并发编程基础" class="headerlink" title="第4章 Java并发编程基础"></a>第4章 Java并发编程基础</h1><h2 id="一、线程"><a href="#一、线程" class="headerlink" title="一、线程"></a>一、线程</h2><p>线程是现代操作系统调度的最小单位，拥有各自的计数器、堆栈和局部变量等属性，能够访问共享的内存变量。</p>
 <p>实际上Java程序天生就是多线程程序，执行main()会启用一个主线程，同时还会启用其他的一些辅助线程。</p>
 <h3 id="1-1-线程优先级-priority"><a href="#1-1-线程优先级-priority" class="headerlink" title="1.1. 线程优先级(priority)"></a>1.1. 线程优先级(priority)</h3><p>现代操作系统基本采用时分调度线程，会分出多个时间片，一个线程会分配到若干时间片，时间片用完了就会发生线程调度，等待下次分配。</p>
 <p><strong>线程优先级决定分配到的时间片和处理器资源多少的线程属性。优先级高的线程分配的时间片数量更多。</strong></p>
@@ -444,7 +449,7 @@
 </tr>
 </tbody>
 </table>
-<p><img src="/Blog/2018/06/01/Java并发编程艺术/第4章-Java并发编程基础/图4-1 Java线程状态变迁.jpg" alt="图4-1 Java线程状态变迁"></p>
+<p><img src="/Blog/Java并发编程艺术/Java并发编程艺术/第4章-Java并发编程基础/图4-1 Java线程状态变迁.jpg" alt="图4-1 Java线程状态变迁"></p>
 <h3 id="1-3-Daemon线程-守护线程"><a href="#1-3-Daemon线程-守护线程" class="headerlink" title="1.3. Daemon线程(守护线程)"></a>1.3. Daemon线程(守护线程)</h3><p>Daemon线程是一种支持型线程，主要被用作程序的后台调度和支持性工作。</p>
 <p>使用threadA.setDaemon(true)将线程设置为Daemon线程（Daemon需要在启动线程前设置）</p>
 <ul>
@@ -584,8 +589,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/Java并发编程艺术/Java并发编程艺术/第3章-Java内存模型/" rel="next" title="第3章 Java内存模型">
-                <i class="fa fa-chevron-left"></i> 第3章 Java内存模型
+              <a href="/Blog/uncategorized/课程学习/软件体系结构/" rel="next" title="软件体系结构复习">
+                <i class="fa fa-chevron-left"></i> 软件体系结构复习
               </a>
             
           </div>
@@ -732,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章-Java并发编程基础"><span class="nav-number">1.</span> <span class="nav-text">第4章 Java并发编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、线程"><span class="nav-number">1.1.</span> <span class="nav-text">一、线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-线程优先级-priority"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1. 线程优先级(priority)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-线程的状态"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2. 线程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Daemon线程-守护线程"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3. Daemon线程(守护线程)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、启动和终止线程"><span class="nav-number">1.2.</span> <span class="nav-text">二、启动和终止线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-构造线程"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. 构造线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-启动线程"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. 启动线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-中断（interrupt）"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. 中断（interrupt）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-安全地终止线程"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. 安全地终止线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-终止处于运行状态的线程"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">2.4.1. 终止处于运行状态的线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-终止处于“阻塞状态”的线程"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2.4.2. 终止处于“阻塞状态”的线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-废弃的suspend-、resume-、和stop"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. 废弃的suspend()、resume()、和stop()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、线程间通信"><span class="nav-number">1.3.</span> <span class="nav-text">三、线程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-volatile和synchronized关键字"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1. volatile和synchronized关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-等待-通知机制（wait-notify）"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2.等待/通知机制（wait/notify）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-管道-输入-输出流（Piped）"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3. 管道.输入/输出流（Piped）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Thread-join"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4. Thread.join()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-ThreadLocal-线程变量"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5. ThreadLocal 线程变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、补充"><span class="nav-number">1.4.</span> <span class="nav-text">四、补充</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章-Java并发编程基础"><span class="nav-number">2.</span> <span class="nav-text">第4章 Java并发编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、线程"><span class="nav-number">2.1.</span> <span class="nav-text">一、线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-线程优先级-priority"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1. 线程优先级(priority)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-线程的状态"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2. 线程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Daemon线程-守护线程"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3. Daemon线程(守护线程)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、启动和终止线程"><span class="nav-number">2.2.</span> <span class="nav-text">二、启动和终止线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-构造线程"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1. 构造线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-启动线程"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2. 启动线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-中断（interrupt）"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3. 中断（interrupt）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-安全地终止线程"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.4. 安全地终止线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-终止处于运行状态的线程"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">2.4.1. 终止处于运行状态的线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-终止处于“阻塞状态”的线程"><span class="nav-number">2.2.4.2.</span> <span class="nav-text">2.4.2. 终止处于“阻塞状态”的线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-废弃的suspend-、resume-、和stop"><span class="nav-number">2.2.5.</span> <span class="nav-text">2.5. 废弃的suspend()、resume()、和stop()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、线程间通信"><span class="nav-number">2.3.</span> <span class="nav-text">三、线程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-volatile和synchronized关键字"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1. volatile和synchronized关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-等待-通知机制（wait-notify）"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.2.等待/通知机制（wait/notify）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-管道-输入-输出流（Piped）"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.3. 管道.输入/输出流（Piped）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Thread-join"><span class="nav-number">2.3.4.</span> <span class="nav-text">3.4. Thread.join()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-ThreadLocal-线程变量"><span class="nav-number">2.3.5.</span> <span class="nav-text">3.5. ThreadLocal 线程变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、补充"><span class="nav-number">2.4.</span> <span class="nav-text">四、补充</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -787,7 +792,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共23.4k字</span>
+  <span class="post-count">博客全站共23.9k字</span>
 </div>
 
         

@@ -85,20 +85,20 @@
 
 
 
-<meta name="description" content="末行模式（进出、搜索、替换）123456:w	# 保存:w filename	# 另存为:q	# 退出:q!	# 退出不保存:wq	# 退出保存:x	# 加密保存 搜索12/&amp;lt;pattern&amp;gt;	# 从光标向下搜索?&amp;lt;pattern&amp;gt;	# 从光标向上搜索 n：向下遍历光标 N：向上遍历光标 替换(:s/x/y普通替换本行第一个。最后加/g替换本行全部 , :%s/x/y 替">
+<meta name="description" content="前言 总结了Vi的使用">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux Vi">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/Linux/Linux/Vim简易笔记/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="末行模式（进出、搜索、替换）123456:w	# 保存:w filename	# 另存为:q	# 退出:q!	# 退出不保存:wq	# 退出保存:x	# 加密保存 搜索12/&amp;lt;pattern&amp;gt;	# 从光标向下搜索?&amp;lt;pattern&amp;gt;	# 从光标向上搜索 n：向下遍历光标 N：向上遍历光标 替换(:s/x/y普通替换本行第一个。最后加/g替换本行全部 , :%s/x/y 替">
+<meta property="og:description" content="前言 总结了Vi的使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/11/Linux/Vim简易笔记/Vi.png">
-<meta property="og:updated_time" content="2018-06-24T12:26:55.187Z">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/Linux/Linux/Vim简易笔记/Vi.png">
+<meta property="og:updated_time" content="2018-07-16T11:46:30.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux Vi">
-<meta name="twitter:description" content="末行模式（进出、搜索、替换）123456:w	# 保存:w filename	# 另存为:q	# 退出:q!	# 退出不保存:wq	# 退出保存:x	# 加密保存 搜索12/&amp;lt;pattern&amp;gt;	# 从光标向下搜索?&amp;lt;pattern&amp;gt;	# 从光标向上搜索 n：向下遍历光标 N：向上遍历光标 替换(:s/x/y普通替换本行第一个。最后加/g替换本行全部 , :%s/x/y 替">
-<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/2018/06/11/Linux/Vim简易笔记/Vi.png">
+<meta name="twitter:description" content="前言 总结了Vi的使用">
+<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/Linux/Linux/Vim简易笔记/Vi.png">
 
 
 
@@ -354,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  581
+                  590
                 </span>
               
 
@@ -391,7 +391,11 @@
       
 
       
-        <p><img src="/Blog/2018/06/11/Linux/Vim简易笔记/Vi.png" alt="Vi"></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>总结了Vi的使用</p>
+</blockquote>
+<a id="more"></a>
+<p><img src="/Blog/Linux/Linux/Vim简易笔记/Vi.png" alt="Vi"></p>
 <h2 id="末行模式（进出、搜索、替换）"><a href="#末行模式（进出、搜索、替换）" class="headerlink" title="末行模式（进出、搜索、替换）"></a>末行模式（进出、搜索、替换）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:w	<span class="comment"># 保存</span></span><br><span class="line">:w filename	<span class="comment"># 另存为</span></span><br><span class="line">:q	<span class="comment"># 退出</span></span><br><span class="line">:q!	<span class="comment"># 退出不保存</span></span><br><span class="line">:wq	<span class="comment"># 退出保存</span></span><br><span class="line">:x	<span class="comment"># 加密保存</span></span><br></pre></td></tr></table></figure>
 <h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/&lt;pattern&gt;	<span class="comment"># 从光标向下搜索</span></span><br><span class="line">?&lt;pattern&gt;	<span class="comment"># 从光标向上搜索</span></span><br></pre></td></tr></table></figure>
 <p>n：向下遍历光标</p>
@@ -605,7 +609,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#末行模式（进出、搜索、替换）"><span class="nav-number">1.</span> <span class="nav-text">末行模式（进出、搜索、替换）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索"><span class="nav-number">1.1.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换"><span class="nav-number">1.2.</span> <span class="nav-text">替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#光标移动"><span class="nav-number">2.</span> <span class="nav-text">光标移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑指令"><span class="nav-number">3.</span> <span class="nav-text">编辑指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除（x-d）"><span class="nav-number">3.1.</span> <span class="nav-text">删除（x, d）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制（y）"><span class="nav-number">3.2.</span> <span class="nav-text">复制（y）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#粘贴（p）"><span class="nav-number">3.3.</span> <span class="nav-text">粘贴（p）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销（u）"><span class="nav-number">3.4.</span> <span class="nav-text">撤销（u）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">4.</span> <span class="nav-text">设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行号"><span class="nav-number">4.1.</span> <span class="nav-text">行号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">5.</span> <span class="nav-text">其他</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#末行模式（进出、搜索、替换）"><span class="nav-number">1.1.</span> <span class="nav-text">末行模式（进出、搜索、替换）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索"><span class="nav-number">1.1.1.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换"><span class="nav-number">1.1.2.</span> <span class="nav-text">替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#光标移动"><span class="nav-number">1.2.</span> <span class="nav-text">光标移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑指令"><span class="nav-number">1.3.</span> <span class="nav-text">编辑指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除（x-d）"><span class="nav-number">1.3.1.</span> <span class="nav-text">删除（x, d）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制（y）"><span class="nav-number">1.3.2.</span> <span class="nav-text">复制（y）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#粘贴（p）"><span class="nav-number">1.3.3.</span> <span class="nav-text">粘贴（p）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销（u）"><span class="nav-number">1.3.4.</span> <span class="nav-text">撤销（u）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">1.4.</span> <span class="nav-text">设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行号"><span class="nav-number">1.4.1.</span> <span class="nav-text">行号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.5.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -660,7 +664,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共23.4k字</span>
+  <span class="post-count">博客全站共23.9k字</span>
 </div>
 
         
