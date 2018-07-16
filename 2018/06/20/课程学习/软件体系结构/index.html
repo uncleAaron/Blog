@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/Blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/Blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/Blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/Blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/Blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/Blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="课程学习," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="4+1视图逻辑视图功能需求（功能调用关系）(可以根据菜单设计) 最终用户 物理视图拓扑结构 系统工程人员 开发视图软件各层模块设计（页面-业务-底层(DB,网络,安全…)） 编程人员 进程视图画出一个流程的从前端到后端的各个可能产生关系的进程调用关系。 系统集成人员 场景视图某个功能场景下，从用户操作到系统内部顺序的整个过程描述 软件体系结构软件体系结构是对系统的高层设计，是指系统的基本组织结构，">
+<meta name="keywords" content="课程学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件体系结构复习">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/index.html">
+<meta property="og:site_name" content="StormAaron的技术站">
+<meta property="og:description" content="4+1视图逻辑视图功能需求（功能调用关系）(可以根据菜单设计) 最终用户 物理视图拓扑结构 系统工程人员 开发视图软件各层模块设计（页面-业务-底层(DB,网络,安全…)） 编程人员 进程视图画出一个流程的从前端到后端的各个可能产生关系的进程调用关系。 系统集成人员 场景视图某个功能场景下，从用户操作到系统内部顺序的整个过程描述 软件体系结构软件体系结构是对系统的高层设计，是指系统的基本组织结构，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-简单工厂模式.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-工厂模式.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-抽象工厂模式.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/组合模式-安全组合模式.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/组合模式-一致性组合模式.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/适配器模式-对象适配器.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/适配器模式-类适配器.png">
+<meta property="og:updated_time" content="2018-06-23T10:34:35.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件体系结构复习">
+<meta name="twitter:description" content="4+1视图逻辑视图功能需求（功能调用关系）(可以根据菜单设计) 最终用户 物理视图拓扑结构 系统工程人员 开发视图软件各层模块设计（页面-业务-底层(DB,网络,安全…)） 编程人员 进程视图画出一个流程的从前端到后端的各个可能产生关系的进程调用关系。 系统集成人员 场景视图某个功能场景下，从用户操作到系统内部顺序的整个过程描述 软件体系结构软件体系结构是对系统的高层设计，是指系统的基本组织结构，">
+<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-简单工厂模式.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/Blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/2018/06/20/课程学习/软件体系结构/"/>
+
+
+
+
+
+  <title>软件体系结构复习 | StormAaron的技术站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/Blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StormAaron的技术站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/Blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/Blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/Blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/Blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/Blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/2018/06/20/课程学习/软件体系结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件体系结构复习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T00:05:10+08:00">
+                2018-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="4-1视图"><a href="#4-1视图" class="headerlink" title="4+1视图"></a>4+1视图</h1><h2 id="逻辑视图"><a href="#逻辑视图" class="headerlink" title="逻辑视图"></a>逻辑视图</h2><p>功能需求（功能调用关系）(可以根据菜单设计)</p>
+<p>最终用户</p>
+<h2 id="物理视图"><a href="#物理视图" class="headerlink" title="物理视图"></a>物理视图</h2><p>拓扑结构</p>
+<p>系统工程人员</p>
+<h2 id="开发视图"><a href="#开发视图" class="headerlink" title="开发视图"></a>开发视图</h2><p>软件各层模块设计（页面-业务-底层(DB,网络,安全…)）</p>
+<p>编程人员</p>
+<h2 id="进程视图"><a href="#进程视图" class="headerlink" title="进程视图"></a>进程视图</h2><p>画出一个流程的从前端到后端的各个可能产生关系的进程调用关系。</p>
+<p>系统集成人员</p>
+<h2 id="场景视图"><a href="#场景视图" class="headerlink" title="场景视图"></a>场景视图</h2><p>某个功能场景下，从用户操作到系统内部顺序的整个过程描述</p>
+<h1 id="软件体系结构"><a href="#软件体系结构" class="headerlink" title="软件体系结构"></a>软件体系结构</h1><p>软件体系结构是对系统的高层设计，是指<strong>系统的基本组织结构</strong>，包括：组成系统的<strong>构件</strong>、<strong>构件之间的连接关系</strong>、以及系统需满足的<strong>约束</strong>、原则等。</p>
+<h1 id="软件体系结构风格"><a href="#软件体系结构风格" class="headerlink" title="软件体系结构风格"></a>软件体系结构风格</h1><p>软件体系结构风格是<strong>对软件体系结构的分类</strong>，<strong>总结和描述</strong>一类<strong>系统组织方式</strong>的惯用模式。</p>
+<p>体系结构风格定义一个<strong>词汇表</strong>和<strong>一组约束</strong>。</p>
+<p><strong>词汇表</strong>：包含<strong>构件</strong>和<strong>连接件</strong>类型</p>
+<p><strong>约束</strong>：指出系统是<strong>如何将这些构件和连接件组合</strong>起来的。</p>
+<p>体系结构风格<strong>反映</strong>了众多系统所<strong>共有的结构</strong>和语义特性，并<strong>指导</strong>如何将各个模块<strong>有效地组织成一个完整的系统</strong>。</p>
+<h2 id="面向对象设计风格"><a href="#面向对象设计风格" class="headerlink" title="面向对象设计风格"></a>面向对象设计风格</h2><p>这种风格建立在数据抽象和面向对象的基础上，<strong>数据的表示</strong>和<strong>操作封装</strong>在一个<strong>抽象数据类型或对象</strong>中。</p>
+<p>这种风格的<strong>构件是对象</strong>，或者说是抽象数据类型的实例。对象是一种被称作管理者的构件，因为它负责保持资源的完整性。对象是<strong>通过函数和过程的调用来交互</strong>的。</p>
+<h2 id="结构化设计风格"><a href="#结构化设计风格" class="headerlink" title="结构化设计风格"></a>结构化设计风格</h2><p>模块化设计，采用<strong>自顶向下</strong>的方法，将<strong>问题划分</strong>为多个<strong>相对独立、功能单一的模块</strong>，以<strong>功能块为单位进行程序设计</strong>。降低了<strong>程序复杂度</strong>，提高<strong>代码的重用性</strong>，使程序<strong>易于调试和维护、扩充</strong>。</p>
+<h2 id="管道过滤器风格"><a href="#管道过滤器风格" class="headerlink" title="管道过滤器风格"></a>管道过滤器风格</h2><p>每个<strong>构件（过滤器）</strong>都<strong>有一组输入和输出</strong>，构件读输入的数据流，经过<strong>内部处理</strong>，然后<strong>产生输出</strong>数据流。这里的构件被称为<strong>过滤器</strong>，这种风格的<strong>连接件</strong>是数据流传输的<strong>管道</strong>，将一个<strong>过滤器的输出传到另一过滤器的输入</strong>。</p>
+<p><code>过滤器 → 管道 → 过滤器</code></p>
+<h2 id="层次风格"><a href="#层次风格" class="headerlink" title="层次风格"></a>层次风格</h2><p>层次系统组织成一个层次结构，<strong>每一层为上层服务，并作为下层客户</strong>。在一些层次系统中，<strong>内部的层只对相邻的层可见。</strong>这种风格支持基于可增加抽象层的设计。允许将一个复杂问题分解成一个增量<strong>步骤序列的实现</strong>。</p>
+<p><strong>构件</strong>在一些层实现了虚拟机 </p>
+<p><strong>连接件</strong>通过决定<strong>层间如何交互</strong>的协议来定义</p>
+<p>拓扑<strong>约束</strong>包括对<strong>相邻层间交互</strong>的约束。 </p>
+<p>//由于每一层最多只影响两层，同时只要给相邻层提供相同的接口，允许每层用不同的方法实现，同样为软件重用提供了强大的支持。</p>
+<h2 id="CS风格"><a href="#CS风格" class="headerlink" title="CS风格"></a>CS风格</h2><p>C/S软件体系结构是基于资源不对等，且<strong>为实现共享</strong>而提出来的。</p>
+<p>C/S体系结构<strong>定义了工作站如何与服务器相连，以实现数据和应用分布到多个处理机上</strong>。 </p>
+<p>C/S体系结构有三个主要组成部分：<strong>数据库服务器</strong>、<strong>客户端程序</strong> 和 <strong>网络</strong>。</p>
+<p><strong>客户端</strong>，服务请求者。<strong>不共享任何资源</strong>，但需要<strong>获取服务器</strong>的<strong>内容</strong>或<strong>功能</strong>。 </p>
+<p><strong>服务器</strong>运行一个或多个服务器计划，与客户<strong>分享他们的资源</strong>。  </p>
+<h2 id="BS风格"><a href="#BS风格" class="headerlink" title="BS风格"></a>BS风格</h2><p>浏览器/服务器（B/S）风格就是上述三层C/S结构的一种实现方式，其具体结构为：<strong>浏览器</strong>/<strong>Web服务器</strong>/<strong>数据库服务器</strong>。B/S体系结构主要是利用不断成熟的<strong>WWW浏览器技术</strong>，结合<strong>浏览器的多种脚本语言</strong>，用<strong>通用浏览器</strong>就实现了原来需要复杂的专用软件才能实现的强大功能，并<strong>节约了开发成本</strong>。</p>
+<h2 id="CS、BS混合风格"><a href="#CS、BS混合风格" class="headerlink" title="CS、BS混合风格"></a>CS、BS混合风格</h2><p>CS和BS各有优缺点，标准在不同地方也有不同的地位，使用习惯不同，还有遗留代码，所以会使用混合</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><ol>
+<li>对<strong>扩展是开放的</strong>。模块的<strong>行为可以扩展</strong>，当需求改变时，可以对模块进行扩展，<strong>增加新的功能</strong>。</li>
+<li>对<strong>修改是封闭的</strong>。在对模块行为进行扩展时，<strong>不允许修改模块中已经存在的类的源代码</strong>。</li>
+</ol>
+<h2 id="接口编程"><a href="#接口编程" class="headerlink" title="接口编程"></a>接口编程</h2><p>所有的<strong>定义与实现分离</strong>。把业务抽象出来，具体实现通过该接口的实现完成。</p>
+<p>在一个面向对象的系统中，系统的各种功能是由许许多多的不同对象协作完成的。在这种情况下，各个对象<strong>内部实现显得不那么重要</strong>；而各个对象之间的<strong>协作关系</strong>则成为<strong>系统设计的关键</strong>。小到不同类之间的<strong>通信</strong>，大到各模块之间的<strong>交互</strong>，是系统设计的主要工作内容。</p>
+<p>好处：<strong>业务逻辑清晰</strong>，代码易懂，<strong>方便扩展</strong>，可维护性强，符合<strong>开闭原则</strong> 。</p>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><p>设计模式是对<strong>软件设计经验的总结</strong>，是对软件设计中<strong>反复出现的设计问题的成功解决方案</strong>的描述。设计模式可以用于软件体系结构的设计，以实现体系结构级的<strong>设计复用</strong>。设计模式可以使设计者<strong>更加方便地借鉴并直接使用</strong>已经经过证实的成功设计方案，不必花时间进行重复设计。帮助设计者<strong>更快更好地完成软件系统的设计工作</strong>。</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>无论是单例还是多例，对象属性和方法都不static。</p>
+<p>而static的应该是获取单例/多例对象相关的方法或属性，</p>
+<p><strong>构造器</strong>都应该是<strong>私有的</strong>，因为不允许从getInstance外的其他方式构造对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChairMan</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> ChairMan chairmanInstance;	<span class="comment">//单例对象</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="comment">// 私有构造器，因为不允许外部初始化。</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">ChairMan</span><span class="params">(String name)</span></span>&#123; <span class="keyword">this</span>.name = name; &#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	* 单例在第一次调用时初始化单例的static对象，后续不允许初始化。</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> ChairMan <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (chairmanInstance == <span class="keyword">null</span>) &#123;	<span class="comment">//检查是否已经被初始化，未初始化则创建，否则已存在，跳过</span></span><br><span class="line">			chairmanInstance = <span class="keyword">new</span> ChairMan(<span class="string">"习近平"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> chairmanInstance;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//对象实例方法，不静态处理</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> name; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123; <span class="keyword">this</span>.name = name; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> name + <span class="keyword">super</span>.toString(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多例模式"><a href="#多例模式" class="headerlink" title="多例模式"></a>多例模式</h2><p>多个对象在类加载时就已经进行内部初始化，通过getInstance从static对象中获取对象，在构造器中限制类初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Marshal</span> </span>&#123;</span><br><span class="line">    <span class="comment">//用一个Map对象存放多例的对象，以便用key随机查找</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Marshal&gt; marshalInstances = <span class="keyword">new</span> HashMap&lt;String, Marshal&gt;();</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;	<span class="comment">//已初始化对象的数量，在构造方法中自增</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_COUNT = <span class="number">5</span>;	<span class="comment">//限制的多例对象数量上限，在构造方法中限制，超出则异常</span></span><br><span class="line">	</span><br><span class="line">    <span class="keyword">private</span> String name;	<span class="comment">//实例对象的属性，不采取static</span></span><br><span class="line">    </span><br><span class="line">	<span class="comment">//类加载时执行代码块，初始化多个对象</span></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		String[] marshals = &#123;<span class="string">"陈毅"</span>,<span class="string">"罗荣桓"</span>,<span class="string">"徐向前"</span>,<span class="string">"聂荣臻"</span>,<span class="string">"叶剑英"</span>,<span class="string">"刘德华"</span>&#125;;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line">			<span class="keyword">for</span> (String name : marshals) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				marshalInstances.put(name,<span class="keyword">new</span> Marshal(name));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception ex) &#123; System.out.println(ex); &#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">// 构造器</span></span><br><span class="line">    <span class="comment">// 是私有的，因为不允许外部初始化</span></span><br><span class="line">    <span class="comment">// 并通过已存在多例对象数量和已设上限来禁止超出上限数量后的初始化。</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Marshal</span><span class="params">(String name)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (count &gt;= MAX_COUNT) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"不可继续创建新的元帅"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">this</span>.name = name;</span><br><span class="line">			count ++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 从Map中获取多例对象</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Marshal <span class="title">getInstance</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> marshalInstances.get(name);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//对象实例方法，不用静态处理</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> name + <span class="string">"元帅"</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> name; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123; <span class="keyword">this</span>.name = name; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="简单工厂方法模式"><a href="#简单工厂方法模式" class="headerlink" title="简单工厂方法模式"></a>简单工厂方法模式</h2><p>思想：在工厂类中用一个switch-case分辨需要的是哪一个类的对象，用一个父类型的引用获取新建的子类型对象。</p>
+<p><img src="/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-简单工厂模式.png" alt="工厂模式-简单工厂模式"></p>
+<p>缺点：</p>
+<ol>
+<li>工厂类必须知道怎么样创建每个子类的对象，所以每次增加产品的时候，都需要修改工厂类代码，不符合开闭原则。</li>
+<li>简单工厂类的工厂方法是静态的，不能被继承，只能是一个单独的类。</li>
+</ol>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p><img src="/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-工厂模式.png" alt="工厂模式-工厂模式"></p>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><p>对同结构的产品抽象成父类，不同的公司工厂生产其对应的产品。</p>
+<p>有两种情况：</p>
+<p><strong>拓展产品不符合开闭原则</strong></p>
+<p><strong>拓展工厂符合开闭原则</strong></p>
+<p><img src="/Blog/2018/06/20/课程学习/软件体系结构/工厂模式-抽象工厂模式.png" alt="工厂模式-抽象工厂模式"></p>
+<h2 id="安全组合模式"><a href="#安全组合模式" class="headerlink" title="安全组合模式"></a>安全组合模式</h2><p><img src="/Blog/2018/06/20/课程学习/软件体系结构/组合模式-安全组合模式.png" alt="组合模式-安全组合模式"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span>  </span></span><br><span class="line"><span class="class"></span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="comment">/** </span></span><br><span class="line"><span class="comment">         *           composite1 </span></span><br><span class="line"><span class="comment">         *           /      \ </span></span><br><span class="line"><span class="comment">         *        leaf1   composite2 </span></span><br><span class="line"><span class="comment">         *                  /   \ </span></span><br><span class="line"><span class="comment">         *               leaf2  leaf3         </span></span><br><span class="line"><span class="comment">         *                </span></span><br><span class="line"><span class="comment">         * */</span>  </span><br><span class="line">        Component leaf1=<span class="keyword">new</span> Leaf();  </span><br><span class="line">        Component leaf2=<span class="keyword">new</span> Leaf();  </span><br><span class="line">        Component leaf3=<span class="keyword">new</span> Leaf();  </span><br><span class="line">        Composite composite1=<span class="keyword">new</span> Composite();  </span><br><span class="line">        Composite composite2=<span class="keyword">new</span> Composite();  </span><br><span class="line">          </span><br><span class="line">        composite2.add(leaf2);  </span><br><span class="line">        composite2.add(leaf3);  </span><br><span class="line">        composite1.add(leaf1);  </span><br><span class="line">        composite1.add(composite2);  </span><br><span class="line">          </span><br><span class="line">        composite1.doSomething();  </span><br><span class="line">          </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="一致型组合模式"><a href="#一致型组合模式" class="headerlink" title="一致型组合模式"></a>一致型组合模式</h2><p>与安全组合模式的区别在于所有的构建类都有相同的接口，各个类在接口上是没有区别的，客户端可以等同对待所有的对象。不必区分叶子节点和树枝节点，不需要强制类型转换。</p>
+<p>缺点在于不够安全，Leaf(Person)需要屏蔽一些方法，并且抛出适当的异常。这样在客户类调用Leaf方法的时候可以做到部分方法可以什么都不做。</p>
+<p><img src="/Blog/2018/06/20/课程学习/软件体系结构/组合模式-一致性组合模式.png" alt="组合模式-安全组合模式"></p>
+<h2 id="对象适配器模式"><a href="#对象适配器模式" class="headerlink" title="对象适配器模式"></a>对象适配器模式</h2><p><img src="/Blog/2018/06/20/课程学习/软件体系结构/适配器模式-对象适配器.png" alt="适配器模式-类适配器"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对象适配器模式的适配器类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Ps2</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 依赖于USB类，在构造时存放一个USB的实例引用（这里体现了“对象”适配器模式）</span></span><br><span class="line">    <span class="keyword">private</span> Usb usb;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Usb usb)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.usb = usb;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//Target类的方法重写，调用了USB类的方法返回。（这里体现了适配）</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">isPs2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        usb.isUsb();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Clienter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Ps2 p = <span class="keyword">new</span> Adapter(<span class="keyword">new</span> Usber());	<span class="comment">//这里实例Target类时在Adaptor构造器里传入实例</span></span><br><span class="line">        p.isPs2();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类适配器模式"><a href="#类适配器模式" class="headerlink" title="类适配器模式"></a>类适配器模式</h2><p><img src="/Blog/2018/06/20/课程学习/软件体系结构/适配器模式-类适配器.png" alt="适配器模式-类适配器"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">extends</span> <span class="title">Usber</span> <span class="keyword">implements</span> <span class="title">Ps2</span> </span>&#123;	</span><br><span class="line">    <span class="comment">//这里继承了被适配类USB，可以直接作为USB被构造和使用USB的方法</span></span><br><span class="line">    <span class="comment">//由于实现了Target类，同时也可以作为Target类使用，但是实现是USB类的方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">isPs2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        isUsb();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Clienter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//直接作为Adapter被实例化，因为是继承了USB，所以不需要new USB，直接作为USB</span></span><br><span class="line">        Ps2 p = <span class="keyword">new</span> Adapter();	</span><br><span class="line">        p.isPs2();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ORM模式"><a href="#ORM模式" class="headerlink" title="ORM模式"></a>ORM模式</h2><p>对象-关系映射（Object Relational Mapping），把对象映射到关系模型数据库结构中去。在操作对象的时候，不需要再去和复杂的SQL语句打交道，只需简单的操作实体对象的属性和方法。</p>
+<p>ORM技术是在对象和关系之间提供了一条桥梁，对象数据和数据库中的关系型的数据通过ORM来相互转化 。</p>
+<div id="flowchart-0" class="flow-chart"></div>
+
+<h2 id="IOC模式"><a href="#IOC模式" class="headerlink" title="IOC模式"></a>IOC模式</h2><p>控制反转</p>
+<p>IoC模式，系统中通过<strong>IoC容器</strong>来<strong>管理对象</strong>的<strong>生命周期</strong>、<strong>依赖关系</strong>等，使程序的配置和依赖性规范<strong>与实际的代码分开</strong>。<strong>通过文本配置</strong>文件进行<strong>程序组件间相互关系</strong>的配置，而<strong>不用修改编译具体的代码</strong>。</p>
+<p>IoC是把以前在工厂方法里写死的对象生成代码，改变为由XML文件来定义，<strong>利用Java反射，根据XML生成相应的对象</strong>。也就是把工厂和对象生成这两者独立分隔开来，目的就是提高灵活性和可维护性。</p>
+<p>// IOC模式把耦合从代码中移出去，放到统一的XML 文件中，通过一个容器在需要的时候把这个依赖关系形成，即把需要的接口实现注入到需要它的类中，也就是所谓“依赖注入DI”。</p>
+<h2 id="Spring框架基本原理和使用"><a href="#Spring框架基本原理和使用" class="headerlink" title="Spring框架基本原理和使用"></a>Spring框架基本原理和使用</h2><p>Spring在Spring上下文中存放bean对象，对象在配置文件中声明。</p>
+<p>使用时先从配置文件中获取上下文，然后可以用上下文content.getBean()获取bean对象。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span> <span class="comment">&lt;!-- 省略beans引用的头信息 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"teacher"</span> <span class="attr">class</span>=<span class="string">"cn.edu.scau.cmi.huangyanrong.spring.domain.Teacher"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"liangzaoqing"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"梁早清"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"gender"</span> <span class="attr">value</span>=<span class="string">"男"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"student"</span> <span class="attr">class</span>=<span class="string">"cn.edu.scau.cmi.huangyanrong.spring.domain.Student"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"huangyanrong"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"黄彦荣"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"gender"</span> <span class="attr">value</span>=<span class="string">"男"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"tutor"</span> <span class="attr">ref</span>=<span class="string">"teacher"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span> </span>&#123;</span><br><span class="line">		ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"codes/spring/config/applicationContext.xml"</span>);</span><br><span class="line">		Student student = (Student)context.getBean(<span class="string">"student"</span>);</span><br><span class="line">		System.out.println(student);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Hibernate框架基本原理和使用"><a href="#Hibernate框架基本原理和使用" class="headerlink" title="Hibernate框架基本原理和使用"></a>Hibernate框架基本原理和使用</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"domain.Course"</span> <span class="attr">table</span>=<span class="string">"course"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"java.lang.Long"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"assigned"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">type</span>=<span class="string">"java.lang.String"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"students"</span> <span class="attr">inverse</span>=<span class="string">"true"</span> <span class="attr">table</span>=<span class="string">"select"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"course"</span> <span class="attr">not-null</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">many-to-many</span> <span class="attr">entity-name</span>=<span class="string">"domain.Student"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">column</span> <span class="attr">name</span>=<span class="string">"student"</span> <span class="attr">not-null</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">many-to-many</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">A=>operation: 数据库连接工具类
+B=>operation: DAO类
+C=>operation: Service业务类
+D=>operation: Client
+D(right)->C(bottom)->B(bottom)->A</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/课程学习/" rel="tag"># 课程学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Blog/2018/06/17/Linux/Linux程序设计/" rel="next" title="Linux程序设计">
+                <i class="fa fa-chevron-left"></i> Linux程序设计
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Aaron.H</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/Blog/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/Blog/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/Blog/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4-1视图"><span class="nav-number">1.</span> <span class="nav-text">4+1视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑视图"><span class="nav-number">1.1.</span> <span class="nav-text">逻辑视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理视图"><span class="nav-number">1.2.</span> <span class="nav-text">物理视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发视图"><span class="nav-number">1.3.</span> <span class="nav-text">开发视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程视图"><span class="nav-number">1.4.</span> <span class="nav-text">进程视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景视图"><span class="nav-number">1.5.</span> <span class="nav-text">场景视图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件体系结构"><span class="nav-number">2.</span> <span class="nav-text">软件体系结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件体系结构风格"><span class="nav-number">3.</span> <span class="nav-text">软件体系结构风格</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象设计风格"><span class="nav-number">3.1.</span> <span class="nav-text">面向对象设计风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构化设计风格"><span class="nav-number">3.2.</span> <span class="nav-text">结构化设计风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道过滤器风格"><span class="nav-number">3.3.</span> <span class="nav-text">管道过滤器风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#层次风格"><span class="nav-number">3.4.</span> <span class="nav-text">层次风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CS风格"><span class="nav-number">3.5.</span> <span class="nav-text">CS风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BS风格"><span class="nav-number">3.6.</span> <span class="nav-text">BS风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CS、BS混合风格"><span class="nav-number">3.7.</span> <span class="nav-text">CS、BS混合风格</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开闭原则"><span class="nav-number">4.1.</span> <span class="nav-text">开闭原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口编程"><span class="nav-number">4.2.</span> <span class="nav-text">接口编程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式"><span class="nav-number">5.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">5.1.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多例模式"><span class="nav-number">5.2.</span> <span class="nav-text">多例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单工厂方法模式"><span class="nav-number">5.3.</span> <span class="nav-text">简单工厂方法模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂模式"><span class="nav-number">5.4.</span> <span class="nav-text">工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象工厂模式"><span class="nav-number">5.5.</span> <span class="nav-text">抽象工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全组合模式"><span class="nav-number">5.6.</span> <span class="nav-text">安全组合模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致型组合模式"><span class="nav-number">5.7.</span> <span class="nav-text">一致型组合模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象适配器模式"><span class="nav-number">5.8.</span> <span class="nav-text">对象适配器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类适配器模式"><span class="nav-number">5.9.</span> <span class="nav-text">类适配器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM模式"><span class="nav-number">5.10.</span> <span class="nav-text">ORM模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IOC模式"><span class="nav-number">5.11.</span> <span class="nav-text">IOC模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring框架基本原理和使用"><span class="nav-number">5.12.</span> <span class="nav-text">Spring框架基本原理和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate框架基本原理和使用"><span class="nav-number">5.13.</span> <span class="nav-text">Hibernate框架基本原理和使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron.H</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/Blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/Blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
