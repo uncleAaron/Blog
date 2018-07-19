@@ -6,7 +6,7 @@
   <link href="/Blog/atom.xml" rel="self"/>
   
   <link href="https://uncleaaron.github.io/Blog/"/>
-  <updated>2018-07-17T12:57:47.705Z</updated>
+  <updated>2018-07-19T08:36:24.069Z</updated>
   <id>https://uncleaaron.github.io/Blog/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mysql数据库规范及解读</title>
+    <link href="https://uncleaaron.github.io/Blog/DataBase/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%84%E8%8C%83%E5%8F%8A%E8%A7%A3%E8%AF%BB/"/>
+    <id>https://uncleaaron.github.io/Blog/DataBase/MySQL数据库规范及解读/</id>
+    <published>2018-07-19T07:16:08.000Z</published>
+    <updated>2018-07-19T08:36:24.069Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote><p>使用Mysql的准则 🖊 </p></blockquote><a id="more"></a><h2 id="一、基础规范"><a href="#一、基础规范" class="headerlink" title="一、基础规范"></a>一、基础规范</h2><blockquote><p>第一条：必须使用InnoDB存储引擎</p></blockquote><p>解读：支持事务、行级锁、并发性能更好、CPU及内存缓存页优化使得资源利用率更高</p><blockquote><p>第二条：必须使用utf8(utf8mb4)字符集</p></blockquote><p>解读：万国码，无需转码，无乱码风险，节省空间，utf8mb4是utf8的超集，由于近年移动设备的增多，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4</p><blockquote><p>第三条：数据表、数据字段必须加入中文注释</p></blockquote><p>解读：N年后谁会知道这个a1,a2,a3字段是干嘛的</p><blockquote><p>第四条：禁止使用存储过程、视图、触发器、Event</p></blockquote><p>解读：高并发<strong>大数据</strong>的互联网业务，<strong>架构</strong>设计思路是<em>“解放<strong>数据库</strong>CPU，将计算转移到服务层“</em>，并发量大的情况下，这些功能很可能将数据库拖死，<em>业务逻辑放到服务层具备更好的扩展性，能够轻易实现“增机器就加性能”</em>。数据库擅长存储与索引，CPU计算还是上移吧</p><blockquote><p>第五条：禁止存储大文件或者大照片</p></blockquote><p>解读：为何要让数据库做它不擅长的事情？大文件和照片存储在文件系统，数据库里存URI多好</p><h2 id="二、命名规范"><a href="#二、命名规范" class="headerlink" title="二、命名规范"></a>二、命名规范</h2><blockquote><p>第一条：只允许<em>使用内网域名，而不是ip连接数据库</em></p></blockquote><p>解读：虽然IP访问更快，域名访问需要内网dns，但是对于大数据库的扩展和迁库考虑，域名更好</p><blockquote><p>第二条：线上环境、开发环境、<strong>测试</strong>环境数据库内网域名遵循命名规范</p></blockquote><p>业务名称：xxx<br>线上环境：dj.xxx.db<br>开发环境：dj.xxx.rdb<br>测试环境：dj.xxx.tdb<br>从库在名称后加-s标识，备库在名称后加-ss标识<br>线上从库：dj.xxx-s.db<br>线上备库：dj.xxx-sss.db</p><blockquote><p>第三条：库名、表名、字段名：小写，下划线风格，不超过32个字符，禁止拼音英文混用</p></blockquote><p>解读：见名知意，方便后续维护</p><blockquote><p>第四条：表名t_xxx，非唯一索引名idx_xxx，唯一索引名uniq_xxx</p></blockquote><p>解读：见名知意，方便后续维护</p><h2 id="三、表和字段设计规范"><a href="#三、表和字段设计规范" class="headerlink" title="三、表和字段设计规范"></a>三、表和字段设计规范</h2><blockquote><p>第一条：禁止使用外键，如果有外键完整性约束，需要应用程序控制</p></blockquote><p>解读：<em>外键会导致表与表之间耦合，update与delete操作都会涉及相关联的表，十分影响sql的性能</em>，甚至会造成死锁。高并发情况下容易造成数据库性能，<em>大数据高并发业务场景数据库使用以性能优先</em></p><blockquote><p>第二条：必须把字段定义为NOT NULL并且提供默认值</p></blockquote><p>解读：<br>a) null的列使索引/索引统计/值比较都更加复杂，对MySQL来说更难优化<br>b) null这种类型MySQL内部需要进行特殊处理，增加数据库处理记录的复杂性；同等条件下，表中有较多空字段的时候，数据库的处理性能会降低很多<br>c) null值需要更多的存储空，无论是表还是索引中每行中的null的列都需要额外的空间来标识<br>d) 对null的处理时候，只能采用is null或is not null，而不能采用=、in、&lt;、&lt;&gt;、!=、not in这些操作符号。<em>如：where name!=’shenjian’，如果存在name为null值的记录，查询结果就不会包含name为null值的记录</em></p><blockquote><p>第三条：禁止使用TEXT、BLOB类型</p></blockquote><p>解读：会浪费更多的磁盘和内存空间，<em>非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能</em></p><blockquote><p>第四条：禁止使用小数存储国币</p></blockquote><p>解读：曾经踩过这样的坑，100元分3天摊销，每天摊销(100/3)元，结果得到3个33.33。后来实施对账系统，始终有几分钱对不齐，郁闷了很久（不是几分钱的事，是业务方质疑的眼神让研发很不爽），最后发现是除法惹的祸<br>解决方案：使用“分”作为单位，这样数据库里就是整数了</p><blockquote><p>第五条：必须使用varchar(20)存储手机号</p></blockquote><p>解读：<br>a) 涉及到区号或者国家代号，可能出现+-()<br>b) 手机号会去做数学运算么？<br>c) varchar可以支持模糊查询，例如：like“138%”</p><blockquote><p>第六条：禁止使用ENUM，可使用TINYINT代替</p></blockquote><p>解读：<br>a) 增加新的ENUM值要做DDL操作<br>b) ENUM的内部实际存储就是整数，你以为自己定义的是字符串？</p><blockquote><p>第七条：表必须有主键，例如自增主键</p></blockquote><p>解读：<br>a) 主键递增，数据行写入可以提高插入性能，可以避免page分裂，减少表碎片提升空间和内存的使用<br>b) 主键要选择较短的数据类型， Innodb引擎普通索引都会保存主键的值，较短的数据类型可以有效的减少索引的磁盘空间，提高索引的缓存效率<br>c) 无主键的表删除，在row模式的主从架构，会导致备库夯住</p><h2 id="四、索引设计规范"><a href="#四、索引设计规范" class="headerlink" title="四、索引设计规范"></a>四、索引设计规范</h2><blockquote><p>第一条：单表索引建议控制在5个以内</p></blockquote><p>解读：一个好的索引设计，可以让你的效率提高几十甚至几百倍，但过多反而适得其反</p><blockquote><p>第二条：单索引字段数不允许超过5个</p></blockquote><p>解读：字段超过5个时，实际已经起不到有效过滤数据的作用了</p><blockquote><p>第三条：禁止在更新十分频繁、区分度不高的属性上建立索引</p></blockquote><p>解读：<br>a) 更新会变更B+树，更新频繁的字段建立索引会大大降低数据库性能<br>b) “性别”这种区分度不大的属性，建立索引是没有什么意义的，不能有效过滤数据，性能与全表扫描类似</p><blockquote><p>第四条:建立组合索引，必须把区分度高的字段放在前面</p></blockquote><p>解读：能够更加有效的过滤数据</p><h2 id="五、SQL使用规范"><a href="#五、SQL使用规范" class="headerlink" title="五、SQL使用规范"></a>五、SQL使用规范</h2><blockquote><p>第一条：禁止使用SELECT *，只获取必要的字段，需要显示说明列属性</p></blockquote><p>解读：<br>a) 读取不需要的列会增加CPU、IO、NET消耗<br>b) 不能有效的利用覆盖索引<br>c) 使用<code>SELECT *</code>容易在增加或者删除字段后出现程序BUG</p><blockquote><p>第二条：禁止使用INSERT INTO t_xxx VALUES(xxx)，必须显示指定插入的列属性</p></blockquote><p>解读：容易在增加或者删除字段后出现程序BUG</p><blockquote><p>第三条：禁止使用属性隐式转换</p></blockquote><p>解读：SELECT uid FROM t_user WHERE phone=13812345678 会导致全表扫描，而不能命中phone索引，猜猜为什么？<br>int数据类型优先级高于varcher， 该查询会把phone转换为int，因此需要把表中所有数据改成int，所以必须全盘扫描<br>phone是varchar类型，SQL语句带入的是整形，故不会命中索引，加个引号就好了：<br>SELECT uid FROM t_user WHERE phone=’13812345678’</p><blockquote><p>第四条：禁止在WHERE条件的属性上使用函数或者表达式</p></blockquote><p>解读：SELECT uid FROM t_user WHERE from_unixtime(day)&gt;=’2017-02-15’ 会导致全表扫描<br>正确的写法是：SELECT uid FROM t_user WHERE day&gt;= unix_timestamp(‘2017-02-15 00:00:00’)</p><blockquote><p>第五条：禁止大表使用JOIN查询，禁止大表使用子查询</p></blockquote><p>解读：会产生临时表，消耗较多内存与CPU，极大影响数据库性能，大表指的是数据量在1000万以上的表</p><blockquote><p>第六条：禁止使用OR条件，必须改为IN查询</p></blockquote><p>解读：旧版本Mysql的OR查询是不能命中索引的，即使能命中索引，为何要让数据库耗费更多的CPU帮助实施查询优化呢？</p><blockquote><p>第七条：禁止使用负向查询，以及%开头的模糊查询</p></blockquote><p>解读：<br>a) 负向查询条件：NOT、!=、&lt;&gt;、!&lt;、!&gt;、NOT IN、NOT LIKE等，会导致全表扫描<br>b) %开头的模糊查询，会导致全表扫描<br>一般来说，WHERE过滤条件不会只带这么一个“负向查询条件”，还会有其他过滤条件，举个例子：查询沈剑已完成订单之外的订单（好拗口）：<br>SELECT oid FROM t_order WHERE uid=123 AND status != 1;<br>订单表5000w数据，但uid=123就会迅速的将数据量过滤到很少的级别（uid建立了索引），此时再接上一个负向的查询条件就无所谓了，扫描的行数本身就会很少<br>但如果要查询所有已完成订单之外的订单：<br>SELECT oid FROM t_order WHERE status != 1;<br>这就挂了，立马CPU100%，status索引会失效，负向查询导致全表扫描</p><blockquote><p>第八条：应用程序必须捕获SQL异常，并有相应处理</p></blockquote><p>解读：方便维护，及时“查漏补缺”</p><p><strong>总结：大数据量高并发的互联网业务，极大影响数据库性能的都不让用，不让用哟。</strong></p><p>转自：<a href="https://zhuanlan.zhihu.com/p/32586602" target="_blank" rel="noopener">知乎：SangSir</a>的文章</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;使用Mysql的准则 🖊 &lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>领域模型中的实体类的4种类型VO,DTO,DO,PO</title>
+    <link href="https://uncleaaron.github.io/Blog/Java/%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BD%93%E7%B1%BB%E7%9A%844%E7%A7%8D%E7%B1%BB%E5%9E%8BVO-DTO-DO-PO/"/>
+    <id>https://uncleaaron.github.io/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/</id>
+    <published>2018-07-19T07:14:08.000Z</published>
+    <updated>2018-07-19T07:19:57.373Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote><p>经常会接触到VO，DO，DTO的概念，本文从领域建模中的实体划分和项目中的实际应用情况两个角度，对这几个概念进行简析 🖊 </p></blockquote><a id="more"></a><p>在项目应用中，VO对应于页面上需要显示的数据（表单），DO对应于数据库中存储的数据（数据表），DTO对应于除二者之外需要进行传递的数据。 </p><p>领域模型中的实体类分为四种类型：VO、DTO、DO、PO，各种实体类用于不同业务层次间的交互，并会在层次内实现实体类之间的转化。</p><p>业务分层为：视图层（VIEW+ACTION），服务层（SERVICE），持久层（DAO） </p><p>相应各层间实体的传递如下图：  </p><p> <img src="/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/领域模型.jpg" alt="领域模型"></p><p>项目中我们并没有严格遵循这种传递关系，但这种和业务层次的关联对我们理解各实体类的作用是有帮助的。（我们没有接触到PO的原因，我理解为ORM对PO进行了封装） </p><p>概念：</p><ul><li><strong>VO（View Object）</strong>：视图对象，用于展示层，它的作用是把某个指定页面（或组件）的所有数据封装起来。</li><li><strong>DTO（Data Transfer Object）</strong>：数据传输对象，这个概念来源于J2EE的设计模式，原来的目的是为了EJB的分布式应用提供粗粒度的数据实体，以减少分布式调用的次数，从而提高分布式调用的性能和降低网络负载，但在这里，我泛指用于展示层与服务层之间的数据传输对象。</li><li><strong>DO（Domain Object）</strong>：领域对象，就是从现实世界中抽象出来的有形或无形的业务实体。</li><li><strong>PO（PersistentObject）</strong>：持久化对象，它跟持久层（通常是关系型数据库）的数据结构形成一一对应的映射关系，如果持久层是关系型数据库，那么，数据表中的每个字段（或若干个）就对应PO的一个（或若干个）属性。 </li></ul><p>模型：</p><p> 下面以一个时序图建立简单模型来描述上述对象在三层架构应用中的位置 </p><ul><li><p>用户发出请求（可能是填写表单），表单的数据在展示层被匹配为VO。</p></li><li><p>展示层把VO转换为服务层对应方法所要求的DTO，传送给服务层。 l 服务层首先根据DTO的数据构造（或重建）一个DO，调用DO的业务方法完成具体业务。 </p></li><li>服务层把DO转换为持久层对应的PO（可以使用ORM工具，也可以不用），调用持久层的持久化方法，把PO传递给它，完成持久化操作。</li><li><p>对于一个逆向操作，如读取数据，也是用类似的方式转换和传递，略。</p><p>三、项目中的实体类</p></li></ul><p>项目中常见的实体类有VO，DO和DTO，命名规则也常是以相应字符串结尾，如VO.Java。</p><p>但是DTO不总是遵循这个规则，而通常与他的用途有关，如写成Query.java，表示存储了一个查询条件。</p><p>项目中实体类出现的业务层次也没有这么严格，例如我们可以在视图层就组装一个DO，也可以将一个VO从持久层传出来，所以与业务分层相关联的划分方法显得有些冗余。</p><p>从项目代码中抽象出的理解是：VO对应于页面上需要显示的数据，DO对应于数据库中存储的数据，DTO对应于除二者之外需要进行传递的数据。 </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;经常会接触到VO，DO，DTO的概念，本文从领域建模中的实体划分和项目中的实际应用情况两个角度，对这几个概念进行简析 🖊 &lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>使SpringMVC支持跨域访问的几种解决方法</title>
