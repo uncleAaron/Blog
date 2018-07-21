@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java,虚拟机," />
 
 
 
@@ -87,18 +87,19 @@
 
 
 
-<meta name="description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta name="description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量">
+<meta name="keywords" content="Java,虚拟机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内存区域划分以及内存溢出异常">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta property="og:description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/Java虚拟机运行时数据区.png">
-<meta property="og:updated_time" content="2018-07-21T14:31:48.859Z">
+<meta property="og:updated_time" content="2018-07-21T16:58:18.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存区域划分以及内存溢出异常">
-<meta name="twitter:description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta name="twitter:description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量">
 <meta name="twitter:image" content="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/Java虚拟机运行时数据区.png">
 
 
@@ -333,7 +334,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  661
+                  720
                 </span>
               
 
@@ -349,7 +350,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -371,7 +372,8 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>前言用<code>&gt;</code>符号标注🖊 </p>
+<p>Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊 </p>
+<p>其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量</p>
 </blockquote>
 <a id="more"></a>
 <h1 id="Java虚拟机运行时数据区域"><a href="#Java虚拟机运行时数据区域" class="headerlink" title="Java虚拟机运行时数据区域"></a>Java虚拟机运行时数据区域</h1><p><img src="/Blog/Java/Java内存区域划分以及内存溢出异常/Java虚拟机运行时数据区.png" alt="Java虚拟机运行时数据区"></p>
@@ -379,7 +381,7 @@
 <ol>
 <li><p><strong>程序计数器</strong>：在Java中，每个线程都有一个独立的程序计数器，独立存储，该段内存是线程私有的</p>
 </li>
-<li><p><strong>Java虚拟机栈：</strong>描述方法执行<strong>的内存模型：</strong></p>
+<li><p><strong>Java虚拟机栈：</strong>描述<strong>方法执行</strong>的内存模型：</p>
 <ul>
 <li><p>每个方法在执行的同时会创建<strong>栈帧</strong>用于存储<strong>局部变量表</strong>、动态链接等信息。</p>
 </li>
@@ -439,7 +441,7 @@
   <p><span>本文标题:</span><a href="/Blog/Java/Java内存区域划分以及内存溢出异常/">Java内存区域划分以及内存溢出异常</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年07月21日 - 19:07</p>
-  <p><span>最后更新:</span>2018年07月21日 - 22:07</p>
+  <p><span>最后更新:</span>2018年07月22日 - 00:07</p>
   <p><span>原始链接:</span><a href="/Blog/Java/Java内存区域划分以及内存溢出异常/" title="Java内存区域划分以及内存溢出异常">https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/"  aria-label="复制成功！"></i></span>
   </p>
@@ -470,6 +472,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/Blog/tags/虚拟机/" rel="tag"># 虚拟机</a>
+          
+        </div>
+      
 
       
       
@@ -489,8 +499,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/Java/Java对象（HotSpot虚拟机下）/" rel="prev" title="Java对象创建、内部数据、如何访问">
-                Java对象创建、内部数据、如何访问 <i class="fa fa-chevron-right"></i>
+              <a href="/Blog/Java/Java对象(HotSpot虚拟机下)/" rel="prev" title="Java对象创建、内部数据、如何访问(HptSpot虚拟机下）">
+                Java对象创建、内部数据、如何访问(HptSpot虚拟机下） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +604,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -689,7 +699,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共30.9k字</span>
+  <span class="post-count">博客全站共31.0k字</span>
 </div>
 
         
