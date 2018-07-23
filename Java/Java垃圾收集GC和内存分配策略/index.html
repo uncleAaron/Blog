@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="JavaWeb," />
+  <meta name="keywords" content="虚拟机,Java," />
 
 
 
@@ -87,20 +87,18 @@
 
 
 
-<meta name="description" content="前言 经常会接触到VO，DO，DTO的概念，本文从领域建模中的实体划分和项目中的实际应用情况两个角度，对这几个概念进行简析 🖊">
-<meta name="keywords" content="JavaWeb">
+<meta name="description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta name="keywords" content="虚拟机,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="领域模型中的实体类的4种类型VO,DTO,DO,PO">
-<meta property="og:url" content="https://uncleaaron.github.io/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/index.html">
+<meta property="og:title" content="Java垃圾收集GC和内存分配策略">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/Java/Java垃圾收集GC和内存分配策略/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="前言 经常会接触到VO，DO，DTO的概念，本文从领域建模中的实体划分和项目中的实际应用情况两个角度，对这几个概念进行简析 🖊">
+<meta property="og:description" content="前言 前言用&amp;gt;符号标注🖊">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/领域模型.jpg">
-<meta property="og:updated_time" content="2018-07-21T16:58:40.574Z">
+<meta property="og:updated_time" content="2018-07-23T12:19:31.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="领域模型中的实体类的4种类型VO,DTO,DO,PO">
-<meta name="twitter:description" content="前言 经常会接触到VO，DO，DTO的概念，本文从领域建模中的实体划分和项目中的实际应用情况两个角度，对这几个概念进行简析 🖊">
-<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/领域模型.jpg">
+<meta name="twitter:title" content="Java垃圾收集GC和内存分配策略">
+<meta name="twitter:description" content="前言 前言用&amp;gt;符号标注🖊">
 
 
 
@@ -130,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://uncleaaron.github.io/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/"/>
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/Java/Java垃圾收集GC和内存分配策略/"/>
 
 
 
 
 
-  <title>领域模型中的实体类的4种类型VO,DTO,DO,PO | StormAaron的技术站</title>
+  <title>Java垃圾收集GC和内存分配策略 | StormAaron的技术站</title>
   
 
 
@@ -273,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Java/Java垃圾收集GC和内存分配策略/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron.H">
@@ -290,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">领域模型中的实体类的4种类型VO,DTO,DO,PO</h1>
+          <h1 class="post-title" itemprop="name headline">Java垃圾收集GC和内存分配策略</h1>
         
 
         <div class="post-meta">
@@ -302,8 +300,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T15:14:08+08:00">
-                2018-07-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T20:17:47+08:00">
+                2018-07-23
               </time>
             
 
@@ -334,7 +332,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  910
+                  9
                 </span>
               
 
@@ -350,7 +348,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  1
                 </span>
               
             </div>
@@ -372,38 +370,9 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>经常会接触到VO，DO，DTO的概念，本文从领域建模中的实体划分和项目中的实际应用情况两个角度，对这几个概念进行简析 🖊 </p>
+<p>前言用<code>&gt;</code>符号标注🖊 </p>
 </blockquote>
 <a id="more"></a>
-<p>在项目应用中，VO对应于页面上需要显示的数据（表单），DO对应于数据库中存储的数据（数据表），DTO对应于除二者之外需要进行传递的数据。 </p>
-<p>领域模型中的实体类分为四种类型：VO、DTO、DO、PO，各种实体类用于不同业务层次间的交互，并会在层次内实现实体类之间的转化。</p>
-<p>业务分层为：视图层（VIEW+ACTION），服务层（SERVICE），持久层（DAO） </p>
-<p>相应各层间实体的传递如下图：  </p>
-<p> <img src="/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/领域模型.jpg" alt="领域模型"></p>
-<p>项目中我们并没有严格遵循这种传递关系，但这种和业务层次的关联对我们理解各实体类的作用是有帮助的。（我们没有接触到PO的原因，我理解为ORM对PO进行了封装） </p>
-<p>概念：</p>
-<ul>
-<li><strong>VO（View Object）</strong>：视图对象，用于展示层，它的作用是把某个指定页面（或组件）的所有数据封装起来。</li>
-<li><strong>DTO（Data Transfer Object）</strong>：数据传输对象，这个概念来源于J2EE的设计模式，原来的目的是为了EJB的分布式应用提供粗粒度的数据实体，以减少分布式调用的次数，从而提高分布式调用的性能和降低网络负载，但在这里，我泛指用于展示层与服务层之间的数据传输对象。</li>
-<li><strong>DO（Domain Object）</strong>：领域对象，就是从现实世界中抽象出来的有形或无形的业务实体。</li>
-<li><strong>PO（PersistentObject）</strong>：持久化对象，它跟持久层（通常是关系型数据库）的数据结构形成一一对应的映射关系，如果持久层是关系型数据库，那么，数据表中的每个字段（或若干个）就对应PO的一个（或若干个）属性。 </li>
-</ul>
-<p>模型：</p>
-<p> 下面以一个时序图建立简单模型来描述上述对象在三层架构应用中的位置 </p>
-<ul>
-<li><p>用户发出请求（可能是填写表单），表单的数据在展示层被匹配为VO。</p>
-</li>
-<li><p>展示层把VO转换为服务层对应方法所要求的DTO，传送给服务层。 l 服务层首先根据DTO的数据构造（或重建）一个DO，调用DO的业务方法完成具体业务。 </p>
-</li>
-<li>服务层把DO转换为持久层对应的PO（可以使用ORM工具，也可以不用），调用持久层的持久化方法，把PO传递给它，完成持久化操作。</li>
-<li><p>对于一个逆向操作，如读取数据，也是用类似的方式转换和传递，略。</p>
-<p>三、项目中的实体类</p>
-</li>
-</ul>
-<p>项目中常见的实体类有VO，DO和DTO，命名规则也常是以相应字符串结尾，如VO.Java。</p>
-<p>但是DTO不总是遵循这个规则，而通常与他的用途有关，如写成Query.java，表示存储了一个查询条件。</p>
-<p>项目中实体类出现的业务层次也没有这么严格，例如我们可以在视图层就组装一个DO，也可以将一个VO从持久层传出来，所以与业务分层相关联的划分方法显得有些冗余。</p>
-<p>从项目代码中抽象出的理解是：VO对应于页面上需要显示的数据，DO对应于数据库中存储的数据，DTO对应于除二者之外需要进行传递的数据。 </p>
 
       
     </div>
@@ -420,12 +389,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/">领域模型中的实体类的4种类型VO,DTO,DO,PO</a></p>
+  <p><span>本文标题:</span><a href="/Blog/Java/Java垃圾收集GC和内存分配策略/">Java垃圾收集GC和内存分配策略</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
-  <p><span>发布时间:</span>2018年07月19日 - 15:07</p>
-  <p><span>最后更新:</span>2018年07月22日 - 00:07</p>
-  <p><span>原始链接:</span><a href="/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/" title="领域模型中的实体类的4种类型VO,DTO,DO,PO">https://uncleaaron.github.io/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2018年07月23日 - 20:07</p>
+  <p><span>最后更新:</span>2018年07月23日 - 20:07</p>
+  <p><span>原始链接:</span><a href="/Blog/Java/Java垃圾收集GC和内存分配策略/" title="Java垃圾收集GC和内存分配策略">https://uncleaaron.github.io/Blog/Java/Java垃圾收集GC和内存分配策略/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java垃圾收集GC和内存分配策略/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -456,7 +425,9 @@
       
         <div class="post-tags">
           
-            <a href="/Blog/tags/JavaWeb/" rel="tag"># JavaWeb</a>
+            <a href="/Blog/tags/虚拟机/" rel="tag"># 虚拟机</a>
+          
+            <a href="/Blog/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -469,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/JavaWeb/使SpringMVC支持跨域访问的几种解决方法/" rel="next" title="使SpringMVC支持跨域访问的几种解决方法">
-                <i class="fa fa-chevron-left"></i> 使SpringMVC支持跨域访问的几种解决方法
+              <a href="/Blog/Java/Java内存区域划分以及内存溢出异常/" rel="next" title="Java内存区域划分以及内存溢出异常">
+                <i class="fa fa-chevron-left"></i> Java内存区域划分以及内存溢出异常
               </a>
             
           </div>
@@ -478,10 +449,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Blog/DataBase/MySQL数据库规范及解读/" rel="prev" title="Mysql数据库规范及解读">
-                Mysql数据库规范及解读 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Java,虚拟机," />
+  <meta name="keywords" content="虚拟机,Java," />
 
 
 
@@ -87,19 +87,19 @@
 
 
 
-<meta name="description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量">
-<meta name="keywords" content="Java,虚拟机">
+<meta name="description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量 其中，栈结构线程私有，堆结构线程共享（方法区描述类，也是堆结构）">
+<meta name="keywords" content="虚拟机,Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内存区域划分以及内存溢出异常">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量">
+<meta property="og:description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量 其中，栈结构线程私有，堆结构线程共享（方法区描述类，也是堆结构）">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/Java虚拟机运行时数据区.png">
-<meta property="og:updated_time" content="2018-07-21T17:06:06.759Z">
+<meta property="og:updated_time" content="2018-07-23T12:15:41.684Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存区域划分以及内存溢出异常">
-<meta name="twitter:description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量">
+<meta name="twitter:description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量 其中，栈结构线程私有，堆结构线程共享（方法区描述类，也是堆结构）">
 <meta name="twitter:image" content="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/Java虚拟机运行时数据区.png">
 
 
@@ -334,7 +334,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  796
+                  1,316
                 </span>
               
 
@@ -350,7 +350,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  5
                 </span>
               
             </div>
@@ -373,10 +373,16 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
 <p>Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊 </p>
-<p>其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量</p>
+<p>其中，<strong>栈</strong>描述<strong>方法</strong>执行，及方法的<em>局部变量和引用</em>；<strong>堆</strong>描述<strong>对象</strong>；<strong>方法区</strong>描述<strong>类</strong>和常量</p>
+<p>其中，栈结构线程私有，堆结构线程共享（方法区描述类，也是堆结构）</p>
 </blockquote>
 <a id="more"></a>
 <h1 id="Java虚拟机运行时数据区域"><a href="#Java虚拟机运行时数据区域" class="headerlink" title="Java虚拟机运行时数据区域"></a>Java虚拟机运行时数据区域</h1><p><img src="/Blog/Java/Java内存区域划分以及内存溢出异常/Java虚拟机运行时数据区.png" alt="Java虚拟机运行时数据区"></p>
+<blockquote>
+<p>上图理解：</p>
+<p><strong>堆</strong>结构线程共享，描述所有的对象（类在方法区中，方法区也是堆）；</p>
+<p><strong>栈</strong>和计数器线程私有，描述方法执行</p>
+</blockquote>
 <p>Java虚拟机在运行时会把它所管理的内存划分为若干个不同的数据区域。大致分为以下：</p>
 <ol>
 <li><p><strong>程序计数器</strong>：在Java中，每个线程都有一个独立的程序计数器，独立存储，该段内存是线程私有的</p>
@@ -392,18 +398,18 @@
 <li>可动态扩展，可能会产生OutOfMemoryError异常(OOM)</li>
 </ul>
 </li>
-<li><p><strong>本地方法栈</strong>：描述Native方法的内存模型，其他与虚拟机栈一样。</p>
+<li><p><strong>本地方法栈</strong>：描述<strong>Native方法</strong>的内存模型，其他与虚拟机栈一样。</p>
 </li>
-<li><p><strong>Java堆</strong>：存放对象实例，几乎所有的对象实例都在这里分配内存。</p>
+<li><p><strong>Java堆</strong>：<strong>存放对象实例</strong>，几乎所有的对象实例都在这里分配内存。</p>
 <ul>
 <li>被<strong>所有线程共享</strong>这一块内存区域，是Java虚拟机所管理的最大一块内存</li>
-<li>堆是GC垃圾收集器管理的主要区域（在普遍使用的分代手机算法中，堆可分为：新生代和老年代）</li>
-<li>对线程来说，还划分出多个线程私有的本地线程分配缓冲区（TLAB）</li>
+<li>堆是<strong>GC垃圾收集器管理</strong>的主要区域（在普遍使用的分代手机算法中，堆可分为：新生代和老年代）</li>
+<li>对线程来说，还划分出多个线程私有的<strong>本地线程分配缓冲区（TLAB）</strong></li>
 <li>以上无论如何划分，堆存放的都是对象实例，划分只是为了更好地回收和分配内存</li>
 <li>可动态扩展，可能会产生OutOfMemoryError异常(OOM)</li>
 </ul>
 </li>
-<li><p><strong>方法区</strong>：存储已被加载的<strong>类信息</strong>、<strong>常量</strong>、（类变量）静态变量、编译后的代码等（大概就是已加载的Class文件的基本内容吧）</p>
+<li><p><strong>方法区</strong>：<strong>存储Class</strong>文件的相关信息：已被加载的<strong>类信息</strong>、<strong>常量</strong>、（类变量）静态变量、编译后的代码等</p>
 <ul>
 <li>所有线程共享</li>
 <li><strong>运行时常量池</strong>：Class文件的常量池的信息，在类加载后进入方法区的运行时常量池<ul>
@@ -422,7 +428,25 @@
 </ul>
 </li>
 </ol>
-<h1 id="OutOfMemoryError异常"><a href="#OutOfMemoryError异常" class="headerlink" title="OutOfMemoryError异常"></a>OutOfMemoryError异常</h1><h2 id="Java堆溢出"><a href="#Java堆溢出" class="headerlink" title="Java堆溢出"></a>Java堆溢出</h2><p>堆用于存储对象实例，只要不断创建对象，并且保证GC Roots到对象之间有可达路径以避免对象被垃圾回收，那么对象数量在到达堆最大容量限制是抛出内存溢出OOM异常</p>
+<h1 id="OutOfMemoryError异常-内存溢出"><a href="#OutOfMemoryError异常-内存溢出" class="headerlink" title="OutOfMemoryError异常(内存溢出)"></a>OutOfMemoryError异常(内存溢出)</h1><p>申请的内存空间超过了系统实际分配的空间<strong>（系统无法满足内存申请）</strong> ，就会发生OutOfMemory异常（以下简称OOM）</p>
+<p>除了程序计数器外，其他几个运行时区域都有可能发生OOM异常</p>
+<h2 id="Java堆溢出"><a href="#Java堆溢出" class="headerlink" title="Java堆溢出"></a>Java堆溢出</h2><p>堆用于存储对象实例，只要不断创建对象，并且保证GC Roots到对象之间有可达路径以避免对象被垃圾回收，那么对象数量在到达堆最大容量限制是抛出内存溢出OOM异常。</p>
+<p>分清楚是内存泄漏还是内存溢出</p>
+<p><strong>内存泄漏：</strong>申请内存后，无法释放已申请的内存空间 。</p>
+<blockquote>
+<p>比如，你向系统申请分配内存进行使用(new)，可是使用完了以后却不归还(delete)，结果你申请到的那块内存你自己也不能再访问（也许你把它的地址给弄丢了），而系统也不能再次将它分配给需要的程序。 </p>
+</blockquote>
+<p><strong>内存溢出：</strong>申请内存时，没有足够的内存供申请者使用。</p>
+<blockquote>
+<p>比如：给了你一块存储int类型数据的存储空间，但是你却存储long类型的数据，内存不够用，就会报OOM，此时内存溢出。</p>
+<p>又比如：一个盘子用尽各种方法只能装4个果子，你装了5个，结果掉倒地上不能吃了。   </p>
+</blockquote>
+<h2 id="虚拟机栈和本地方法栈溢出"><a href="#虚拟机栈和本地方法栈溢出" class="headerlink" title="虚拟机栈和本地方法栈溢出"></a>虚拟机栈和本地方法栈溢出</h2><p>（HotSpot虚拟机不区分这两个栈）</p>
+<p><strong>StackOverFlow</strong>Error：线程请求的栈深度大于虚拟机允许的深度</p>
+<p><strong>OutOfMemory</strong>Error：扩展栈时无法申请到足够的内存</p>
+<p>单线程测试下，无论是栈容量少，还是栈帧太大，都抛出了StackOverFlow异常</p>
+<p>而在多线程下，通过不断建立内存用量大的线程，迅速耗尽内存空间，会抛出OOM</p>
+<h2 id="方法区溢出"><a href="#方法区溢出" class="headerlink" title="方法区溢出"></a>方法区溢出</h2><p>通过<strong>不断产生动态类</strong>（如<strong>反射</strong>和<strong>动态代理</strong>、<strong>JSP</strong>等<strong>会加载Class</strong>的操作），在运行时产生大量的类去填满方法区，直到溢出，抛出OOM。</p>
 
       
     </div>
@@ -442,7 +466,7 @@
   <p><span>本文标题:</span><a href="/Blog/Java/Java内存区域划分以及内存溢出异常/">Java内存区域划分以及内存溢出异常</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年07月21日 - 19:07</p>
-  <p><span>最后更新:</span>2018年07月22日 - 01:07</p>
+  <p><span>最后更新:</span>2018年07月23日 - 20:07</p>
   <p><span>原始链接:</span><a href="/Blog/Java/Java内存区域划分以及内存溢出异常/" title="Java内存区域划分以及内存溢出异常">https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/"  aria-label="复制成功！"></i></span>
   </p>
@@ -475,9 +499,9 @@
       
         <div class="post-tags">
           
-            <a href="/Blog/tags/Java/" rel="tag"># Java</a>
-          
             <a href="/Blog/tags/虚拟机/" rel="tag"># 虚拟机</a>
+          
+            <a href="/Blog/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -490,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/DataBase/MySQL数据库规范及解读/" rel="next" title="Mysql数据库规范及解读">
-                <i class="fa fa-chevron-left"></i> Mysql数据库规范及解读
+              <a href="/Blog/Java/Java对象-HotSpot虚拟机下/" rel="next" title="Java对象创建、内部数据、如何访问(HotSpot虚拟机下）">
+                <i class="fa fa-chevron-left"></i> Java对象创建、内部数据、如何访问(HotSpot虚拟机下）
               </a>
             
           </div>
@@ -500,8 +524,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/Java/Java对象-HotSpot虚拟机下/" rel="prev" title="Java对象创建、内部数据、如何访问(HotSpot虚拟机下）">
-                Java对象创建、内部数据、如何访问(HotSpot虚拟机下） <i class="fa fa-chevron-right"></i>
+              <a href="/Blog/Java/Java垃圾收集GC和内存分配策略/" rel="prev" title="Java垃圾收集GC和内存分配策略">
+                Java垃圾收集GC和内存分配策略 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -583,7 +607,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -645,7 +669,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java虚拟机运行时数据区域"><span class="nav-number">2.</span> <span class="nav-text">Java虚拟机运行时数据区域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OutOfMemoryError异常"><span class="nav-number">3.</span> <span class="nav-text">OutOfMemoryError异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java堆溢出"><span class="nav-number">3.1.</span> <span class="nav-text">Java堆溢出</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java虚拟机运行时数据区域"><span class="nav-number">2.</span> <span class="nav-text">Java虚拟机运行时数据区域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OutOfMemoryError异常-内存溢出"><span class="nav-number">3.</span> <span class="nav-text">OutOfMemoryError异常(内存溢出)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java堆溢出"><span class="nav-number">3.1.</span> <span class="nav-text">Java堆溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机栈和本地方法栈溢出"><span class="nav-number">3.2.</span> <span class="nav-text">虚拟机栈和本地方法栈溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法区溢出"><span class="nav-number">3.3.</span> <span class="nav-text">方法区溢出</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -700,7 +724,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共31.1k字</span>
+  <span class="post-count">博客全站共31.6k字</span>
 </div>
 
         

@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Java/Java对象-HotSpot虚拟机下/">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Java/Java垃圾收集GC和内存分配策略/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron.H">
@@ -289,7 +289,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/Blog/Java/Java对象-HotSpot虚拟机下/" itemprop="url">Java对象创建、内部数据、如何访问(HotSpot虚拟机下）</a></h1>
+                <a class="post-title-link" href="/Blog/Java/Java垃圾收集GC和内存分配策略/" itemprop="url">Java垃圾收集GC和内存分配策略</a></h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T19:54:55+08:00">
-                2018-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T20:17:47+08:00">
+                2018-07-23
               </time>
             
 
@@ -333,7 +333,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  663
+                  9
                 </span>
               
 
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -372,13 +372,11 @@
       
         
           <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p><strong>对象创建</strong>：查找类型，确认类加载，分配内存，初始化内存，设置对象，init🖊</p>
-<p><strong>对象构造</strong>：对象头（Markword，类型指针），实例数据</p>
-<p><strong>对象访问定位</strong>：从栈上的引用访问到对象，需要查找到堆中的对象，然后通过对象中的类型指针找到其类型 </p>
+<p>前言用<code>&gt;</code>符号标注🖊 </p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/Blog/Java/Java对象-HotSpot虚拟机下/#more" rel="contents">
+            <a class="btn" href="/Blog/Java/Java垃圾收集GC和内存分配策略/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -496,7 +494,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  796
+                  1,316
                 </span>
               
 
@@ -512,7 +510,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  5
                 </span>
               
             </div>
@@ -536,11 +534,175 @@
         
           <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
 <p>Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊 </p>
-<p>其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量</p>
+<p>其中，<strong>栈</strong>描述<strong>方法</strong>执行，及方法的<em>局部变量和引用</em>；<strong>堆</strong>描述<strong>对象</strong>；<strong>方法区</strong>描述<strong>类</strong>和常量</p>
+<p>其中，栈结构线程私有，堆结构线程共享（方法区描述类，也是堆结构）</p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/Blog/Java/Java内存区域划分以及内存溢出异常/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+	      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Java/Java对象-HotSpot虚拟机下/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Blog/Java/Java对象-HotSpot虚拟机下/" itemprop="url">Java对象创建、内部数据、如何访问(HotSpot虚拟机下）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T19:54:55+08:00">
+                2018-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  666
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p><strong>对象创建</strong>：查找类型，确认类加载，分配内存，初始化内存，设置对象，init🖊</p>
+<p><strong>对象构造</strong>：对象头（Markword，类型指针），实例数据</p>
+<p><strong>对象访问定位</strong>：从栈上的引用访问到对象，需要查找到堆中的对象，然后通过对象中的类型指针找到其类型 </p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Blog/Java/Java对象-HotSpot虚拟机下/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -917,7 +1079,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Java/Web/使SpringMVC支持跨域访问的几种解决方法/">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/JavaWeb/使SpringMVC支持跨域访问的几种解决方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron.H">
@@ -936,7 +1098,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/Blog/Java/Web/使SpringMVC支持跨域访问的几种解决方法/" itemprop="url">使SpringMVC支持跨域访问的几种解决方法</a></h1>
+                <a class="post-title-link" href="/Blog/JavaWeb/使SpringMVC支持跨域访问的几种解决方法/" itemprop="url">使SpringMVC支持跨域访问的几种解决方法</a></h1>
         
 
         <div class="post-meta">
@@ -1024,7 +1186,7 @@
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/Blog/Java/Web/使SpringMVC支持跨域访问的几种解决方法/#more" rel="contents">
+            <a class="btn" href="/Blog/JavaWeb/使SpringMVC支持跨域访问的几种解决方法/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1800,190 +1962,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Java/Java并发编程艺术/第4章-Java并发编程基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Aaron.H">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/Blog/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="StormAaron的技术站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Blog/Java/Java并发编程艺术/第4章-Java并发编程基础/" itemprop="url">第4章 Java并发编程基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T20:46:25+08:00">
-                2018-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/Blog/categories/Java并发编程艺术/" itemprop="url" rel="index">
-                    <span itemprop="name">Java并发编程艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  3,480
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  14
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>本章主要讲解Java的线程Thread，线程的6个状态，Daemon守护线程，线程的生存周期操作（构造、启动、中断、终止），以及线程的几种通信方式：volatile和synchronized提供的内存可见性保障，等待/通知机制wait/notify，管道流，Thread.join() 以及 ThreadLocal变量。</p>
-<p>最后还示例了线程池、数据库连接池的简单实现，篇幅较大，暂时未补充，需要自己阅读书本。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/Blog/Java/Java并发编程艺术/第4章-Java并发编程基础/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-	      
-	</div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2038,7 +2016,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2139,7 +2117,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共31.1k字</span>
+  <span class="post-count">博客全站共31.6k字</span>
 </div>
 
         

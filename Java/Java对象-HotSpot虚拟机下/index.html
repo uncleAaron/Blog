@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Java,虚拟机," />
+  <meta name="keywords" content="虚拟机,Java," />
 
 
 
@@ -88,7 +88,7 @@
 
 
 <meta name="description" content="前言 对象创建：查找类型，确认类加载，分配内存，初始化内存，设置对象，init🖊 对象构造：对象头（Markword，类型指针），实例数据 对象访问定位：从栈上的引用访问到对象，需要查找到堆中的对象，然后通过对象中的类型指针找到其类型">
-<meta name="keywords" content="Java,虚拟机">
+<meta name="keywords" content="虚拟机,Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java对象创建、内部数据、如何访问(HotSpot虚拟机下）">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/Java/Java对象-HotSpot虚拟机下/index.html">
@@ -97,7 +97,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java对象-HotSpot虚拟机下/通过句柄访问对象.png">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java对象-HotSpot虚拟机下/通过类型指针访问对象.png">
-<meta property="og:updated_time" content="2018-07-21T17:12:10.141Z">
+<meta property="og:updated_time" content="2018-07-23T11:44:44.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java对象创建、内部数据、如何访问(HotSpot虚拟机下）">
 <meta name="twitter:description" content="前言 对象创建：查找类型，确认类加载，分配内存，初始化内存，设置对象，init🖊 对象构造：对象头（Markword，类型指针），实例数据 对象访问定位：从栈上的引用访问到对象，需要查找到堆中的对象，然后通过对象中的类型指针找到其类型">
@@ -335,7 +335,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  663
+                  666
                 </span>
               
 
@@ -388,7 +388,7 @@
 <li>虚拟机对<strong>对象进行设置</strong>。例如是哪个类、对象哈希码、GC分代年龄、是否设置偏向锁等，对对象头Object Header设置。</li>
 <li><strong>执行<code>init</code>方法</strong>，按照程序员意愿初始化对象。这样才算是真正被完全生产出来对象（在这之前对象内都还是零值）</li>
 </ol>
-<h1 id="对象内部"><a href="#对象内部" class="headerlink" title="对象内部"></a>对象内部</h1><ul>
+<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><ul>
 <li>对象头：MarkWord+类型指针<ul>
 <li>MarkWord：对象自身运行时的设置数据：哈希码HashCode，GC分代年龄，锁状态，持有锁，偏向线程ID等</li>
 <li>类型指针：指向类元数据，虚拟机通过这个指针确定对象的类型</li>
@@ -424,7 +424,7 @@
   <p><span>本文标题:</span><a href="/Blog/Java/Java对象-HotSpot虚拟机下/">Java对象创建、内部数据、如何访问(HotSpot虚拟机下）</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年07月21日 - 19:07</p>
-  <p><span>最后更新:</span>2018年07月22日 - 01:07</p>
+  <p><span>最后更新:</span>2018年07月23日 - 19:07</p>
   <p><span>原始链接:</span><a href="/Blog/Java/Java对象-HotSpot虚拟机下/" title="Java对象创建、内部数据、如何访问(HotSpot虚拟机下）">https://uncleaaron.github.io/Blog/Java/Java对象-HotSpot虚拟机下/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java对象-HotSpot虚拟机下/"  aria-label="复制成功！"></i></span>
   </p>
@@ -457,9 +457,9 @@
       
         <div class="post-tags">
           
-            <a href="/Blog/tags/Java/" rel="tag"># Java</a>
-          
             <a href="/Blog/tags/虚拟机/" rel="tag"># 虚拟机</a>
+          
+            <a href="/Blog/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -472,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/Java/Java内存区域划分以及内存溢出异常/" rel="next" title="Java内存区域划分以及内存溢出异常">
-                <i class="fa fa-chevron-left"></i> Java内存区域划分以及内存溢出异常
+              <a href="/Blog/DataBase/MySQL数据库规范及解读/" rel="next" title="Mysql数据库规范及解读">
+                <i class="fa fa-chevron-left"></i> Mysql数据库规范及解读
               </a>
             
           </div>
@@ -481,6 +481,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/Java/Java内存区域划分以及内存溢出异常/" rel="prev" title="Java内存区域划分以及内存溢出异常">
+                Java内存区域划分以及内存溢出异常 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -561,7 +565,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -623,7 +627,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象创建过程"><span class="nav-number">2.</span> <span class="nav-text">对象创建过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象内部"><span class="nav-number">3.</span> <span class="nav-text">对象内部</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象访问定位"><span class="nav-number">4.</span> <span class="nav-text">对象访问定位</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象创建过程"><span class="nav-number">2.</span> <span class="nav-text">对象创建过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象的内存布局"><span class="nav-number">3.</span> <span class="nav-text">对象的内存布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象访问定位"><span class="nav-number">4.</span> <span class="nav-text">对象访问定位</span></a></li></ol></div>
             
 
           </div>
@@ -678,7 +682,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共31.1k字</span>
+  <span class="post-count">博客全站共31.6k字</span>
 </div>
 
         
