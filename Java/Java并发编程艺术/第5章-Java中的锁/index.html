@@ -98,7 +98,10 @@
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/Lock实现.png">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/节点自旋获取同步状态.png">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/独占式获取同步状态流程.png">
-<meta property="og:updated_time" content="2018-07-20T11:39:27.915Z">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/重入锁的公平与非公平对比.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/读写锁锁状态的划分方式.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/Condition等待队列在同步器中的体现.png">
+<meta property="og:updated_time" content="2018-07-25T11:54:29.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第5章 Java中的锁">
 <meta name="twitter:description" content="前言 本章总结了Lock接口，队列同步器(AbstractQueuedSynchronizer)，可重用锁ReentrantLock">
@@ -358,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,144
+                  3,830
                 </span>
               
 
@@ -374,7 +377,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  14
                 </span>
               
             </div>
@@ -541,20 +544,210 @@
 <p>锁是面向使用者的，定义了使用者和锁之间的接口，隐藏了实现细节。同步器面向锁的实现者，简化锁的实现方式，隐藏了同步状态管理、线程排队、等待唤醒的操作。</p>
 </blockquote>
 <h2 id="三、-重入锁ReentrantLock"><a href="#三、-重入锁ReentrantLock" class="headerlink" title="三、 重入锁ReentrantLock"></a>三、 重入锁ReentrantLock</h2><p><strong>ReentrantLock重入锁</strong>：支持重进入的锁，表示该锁<strong>支持一个线程对资源重复加锁</strong>。有公平性和非公平性选择。</p>
-<p>重进入：已经获取到锁的线程能够再次调用lock()而不被锁阻塞。</p>
+<p><strong>重进入：**</strong>已经获取到锁的线程能够再次调用lock()而不被锁阻塞。**</p>
 <ul>
 <li>其实synchronized关键字隐式支持了重进入（如synchronized修饰的递归方法）</li>
 </ul>
-<p>公平性：等待时间最长的线程优先获取锁（请求先到先得FIFO，符合请求的绝对时间顺序）</p>
-<p>非公平性：就是不公平性</p>
+<p><strong>公平性：</strong>等待时间最长的线程优先获取锁（请求先到先得<strong>FIFO</strong>，符合请求的绝对时间顺序）</p>
+<p><strong>非公平性：</strong>就是不公平性</p>
 <ul>
-<li>公平虽然能减少“饥饿”，但效率其实没有非公平高，因为会造成更多的线程交换。</li>
+<li>公平虽然能减少“饥饿”，但效率其实没有非公平高，因为会造成大量的线程切换开销代价。</li>
+<li>非公平锁虽然可能造成线程“饥饿”，但极少的线程切换，保证了更大的吞吐量</li>
 </ul>
 <h3 id="实现重进入"><a href="#实现重进入" class="headerlink" title="实现重进入"></a>实现重进入</h3><p>线程再次获取锁：识别当前线程是否为当前占据锁的线程，是则成功获取。</p>
 <p>锁的最终释放：重复n次获取锁后，再释放n次时，其他线程能获取到该锁。</p>
-<p>非公平锁：</p>
-<p>获取锁需要CAS原子操作（非公平情况下会产生并发问题）</p>
-<p>释放锁时不存在并发，不需要CAS</p>
+<h3 id="非公平锁和公平锁的实现细节"><a href="#非公平锁和公平锁的实现细节" class="headerlink" title="非公平锁和公平锁的实现细节"></a>非公平锁和公平锁的实现细节</h3><h4 id="非公平锁的实现细节："><a href="#非公平锁的实现细节：" class="headerlink" title="非公平锁的实现细节："></a>非公平锁的实现细节：</h4><p><strong>获取锁需要CAS</strong>原子操作（非公平情况下会产生并发问题）</p>
+<p><strong>释放锁时不存在并发，不需要CAS</strong></p>
+<p>没有队列上的严格限制</p>
+<h4 id="公平锁的实现细节："><a href="#公平锁的实现细节：" class="headerlink" title="公平锁的实现细节："></a>公平锁的实现细节：</h4><p>多一个判断当前线程是否是头节点，是头节点才能获得锁（严格的FIFO）</p>
+<p><img src="/Blog/Java/Java并发编程艺术/第5章-Java中的锁/重入锁的公平与非公平对比.png" alt=""></p>
+<p>可以看到：公平锁每次都会从队列中的第一个节点获取到锁，大量的线程切换；而非公平锁出现了一个线程连续获取锁的情况。</p>
+<blockquote>
+<p>这是因为当一个线程请求锁时，只要获取了同步状态即成功获取锁，在此前提下，刚释放锁的线程再次获取同步状态的几率很大。</p>
+</blockquote>
+<h2 id="三、读写锁ReentrantReadWriteLock"><a href="#三、读写锁ReentrantReadWriteLock" class="headerlink" title="三、读写锁ReentrantReadWriteLock"></a>三、读写锁ReentrantReadWriteLock</h2><p>读写锁在同一时刻允许多个读线程访问，但是在写线程访问时，所有的读线程和其他写线程均被阻塞。</p>
+<p>读写锁<strong>维护了一对锁，一个读锁和一个写锁</strong>，通过分离读锁和写锁，使得并发性相比一般的排他锁有了很大提升。    </p>
+<p>（读写锁能够简化线程交互场景的编程方式，如生产者-消费者）</p>
+<p>一般情况下，读写锁的性能都会比排它锁好，因为大多数场景读是多于写的。在读多于写的情况下，读写锁能够提供比排它锁更好的并发性和吞吐量。    </p>
+<p>Java提供的ReetrankReadWriteLock有三个特性（其实大概比重入锁多了锁降级）：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>公平性选择</strong></td>
+<td>支持非公平和公平的锁获取方式</td>
+</tr>
+<tr>
+<td><strong>重进入</strong></td>
+<td>读锁或写锁都支持重进入</td>
+</tr>
+<tr>
+<td><strong>锁降级</strong></td>
+<td><strong>获取写锁–&gt;获取读锁–&gt;释放写锁</strong>，<br>以此完成写锁降级为读锁</td>
+</tr>
+</tbody>
+</table>
+<h3 id="读写锁的接口示例"><a href="#读写锁的接口示例" class="headerlink" title="读写锁的接口示例"></a>读写锁的接口示例</h3><p>ReadWriteLock接口仅定义了读锁和写锁两个方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>readLock()</td>
+<td>获取读锁</td>
+</tr>
+<tr>
+<td>writeLock()</td>
+<td>获取写锁</td>
+</tr>
+</tbody>
+</table>
+<p>其实现ReetrantReadWriteLock还提供了外界监控锁状态的方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int getReadLockCount()</td>
+<td>返回当前读锁被获取的次数（不等于获取读锁的线程数）</td>
+</tr>
+<tr>
+<td>int getReadHoldCount()</td>
+<td>返回当前线程获取读锁的次数（参数保存在ThreadLocal中）</td>
+</tr>
+<tr>
+<td>boolean isWriteLocked()</td>
+<td>判断写锁是否被获取</td>
+</tr>
+<tr>
+<td>int getWriteHoldCount()</td>
+<td>返回当前写锁被获取的次数</td>
+</tr>
+</tbody>
+</table>
+<p>使用示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cache</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	<span class="keyword">static</span> ReentrantReadWriteLock rwl = <span class="keyword">new</span> ReentrantReadWriteLock();	<span class="comment">//声明读写锁</span></span><br><span class="line">	<span class="keyword">static</span> Lock r = rwl.readLock();		<span class="comment">// 获取读锁r</span></span><br><span class="line">	<span class="keyword">static</span> Lock w = rwl.writeLock();	<span class="comment">// 获取写锁w</span></span><br><span class="line">	<span class="comment">// 读方法：获取一个key对应的value</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Object <span class="title">get</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">		r.lock();	<span class="comment">// 获取读锁</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> map.get(key);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			r.unlock();	<span class="comment">// 释放读锁</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 写方法：设置key对应的value，并返回旧的value</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Object <span class="title">put</span><span class="params">(String key, Object value)</span> </span>&#123;</span><br><span class="line">		w.lock();	<span class="comment">// 获取写锁</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> map.put(key, value);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			w.unlock();	<span class="comment">// 释放写锁</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="读写状态设计"><a href="#读写状态设计" class="headerlink" title="读写状态设计"></a>读写状态设计</h3><p>读写锁使用一个int变量（32位），维护多个读线程和写线程的状态</p>
+<blockquote>
+<p><strong>写状态：</strong>被一个线程重复获取写锁的次数；</p>
+<p><strong>读状态：</strong>是所有线程获取读锁次数的总和</p>
+</blockquote>
+<p>按位切割方法：高16位表示读，低16为表示写（按2进制16位数计算锁获取次数）</p>
+<p>推论：同步状态S不为0时，写状态为0时时，则读状态(S &gt;&gt;&gt; 16) 定大于 0，即读锁被获取</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">读锁被获取判断：((S != <span class="number">0</span>) &amp;&amp; (S &amp; <span class="number">0x0000FFFF</span> == <span class="number">0</span>)) =&gt; ((S &gt;&gt;&gt; <span class="number">16</span>) &gt; <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/Blog/Java/Java并发编程艺术/第5章-Java中的锁/读写锁锁状态的划分方式.png" alt="读写锁锁状态的划分方式"></p>
+<h3 id="锁降级"><a href="#锁降级" class="headerlink" title="锁降级"></a>锁降级</h3><p><strong>获取写锁–&gt;获取读锁–&gt;释放写锁</strong></p>
+<p><strong>好处：</strong>锁降级是为了保证数据的可见性，如果不是锁降级而是释放写锁再获取读锁，中途可能会被别的线程写打断下一步读。锁降级同时也可以保证其他读线程能获取读锁，达到并发读的目的。</p>
+<h2 id="LockSupport工具"><a href="#LockSupport工具" class="headerlink" title="LockSupport工具"></a>LockSupport工具</h2><p><code>LockSupport</code>也是构建同步组件的基础工具之一，提供了一组另线程阻塞和唤醒功能的公共静态方法</p>
+<p><strong><code>park(Object blocker)</code> </strong>用于在某对象上阻塞当前线程（此外还有超时等待方法xxNanos和xxxUntil）</p>
+<p><strong><code>unpark(Thread th)</code> </strong>方法唤醒一个被阻塞的线程</p>
+<h2 id="Condition接口"><a href="#Condition接口" class="headerlink" title="Condition接口"></a>Condition接口</h2><p>Condition接口实现的功能与Object监视器的等待/通知机制类似(<strong><code>await/signal - wait/notify</code></strong>)</p>
+<p>Condition是同步器AbstractQueuedSynchronizer的内部类</p>
+<p>调用Condition需要先获取其关联的Lock锁<strong>（一个Condition必须由Lock的newCondition()方法创建出来）</strong> <strong>使用前需获取lock锁</strong></p>
+<p>Condition部分方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>void await()</strong> throws InterruptedException</td>
+<td>可被中断地等待，直到被signal通知</td>
+</tr>
+<tr>
+<td>void await<strong>Uninterruptibly()</strong></td>
+<td>不响应中断的等待，直到被signal通知</td>
+</tr>
+<tr>
+<td>long awaitNanos(long nanosTimeOut) throws InterruptedException</td>
+<td>超时等待</td>
+</tr>
+<tr>
+<td>boolean awaitUntil(Date deadline) throws InterruptedException</td>
+<td>等待到某个时间，中途被通知返回true，否则返回false。响应中断</td>
+</tr>
+<tr>
+<td><strong>void signal()</strong></td>
+<td>唤醒一个等待在Condition上的线程，该线程返回前必须获得Condition相关联的锁</td>
+</tr>
+<tr>
+<td><strong>void signalAll()</strong></td>
+<td>唤醒所有等待在Condition上的线程</td>
+</tr>
+</tbody>
+</table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Lock lock = <span class="keyword">new</span> ReetrantLock();		<span class="comment">// 创建锁实例</span></span><br><span class="line">Condition condition = lock.newCondition();	<span class="comment">// 获取一个Condition对象</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">conditionWait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    lock.lock();	<span class="comment">// 1. 获取锁lock()</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        condition.await();	<span class="comment">// 2. 当前线程等待（condition可在获得锁状态下操作）</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();	<span class="comment">// 3. 释放锁</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">conditionSignal</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    lock.lock();	<span class="comment">// 1. 获得锁</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        condition.signal();	<span class="comment">// 2. 唤醒1个等待在condition上的线程</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();	<span class="comment">// 3. 释放锁</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="对比Object监视器和Condition"><a href="#对比Object监视器和Condition" class="headerlink" title="对比Object监视器和Condition"></a>对比Object监视器和Condition</h4><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>Object Monitor Methods</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前置条件</td>
+<td>获取对象锁(<code>synchronized</code>)</td>
+<td>调用<code>Lock.lock()</code>获取锁<br>调用<code>Lock.newCondition()</code>获取Condition对象</td>
+</tr>
+<tr>
+<td>调用方式</td>
+<td>直接在object对象上调用<br>如<code>object.wait()</code></td>
+<td>直接使用condition调用<br>如：<code>condition.await()</code></td>
+</tr>
+<tr>
+<td>等待队列个数</td>
+<td>一个</td>
+<td>多个（一个Condition本身维护一个等待队列，一个同步器上有多个Condition和一个同步队列）</td>
+</tr>
+<tr>
+<td>当前线程释放锁并进入等待</td>
+<td>支持(wait)</td>
+<td>支持(await)</td>
+</tr>
+<tr>
+<td>线程释放锁后，在等待中不响应中断</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>线程释放锁进入超时等待</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>线程释放锁等待到将来一时间</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>唤醒等待队列中一个或全部线程</td>
+<td>支持 (notify)</td>
+<td>支持 (signal)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Condition等待队列和同步器的联系"><a href="#Condition等待队列和同步器的联系" class="headerlink" title="Condition等待队列和同步器的联系"></a>Condition等待队列和同步器的联系</h4><p>Condition是同步器AbstractQueuedSynchronizer的内部类，同步器维护的多个等待队列和一个同步队列，而每个等待队列都是由每个Condition维护的，也是存放着获得锁失败的线程。</p>
+<p>signalAll相当于该Condition上的每一个节点均执行以此signal()方法，所有节点移到同步队列中，并唤醒它们。</p>
+<p><img src="/Blog/Java/Java并发编程艺术/第5章-Java中的锁/Condition等待队列在同步器中的体现.png" alt="1532519358919"></p>
 
       
     </div>
@@ -574,7 +767,7 @@
   <p><span>本文标题:</span><a href="/Blog/Java/Java并发编程艺术/第5章-Java中的锁/">第5章 Java中的锁</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年06月06日 - 15:06</p>
-  <p><span>最后更新:</span>2018年07月20日 - 19:07</p>
+  <p><span>最后更新:</span>2018年07月25日 - 19:07</p>
   <p><span>原始链接:</span><a href="/Blog/Java/Java并发编程艺术/第5章-Java中的锁/" title="第5章 Java中的锁">https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/"  aria-label="复制成功！"></i></span>
   </p>
@@ -715,7 +908,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -737,7 +930,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -777,7 +970,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第5章-Java中的锁"><span class="nav-number">2.</span> <span class="nav-text">第5章 Java中的锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Lock接口"><span class="nav-number">2.1.</span> <span class="nav-text">一、Lock接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、队列同步器AbstractQueuedSynchronizer"><span class="nav-number">2.2.</span> <span class="nav-text">二、队列同步器AbstractQueuedSynchronizer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用同步器实现的独占锁示例："><span class="nav-number">2.2.1.</span> <span class="nav-text">利用同步器实现的独占锁示例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-队列同步器的内部实现"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2. 队列同步器的内部实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-同步队列"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">2.2.1. 同步队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-独占式获取同步状态"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">2.2.2. 独占式获取同步状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-共享式同步状态："><span class="nav-number">2.2.2.3.</span> <span class="nav-text">2.2.3. 共享式同步状态：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁和同步器的关系"><span class="nav-number">2.2.3.</span> <span class="nav-text">锁和同步器的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、-重入锁ReentrantLock"><span class="nav-number">2.3.</span> <span class="nav-text">三、 重入锁ReentrantLock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现重进入"><span class="nav-number">2.3.1.</span> <span class="nav-text">实现重进入</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第5章-Java中的锁"><span class="nav-number">2.</span> <span class="nav-text">第5章 Java中的锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Lock接口"><span class="nav-number">2.1.</span> <span class="nav-text">一、Lock接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、队列同步器AbstractQueuedSynchronizer"><span class="nav-number">2.2.</span> <span class="nav-text">二、队列同步器AbstractQueuedSynchronizer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用同步器实现的独占锁示例："><span class="nav-number">2.2.1.</span> <span class="nav-text">利用同步器实现的独占锁示例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-队列同步器的内部实现"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2. 队列同步器的内部实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-同步队列"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">2.2.1. 同步队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-独占式获取同步状态"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">2.2.2. 独占式获取同步状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-共享式同步状态："><span class="nav-number">2.2.2.3.</span> <span class="nav-text">2.2.3. 共享式同步状态：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁和同步器的关系"><span class="nav-number">2.2.3.</span> <span class="nav-text">锁和同步器的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、-重入锁ReentrantLock"><span class="nav-number">2.3.</span> <span class="nav-text">三、 重入锁ReentrantLock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现重进入"><span class="nav-number">2.3.1.</span> <span class="nav-text">实现重进入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非公平锁和公平锁的实现细节"><span class="nav-number">2.3.2.</span> <span class="nav-text">非公平锁和公平锁的实现细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非公平锁的实现细节："><span class="nav-number">2.3.2.1.</span> <span class="nav-text">非公平锁的实现细节：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#公平锁的实现细节："><span class="nav-number">2.3.2.2.</span> <span class="nav-text">公平锁的实现细节：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、读写锁ReentrantReadWriteLock"><span class="nav-number">2.4.</span> <span class="nav-text">三、读写锁ReentrantReadWriteLock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读写锁的接口示例"><span class="nav-number">2.4.1.</span> <span class="nav-text">读写锁的接口示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写状态设计"><span class="nav-number">2.4.2.</span> <span class="nav-text">读写状态设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁降级"><span class="nav-number">2.4.3.</span> <span class="nav-text">锁降级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LockSupport工具"><span class="nav-number">2.5.</span> <span class="nav-text">LockSupport工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Condition接口"><span class="nav-number">2.6.</span> <span class="nav-text">Condition接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对比Object监视器和Condition"><span class="nav-number">2.6.0.1.</span> <span class="nav-text">对比Object监视器和Condition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Condition等待队列和同步器的联系"><span class="nav-number">2.6.0.2.</span> <span class="nav-text">Condition等待队列和同步器的联系</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -832,7 +1025,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共31.6k字</span>
+  <span class="post-count">博客全站共34.5k字</span>
 </div>
 
         

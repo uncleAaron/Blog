@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JavaWeb,Java 开发问题总结,Spring," />
 
 
 
@@ -87,17 +87,18 @@
 
 
 
-<meta name="description" content="前言 使用Mysql的准则 🖊">
+<meta name="description" content="前言 今天用Sping Boot2.0.3写项目编写WebMvc的JavaConfig时，发现WebMvcConfigurerAdapter已经被标注弃用，便去找了下Spring的API，发现官方开始推荐直接实现WebMvcConfigurer接口的方式来配置SpringMVC。（原因在Java8接口默认方法替代了原来适配器的作用）🖊">
+<meta name="keywords" content="JavaWeb,Java 开发问题总结,Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql数据库规范及解读">
-<meta property="og:url" content="https://uncleaaron.github.io/Blog/DataBase/MySQL数据库规范及解读/index.html">
+<meta property="og:title" content="WebMvcConfigurerAdapter在Spring5.0中被弃用">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/JavaWeb/WebMvcConfigurerAdaptor在Spring5.0被弃用/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="前言 使用Mysql的准则 🖊">
+<meta property="og:description" content="前言 今天用Sping Boot2.0.3写项目编写WebMvc的JavaConfig时，发现WebMvcConfigurerAdapter已经被标注弃用，便去找了下Spring的API，发现官方开始推荐直接实现WebMvcConfigurer接口的方式来配置SpringMVC。（原因在Java8接口默认方法替代了原来适配器的作用）🖊">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-19T08:36:24.069Z">
+<meta property="og:updated_time" content="2018-07-27T14:59:34.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql数据库规范及解读">
-<meta name="twitter:description" content="前言 使用Mysql的准则 🖊">
+<meta name="twitter:title" content="WebMvcConfigurerAdapter在Spring5.0中被弃用">
+<meta name="twitter:description" content="前言 今天用Sping Boot2.0.3写项目编写WebMvc的JavaConfig时，发现WebMvcConfigurerAdapter已经被标注弃用，便去找了下Spring的API，发现官方开始推荐直接实现WebMvcConfigurer接口的方式来配置SpringMVC。（原因在Java8接口默认方法替代了原来适配器的作用）🖊">
 
 
 
@@ -127,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://uncleaaron.github.io/Blog/DataBase/MySQL数据库规范及解读/"/>
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/JavaWeb/WebMvcConfigurerAdaptor在Spring5.0被弃用/"/>
 
 
 
 
 
-  <title>Mysql数据库规范及解读 | StormAaron的技术站</title>
+  <title>WebMvcConfigurerAdapter在Spring5.0中被弃用 | StormAaron的技术站</title>
   
 
 
@@ -270,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/DataBase/MySQL数据库规范及解读/">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/JavaWeb/WebMvcConfigurerAdaptor在Spring5.0被弃用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron.H">
@@ -287,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mysql数据库规范及解读</h1>
+          <h1 class="post-title" itemprop="name headline">WebMvcConfigurerAdapter在Spring5.0中被弃用</h1>
         
 
         <div class="post-meta">
@@ -299,8 +300,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T15:16:08+08:00">
-                2018-07-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T20:41:09+08:00">
+                2018-07-17
               </time>
             
 
@@ -331,7 +332,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,284
+                  444
                 </span>
               
 
@@ -347,7 +348,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  2
                 </span>
               
             </div>
@@ -369,123 +370,20 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>使用Mysql的准则 🖊 </p>
+<p>今天用Sping Boot2.0.3写项目编写WebMvc的JavaConfig时，发现WebMvcConfigurerAdapter已经被标注弃用，便去找了下Spring的API，发现官方开始推荐<strong>直接实现WebMvcConfigurer接口</strong>的方式来配置SpringMVC。（原因在Java8接口默认方法替代了原来适配器的作用）🖊 </p>
 </blockquote>
 <a id="more"></a>
-<h2 id="一、基础规范"><a href="#一、基础规范" class="headerlink" title="一、基础规范"></a>一、基础规范</h2><blockquote>
-<p>第一条：必须使用InnoDB存储引擎</p>
-</blockquote>
-<p>解读：支持事务、行级锁、并发性能更好、CPU及内存缓存页优化使得资源利用率更高</p>
+<h2 id="在SpringBoot2-0及Spring-5-0-WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种"><a href="#在SpringBoot2-0及Spring-5-0-WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种" class="headerlink" title="在SpringBoot2.0及Spring 5.0 WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种"></a>在SpringBoot2.0及Spring 5.0 WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种</h2><hr>
+<h3 id="1-直接实现WebMvcConfigurer-（官方推荐）"><a href="#1-直接实现WebMvcConfigurer-（官方推荐）" class="headerlink" title="1. 直接实现WebMvcConfigurer （官方推荐）"></a>1. 直接实现WebMvcConfigurer （官方推荐）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfg</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="comment">//todo</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-直接继承WebMvcConfigurationSupport"><a href="#2-直接继承WebMvcConfigurationSupport" class="headerlink" title="2. 直接继承WebMvcConfigurationSupport"></a>2. 直接继承WebMvcConfigurationSupport</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfg</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="WebMvcConfigurerAdapter的官方api描述"><a href="#WebMvcConfigurerAdapter的官方api描述" class="headerlink" title="WebMvcConfigurerAdapter的官方api描述"></a>WebMvcConfigurerAdapter的官方api描述</h3><p>WebMvcConfigurerAdapter – Deprecated.<br>as of 5.0 WebMvcConfigurer has default methods (made possible by a Java 8 baseline) and can be implemented directly without the need for this adapter.<br>An implementation of WebMvcConfigurer with empty methods allowing subclasses to override only the methods they’re interested in.</p>
 <blockquote>
-<p>第二条：必须使用utf8(utf8mb4)字符集</p>
+<p>Java8中WebMvcConfigurer实现了默认方法，不需要这个适配器了。</p>
+<p>因为WebMvcConfigurer接口实现了默认方法，使用者可以自由实现想配置的方法</p>
 </blockquote>
-<p>解读：万国码，无需转码，无乱码风险，节省空间，utf8mb4是utf8的超集，由于近年移动设备的增多，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4</p>
-<blockquote>
-<p>第三条：数据表、数据字段必须加入中文注释</p>
-</blockquote>
-<p>解读：N年后谁会知道这个a1,a2,a3字段是干嘛的</p>
-<blockquote>
-<p>第四条：禁止使用存储过程、视图、触发器、Event</p>
-</blockquote>
-<p>解读：高并发<strong>大数据</strong>的互联网业务，<strong>架构</strong>设计思路是<em>“解放<strong>数据库</strong>CPU，将计算转移到服务层“</em>，并发量大的情况下，这些功能很可能将数据库拖死，<em>业务逻辑放到服务层具备更好的扩展性，能够轻易实现“增机器就加性能”</em>。数据库擅长存储与索引，CPU计算还是上移吧</p>
-<blockquote>
-<p>第五条：禁止存储大文件或者大照片</p>
-</blockquote>
-<p>解读：为何要让数据库做它不擅长的事情？大文件和照片存储在文件系统，数据库里存URI多好</p>
-<h2 id="二、命名规范"><a href="#二、命名规范" class="headerlink" title="二、命名规范"></a>二、命名规范</h2><blockquote>
-<p>第一条：只允许<em>使用内网域名，而不是ip连接数据库</em></p>
-</blockquote>
-<p>解读：虽然IP访问更快，域名访问需要内网dns，但是对于大数据库的扩展和迁库考虑，域名更好</p>
-<blockquote>
-<p>第二条：线上环境、开发环境、<strong>测试</strong>环境数据库内网域名遵循命名规范</p>
-</blockquote>
-<p>业务名称：xxx<br>线上环境：dj.xxx.db<br>开发环境：dj.xxx.rdb<br>测试环境：dj.xxx.tdb<br>从库在名称后加-s标识，备库在名称后加-ss标识<br>线上从库：dj.xxx-s.db<br>线上备库：dj.xxx-sss.db</p>
-<blockquote>
-<p>第三条：库名、表名、字段名：小写，下划线风格，不超过32个字符，禁止拼音英文混用</p>
-</blockquote>
-<p>解读：见名知意，方便后续维护</p>
-<blockquote>
-<p>第四条：表名t_xxx，非唯一索引名idx_xxx，唯一索引名uniq_xxx</p>
-</blockquote>
-<p>解读：见名知意，方便后续维护</p>
-<h2 id="三、表和字段设计规范"><a href="#三、表和字段设计规范" class="headerlink" title="三、表和字段设计规范"></a>三、表和字段设计规范</h2><blockquote>
-<p>第一条：禁止使用外键，如果有外键完整性约束，需要应用程序控制</p>
-</blockquote>
-<p>解读：<em>外键会导致表与表之间耦合，update与delete操作都会涉及相关联的表，十分影响sql的性能</em>，甚至会造成死锁。高并发情况下容易造成数据库性能，<em>大数据高并发业务场景数据库使用以性能优先</em></p>
-<blockquote>
-<p>第二条：必须把字段定义为NOT NULL并且提供默认值</p>
-</blockquote>
-<p>解读：<br>a) null的列使索引/索引统计/值比较都更加复杂，对MySQL来说更难优化<br>b) null这种类型MySQL内部需要进行特殊处理，增加数据库处理记录的复杂性；同等条件下，表中有较多空字段的时候，数据库的处理性能会降低很多<br>c) null值需要更多的存储空，无论是表还是索引中每行中的null的列都需要额外的空间来标识<br>d) 对null的处理时候，只能采用is null或is not null，而不能采用=、in、&lt;、&lt;&gt;、!=、not in这些操作符号。<em>如：where name!=’shenjian’，如果存在name为null值的记录，查询结果就不会包含name为null值的记录</em></p>
-<blockquote>
-<p>第三条：禁止使用TEXT、BLOB类型</p>
-</blockquote>
-<p>解读：会浪费更多的磁盘和内存空间，<em>非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能</em></p>
-<blockquote>
-<p>第四条：禁止使用小数存储国币</p>
-</blockquote>
-<p>解读：曾经踩过这样的坑，100元分3天摊销，每天摊销(100/3)元，结果得到3个33.33。后来实施对账系统，始终有几分钱对不齐，郁闷了很久（不是几分钱的事，是业务方质疑的眼神让研发很不爽），最后发现是除法惹的祸<br>解决方案：使用“分”作为单位，这样数据库里就是整数了</p>
-<blockquote>
-<p>第五条：必须使用varchar(20)存储手机号</p>
-</blockquote>
-<p>解读：<br>a) 涉及到区号或者国家代号，可能出现+-()<br>b) 手机号会去做数学运算么？<br>c) varchar可以支持模糊查询，例如：like“138%”</p>
-<blockquote>
-<p>第六条：禁止使用ENUM，可使用TINYINT代替</p>
-</blockquote>
-<p>解读：<br>a) 增加新的ENUM值要做DDL操作<br>b) ENUM的内部实际存储就是整数，你以为自己定义的是字符串？</p>
-<blockquote>
-<p>第七条：表必须有主键，例如自增主键</p>
-</blockquote>
-<p>解读：<br>a) 主键递增，数据行写入可以提高插入性能，可以避免page分裂，减少表碎片提升空间和内存的使用<br>b) 主键要选择较短的数据类型， Innodb引擎普通索引都会保存主键的值，较短的数据类型可以有效的减少索引的磁盘空间，提高索引的缓存效率<br>c) 无主键的表删除，在row模式的主从架构，会导致备库夯住</p>
-<h2 id="四、索引设计规范"><a href="#四、索引设计规范" class="headerlink" title="四、索引设计规范"></a>四、索引设计规范</h2><blockquote>
-<p>第一条：单表索引建议控制在5个以内</p>
-</blockquote>
-<p>解读：一个好的索引设计，可以让你的效率提高几十甚至几百倍，但过多反而适得其反</p>
-<blockquote>
-<p>第二条：单索引字段数不允许超过5个</p>
-</blockquote>
-<p>解读：字段超过5个时，实际已经起不到有效过滤数据的作用了</p>
-<blockquote>
-<p>第三条：禁止在更新十分频繁、区分度不高的属性上建立索引</p>
-</blockquote>
-<p>解读：<br>a) 更新会变更B+树，更新频繁的字段建立索引会大大降低数据库性能<br>b) “性别”这种区分度不大的属性，建立索引是没有什么意义的，不能有效过滤数据，性能与全表扫描类似</p>
-<blockquote>
-<p>第四条:建立组合索引，必须把区分度高的字段放在前面</p>
-</blockquote>
-<p>解读：能够更加有效的过滤数据</p>
-<h2 id="五、SQL使用规范"><a href="#五、SQL使用规范" class="headerlink" title="五、SQL使用规范"></a>五、SQL使用规范</h2><blockquote>
-<p>第一条：禁止使用SELECT *，只获取必要的字段，需要显示说明列属性</p>
-</blockquote>
-<p>解读：<br>a) 读取不需要的列会增加CPU、IO、NET消耗<br>b) 不能有效的利用覆盖索引<br>c) 使用<code>SELECT *</code>容易在增加或者删除字段后出现程序BUG</p>
-<blockquote>
-<p>第二条：禁止使用INSERT INTO t_xxx VALUES(xxx)，必须显示指定插入的列属性</p>
-</blockquote>
-<p>解读：容易在增加或者删除字段后出现程序BUG</p>
-<blockquote>
-<p>第三条：禁止使用属性隐式转换</p>
-</blockquote>
-<p>解读：SELECT uid FROM t_user WHERE phone=13812345678 会导致全表扫描，而不能命中phone索引，猜猜为什么？<br>int数据类型优先级高于varcher， 该查询会把phone转换为int，因此需要把表中所有数据改成int，所以必须全盘扫描<br>phone是varchar类型，SQL语句带入的是整形，故不会命中索引，加个引号就好了：<br>SELECT uid FROM t_user WHERE phone=’13812345678’</p>
-<blockquote>
-<p>第四条：禁止在WHERE条件的属性上使用函数或者表达式</p>
-</blockquote>
-<p>解读：SELECT uid FROM t_user WHERE from_unixtime(day)&gt;=’2017-02-15’ 会导致全表扫描<br>正确的写法是：SELECT uid FROM t_user WHERE day&gt;= unix_timestamp(‘2017-02-15 00:00:00’)</p>
-<blockquote>
-<p>第五条：禁止大表使用JOIN查询，禁止大表使用子查询</p>
-</blockquote>
-<p>解读：会产生临时表，消耗较多内存与CPU，极大影响数据库性能，大表指的是数据量在1000万以上的表</p>
-<blockquote>
-<p>第六条：禁止使用OR条件，必须改为IN查询</p>
-</blockquote>
-<p>解读：旧版本Mysql的OR查询是不能命中索引的，即使能命中索引，为何要让数据库耗费更多的CPU帮助实施查询优化呢？</p>
-<blockquote>
-<p>第七条：禁止使用负向查询，以及%开头的模糊查询</p>
-</blockquote>
-<p>解读：<br>a) 负向查询条件：NOT、!=、&lt;&gt;、!&lt;、!&gt;、NOT IN、NOT LIKE等，会导致全表扫描<br>b) %开头的模糊查询，会导致全表扫描<br>一般来说，WHERE过滤条件不会只带这么一个“负向查询条件”，还会有其他过滤条件，举个例子：查询沈剑已完成订单之外的订单（好拗口）：<br>SELECT oid FROM t_order WHERE uid=123 AND status != 1;<br>订单表5000w数据，但uid=123就会迅速的将数据量过滤到很少的级别（uid建立了索引），此时再接上一个负向的查询条件就无所谓了，扫描的行数本身就会很少<br>但如果要查询所有已完成订单之外的订单：<br>SELECT oid FROM t_order WHERE status != 1;<br>这就挂了，立马CPU100%，status索引会失效，负向查询导致全表扫描</p>
-<blockquote>
-<p>第八条：应用程序必须捕获SQL异常，并有相应处理</p>
-</blockquote>
-<p>解读：方便维护，及时“查漏补缺”</p>
-<p><strong>总结：大数据量高并发的互联网业务，极大影响数据库性能的都不让用，不让用哟。</strong></p>
-<p>转自：<a href="https://zhuanlan.zhihu.com/p/32586602" target="_blank" rel="noopener">知乎：SangSir</a>的文章</p>
+<p>解释：</p>
+<p>在Java8以前，因为实现接口的时候每个接口方法必须需要实现，所以导致编写JavaConfig配置类很困难，不能自由选择配置类，所以Spring5.0以前用一个适配器抽象类实现了WebMvcConfigurer的所有方法（但其实都是空的），这样可以满足用户可以选择自己需要的配置功能进行选择性配置，而不需要全部实现。</p>
+<p>而现在Java8提供了接口默认实现方法，接口的默认方法完全替代了这个适配器类的目的，可以满足仅在接口层面用户就能选择自己想实现的方法，没有实现的方法就用默认方法代替，原来的适配器就多余了。因此推荐第一种方式。</p>
 
       
     </div>
@@ -496,6 +394,35 @@
 	<div>
 	      
 	        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/Blog/JavaWeb/WebMvcConfigurerAdaptor在Spring5.0被弃用/">WebMvcConfigurerAdapter在Spring5.0中被弃用</a></p>
+  <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
+  <p><span>发布时间:</span>2018年07月17日 - 20:07</p>
+  <p><span>最后更新:</span>2018年07月27日 - 22:07</p>
+  <p><span>原始链接:</span><a href="/Blog/JavaWeb/WebMvcConfigurerAdaptor在Spring5.0被弃用/" title="WebMvcConfigurerAdapter在Spring5.0中被弃用">https://uncleaaron.github.io/Blog/JavaWeb/WebMvcConfigurerAdaptor在Spring5.0被弃用/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/JavaWeb/WebMvcConfigurerAdaptor在Spring5.0被弃用/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
 	      
 	</div>
 
@@ -507,6 +434,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/JavaWeb/" rel="tag"># JavaWeb</a>
+          
+            <a href="/Blog/tags/Java-开发问题总结/" rel="tag"># Java 开发问题总结</a>
+          
+            <a href="/Blog/tags/Spring/" rel="tag"># Spring</a>
+          
+        </div>
+      
 
       
       
@@ -516,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/" rel="next" title="领域模型中的实体类的4种类型VO,DTO,DO,PO">
-                <i class="fa fa-chevron-left"></i> 领域模型中的实体类的4种类型VO,DTO,DO,PO
+              <a href="/Blog/Linux/Linux程序设计/" rel="next" title="Linux程序设计">
+                <i class="fa fa-chevron-left"></i> Linux程序设计
               </a>
             
           </div>
@@ -526,8 +463,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/Java/Java内存区域划分以及内存溢出异常/" rel="prev" title="Java内存区域划分以及内存溢出异常">
-                Java内存区域划分以及内存溢出异常 <i class="fa fa-chevron-right"></i>
+              <a href="/Blog/JavaWeb/SpringBoot2.x中拦截器对静态资源的影响/" rel="prev" title="SpringBoot2.x中静态资源会被自定义拦截器拦截">
+                SpringBoot2.x中静态资源会被自定义拦截器拦截 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -671,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基础规范"><span class="nav-number">1.1.</span> <span class="nav-text">一、基础规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、命名规范"><span class="nav-number">1.2.</span> <span class="nav-text">二、命名规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、表和字段设计规范"><span class="nav-number">1.3.</span> <span class="nav-text">三、表和字段设计规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、索引设计规范"><span class="nav-number">1.4.</span> <span class="nav-text">四、索引设计规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、SQL使用规范"><span class="nav-number">1.5.</span> <span class="nav-text">五、SQL使用规范</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在SpringBoot2-0及Spring-5-0-WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种"><span class="nav-number">1.1.</span> <span class="nav-text">在SpringBoot2.0及Spring 5.0 WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-直接实现WebMvcConfigurer-（官方推荐）"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 直接实现WebMvcConfigurer （官方推荐）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-直接继承WebMvcConfigurationSupport"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 直接继承WebMvcConfigurationSupport</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebMvcConfigurerAdapter的官方api描述"><span class="nav-number">1.1.3.</span> <span class="nav-text">WebMvcConfigurerAdapter的官方api描述</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
