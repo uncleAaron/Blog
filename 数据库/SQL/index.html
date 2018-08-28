@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/Blog/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/Blog/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/Blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/Blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/Blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/Blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/Blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/Blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库,Mysql,SQL," />
+
+
+
+
+
+  <link rel="alternate" href="/Blog/atom.xml" title="StormAaron的技术站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta name="keywords" content="数据库,Mysql,SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/数据库/SQL/index.html">
+<meta property="og:site_name" content="StormAaron的技术站">
+<meta property="og:description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-07T03:28:39.108Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL">
+<meta name="twitter:description" content="前言 前言用&amp;gt;符号标注🖊">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/Blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/数据库/SQL/"/>
+
+
+
+
+
+  <title>SQL | StormAaron的技术站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/Blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StormAaron的技术站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/Blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/Blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/Blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/Blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/Blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/数据库/SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-06T19:21:03+08:00">
+                2018-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,212
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>前言用<code>&gt;</code>符号标注🖊 </p>
+</blockquote>
+<a id="more"></a>
+<p>DML数据操纵语言(INSERT, UPDATE, DELETE)</p>
+<p>DDL数据定义语言(CREATE TABLE, VIEW, INDEX, )</p>
+<p>DQL数据查询语言(SELECT)</p>
+<p>DCL数据控制语言（GRANT, ROLLBACK, COMMIT）</p>
+<h1 id="一、创建和使用数据库"><a href="#一、创建和使用数据库" class="headerlink" title="一、创建和使用数据库"></a>一、创建和使用数据库</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> <span class="keyword">test</span>;</span><br><span class="line"><span class="keyword">USE</span> <span class="keyword">test</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="二、创建表"><a href="#二、创建表" class="headerlink" title="二、创建表"></a>二、创建表</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">table</span> (</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    col1 <span class="built_in">VARCHAR</span>(<span class="number">45</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">"COL1"</span>,</span><br><span class="line">    col2 <span class="built_in">DATE</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h1 id="三、修改表"><a href="#三、修改表" class="headerlink" title="三、修改表"></a>三、修改表</h1><p>Alter， Drop</p>
+<h2 id="添加列"><a href="#添加列" class="headerlink" title="添加列"></a>添加列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">table</span></span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">col</span> <span class="built_in">CHAR</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="删除列"><a href="#删除列" class="headerlink" title="删除列"></a>删除列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">table</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">COLUMN</span> <span class="keyword">col</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">table</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="四、插入行"><a href="#四、插入行" class="headerlink" title="四、插入行"></a>四、插入行</h1><h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table(col1, col2) VALUES (val1, val2);</span><br></pre></td></tr></table></figure>
+<h2 id="插入检索出来的数据"><a href="#插入检索出来的数据" class="headerlink" title="插入检索出来的数据"></a>插入检索出来的数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table(col1, col2)</span><br><span class="line">SELECT col1, col2</span><br><span class="line">FROM table_A;</span><br></pre></td></tr></table></figure>
+<h2 id="将一个表中的内容插入到新表"><a href="#将一个表中的内容插入到新表" class="headerlink" title="将一个表中的内容插入到新表"></a>将一个表中的内容插入到新表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE newtable AS</span><br><span class="line">SELECT * FROM table;</span><br></pre></td></tr></table></figure>
+<h1 id="六、更新"><a href="#六、更新" class="headerlink" title="六、更新"></a>六、更新</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table</span><br><span class="line">SET col1 = val1</span><br><span class="line">WHERE id = 1;</span><br></pre></td></tr></table></figure>
+<h1 id="七、删除"><a href="#七、删除" class="headerlink" title="七、删除"></a>七、删除</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table</span><br><span class="line">where id = 1;</span><br></pre></td></tr></table></figure>
+<h1 id="八、查询"><a href="#八、查询" class="headerlink" title="八、查询"></a>八、查询</h1><h2 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h2><p>重复行只出现一次。作用于所有列，也就是说所有列的值都相同才算重复</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT col1, col2</span><br><span class="line">FROM table;</span><br></pre></td></tr></table></figure>
+<h2 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h2><p>分页。限制返回的行数。可以有两个参数，第一个参数为：起始行，从0开始；第二个参数为返回的行数。</p>
+<p>返回前5行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT col1, col2</span><br><span class="line">FROM table</span><br><span class="line">LIMIT 5;	# 返回前5行</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT col1, col2</span><br><span class="line">FROM table</span><br><span class="line">LIMIT 0, 5;	# 返回前5行完整写法</span><br></pre></td></tr></table></figure>
+<p>返回3~5行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT col1, col2</span><br><span class="line">FROM table</span><br><span class="line">LIMIT 2, 3;	# 返回第2+1行开始的3条数据，也就是345行</span><br></pre></td></tr></table></figure>
+<h1 id="八、排序"><a href="#八、排序" class="headerlink" title="八、排序"></a>八、排序</h1><ul>
+<li><strong>ASC：</strong>升序（默认）</li>
+<li><strong>DESC：</strong>降序</li>
+</ul>
+<p>可以按多个列排序，而且可以给每个列指定不同的排序方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT col1, col2</span><br><span class="line">FROM table</span><br><span class="line">ORDER BY col DESC, col2 ASC;</span><br></pre></td></tr></table></figure>
+<h1 id="九、用where过滤"><a href="#九、用where过滤" class="headerlink" title="九、用where过滤"></a>九、用where过滤</h1><p>WHERE子句可用的操作符</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&lt;&gt;   !=</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>&lt;=    !&gt;</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>&gt;=    !&lt;</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>BETWEEN</td>
+<td>在两个值之间</td>
+</tr>
+<tr>
+<td>IS NULL</td>
+<td>为 NULL 值</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>注意：NULL和0和空字符串””都不一样！区分！</li>
+</ul>
+<p>WHERE子句的连接符</p>
+<table>
+<thead>
+<tr>
+<th>连接符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AND</td>
+<td>与，连接过滤条件。与比或优先</td>
+</tr>
+<tr>
+<td>OR</td>
+<td>或，连接过滤条件</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>匹配值，后面可以接SELECT子句，匹配查询到的一组值</td>
+</tr>
+<tr>
+<td>NOT</td>
+<td>否定一个条件</td>
+</tr>
+<tr>
+<td>col LIKE xx</td>
+<td>检查col匹配通配符xx</td>
+</tr>
+</tbody>
+</table>
+<h2 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h2><ul>
+<li>% 匹配 &gt;=0 的任意字符串</li>
+<li>_ 匹配 1 个字符</li>
+<li style="list-style: none"><input type="checkbox"> 匹配集合内的字符，例如 [ab] 匹配字符 a 或者 b。</li>
+<li>^ 否定，配合 [ ] 使用，表示不匹配集合内的字符，如 [^ab]</li>
+</ul>
+<p>使用 LIKE 来进行通配符匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT col1, col2</span><br><span class="line">FROM table</span><br><span class="line">WHERE col LIKE &apos;[^AB]%&apos;	-- 不以A或B开头的任意文本</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：通配符位于开头处匹配会非常慢！不要滥用！</li>
+</ul>
+<h1 id="十、计算字段"><a href="#十、计算字段" class="headerlink" title="十、计算字段"></a>十、计算字段</h1><h1 id="十一、函数"><a href="#十一、函数" class="headerlink" title="十一、函数"></a>十一、函数</h1><h1 id="十二、分组"><a href="#十二、分组" class="headerlink" title="十二、分组"></a>十二、分组</h1><h1 id="十三、子查询"><a href="#十三、子查询" class="headerlink" title="十三、子查询"></a>十三、子查询</h1><h1 id="十四、连接"><a href="#十四、连接" class="headerlink" title="十四、连接"></a>十四、连接</h1><h1 id="十五、组合查询"><a href="#十五、组合查询" class="headerlink" title="十五、组合查询"></a>十五、组合查询</h1><h1 id="十六、视图"><a href="#十六、视图" class="headerlink" title="十六、视图"></a>十六、视图</h1><h1 id="十七、存储过程"><a href="#十七、存储过程" class="headerlink" title="十七、存储过程"></a>十七、存储过程</h1><h1 id="十八、游标"><a href="#十八、游标" class="headerlink" title="十八、游标"></a>十八、游标</h1><h1 id="十九、触发器"><a href="#十九、触发器" class="headerlink" title="十九、触发器"></a>十九、触发器</h1><h1 id="二十、事务管理"><a href="#二十、事务管理" class="headerlink" title="二十、事务管理"></a>二十、事务管理</h1><p>基本术语：</p>
+<ul>
+<li>事务（transaction）指一组 SQL 语句；</li>
+<li>回退（rollback）指撤销指定 SQL 语句的过程；</li>
+<li>提交（commit）指将未存储的 SQL 语句结果写入数据库表；</li>
+<li>保留点（savepoint）指事务处理中设置的临时占位符（placeholder），你可以对它发布回退（与回退整个事务处理不同）。</li>
+</ul>
+<p>不能回退 SELECT 语句，回退 SELECT 语句也没意义；也不能回退 CREATE 和 DROP 语句。</p>
+<p>MySQL 的事务提交默认是隐式提交，每执行一条语句就把这条语句当成一个事务然后进行提交。当出现 START TRANSACTION 语句时，会关闭隐式提交；当 COMMIT 或 ROLLBACK 语句执行后，事务会自动关闭，重新恢复隐式提交。</p>
+<p>通过设置 autocommit 为 0 可以取消自动提交；autocommit 标记是针对每个连接而不是针对服务器的。</p>
+<p>如果没有设置保留点，ROLLBACK 会回退到 START TRANSACTION 语句处；如果设置了保留点，并且在 ROLLBACK 中指定该保留点，则会回退到该保留点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">START TRANSACTION</span><br><span class="line">// ...</span><br><span class="line">SAVEPOINT delete1</span><br><span class="line">// ...</span><br><span class="line">ROLLBACK TO delete1</span><br><span class="line">// ...</span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
+<h1 id="二十一、字符集"><a href="#二十一、字符集" class="headerlink" title="二十一、字符集"></a>二十一、字符集</h1><h1 id="二十二、权限管理"><a href="#二十二、权限管理" class="headerlink" title="二十二、权限管理"></a>二十二、权限管理</h1><ul>
+<li>Mysql的账户信息存在mysql这个数据库中</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE mysql;</span><br><span class="line">SELECT user from user;	# 查询mysql.user表</span><br></pre></td></tr></table></figure>
+<p>##创建账户</p>
+<p>新创建的账户没有任何权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER myuser Identified By &apos;password&apos;;</span><br></pre></td></tr></table></figure>
+<h2 id="删除账户"><a href="#删除账户" class="headerlink" title="删除账户"></a>删除账户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP USER myuser;</span><br></pre></td></tr></table></figure>
+<h2 id="授予权限Grant"><a href="#授予权限Grant" class="headerlink" title="授予权限Grant"></a>授予权限Grant</h2><p>账户用 username@host 的形式定义，username@% 使用的是默认主机名。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT SELECT, INSERT ON mydatabase.* TO myuser</span><br></pre></td></tr></table></figure>
+<h2 id="删除权限Revoke"><a href="#删除权限Revoke" class="headerlink" title="删除权限Revoke"></a>删除权限Revoke</h2><p>GRANT 和 REVOKE 可在几个层次上控制访问权限：</p>
+<ul>
+<li>整个服务器，使用 GRANT ALL 和 REVOKE ALL；</li>
+<li>整个数据库，使用 ON database.*；</li>
+<li>特定的表，使用 ON database.table；</li>
+<li>特定的列；</li>
+<li>特定的存储过程。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVOKE SELECT, INSERT ON mydatabase.* FROM myuser;</span><br></pre></td></tr></table></figure>
+<h2 id="查看权限"><a href="#查看权限" class="headerlink" title="查看权限"></a>查看权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW GRANTS FOR myuser;</span><br></pre></td></tr></table></figure>
+<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><p>使用 Password() 函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET PASSWORD FOR myuser = Password(&apos;new_password&apos;);</span><br></pre></td></tr></table></figure>
+<h2 id="修改账户名"><a href="#修改账户名" class="headerlink" title="修改账户名"></a>修改账户名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RENAME myuser TO newuser;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+	      
+	        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/Blog/数据库/SQL/">SQL</a></p>
+  <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
+  <p><span>发布时间:</span>2018年08月06日 - 19:08</p>
+  <p><span>最后更新:</span>2018年08月07日 - 11:08</p>
+  <p><span>原始链接:</span><a href="/Blog/数据库/SQL/" title="SQL">https://uncleaaron.github.io/Blog/数据库/SQL/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/数据库/SQL/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+	      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/Blog/tags/Mysql/" rel="tag"># Mysql</a>
+          
+            <a href="/Blog/tags/SQL/" rel="tag"># SQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Blog/数据库/Mysql/" rel="next" title="Mysql">
+                <i class="fa fa-chevron-left"></i> Mysql
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/计算机网络/" rel="prev" title="计算机网络">
+                计算机网络 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/Blog/images/head.jpg"
+                alt="Aaron.H" />
+            
+              <p class="site-author-name" itemprop="name">Aaron.H</p>
+              <p class="site-description motion-element" itemprop="description">Road endless its long and far, I will seek up and down！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/Blog/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/Blog/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/Blog/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/Blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、创建和使用数据库"><span class="nav-number">2.</span> <span class="nav-text">一、创建和使用数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、创建表"><span class="nav-number">3.</span> <span class="nav-text">二、创建表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、修改表"><span class="nav-number">4.</span> <span class="nav-text">三、修改表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加列"><span class="nav-number">4.1.</span> <span class="nav-text">添加列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除列"><span class="nav-number">4.2.</span> <span class="nav-text">删除列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除表"><span class="nav-number">4.3.</span> <span class="nav-text">删除表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、插入行"><span class="nav-number">5.</span> <span class="nav-text">四、插入行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">5.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入检索出来的数据"><span class="nav-number">5.2.</span> <span class="nav-text">插入检索出来的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将一个表中的内容插入到新表"><span class="nav-number">5.3.</span> <span class="nav-text">将一个表中的内容插入到新表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、更新"><span class="nav-number">6.</span> <span class="nav-text">六、更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、删除"><span class="nav-number">7.</span> <span class="nav-text">七、删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八、查询"><span class="nav-number">8.</span> <span class="nav-text">八、查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DISTINCT"><span class="nav-number">8.1.</span> <span class="nav-text">DISTINCT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LIMIT"><span class="nav-number">8.2.</span> <span class="nav-text">LIMIT</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八、排序"><span class="nav-number">9.</span> <span class="nav-text">八、排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#九、用where过滤"><span class="nav-number">10.</span> <span class="nav-text">九、用where过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通配符"><span class="nav-number">10.1.</span> <span class="nav-text">通配符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十、计算字段"><span class="nav-number">11.</span> <span class="nav-text">十、计算字段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十一、函数"><span class="nav-number">12.</span> <span class="nav-text">十一、函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十二、分组"><span class="nav-number">13.</span> <span class="nav-text">十二、分组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十三、子查询"><span class="nav-number">14.</span> <span class="nav-text">十三、子查询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十四、连接"><span class="nav-number">15.</span> <span class="nav-text">十四、连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十五、组合查询"><span class="nav-number">16.</span> <span class="nav-text">十五、组合查询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十六、视图"><span class="nav-number">17.</span> <span class="nav-text">十六、视图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十七、存储过程"><span class="nav-number">18.</span> <span class="nav-text">十七、存储过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十八、游标"><span class="nav-number">19.</span> <span class="nav-text">十八、游标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十九、触发器"><span class="nav-number">20.</span> <span class="nav-text">十九、触发器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二十、事务管理"><span class="nav-number">21.</span> <span class="nav-text">二十、事务管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二十一、字符集"><span class="nav-number">22.</span> <span class="nav-text">二十一、字符集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二十二、权限管理"><span class="nav-number">23.</span> <span class="nav-text">二十二、权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除账户"><span class="nav-number">23.1.</span> <span class="nav-text">删除账户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#授予权限Grant"><span class="nav-number">23.2.</span> <span class="nav-text">授予权限Grant</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除权限Revoke"><span class="nav-number">23.3.</span> <span class="nav-text">删除权限Revoke</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看权限"><span class="nav-number">23.4.</span> <span class="nav-text">查看权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改密码"><span class="nav-number">23.5.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改账户名"><span class="nav-number">23.6.</span> <span class="nav-text">修改账户名</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron.H</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共71.3k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/Blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/Blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

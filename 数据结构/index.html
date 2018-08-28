@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/Blog/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/Blog/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/Blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/Blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/Blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/Blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/Blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/Blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构,二叉树," />
+
+
+
+
+
+  <link rel="alternate" href="/Blog/atom.xml" title="StormAaron的技术站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta name="keywords" content="数据结构,二叉树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/数据结构/index.html">
+<meta property="og:site_name" content="StormAaron的技术站">
+<meta property="og:description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/数据结构/树的存储结构-孩子兄弟表示法.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/795187/201510/795187-20151023201552927-578458496.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/数据结构/二叉树转换为树.jpg">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/数据结构/二叉树转一般树.jpg">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/数据结构/邻接表和逆邻接表.png">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/数据结构/图的十字链表结构.jpg">
+<meta property="og:image" content="https://uncleaaron.github.io/Blog/数据结构/深度优先搜索.jpg">
+<meta property="og:updated_time" content="2018-08-27T13:05:11.308Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构">
+<meta name="twitter:description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta name="twitter:image" content="https://uncleaaron.github.io/Blog/数据结构/树的存储结构-孩子兄弟表示法.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/Blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/数据结构/"/>
+
+
+
+
+
+  <title>数据结构 | StormAaron的技术站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/Blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StormAaron的技术站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/Blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/Blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/Blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/Blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/Blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/数据结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-06T19:20:55+08:00">
+                2018-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,359
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>前言用<code>&gt;</code>符号标注🖊 </p>
+</blockquote>
+<a id="more"></a>
+<h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><p>深度：节点层次</p>
+<p>度：节点的子树数</p>
+<p>叶子：度为0的节点</p>
+<p>分支结点</p>
+<p>子结点</p>
+<p>父结点</p>
+<p>兄弟结点：有同一个父结点的结点</p>
+<p>无序树：左右无序</p>
+<p>有序树：左右有序</p>
+<p>森林：多个不相交的树的集合</p>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><p>二叉树是个有序树，每个结点至多有两棵子树</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
+<li><p>在二叉树上的第 i 层上至多有 $$2^{i-1}$$个结点</p>
+</li>
+<li><p>深度为k的二叉树至多有 $$2^k-1$$个结点</p>
+</li>
+<li><p>对任何一棵二叉树T，如果其叶子数为 $$n_0$$，度为2的结点数为$$n_2$$，则有 $$n_0=n_2+1$$</p>
+<blockquote>
+<p> 证明3：</p>
+<ol>
+<li>二叉树内所有结点数为 $n=n_0+n_1+n_2$</li>
+<li>二叉树内总分支数都由度为1和2的结点射出，总结点数为 $n_1+2n_2$</li>
+<li>总分支树代表子结点数，再加上根节点（唯一的非子结点）得：$$n=n_1+2n_2+1$$</li>
+<li>结合1，3得 $n_0=n_2+1$</li>
+</ol>
+</blockquote>
+</li>
+<li><p>满二叉树：深度为 k 且结点数为$2^k-1$的二叉树（满了）</p>
+<h4 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h4><ol>
+<li>具有 n 个结点的完全二叉树的深度为 $[log_2n]+1$</li>
+<li>$i=1$ 的结点为根节点，$i&gt;1$ 的结点的父节点为 $[i/2]$</li>
+<li>如果 $2i&gt;n$ ，则结点 i 是叶子结点，否则其左孩子为 $2i$</li>
+<li>如果 $2i&gt;n$ ，则结点 i 无右孩子，否则其右孩子为 $2i+1$</li>
+</ol>
+</li>
+</ol>
+<h3 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h3><h4 id="数组（计算得出结点）"><a href="#数组（计算得出结点）" class="headerlink" title="数组（计算得出结点）"></a>数组（计算得出结点）</h4><p>根据性质计算出结点位置</p>
+<h4 id="链式存储（模拟了逻辑模型）"><a href="#链式存储（模拟了逻辑模型）" class="headerlink" title="链式存储（模拟了逻辑模型）"></a>链式存储（模拟了逻辑模型）</h4><p>每个结点存储一个左孩子，右孩子和数据，还可以存储父节点</p>
+<h3 id="树的存储结构"><a href="#树的存储结构" class="headerlink" title="树的存储结构"></a>树的存储结构</h3><h4 id="双亲表示法"><a href="#双亲表示法" class="headerlink" title="双亲表示法"></a>双亲表示法</h4><h4 id="孩子表示法"><a href="#孩子表示法" class="headerlink" title="孩子表示法"></a>孩子表示法</h4><h4 id="孩子兄弟表示法（二叉树表示法）"><a href="#孩子兄弟表示法（二叉树表示法）" class="headerlink" title="孩子兄弟表示法（二叉树表示法）"></a>孩子兄弟表示法（二叉树表示法）</h4><p><img src="/Blog/数据结构/树的存储结构-孩子兄弟表示法.png" alt="树的存储结构-孩子兄弟表示法"></p>
+<h3 id="遍历二叉树"><a href="#遍历二叉树" class="headerlink" title="遍历二叉树"></a>遍历二叉树</h3><h4 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h4><ol>
+<li>根节点</li>
+<li>左子树</li>
+<li>右子树</li>
+</ol>
+<h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><ol>
+<li>左子树</li>
+<li>根结点</li>
+<li>右子树</li>
+</ol>
+<h4 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h4><ol>
+<li>左子树</li>
+<li>右子树</li>
+<li>根节点</li>
+</ol>
+<h4 id="根据先序遍历和中序遍历还原二叉树或后序遍历"><a href="#根据先序遍历和中序遍历还原二叉树或后序遍历" class="headerlink" title="根据先序遍历和中序遍历还原二叉树或后序遍历"></a>根据先序遍历和中序遍历还原二叉树或后序遍历</h4><h5 id="算法1"><a href="#算法1" class="headerlink" title="算法1"></a>算法1</h5><p>输入：前序遍历，中序遍历<br>1、寻找树的root，前序遍历的第一节点G就是root。<br>2、观察前序遍历GDAFEMHZ，知道了G是root，剩下的节点必然在root的左或右子树中的节点。<br>3、观察中序遍历ADEFGHMZ。其中root节点G左侧的ADEF必然是root的左子树中的节点，G右侧的HMZ必然是root的右子树中的节点，root不在中序遍历的末尾或开始就说明根节点的两颗子树都不为空。<br>4、观察左子树ADEF，按照前序遍历的顺序来排序为DAFE，因此左子树的根节点为D，并且A是左子树的左子树中的节点，EF是左子树的右子树中的节点。<br>5、同样的道理，观察右子树节点HMZ，前序为MHZ，因此右子树的根节点为M，左子节点H，右子节点Z。</p>
+<p>观察发现，上面的过程是递归的。先找到当前树的根节点，然后划分为左子树，右子树，然后进入左子树重复上面的过程，然后进入右子树重复上面的过程。最后就可以还原一棵树了：</p>
+<p><img src="https://images2015.cnblogs.com/blog/795187/201510/795187-20151023201552927-578458496.png" alt="img"></p>
+<p>从而得到PostOrder:       AEFDHZMG</p>
+<p>改进：<br>更进一步说，其实，如果仅仅要求写后续遍历，甚至不要专门占用空间保存还原后的树。只需要用一个数组保存将要得到的后序，就能实现：</p>
+<h5 id="算法2"><a href="#算法2" class="headerlink" title="算法2"></a>算法2</h5><p>输入：一个保存后序的数组，前序遍历，中序遍历<br>1、确定根,放在数组末尾<br>2、确定左子树的索引范围，放在数组中相同索引的位置。<br>3、确定右子树索引范围，放在数组中对应索引的位置，刚好能放下。<br>4、用左子树的前序遍历和中序遍历，把后序遍历保存在对应索引的位置<br>5、用左子树的前序遍历和中序遍历，把后序遍历保存在对应索引的位置</p>
+<h3 id="哈夫曼树（最优二叉树）"><a href="#哈夫曼树（最优二叉树）" class="headerlink" title="哈夫曼树（最优二叉树）"></a>哈夫曼树（最优二叉树）</h3><p>路径长度</p>
+<p>带权路径长度</p>
+<p>哈夫曼树：所有叶子结点的带权路径长度之和最小</p>
+<p>构造哈夫曼树</p>
+<h3 id="数等价"><a href="#数等价" class="headerlink" title="数等价"></a>数等价</h3><h3 id="二叉树与一般树转换"><a href="#二叉树与一般树转换" class="headerlink" title="二叉树与一般树转换"></a>二叉树与一般树转换</h3><h4 id="一般树转二叉树"><a href="#一般树转二叉树" class="headerlink" title="一般树转二叉树"></a>一般树转二叉树</h4><ol>
+<li><p>将每一个结点与他的兄弟结点之间连一条线。</p>
+</li>
+<li><p>对每一个双亲结点，只保留它与第一个子结点的连线，删除与其余结点的连线。</p>
+</li>
+<li><p>整理，左右摆齐。</p>
+</li>
+</ol>
+<p><img src="/Blog/数据结构/二叉树转换为树.jpg" alt="二叉树转换为树"></p>
+<h4 id="二叉树转一般树（反过程）"><a href="#二叉树转一般树（反过程）" class="headerlink" title="二叉树转一般树（反过程）"></a>二叉树转一般树（反过程）</h4><ol>
+<li><p>若一个结点是其父结点的左结点，则将此结点的右结点，右结点的右结点……都与其父结点相连线。</p>
+</li>
+<li><p>删除原二叉树所有父结点与右结点的连线。</p>
+</li>
+<li><p>整理连线，统一高度。</p>
+</li>
+</ol>
+<p><img src="/Blog/数据结构/二叉树转一般树.jpg" alt="二叉树转一般树"></p>
+<h1 id="图"><a href="#图" class="headerlink" title="图"></a>图</h1><p>顶点</p>
+<p>有向图</p>
+<ul>
+<li>弧<ul>
+<li>弧头/初始点</li>
+<li>弧尾/终结点</li>
+</ul>
+</li>
+</ul>
+<p>无向图</p>
+<ul>
+<li>边</li>
+</ul>
+<p>$$G=(V,{A})$$</p>
+<p>设n为顶点数目，e为边或弧的数目</p>
+<p>无向图中 $0\leq$ $$e\leq\frac{1}{2}n(n-1)$$</p>
+<p>完全图：$$e=\frac{1}{2}n(n-1)$$的无向图</p>
+<p>有向完全图：$$e=n(n-1)$$的有向图</p>
+<p>稀疏图：边或弧很少的图</p>
+<p>稠密图</p>
+<p>子图：有两个图$$G=(V,{E})$$和$$G’=(V’,{E’})$$，若$$V’\subseteq V$$且$$E’\subseteq E$$，则 G‘ 是 G 的子图</p>
+<p>邻接点：对于无向图$$G=(V,{E})$$，有边$(v,v’)\in E$，则称顶点 v 和 v’ <strong>互为邻接点</strong>；边$(v,v’)$与顶点 v 和 v’ <strong>相关联</strong>。</p>
+<p>度$$TD(v)$$(degree)：顶点关联的边的数目</p>
+<p>入度$$ID(v)$$(indegree)：</p>
+<p>出度$$OD(v)$$(outdegree)：</p>
+<p>图的度数之和等于边的两倍：$$e=\frac{1}{2}\sum^n_{i=1}TD(v_i)$$</p>
+<p>路径：</p>
+<p>回路/环：第一个顶点和最后一个顶点相同的路径</p>
+<p>简单路径：顶点不重复出现的路径</p>
+<p>连通：无向图中，顶点间有路径，则称为连通</p>
+<p>连通图：图中任意点都是连通的，就是连通图</p>
+<p>连通分量：非连通图中的极大连通子图</p>
+<p>强连通图：有向图中所有顶点都存在路径</p>
+<p>强连通分量：有向图中的极大强连通子图</p>
+<p>生成树：一个连通图的极小连通子图。有连通图中的全部顶点，但只有足以构成一棵树的n-1条边。如果在生成树上增加一条边，必定构成一个环。</p>
+<p>生成森林：</p>
+<h2 id="图的存储结构"><a href="#图的存储结构" class="headerlink" title="图的存储结构"></a>图的存储结构</h2><h4 id="数组表示法："><a href="#数组表示法：" class="headerlink" title="数组表示法："></a>数组表示法：</h4><p><strong>顶点向量+邻接矩阵</strong></p>
+<ul>
+<li>邻接矩阵：表示序号为0-n的元素之间的邻接关系（两点间是否有弧）</li>
+</ul>
+<p>$$<br>\left[<br>\begin{matrix}<br>0 &amp; 1 &amp; 1 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 1 \<br>1 &amp; 0 &amp; 0 &amp; 0 \<br>0 &amp; 1 &amp; 1 &amp; 0<br>\end{matrix}<br>\right]<br>$$</p>
+<ul>
+<li>网的邻接矩阵（带权）：</li>
+</ul>
+<p>$$<br>\left[<br>\begin{matrix}<br>∞ &amp; 5 &amp; 7 &amp; ∞ \<br>∞ &amp; ∞ &amp; ∞ &amp; 1 \<br>12 &amp; 4 &amp; ∞ &amp; ∞ \<br>∞ &amp; 2 &amp; 1 &amp; ∞<br>\end{matrix}<br>\right]<br>$$</p>
+<h4 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h4><p>图的一种链式存储结构，反映的是节点的出度邻接情况。</p>
+<h4 id="逆邻接表"><a href="#逆邻接表" class="headerlink" title="逆邻接表"></a>逆邻接表</h4><p>反映的是节点的入度邻接情况</p>
+<p><img src="/Blog/数据结构/邻接表和逆邻接表.png" alt="邻接表和逆邻接表"></p>
+<h4 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h4><p>有向图的一种优化存储结构。</p>
+<p>十字链表的好处就是因为把邻接表和逆邻接表整合在了一起，这样既容易找到以vi为尾的弧，也容易找到以vi为头的弧，因而容易求得顶点的出度和入度。除了结构复杂一点外，其创建图的时间复杂度和邻接表是相同的，因此在某些有向图的应用中，是很有用的工具。</p>
+<p>顶点结点</p>
+<table>
+<thead>
+<tr>
+<th>data</th>
+<th>firstin</th>
+<th>firstout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>顶点信息</td>
+<td>以该顶点为弧头的第一个弧</td>
+<td>以该顶点为弧尾的第一个弧</td>
+</tr>
+</tbody>
+</table>
+<p>弧结点</p>
+<table>
+<thead>
+<tr>
+<th>tailvex</th>
+<th>headvex</th>
+<th>hlink</th>
+<th>tlink</th>
+<th>info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>弧尾位置</td>
+<td>弧头位置</td>
+<td>弧头相同的下一个弧</td>
+<td>弧尾相同的下一个弧</td>
+<td>以该顶点为弧尾的第一个弧</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/Blog/数据结构/图的十字链表结构.jpg" alt="图的十字链表结构"></p>
+<h4 id="邻接多重表"><a href="#邻接多重表" class="headerlink" title="邻接多重表"></a>邻接多重表</h4><p>无向图的一种链式存储结构</p>
+<p>边：<br>| mark     | ivex | ilink                   | jvex | jlink                   | info   |<br>| ——– | —- | ———————– | —- | ———————– | —— |<br>| 搜索标记 | 顶点 | 下一条依附于 i 顶点的边 | 顶点 | 下一条依附与 j 顶点的边 | 边信息 |</p>
+<p>顶点：</p>
+<table>
+<thead>
+<tr>
+<th>data</th>
+<th>firstedge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>第一条依附于该顶点的边</td>
+</tr>
+</tbody>
+</table>
+<h3 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h3><h4 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h4><p>类似树的先序遍历，先序遍历未被搜索的顶点</p>
+<p>如：下面的顺序是$$v_1→v_2→v_4→v_8→v_5→v_3→v_6→v_7$$</p>
+<p><img src="/Blog/数据结构/深度优先搜索.jpg" alt="深度优先搜索"></p>
+<h4 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h4><p>类似树的按层次遍历，从v出发依次访问未被访问过的v的邻接点</p>
+<p>如：上面的广度优先搜索顺序是：$$v_1→v_2→v_3→v_4→v_5→v_6→v_7→v_8$$</p>
+<h3 id="图的连通性问题"><a href="#图的连通性问题" class="headerlink" title="图的连通性问题"></a>图的连通性问题</h3><h4 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h4><p>最小代价生成树（权值之和最小）</p>
+<p>Prim算法</p>
+<p>适用于求边稠密的网的最小生成树</p>
+<p>Kruskal算法</p>
+<p>适用于求边稀疏的网的最小生成树</p>
+<h3 id="最短路径问题"><a href="#最短路径问题" class="headerlink" title="最短路径问题"></a>最短路径问题</h3><p>Dijkstra算法</p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>二分查找</p>
+<p>O(logn)</p>
+<h2 id="静态查找表"><a href="#静态查找表" class="headerlink" title="静态查找表"></a>静态查找表</h2><h2 id="动态查找表"><a href="#动态查找表" class="headerlink" title="动态查找表"></a>动态查找表</h2><p>二叉排序树</p>
+<p>左子树上的所有结点小于根节点的值，右子树所有节点大于根节点，左右子树也是二叉排序树</p>
+<p>中序遍历有序，适用于二分查找</p>
+<p>平衡二叉树（AVL树）</p>
+<p>左子树和右子树的深度之差绝对值不超过1</p>
+<p>B-树</p>
+<p>B+树</p>
+<h2 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h2><p>处理冲突：</p>
+<p>开放地址法</p>
+<p>再哈希法</p>
+<p>链地址法</p>
+<p>建立公共溢出区</p>
+<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h3>
+      
+    </div>
+    
+    
+    
+
+	<div>
+	      
+	        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/Blog/数据结构/">数据结构</a></p>
+  <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
+  <p><span>发布时间:</span>2018年08月06日 - 19:08</p>
+  <p><span>最后更新:</span>2018年08月27日 - 21:08</p>
+  <p><span>原始链接:</span><a href="/Blog/数据结构/" title="数据结构">https://uncleaaron.github.io/Blog/数据结构/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/数据结构/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+	      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/Blog/tags/二叉树/" rel="tag"># 二叉树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Blog/数据库/数据库系统原理/" rel="next" title="数据库系统原理">
+                <i class="fa fa-chevron-left"></i> 数据库系统原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/数据库/Mysql/" rel="prev" title="Mysql">
+                Mysql <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/Blog/images/head.jpg"
+                alt="Aaron.H" />
+            
+              <p class="site-author-name" itemprop="name">Aaron.H</p>
+              <p class="site-description motion-element" itemprop="description">Road endless its long and far, I will seek up and down！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/Blog/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/Blog/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/Blog/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/Blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树"><span class="nav-number">2.</span> <span class="nav-text">树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">2.1.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">2.1.1.</span> <span class="nav-text">性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完全二叉树"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">完全二叉树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的存储结构"><span class="nav-number">2.1.2.</span> <span class="nav-text">二叉树的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组（计算得出结点）"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">数组（计算得出结点）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链式存储（模拟了逻辑模型）"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">链式存储（模拟了逻辑模型）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的存储结构"><span class="nav-number">2.1.3.</span> <span class="nav-text">树的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#双亲表示法"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">双亲表示法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#孩子表示法"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">孩子表示法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#孩子兄弟表示法（二叉树表示法）"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">孩子兄弟表示法（二叉树表示法）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历二叉树"><span class="nav-number">2.1.4.</span> <span class="nav-text">遍历二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先序遍历"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">先序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中序遍历"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">中序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后序遍历"><span class="nav-number">2.1.4.3.</span> <span class="nav-text">后序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#根据先序遍历和中序遍历还原二叉树或后序遍历"><span class="nav-number">2.1.4.4.</span> <span class="nav-text">根据先序遍历和中序遍历还原二叉树或后序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#算法1"><span class="nav-number">2.1.4.4.1.</span> <span class="nav-text">算法1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#算法2"><span class="nav-number">2.1.4.4.2.</span> <span class="nav-text">算法2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈夫曼树（最优二叉树）"><span class="nav-number">2.1.5.</span> <span class="nav-text">哈夫曼树（最优二叉树）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数等价"><span class="nav-number">2.1.6.</span> <span class="nav-text">数等价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树与一般树转换"><span class="nav-number">2.1.7.</span> <span class="nav-text">二叉树与一般树转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一般树转二叉树"><span class="nav-number">2.1.7.1.</span> <span class="nav-text">一般树转二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树转一般树（反过程）"><span class="nav-number">2.1.7.2.</span> <span class="nav-text">二叉树转一般树（反过程）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图"><span class="nav-number">3.</span> <span class="nav-text">图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图的存储结构"><span class="nav-number">3.1.</span> <span class="nav-text">图的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组表示法："><span class="nav-number">3.1.0.1.</span> <span class="nav-text">数组表示法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#邻接表"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">邻接表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逆邻接表"><span class="nav-number">3.1.0.3.</span> <span class="nav-text">逆邻接表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十字链表"><span class="nav-number">3.1.0.4.</span> <span class="nav-text">十字链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#邻接多重表"><span class="nav-number">3.1.0.5.</span> <span class="nav-text">邻接多重表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图的遍历"><span class="nav-number">3.1.1.</span> <span class="nav-text">图的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#深度优先搜索"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">深度优先搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#广度优先搜索"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">广度优先搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图的连通性问题"><span class="nav-number">3.1.2.</span> <span class="nav-text">图的连通性问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最小生成树"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">最小生成树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最短路径问题"><span class="nav-number">3.1.3.</span> <span class="nav-text">最短路径问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">3.2.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态查找表"><span class="nav-number">3.3.</span> <span class="nav-text">静态查找表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态查找表"><span class="nav-number">3.4.</span> <span class="nav-text">动态查找表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希表"><span class="nav-number">3.5.</span> <span class="nav-text">哈希表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序"><span class="nav-number">4.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">4.1.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接插入排序"><span class="nav-number">4.1.1.</span> <span class="nav-text">直接插入排序</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron.H</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共71.3k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/Blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/Blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

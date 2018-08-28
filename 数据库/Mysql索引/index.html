@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/Blog/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/Blog/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/Blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/Blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/Blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/Blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/Blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/Blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库,Mysql," />
+
+
+
+
+
+  <link rel="alternate" href="/Blog/atom.xml" title="StormAaron的技术站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略   🖊">
+<meta name="keywords" content="数据库,Mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql索引">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/数据库/Mysql索引/index.html">
+<meta property="og:site_name" content="StormAaron的技术站">
+<meta property="og:description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略   🖊">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://segmentfault.com/img/bVbaFIR?w=752&h=565">
+<meta property="og:image" content="https://segmentfault.com/img/bVbaFLU?w=744&h=563">
+<meta property="og:image" content="https://segmentfault.com/img/bVbaFJ5?w=616&h=275">
+<meta property="og:image" content="https://segmentfault.com/img/bVbaFL1?w=615&h=254">
+<meta property="og:image" content="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/13.png">
+<meta property="og:image" content="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/14.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/874710/201612/874710-20161214144949198-761711481.png">
+<meta property="og:updated_time" content="2018-08-18T09:15:16.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql索引">
+<meta name="twitter:description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略   🖊">
+<meta name="twitter:image" content="https://segmentfault.com/img/bVbaFIR?w=752&h=565">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/Blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/数据库/Mysql索引/"/>
+
+
+
+
+
+  <title>Mysql索引 | StormAaron的技术站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/Blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StormAaron的技术站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/Blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/Blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/Blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/Blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/Blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/数据库/Mysql索引/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql索引</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-03T15:01:55+08:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,501
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<ol>
+<li>索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial </li>
+<li>Mysql的存储引擎分为InnoDB、MyISAM、Memory</li>
+<li>其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离</li>
+<li>索引的最左匹配原则和索引使用策略   🖊</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<h1 id="什么是索引"><a href="#什么是索引" class="headerlink" title="什么是索引"></a>什么是索引</h1><p>我们知道，MySQL 查询数据是从第一条记录开始依次查找，直到读完整个表或者找到匹配的行。数据库表的数据量越大，MySQL 查询所花费的时间就越多。索引的出现就是为了改善查询性能的。MySQL 官方对索引的定义为：索引（Index）是帮助 MySQL 高效获取数据的数据结构。从本质上来讲，索引是一种以空间换时间的技术。因为索引的建立是需要占用磁盘物理空间的。</p>
+<p>索引的目的在于提高查询效率，这个过程可以类比查字典：假如我们需要查询 <code>mysql</code> 这个单词，我们通常会先在字母表里找到字母 <code>m</code>，这样我们就定位到了 <code>m</code> 开头的单词在词典的位置，然后根据定位到的位置从下往下找到 <code>y</code> 字母，最后找到剩下的 <code>sql</code>。索引就相当于字典里的字母表。如果不使用字母表，想要找到<code>mysql</code> 这个单词，我们就需要把字典从头开始翻一遍，直到翻到<code>m</code> 开头的单词在词典的位置，这个过程重复而浪费时间。</p>
+<p>通过使用索引技术，MySQL 可以大大减少存储引擎需要扫描的数据量，把磁盘 IO 的随机读取变成顺序读取，从而加快查询效率。</p>
+<h1 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h1><h3 id="主键索引（Primary-Key）"><a href="#主键索引（Primary-Key）" class="headerlink" title="主键索引（Primary Key）"></a>主键索引（Primary Key）</h3><p>特殊的唯一索引，不允许有空值。一个表只能由一个主键。一般在建表同时指定</p>
+<h3 id="普通索引（INDEX）"><a href="#普通索引（INDEX）" class="headerlink" title="普通索引（INDEX）"></a>普通索引（INDEX）</h3><p>MySQL 允许对两个或两个以上的列上创建索引，我们习惯上称之为联合索引（又叫复合索引，或者组合索引）。实际上，单列索引可以看成联合索引元素数为1的特例。</p>
+<p>这是最基本的索引，它没有任何限制。可以在创建表的时候指定，也可以在修改表结构的时候指定。</p>
+<h3 id="唯一索引（Unique）"><a href="#唯一索引（Unique）" class="headerlink" title="唯一索引（Unique）"></a>唯一索引（Unique）</h3><p>唯一索引列的值必须唯一，但可以为空值。可以是联合索引，但列值的组合必须唯一。</p>
+<h3 id="全文索引（FullText）"><a href="#全文索引（FullText）" class="headerlink" title="全文索引（FullText）"></a>全文索引（FullText）</h3><p>全文索引是一种特殊类型的索引，通过建立倒排索引，快速匹配文档的方式。它查找的是文本中的关键字，而不是直接比较索引中的值。全文索引跟其它几种索引类型的匹配方式完全不一样。它有许多需要注意的细节，比如停用词、词干和复数、布尔搜索等。另外，<strong>只有字段类型为 <code>char</code>、<code>varchar</code> 和 <code>text</code>的字段才能设置全文索引</strong>。</p>
+<h3 id="空间索引（Spatial）"><a href="#空间索引（Spatial）" class="headerlink" title="空间索引（Spatial）"></a>空间索引（Spatial）</h3><p>空间索引用于地理数据存储，无需前缀查询，而是会从所有维度来索引数据。 </p>
+<p>下表是 MySQL 中常见的存储引擎对索引类型的支持情况：</p>
+<table>
+<thead>
+<tr>
+<th>索引类型</th>
+<th>InnoDB</th>
+<th>MyISAM</th>
+<th>Memory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRIMARY KEY</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>INDEX</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>Unique</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>FULLTEXT</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>SPATIAL</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+</tbody>
+</table>
+<h3 id="索引数据结构类型（Index-Type）"><a href="#索引数据结构类型（Index-Type）" class="headerlink" title="索引数据结构类型（Index Type）"></a>索引数据结构类型（Index Type）</h3><p>前面说到，不同存储引擎的索引的工作方式并不一样，这是因为存储引擎底层使用的数据结构及算法不一样。在 MySQL 中，某些存储引擎允许在创建索引时指定索引的数据结构类型，下表是常见存储引擎支持的索引的数据结构类型：</p>
+<table>
+<thead>
+<tr>
+<th>存储引擎</th>
+<th>允许的数据结构类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InnoDB</td>
+<td>BTREE（聚集索引实现：数据文件本身就是索引文件）</td>
+</tr>
+<tr>
+<td>MyISAM</td>
+<td>BTREE（非聚集实现：通过索引文件定位数据文件）</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>HASH（默认）, BTREE</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>需要注意的是，用户不能为全文索引和空间索引指定数据结构类型：全文索引的实现取决于存储引擎，而空间索引被实现为 RTREE 数据结构。 </p>
+</blockquote>
+<h4 id="MyISAM-索引实现"><a href="#MyISAM-索引实现" class="headerlink" title="MyISAM 索引实现"></a>MyISAM 索引实现</h4><p>MyISAM 引擎使用 B+Tree 作为索引结构，叶节点的 data 域存放的是数据记录的地址。下图是 MyISAM 索引的原理图：</p>
+<p><img src="https://segmentfault.com/img/bVbaFIR?w=752&amp;h=565" alt="图片描述"></p>
+<p>这里设表一共有三列，假设我们以 Col1 为主键，则上图是一个 MyISAM 表的主索引（Primary key）示意。可以看出 MyISAM 的索引文件仅仅保存数据记录的地址。在 MyISAM 中，主索引和辅助索引（Secondary key）在结构上没有任何区别，只是<strong>主索引要求 key 是唯一的</strong>，而<strong>辅助索引的 key 可以重复</strong>。如果我们在 Col2 上建立一个辅助索引，则此索引的结构如下图所示：</p>
+<p><img src="https://segmentfault.com/img/bVbaFLU?w=744&amp;h=563" alt="图片描述"></p>
+<p>同样也是一颗 B+Tree，data 域保存数据记录的地址。因此，MyISAM 中索引检索的算法为首先按照 B+Tree 搜索算法搜索索引，如果指定的 Key 存在，则取出其 data 域的值，然后以 data 域的值为地址，读取相应数据记录。</p>
+<blockquote>
+<p>MyISAM 的索引方式也叫做“非聚集”的，之所以这么称呼是为了与 InnoDB 的聚集索引区分。</p>
+</blockquote>
+<h4 id="InnoDB-索引实现"><a href="#InnoDB-索引实现" class="headerlink" title="InnoDB 索引实现"></a>InnoDB 索引实现</h4><p>虽然 InnoDB 也使用 B+Tree 作为索引结构，但具体实现方式却与 MyISAM 截然不同。</p>
+<p>第一个重大区别是 InnoDB 的数据文件本身就是索引文件。从上文知道，MyISAM 索引文件和数据文件是分离的，索引文件仅保存数据记录的地址。而在 InnoDB 中，表数据文件本身就是按 B+Tree 组织的一个索引结构，这棵树的叶节点 data 域保存了完整的数据记录。<strong>这个索引的 key 是数据表的主键，因此 InnoDB 表数据文件本身就是主索引。</strong></p>
+<p><img src="https://segmentfault.com/img/bVbaFJ5?w=616&amp;h=275" alt="图片描述"></p>
+<p>上图是 InnoDB 主索引（同时也是数据文件）的示意图，可以看到叶节点包含了完整的数据记录。这种索引叫做聚集索引。因为 InnoDB 的数据文件本身要按主键聚集，所以 <strong>InnoDB 要求表必须有主键（MyISAM 可以没有）</strong>，如果没有显式指定，则 MySQL 系统会自动选择一个可以唯一标识数据记录的列作为主键，如果不存在这种列，则 MySQL 自动为 InnoDB 表生成一个隐含字段作为主键，这个字段长度为6个字节，类型为长整形。</p>
+<p>第二个与 MyISAM 索引的不同是 InnoDB 的辅助索引 data 域存储相应记录主键的值而不是地址。换句话说，<strong>InnoDB 的所有辅助索引都引用主键作为 data 域</strong>。例如，下图为定义在 Col3 上的一个辅助索引：</p>
+<p><img src="https://segmentfault.com/img/bVbaFL1?w=615&amp;h=254" alt="图片描述"></p>
+<p>这里以英文字符的ASCII码作为比较准则。聚集索引这种实现方式使得按主键的搜索十分高效，但是辅助索引搜索需要检索两遍索引：<strong>首先检索辅助索引获得主键，然后用主键到主索引中检索获得记录。</strong></p>
+<h1 id="索引操作"><a href="#索引操作" class="headerlink" title="索引操作"></a>索引操作</h1><p>Mysql索引查询语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW INDEX FROM table_name</span><br></pre></td></tr></table></figure>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>Mysql建表语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX index_name</span><br><span class="line">    [index_type]</span><br><span class="line">    ON tbl_name (index_col_name,...)</span><br><span class="line">    [index_option]</span><br><span class="line">    [algorithm_option | lock_option] ...</span><br><span class="line"></span><br><span class="line"># 下面是创建说明</span><br><span class="line">index_col_name:</span><br><span class="line">    col_name [(length)] [ASC | DESC]</span><br><span class="line"></span><br><span class="line">index_option:</span><br><span class="line">    KEY_BLOCK_SIZE [=] value</span><br><span class="line">  | index_type</span><br><span class="line">  | WITH PARSER parser_name</span><br><span class="line">  | COMMENT &apos;string&apos;</span><br><span class="line">  | &#123;VISIBLE | INVISIBLE&#125;</span><br><span class="line"></span><br><span class="line">index_type:</span><br><span class="line">    USING &#123;BTREE | HASH&#125;</span><br><span class="line"></span><br><span class="line">algorithm_option:</span><br><span class="line">    ALGORITHM [=] &#123;DEFAULT|INPLACE|COPY&#125;</span><br><span class="line"></span><br><span class="line">lock_option:</span><br><span class="line">    LOCK [=] &#123;DEFAULT|NONE|SHARED|EXCLUSIVE&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX index_name ON table_name(col_name)</span><br></pre></td></tr></table></figure>
+<h3 id="Alter"><a href="#Alter" class="headerlink" title="Alter"></a>Alter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE table_name ADD INDEX index_name (col_name)</span><br></pre></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="Drop"><a href="#Drop" class="headerlink" title="Drop"></a>Drop</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX index_name ON table_name</span><br></pre></td></tr></table></figure>
+<h3 id="Alter-1"><a href="#Alter-1" class="headerlink" title="Alter"></a>Alter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE table_name DROP INDEX index_name</span><br></pre></td></tr></table></figure>
+<h1 id="索引使用策略"><a href="#索引使用策略" class="headerlink" title="索引使用策略"></a>索引使用策略</h1><h2 id="1-最左前缀原理"><a href="#1-最左前缀原理" class="headerlink" title="1. 最左前缀原理*"></a>1. 最左前缀原理*</h2><p>MySQL 对联合索引的顺序是敏感的。例如我们建立了一个 ( a, b, c, d ) 顺序的索引，假如现在需要执行这样一个 <code>a = 1 and b = 2 and c &gt; 3 and d = 4</code> WHERE 查询语句：</p>
+<ul>
+<li><strong>MySQL 会一直向右匹配直到遇到范围查询（&gt;、&lt;、between、like）就停止索引的匹配</strong>。因此 d 字段是没有办法使用索引的。</li>
+<li>查询条件用到了索引中列的精确匹配，<strong>但是中间某个条件未提供，此时也是没有办法使用索引的</strong>。</li>
+</ul>
+<p>例如我们有一个 (a,b,c) 顺序的索引，假如现在需要执行一个 <code>a = 1 and c = 2</code> 的 WHERE 查询，因为 b 未提供，所以查询只用到了索引的第一列，而后面的 c 虽然也在索引中，但是由于 b 不存在而无法和左前缀连接，因此 c 字段也是没有办法使用索引的。</p>
+<blockquote>
+<p><strong>有一点需要注意，在精确匹配（<code>=</code> 和 <code>IN</code>）中索引的顺序可以是任意的</strong>，MySQL 的查询优化器会帮用户优化成索引可以识别的形式。比如对于 (a,b,c) 顺序的索引来说，<code>a = 1 and b = 2 and c = 3</code> 和 <code>a = 1 and c = 3 and b = 2</code>、<code>c = 3 and a = 1 and b = 2</code> 等 SQL 语句效果都是一样的。 </p>
+<p>前缀匹配是可以用到索引的（<code>like ‘xxx%’</code>）</p>
+</blockquote>
+<h2 id="2-选择区分度高的列作为索引"><a href="#2-选择区分度高的列作为索引" class="headerlink" title="2. 选择区分度高的列作为索引"></a>2. 选择区分度高的列作为索引</h2><p>尽量选择区分度高的列作为索引，区分度的公式是 <code>count(distinct col)/count(*)</code>，表示字段不重复的比例，比例越大我们扫描的记录数越少，唯一键的区分度是1，而一些状态、性别字段可能在大数据面前区分度就是0，那可能有人会问，这个比例有什么经验值吗？使用场景不同，这个值也很难确定，一般需要 join 的字段我们都要求是0.1以上，即平均1条扫描10条记录。</p>
+<h2 id="3-更新非常频繁的字段不适合创建索引"><a href="#3-更新非常频繁的字段不适合创建索引" class="headerlink" title="3. 更新非常频繁的字段不适合创建索引"></a>3. 更新非常频繁的字段不适合创建索引</h2><p>维护索引是需要空间和时间成本的，对于更新非常频繁的字段，例如通过该字段的查询并不是很多，可能几个小时或是更长才会执行一次，但是更新反而比查询更频繁，此时创建索引就失去了意义，反而降低了 MySQL 的性能。</p>
+<h2 id="4-尽量的扩展索引，不要新建索引"><a href="#4-尽量的扩展索引，不要新建索引" class="headerlink" title="4. 尽量的扩展索引，不要新建索引"></a>4. 尽量的扩展索引，不要新建索引</h2><p>尽量的扩展索引，不要新建索引。比如表中已经有 a 的索引，现在要加 (a,b) 的索引，那么只需要修改原来的索引即可。</p>
+<h2 id="5-数据量少的表不建立索引"><a href="#5-数据量少的表不建立索引" class="headerlink" title="5. 数据量少的表不建立索引"></a>5. 数据量少的表不建立索引</h2><p><strong>数据量小的表最好不要使用索引</strong>，因为由于数据较少，可能查询全部数据花费的时间比遍历索引的时间还要短，索引就可能不会产生优化效果；</p>
+<h1 id="InnoDB的主键选择与插入优化"><a href="#InnoDB的主键选择与插入优化" class="headerlink" title="InnoDB的主键选择与插入优化"></a>InnoDB的主键选择与插入优化</h1><ul>
+<li><strong>在使用InnoDB存储引擎时，如果没有特别的需要，请永远使用一个与业务无关的自增字段作为主键。</strong></li>
+</ul>
+<p>相比业务，从数据库索引优化角度看，使用InnoDB引擎而不使用自增主键绝对是一个糟糕的主意。</p>
+<p>上文讨论过InnoDB的索引实现，InnoDB使用聚集索引，数据记录本身被存于主索引（一颗B+Tree）的叶子节点上。这就要求同一个叶子节点内（大小为一个内存页或磁盘页）的各条数据记录按主键顺序存放，因此每当有一条新的记录插入时，MySQL会根据其主键将其插入适当的节点和位置，如果页面达到装载因子（InnoDB默认为15/16），则开辟一个新的页（节点）。</p>
+<p>如果表使用自增主键，那么每次插入新的记录，记录就会顺序添加到当前索引节点的后续位置，当一页写满，就会自动开辟一个新的页。如下图所示：</p>
+<p><img src="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/13.png" alt="img"></p>
+<p>这样就会形成一个紧凑的索引结构，近似顺序填满。由于每次插入时也不需要移动已有数据，因此效率很高，也不会增加很多开销在维护索引上。</p>
+<p>如果使用非自增主键（如果身份证号或学号等），由于每次插入主键的值近似于随机，因此每次新纪录都要被插到现有索引页得中间某个位置：</p>
+<p><img src="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/14.png" alt="img"></p>
+<p>此时MySQL不得不为了将新记录插到合适位置而移动数据，甚至目标页面可能已经被回写到磁盘上而从缓存中清掉，此时又要从磁盘上读回来，这增加了很多开销，同时频繁的移动、分页操作造成了大量的碎片，得到了不够紧凑的索引结构，后续不得不通过OPTIMIZE TABLE来重建表并优化填充页面。</p>
+<p>因此，只要可以，请尽量在InnoDB上采用自增字段做主键。</p>
+<h2 id="索引的缺点"><a href="#索引的缺点" class="headerlink" title="索引的缺点"></a>索引的缺点</h2><ol>
+<li><p>创建索引和维护索引要耗费时间，并且随着数据量的增加所耗费的时间也会增加</p>
+</li>
+<li><p><strong>索引也需要占空间</strong>，我们知道数据表中的数据也会有最大上线设置的，如果我们有大量的索引，索引文件可能会比数据文件更快达到上线值</p>
+</li>
+<li><p><strong>当对表中的数据进行增加、删除、修改时，索引也需要动态的维护，降低了数据的维护速度</strong></p>
+</li>
+</ol>
+<h1 id="用Explain分析查询"><a href="#用Explain分析查询" class="headerlink" title="用Explain分析查询"></a>用Explain分析查询</h1><h2 id="格式："><a href="#格式：" class="headerlink" title="格式："></a>格式：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN select * from table_name</span><br></pre></td></tr></table></figure>
+<h2 id="分析字段："><a href="#分析字段：" class="headerlink" title="分析字段："></a>分析字段：</h2><p><img src="https://images2015.cnblogs.com/blog/874710/201612/874710-20161214144949198-761711481.png" alt="img"></p>
+<h2 id="Explain解释"><a href="#Explain解释" class="headerlink" title="Explain解释"></a>Explain解释</h2><p>id：SELECT识别符。这是SELECT的查询序列号,也就是一条语句中，该select是第几次出现。</p>
+<p>select_type：所使用的SELECT查询类型</p>
+<ul>
+<li>SIMPLE： 表示此查询不包含 UNION 查询或子查询</li>
+<li>PRIMARY： 表示此查询是最外层的查询</li>
+<li>SUBQUERY： 子查询中的第一个 SELECT</li>
+<li>UNION： 表示此查询是 UNION 的第二或随后的查询</li>
+<li>DEPENDENT UNION： UNION 中的第二个或后面的查询语句, 取决于外面的查询</li>
+<li>UNION RESULT, UNION 的结果</li>
+<li>DEPENDENT SUBQUERY: 子查询中的第一个 SELECT, 取决于外面的查询. 即子查询依赖于外层查询的结果.</li>
+<li>DERIVED：衍生，表示导出表的SELECT（FROM子句的子查询）</li>
+</ul>
+<p>table：被查询数据表的名字，按被读取的先后顺序排列</p>
+<p><strong>type</strong>：通过 type 字段，我们判断此次查询是 全表扫描 还是 索引扫描等。</p>
+<ul>
+<li><p>system: 表中只有一条数据， 这个类型是特殊的 const 类型。</p>
+</li>
+<li><p>const: 针对主键或唯一索引的等值查询扫描，最多只返回一行数据。 const 查询速度非常快， 因为它仅仅读取一次即可。例如下面的这个查询，它使用了主键索引，因此 type 就是 const 类型的：explain select * from user_info where id = 2；</p>
+</li>
+<li><p>eq_ref: 此类型通常出现在多表的 join 查询，表示对于前表的每一个结果，都只能匹配到后表的一行结果。并且查询的比较操作通常是 =，查询效率较高。例如：explain select * from user_info, order_info where user_info.id = order_info.user_id;</p>
+</li>
+<li><p>ref: 此类型通常出现在多表的 join 查询，针对于非唯一或非主键索引，或者是使用了 最左前缀 规则索引的查询。例如下面这个例子中， 就使用到了 ref 类型的查询：explain select * from user_info, order_info where user_info.id = order_info.user_id AND order_info.user_id = 5</p>
+</li>
+<li><p>range: 表示使用索引范围查询，通过索引字段范围获取表中部分数据记录。这个类型通常出现在 =, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;=, IS NULL, &lt;=&gt;, BETWEEN, IN() 操作中。例如下面的例子就是一个范围查询：explain select * from user_info  where id between 2 and 8；</p>
+</li>
+<li><p>index: 表示全索引扫描(full index scan)，和 ALL 类型类似，只不过 ALL 类型是全表扫描，而 index 类型则仅仅扫描所有的索引， 而不扫描数据。index 类型通常出现在：所要查询的数据直接在索引树中就可以获取到, 而不需要扫描数据。当是这种情况时，Extra 字段 会显示 Using index。</p>
+</li>
+<li><p>ALL: 表示全表扫描，这个类型的查询是性能最差的查询之一。通常来说， 我们的查询不应该出现 ALL 类型的查询，因为这样的查询在数据量大的情况下，对数据库的性能是巨大的灾难。 如一个查询是 ALL 类型查询， 那么一般来说可以对相应的字段添加索引来避免。</p>
+<p>通常来说, 不同的 type 类型的性能关系如下: </p>
+<p><strong>ALL &lt; index &lt; range ~ index_merge &lt; ref &lt; eq_ref &lt; const &lt; system</strong></p>
+<p>ALL 类型因为是全表扫描， 因此在相同的查询条件下，它是速度最慢的。而 index 类型的查询虽然不是全表扫描，但是它扫描了所有的索引，因此比 ALL 类型的稍快.后面的几种类型都是利用了索引来查询数据，因此可以过滤部分或大部分数据，因此查询效率就比较高了。 </p>
+</li>
+</ul>
+<p><strong>possible_keys</strong>：MySQL在搜索数据记录时可以选用的各个索引</p>
+<p><strong>key</strong>：实际选用的索引</p>
+<p><strong>key_len</strong>：表示查询优化器使用了索引的字节数（也就是使用的索引个数），这个字段可以评估组合索引是否完全被使用。</p>
+<p>ref：这个表示显示索引的哪一列被使用了 。也可能是const常量。</p>
+<p><strong>rows</strong>：MySQL在估算本次sql要查找到结果集需要扫描读取的数据行数 。原则上越少越好</p>
+<p>extra：提供了与关联操作有关的信息，没有则什么都不写。　　　</p>
+<p>以上内容来自网络，参考文章：</p>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000014906118" target="_blank" rel="noopener">Mysql索引</a></li>
+<li><a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="noopener">Mysql索引背后的数据结构及算法原理</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+	      
+	        
+	      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/Blog/tags/Mysql/" rel="tag"># Mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Blog/Java/java类加载-简单总结/" rel="next" title="java类加载-简单总结">
+                <i class="fa fa-chevron-left"></i> java类加载-简单总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/Java/java集合框架-汇总复习/" rel="prev" title="java集合框架-汇总复习">
+                java集合框架-汇总复习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/Blog/images/head.jpg"
+                alt="Aaron.H" />
+            
+              <p class="site-author-name" itemprop="name">Aaron.H</p>
+              <p class="site-description motion-element" itemprop="description">Road endless its long and far, I will seek up and down！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/Blog/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/Blog/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/Blog/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/Blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是索引"><span class="nav-number">2.</span> <span class="nav-text">什么是索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引分类"><span class="nav-number">3.</span> <span class="nav-text">索引分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主键索引（Primary-Key）"><span class="nav-number">3.0.1.</span> <span class="nav-text">主键索引（Primary Key）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通索引（INDEX）"><span class="nav-number">3.0.2.</span> <span class="nav-text">普通索引（INDEX）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唯一索引（Unique）"><span class="nav-number">3.0.3.</span> <span class="nav-text">唯一索引（Unique）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全文索引（FullText）"><span class="nav-number">3.0.4.</span> <span class="nav-text">全文索引（FullText）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间索引（Spatial）"><span class="nav-number">3.0.5.</span> <span class="nav-text">空间索引（Spatial）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引数据结构类型（Index-Type）"><span class="nav-number">3.0.6.</span> <span class="nav-text">索引数据结构类型（Index Type）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MyISAM-索引实现"><span class="nav-number">3.0.6.1.</span> <span class="nav-text">MyISAM 索引实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB-索引实现"><span class="nav-number">3.0.6.2.</span> <span class="nav-text">InnoDB 索引实现</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引操作"><span class="nav-number">4.</span> <span class="nav-text">索引操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">4.1.</span> <span class="nav-text">创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create"><span class="nav-number">4.1.1.</span> <span class="nav-text">Create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alter"><span class="nav-number">4.1.2.</span> <span class="nav-text">Alter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">4.2.</span> <span class="nav-text">删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop"><span class="nav-number">4.2.1.</span> <span class="nav-text">Drop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alter-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">Alter</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引使用策略"><span class="nav-number">5.</span> <span class="nav-text">索引使用策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-最左前缀原理"><span class="nav-number">5.1.</span> <span class="nav-text">1. 最左前缀原理*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-选择区分度高的列作为索引"><span class="nav-number">5.2.</span> <span class="nav-text">2. 选择区分度高的列作为索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-更新非常频繁的字段不适合创建索引"><span class="nav-number">5.3.</span> <span class="nav-text">3. 更新非常频繁的字段不适合创建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-尽量的扩展索引，不要新建索引"><span class="nav-number">5.4.</span> <span class="nav-text">4. 尽量的扩展索引，不要新建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据量少的表不建立索引"><span class="nav-number">5.5.</span> <span class="nav-text">5. 数据量少的表不建立索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB的主键选择与插入优化"><span class="nav-number">6.</span> <span class="nav-text">InnoDB的主键选择与插入优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的缺点"><span class="nav-number">6.1.</span> <span class="nav-text">索引的缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用Explain分析查询"><span class="nav-number">7.</span> <span class="nav-text">用Explain分析查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#格式："><span class="nav-number">7.1.</span> <span class="nav-text">格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析字段："><span class="nav-number">7.2.</span> <span class="nav-text">分析字段：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Explain解释"><span class="nav-number">7.3.</span> <span class="nav-text">Explain解释</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron.H</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共71.3k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/Blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/Blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
