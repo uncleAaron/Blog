@@ -96,7 +96,7 @@
 <meta property="og:description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量 其中，栈结构线程私有，堆结构线程共享（方法区描述类，也是堆结构）">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/Java虚拟机运行时数据区.png">
-<meta property="og:updated_time" content="2018-07-23T12:15:41.684Z">
+<meta property="og:updated_time" content="2018-09-06T06:26:46.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存区域划分以及内存溢出异常">
 <meta name="twitter:description" content="前言 Java虚拟机的内存区域主要分为：程序计数器，虚拟机栈，本地方法栈，Java堆，方法区🖊  其中，栈描述方法执行，及方法的局部变量和引用；堆描述对象；方法区描述类和常量 其中，栈结构线程私有，堆结构线程共享（方法区描述类，也是堆结构）">
@@ -334,7 +334,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,316
+                  1,333
                 </span>
               
 
@@ -381,13 +381,13 @@
 <blockquote>
 <p>上图理解：</p>
 <p><strong>堆</strong>结构线程共享，描述所有的对象（类在方法区中，方法区也是堆）；</p>
-<p><strong>栈</strong>和计数器线程私有，描述方法执行</p>
+<p><strong>栈</strong>和计数器线程私有，描述方法执行，和存放引用</p>
 </blockquote>
 <p>Java虚拟机在运行时会把它所管理的内存划分为若干个不同的数据区域。大致分为以下：</p>
 <ol>
 <li><p><strong>程序计数器</strong>：在Java中，每个线程都有一个独立的程序计数器，独立存储，该段内存是线程私有的</p>
 </li>
-<li><p><strong>Java虚拟机栈：</strong>描述<strong>方法执行</strong>的内存模型：</p>
+<li><p><strong>Java虚拟机栈：</strong>描述<strong>方法执行</strong>的内存模型，以及<strong>存放局部变量，对象引用</strong>：</p>
 <ul>
 <li><p>每个方法在执行的同时会创建<strong>栈帧</strong>用于存储<strong>局部变量表</strong>、动态链接等信息。</p>
 </li>
@@ -466,7 +466,7 @@
   <p><span>本文标题:</span><a href="/Blog/Java/Java内存区域划分以及内存溢出异常/">Java内存区域划分以及内存溢出异常</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年07月21日 - 19:07</p>
-  <p><span>最后更新:</span>2018年07月23日 - 20:07</p>
+  <p><span>最后更新:</span>2018年09月06日 - 14:09</p>
   <p><span>原始链接:</span><a href="/Blog/Java/Java内存区域划分以及内存溢出异常/" title="Java内存区域划分以及内存溢出异常">https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java内存区域划分以及内存溢出异常/"  aria-label="复制成功！"></i></span>
   </p>
@@ -607,7 +607,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -629,7 +629,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -724,7 +724,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.3k字</span>
+  <span class="post-count">博客全站共76.8k字</span>
 </div>
 
         

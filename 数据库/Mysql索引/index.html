@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略   🖊">
+<meta name="description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略 使用 Expl">
 <meta name="keywords" content="数据库,Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql索引">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/数据库/Mysql索引/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略   🖊">
+<meta property="og:description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略 使用 Expl">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://segmentfault.com/img/bVbaFIR?w=752&h=565">
 <meta property="og:image" content="https://segmentfault.com/img/bVbaFLU?w=744&h=563">
@@ -102,10 +102,10 @@
 <meta property="og:image" content="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/13.png">
 <meta property="og:image" content="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/14.png">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/874710/201612/874710-20161214144949198-761711481.png">
-<meta property="og:updated_time" content="2018-08-18T09:15:16.156Z">
+<meta property="og:updated_time" content="2018-09-06T08:35:26.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql索引">
-<meta name="twitter:description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略   🖊">
+<meta name="twitter:description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略 使用 Expl">
 <meta name="twitter:image" content="https://segmentfault.com/img/bVbaFIR?w=752&h=565">
 
 
@@ -340,7 +340,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,501
+                  4,511
                 </span>
               
 
@@ -382,7 +382,8 @@
 <li>索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial </li>
 <li>Mysql的存储引擎分为InnoDB、MyISAM、Memory</li>
 <li>其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离</li>
-<li>索引的最左匹配原则和索引使用策略   🖊</li>
+<li>索引的最左匹配原则和索引使用策略</li>
+<li>使用 <strong><code>Explain</code></strong>分析查询语句🖊</li>
 </ol>
 </blockquote>
 <a id="more"></a>
@@ -698,7 +699,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -720,7 +721,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -815,7 +816,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.3k字</span>
+  <span class="post-count">博客全站共76.8k字</span>
 </div>
 
         

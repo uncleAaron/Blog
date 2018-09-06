@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/重入锁的公平与非公平对比.png">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/读写锁锁状态的划分方式.png">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/Condition等待队列在同步器中的体现.png">
-<meta property="og:updated_time" content="2018-07-25T11:54:29.907Z">
+<meta property="og:updated_time" content="2018-09-05T17:07:52.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第5章 Java中的锁">
 <meta name="twitter:description" content="前言 本章总结了Lock接口，队列同步器(AbstractQueuedSynchronizer)，可重用锁ReentrantLock">
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,830
+                  3,831
                 </span>
               
 
@@ -466,7 +466,7 @@
 <p>Lock接口的实现一般都是通过聚合使用一个同步器<code>AbstracQueuedSynchronizer</code>的子类实现访问控制的。</p>
 <p><img src="/Blog/Java/Java并发编程艺术/第5章-Java中的锁/Lock实现.png" alt="Lock实现"></p>
 <h2 id="二、队列同步器AbstractQueuedSynchronizer"><a href="#二、队列同步器AbstractQueuedSynchronizer" class="headerlink" title="二、队列同步器AbstractQueuedSynchronizer"></a>二、队列同步器AbstractQueuedSynchronizer</h2><p>队列同步器（简称同步器）AbstractQueuedSynchronizer</p>
-<p>是用来<strong>构建锁和同步组件的基本框架</strong>，使用一个<strong>int表示同步状态</strong>，使用一个FIFO<strong>队列完成获取资源的线程的排队</strong>工作。</p>
+<p>是用来<strong>构建锁和同步组件的基本框架</strong>，使用一个volatile的<strong>int表示同步状态</strong>，使用一个FIFO<strong>队列完成获取资源的线程的排队</strong>工作。</p>
 <blockquote>
 </blockquote>
 <p>同步器主要使用方式：<strong>继承</strong></p>
@@ -767,7 +767,7 @@
   <p><span>本文标题:</span><a href="/Blog/Java/Java并发编程艺术/第5章-Java中的锁/">第5章 Java中的锁</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年06月06日 - 15:06</p>
-  <p><span>最后更新:</span>2018年07月25日 - 19:07</p>
+  <p><span>最后更新:</span>2018年09月06日 - 01:09</p>
   <p><span>原始链接:</span><a href="/Blog/Java/Java并发编程艺术/第5章-Java中的锁/" title="第5章 Java中的锁">https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第5章-Java中的锁/"  aria-label="复制成功！"></i></span>
   </p>
@@ -908,7 +908,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -930,7 +930,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1025,7 +1025,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.3k字</span>
+  <span class="post-count">博客全站共76.8k字</span>
 </div>
 
         

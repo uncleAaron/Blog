@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/Blog/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/Blog/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/Blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/Blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/Blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/Blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/Blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/Blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NIO,netty," />
+
+
+
+
+
+  <link rel="alternate" href="/Blog/atom.xml" title="StormAaron的技术站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言 NIO面向块（整个缓冲区）有所有基本类型的Buffer支持提供新的I/O抽象：Channel支持锁和内存映射文件的文件访问接口多路复用非阻塞式的高伸缩性I/O（原来的是阻塞的）🖊">
+<meta name="keywords" content="NIO,netty">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-NIO">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/Java/Java-NIO/index.html">
+<meta property="og:site_name" content="StormAaron的技术站">
+<meta property="og:description" content="前言 NIO面向块（整个缓冲区）有所有基本类型的Buffer支持提供新的I/O抽象：Channel支持锁和内存映射文件的文件访问接口多路复用非阻塞式的高伸缩性I/O（原来的是阻塞的）🖊">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-06T08:36:29.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java-NIO">
+<meta name="twitter:description" content="前言 NIO面向块（整个缓冲区）有所有基本类型的Buffer支持提供新的I/O抽象：Channel支持锁和内存映射文件的文件访问接口多路复用非阻塞式的高伸缩性I/O（原来的是阻塞的）🖊">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/Blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/Java/Java-NIO/"/>
+
+
+
+
+
+  <title>Java-NIO | StormAaron的技术站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/Blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StormAaron的技术站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/Blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/Blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/Blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/Blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/Blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Java/Java-NIO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java-NIO</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-02T12:54:04+08:00">
+                2018-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,732
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>NIO面向块（整个缓冲区）<br>有所有基本类型的Buffer支持<br>提供新的I/O抽象：Channel<br>支持锁和内存映射文件的文件访问接口<br>多路复用非阻塞式的高伸缩性I/O（原来的是阻塞的）🖊 </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="NIO的特性"><a href="#NIO的特性" class="headerlink" title="NIO的特性"></a>NIO的特性</h2><p>NIO面向块（整个缓冲区）<br>有所有基本类型的Buffer支持<br>提供新的I/O抽象：Channel<br>支持锁和内存映射文件的文件访问接口<br>多路复用非阻塞式的高伸缩性I/O（原来的是阻塞的）</p>
+<h2 id="NIO的目的"><a href="#NIO的目的" class="headerlink" title="NIO的目的"></a>NIO的目的</h2><p>提供高速的I/O而无需编写自定义的本机代码。NIO将最耗时的I/O操作（填充和提取缓冲区）转移到操作系统中，极大提高了运行速度。</p>
+<p>原来的I/O是通过流一个一个字节输出和读取的，而NIO是一次产生或消费一个数据块，比流更快。</p>
+<h2 id="阻塞、非阻塞、同步、异步"><a href="#阻塞、非阻塞、同步、异步" class="headerlink" title="阻塞、非阻塞、同步、异步"></a>阻塞、非阻塞、同步、异步</h2><p>阻塞和非阻塞：针对进程在访问数据时，数据是否已经准备就绪的的一种处理方式</p>
+<p>阻塞：数据还没准备好时，要等待缓冲区中的数据准备好过后才能处理其他的事情，否则一直等在那里。</p>
+<p>非阻塞：当进程访问数据缓冲区时，数据没准备好的话，直接返回不是要等待，有数据时也直接返回。</p>
+<p>异步和同步：针对应用和操作系统处理锁采用的方式</p>
+<p>如：同步需要应用程序直接参与到IO读写的操作，而异步IO交给操作系统处理，程序可以做其他的事情。同步IO必须阻塞在某个方法上等待IO完成</p>
+<p>NIO采用轮询模式（select模式（多路复用模式））这是个同步非阻塞的模式，把读写时间交给单个线程处理，不断轮询读写缓冲区，检查数据是否已经准备好。之后再通知相应的读写线程。这样的话其他线程就可以做其他事情，只阻塞select的线程。</p>
+<h1 id="NIO缓冲区"><a href="#NIO缓冲区" class="headerlink" title="NIO缓冲区"></a>NIO缓冲区</h1><p>是一个包含了一个数组的对象，除了数组之外，还有几个信息：</p>
+<ol>
+<li>容量capacity：创建缓冲时确定，不可改变</li>
+<li>上界limit：缓冲区中现存元素的计数</li>
+<li>位置position：下一个要被读/写的元素索引，会被get和put自动更新</li>
+<li>标记mark：备忘位置，需要设定。</li>
+</ol>
+<p>有7种缓冲区（除boolean以外的基本类型缓冲区）。</p>
+<h2 id="创建缓冲区"><a href="#创建缓冲区" class="headerlink" title="创建缓冲区"></a>创建缓冲区</h2><h3 id="1-静态工厂方法allocate"><a href="#1-静态工厂方法allocate" class="headerlink" title="1. 静态工厂方法allocate"></a>1. 静态工厂方法allocate</h3><p>缓冲区类都是抽象类，但是有定义一个静态工厂方法来创建相应的缓冲区实例。<br>如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CharBuffer charBuffer = CharBuffer.allocate(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="2-wrap-使用已存在的数组作为缓冲区"><a href="#2-wrap-使用已存在的数组作为缓冲区" class="headerlink" title="2. wrap()使用已存在的数组作为缓冲区"></a>2. wrap()使用已存在的数组作为缓冲区</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> [] myArray = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">100</span>];</span><br><span class="line">CharBuffer charbuffer = CharBuffer.wrap(myArray);</span><br></pre></td></tr></table></figure>
+<h2 id="复制缓冲区"><a href="#复制缓冲区" class="headerlink" title="复制缓冲区"></a>复制缓冲区</h2><p>缓冲区不限于管理数组中的外部数据，也可以管理其他缓冲区的外部数据，这种缓冲区称为视图缓冲器。大多数视图缓冲器都是ByteBuffer的视图。</p>
+<p>如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buff = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">IntBuffer intBuffer = buff.asIntBuffer();</span><br></pre></td></tr></table></figure>
+<h3 id="Duplicate-复制缓冲区"><a href="#Duplicate-复制缓冲区" class="headerlink" title="Duplicate()复制缓冲区"></a>Duplicate()复制缓冲区</h3><p><code>Duplicate()</code>创建一个与原始缓冲区相似的新缓冲区，共享数据元素（共用同一个数组，拥有同样的数据视图，并不是真正的复制），拥有相同容量，但是有各自的位置、上界、标记属性。若原缓冲区为只读或直接缓冲，新的缓冲区也会继承这些属性。</p>
+<p>对一个缓冲区的数据元素做改变会反映在另一个缓冲区上。</p>
+<h3 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h3><p>一般用于需要重新使用缓冲区时的重置pos</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CharBuffer charbuffer = CharBuffer.allocate(<span class="number">100</span>);</span><br><span class="line">charbuffer.claer();	<span class="comment">// pos = 0;</span></span><br></pre></td></tr></table></figure>
+<h3 id="flip"><a href="#flip" class="headerlink" title="flip()"></a>flip()</h3><p>缓冲区反转，一般用于需要重新使用缓冲区时的重置pos</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CharBuffer charbuffer = CharBuffer.allocate(<span class="number">100</span>);</span><br><span class="line">charbuffer.flip();	<span class="comment">// limit = pos; pos = 0;</span></span><br></pre></td></tr></table></figure>
+<h1 id="通道Channel"><a href="#通道Channel" class="headerlink" title="通道Channel"></a>通道Channel</h1><p>Channel用于字节缓冲区和位于通道的另一个实体（通常是一个文字或者一个套接字）之间有效的传输数据。<br>通道是一种途径，是访问系统I/O服务的导管。借助通道可以用最小的开销访问操作系统本身的I/O服务。缓冲区则是通道内部用来发送和接收数据的端点。</p>
+<blockquote>
+<p>通道的API由接口指定，具体的实现是native的，不同的操作系统的通道实现有根本的差异，但都是直接访问操作系统底层的I/O服务。</p>
+</blockquote>
+<h2 id="通道基础"><a href="#通道基础" class="headerlink" title="通道基础"></a>通道基础</h2><ul>
+<li>通道可以以阻塞或非阻塞模式进行。（只有面向流的通道像sockets和pipie才能使用非阻塞模式，而文件通道总是阻塞的）<ul>
+<li>非阻塞模式不会让调用的线程休眠。请求的操作要么立即完成，要么返回一个结果表明没进行操作。</li>
+</ul>
+</li>
+<li>通道会连接一个特定I/O服务且通道实例的性能受限于它所连接的I/O服务特征。如：一个连接到只读文件的Channel实例不能进行写操作</li>
+</ul>
+<h2 id="关闭通道-close"><a href="#关闭通道-close" class="headerlink" title="关闭通道 close()"></a>关闭通道 close()</h2><p>我们可以通过调用close()方法来关闭通道；</p>
+<p>一个打开的通道代表与一个特定I/O服务的特定连接，并封装该连接的状态。当通道关闭时，这个连接会丢失，然后通道将不再连接任何东西。</p>
+<p>可以通过isOpen()方法来判断通道是否打开，如果对关闭的通道进行读写等操作，会导致ClosedChannelException异常；</p>
+<p>另外，如果一个通道实现了InterruptibleChannel接口，那么，当该通道上的线程被中断时，通道会被关闭，且该线程会抛出ClosedByInterruptException异常；</p>
+<h2 id="Channel分类"><a href="#Channel分类" class="headerlink" title="Channel分类"></a>Channel分类</h2><p>I/O服务广义可分为两类：File I/O 和 Stream I/O。Channel也分为了两类：文件File通道和套接字socket通道</p>
+<h3 id="文件通道"><a href="#文件通道" class="headerlink" title="文件通道"></a>文件通道</h3><h4 id="1-FileChannel"><a href="#1-FileChannel" class="headerlink" title="1. FileChannel"></a>1. FileChannel</h4><p><strong>文件通道总是阻塞的</strong>，不能被设置为非阻塞模式。</p>
+<ul>
+<li><strong>FileChannel</strong> 对象<strong>只能通过在一个打开的文件流对象：RandomAccessFile、FileInpurStream、FileOutputStream对象上调用<code>getChannel()</code> 方法来获取，不能直接创建</strong>。getChannel会返回一个连接到相同文件的FileChannel对象且该对象<strong>具有与file对象相同的访问权限</strong>。</li>
+<li>通道会连接一个特定I/O服务且通道实例的性能受限于它所连接的I/O服务特征。一个连接到只读文件的Channel实例不能进行写操作</li>
+<li>FileChannel 对象是<strong>线程安全的</strong>。（它有多线程的操作，也有单线程串行的操作，像影响文件大小和位置的操作就是单线程串行的，即写锁读锁的问题）</li>
+</ul>
+<h4 id="创建文件通道-getChannel"><a href="#创建文件通道-getChannel" class="headerlink" title="创建文件通道 getChannel()"></a>创建文件通道 getChannel()</h4><p>FileChannel 对象只能通过在一个打开的文件流对象：RandomAccessFile、FileInpurStream、FileOutputStream对象上调用<code>getChannel()</code> 方法来获取，不能直接创建。</p>
+<h4 id="使用文件通道-read-write-position"><a href="#使用文件通道-read-write-position" class="headerlink" title="使用文件通道 read() write() position()"></a>使用文件通道 read() write() position()</h4><p>使用 FileChannel 的 <code>read()</code> 和 <code>write()</code> 方法进行文件访问，配合<code>position()</code> 进行文件操作。</p>
+<ul>
+<li>FileChannel 位置 (position) 是底层的文件描述符获取的，由所有该文件的FileChannel对象共享可见。</li>
+</ul>
+<p>position 决定文件读写的位置，当字节被read() 或 write() 时，position会自动更新。</p>
+<p>当read() 方法到了文件大小的值时，会返回文件尾条件值（-1）</p>
+<p>write时position超过文件大小时，文件会自动扩展来容纳新字节。</p>
+<p>write() 前一般要 flip()</p>
+<h3 id="套接字-socket-通道"><a href="#套接字-socket-通道" class="headerlink" title="套接字(socket)通道"></a>套接字(socket)通道</h3><p>可设置为非阻塞模式。非阻塞模式使管理维护多个socket通道变得更容易，无需把过多的性能开销耗费在切换管理socket的线程上。</p>
+<ul>
+<li><p>Socket通道在实例化时都会创建一个对等的socket对象（对应Socket，ServerSocket，DatagramSocket）</p>
+</li>
+<li><p>Channel可以通过<code>getSocket()</code>获取其对等的socket对象。</p>
+</li>
+<li>socket可以通过<code>getChannel()</code>方法获取其对应的Channel（不是所有的socket都会有关联的通道，若使用传统方法（直接实例化）创建一个Socket对象，就不会关联Channel，而且getChannel返回null）</li>
+</ul>
+<h4 id="1-SocketChannel"><a href="#1-SocketChannel" class="headerlink" title="1. SocketChannel"></a>1. SocketChannel</h4><p>SocketChannel创建的时候会自动串联一个对等的Socket对象。</p>
+<p>使用SocketChannel 的<code>connect()</code>方法将通道连接。可以用<code>isConnected()</code>判断通道的连接状态。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SocketChannel socketChannel = SocketChannel.open();</span><br><span class="line">socketChannel.connect(<span class="keyword">new</span> InetSocketAddress(<span class="string">"http://127.0.0.1"</span>, <span class="number">80</span>));</span><br></pre></td></tr></table></figure>
+<p>connect下也有阻塞和非阻塞模式<br>阻塞模式下 connect() 会一直等待连接到服务器上连接建立（直接使用socket调用connect也是阻塞的）<br>非阻塞模式下 connect() 会立即返回值true或false（<strong>如果连接不能建立，connect()方法会返回false且异步地继续连接建立的过程。</strong>为了确定连接是否建立，可以调用<code>finishConnect()</code>方法判断是否连接完毕。如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">socketChannel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">socketChannel.connect(<span class="keyword">new</span> InetSocketAddress(<span class="string">"http://127.0.0.1"</span>, <span class="number">80</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(! socketChannel.finishConnect() )&#123;	\\ 直到连接成功就退出自旋</span><br><span class="line">    <span class="comment">//wait, or do something else...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-ServerSocketChannel"><a href="#2-ServerSocketChannel" class="headerlink" title="2. ServerSocketChannel"></a>2. ServerSocketChannel</h4><p>和ServerSocket大概一致，多了通道语义。</p>
+<ul>
+<li><p>在阻塞模式下，调用ServerSocketChannel的<code>accept()</code>会像serverSocket一样一直阻塞直到监听到连接返回一个SocketChannel对象。</p>
+</li>
+<li><p>在非阻塞模式下，在无传入连接等待时，调用<code>accept()</code>会立即返回null（从而实现可伸缩性，降低复杂性，实现可选择性）</p>
+</li>
+<li>//，一般会使用选择器来创建ServerSocketChannel对象和监听事件并通知。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="3-DatagramChannel"><a href="#3-DatagramChannel" class="headerlink" title="3. DatagramChannel"></a>3. DatagramChannel</h4><h4 id="设置非阻塞模式-configureBlocking-false"><a href="#设置非阻塞模式-configureBlocking-false" class="headerlink" title="设置非阻塞模式 configureBlocking(false)"></a>设置非阻塞模式 configureBlocking(false)</h4><p>使用<code>configureBlocking()</code>传参<code>false</code>即为非阻塞模式，反之为阻塞模式。</p>
+<p>可以通过<code>isBlocking()</code>判断当前socket通道在哪种模式下</p>
+<h4 id="创建socket通道-open"><a href="#创建socket通道-open" class="headerlink" title="创建socket通道 open()"></a>创建socket通道 open()</h4><ol>
+<li>调用对应Socket通道类的静态工厂方法<code>open()</code>创建</li>
+<li>创建的时候会返回一个未绑定socket的channel对象，需要后续自己绑定socket</li>
+</ol>
+<h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><p>所有SocketChannel都是可选择的，而FileChannel是不可选择的。一个通道可以被注册到多个选择器上</p>
+<p>通道在注册到选择器上之前，要设置为非阻塞模式</p>
+<h2 id="选择键SelectionKey"><a href="#选择键SelectionKey" class="headerlink" title="选择键SelectionKey"></a>选择键SelectionKey</h2><p>有四个常量：</p>
+<ol>
+<li>OP_READ 1</li>
+<li>OP_WRITE 4</li>
+<li>OP_CONNECT 8</li>
+<li>OP_CONNECT 16</li>
+</ol>
+<p>四个值相加的和都不一样，可以通过<code>validOps()</code>方法返回值确定SelectableChannel支持的操作</p>
+<p>通道关闭时，所有对应的选择键会被自动取消，选择器关闭之后，其上通道都会被注销</p>
+<p><code>keys()</code>返回已注册的键</p>
+<p><code>selectedKeys()</code>返回已被选择的键</p>
+<p><code>cancel()</code>返回已经被调用过的键（无效化了）但还没被注销</p>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><p>创建选择器 <code>Selector.open()</code></p>
+<p>通道向选择器注册事件 <code>SelectableChannel.register(Selector, SelectionKey)</code>*</p>
+<p>从选择器中获取事件</p>
+<p>根据不同的事件做相应的处理</p>
+<p>### </p>
+<h3 id="注册选择器-register"><a href="#注册选择器-register" class="headerlink" title="注册选择器 register()"></a>注册选择器 register()</h3><h5 id="SelectableChannel-register-Selector-SelectionKey"><a href="#SelectableChannel-register-Selector-SelectionKey" class="headerlink" title="SelectableChannel.register(Selector, SelectionKey)"></a><strong><code>SelectableChannel.register(Selector, SelectionKey)</code></strong></h5><p>该通道必须设置为非阻塞模式！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Selector selector = Selector.open();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+	      
+	        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/Blog/Java/Java-NIO/">Java-NIO</a></p>
+  <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
+  <p><span>发布时间:</span>2018年09月02日 - 12:09</p>
+  <p><span>最后更新:</span>2018年09月06日 - 16:09</p>
+  <p><span>原始链接:</span><a href="/Blog/Java/Java-NIO/" title="Java-NIO">https://uncleaaron.github.io/Blog/Java/Java-NIO/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java-NIO/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+	      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/NIO/" rel="tag"># NIO</a>
+          
+            <a href="/Blog/tags/netty/" rel="tag"># netty</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Blog/剑指offer/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/Netty/" rel="prev" title="Netty">
+                Netty <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/Blog/images/head.jpg"
+                alt="Aaron.H" />
+            
+              <p class="site-author-name" itemprop="name">Aaron.H</p>
+              <p class="site-description motion-element" itemprop="description">Road endless its long and far, I will seek up and down！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/Blog/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/Blog/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/Blog/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/Blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO的特性"><span class="nav-number">1.1.</span> <span class="nav-text">NIO的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO的目的"><span class="nav-number">1.2.</span> <span class="nav-text">NIO的目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞、非阻塞、同步、异步"><span class="nav-number">1.3.</span> <span class="nav-text">阻塞、非阻塞、同步、异步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NIO缓冲区"><span class="nav-number">2.</span> <span class="nav-text">NIO缓冲区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建缓冲区"><span class="nav-number">2.1.</span> <span class="nav-text">创建缓冲区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-静态工厂方法allocate"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 静态工厂方法allocate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-wrap-使用已存在的数组作为缓冲区"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. wrap()使用已存在的数组作为缓冲区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制缓冲区"><span class="nav-number">2.2.</span> <span class="nav-text">复制缓冲区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Duplicate-复制缓冲区"><span class="nav-number">2.2.1.</span> <span class="nav-text">Duplicate()复制缓冲区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clear"><span class="nav-number">2.2.2.</span> <span class="nav-text">clear()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flip"><span class="nav-number">2.2.3.</span> <span class="nav-text">flip()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通道Channel"><span class="nav-number">3.</span> <span class="nav-text">通道Channel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通道基础"><span class="nav-number">3.1.</span> <span class="nav-text">通道基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关闭通道-close"><span class="nav-number">3.2.</span> <span class="nav-text">关闭通道 close()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Channel分类"><span class="nav-number">3.3.</span> <span class="nav-text">Channel分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件通道"><span class="nav-number">3.3.1.</span> <span class="nav-text">文件通道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-FileChannel"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">1. FileChannel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建文件通道-getChannel"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">创建文件通道 getChannel()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用文件通道-read-write-position"><span class="nav-number">3.3.1.3.</span> <span class="nav-text">使用文件通道 read() write() position()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#套接字-socket-通道"><span class="nav-number">3.3.2.</span> <span class="nav-text">套接字(socket)通道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SocketChannel"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">1. SocketChannel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-ServerSocketChannel"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">2. ServerSocketChannel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-DatagramChannel"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">3. DatagramChannel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置非阻塞模式-configureBlocking-false"><span class="nav-number">3.3.2.4.</span> <span class="nav-text">设置非阻塞模式 configureBlocking(false)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建socket通道-open"><span class="nav-number">3.3.2.5.</span> <span class="nav-text">创建socket通道 open()</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#选择器"><span class="nav-number">4.</span> <span class="nav-text">选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择键SelectionKey"><span class="nav-number">4.1.</span> <span class="nav-text">选择键SelectionKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用步骤"><span class="nav-number">4.2.</span> <span class="nav-text">使用步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册选择器-register"><span class="nav-number">4.2.1.</span> <span class="nav-text">注册选择器 register()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SelectableChannel-register-Selector-SelectionKey"><span class="nav-number">4.2.1.0.1.</span> <span class="nav-text">SelectableChannel.register(Selector, SelectionKey)</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron.H</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共76.8k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/Blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/Blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta name="description" content="前言 TCP/IP协议的体系结构：  应用层 ：为特定应用程序提供数据传输服务，例如 HTTP、DNS 等。数据单位为报文。 运输层 ：提供的是进程间的通用数据传输服务。传输控制协议 TCP，提供面向连接、可靠的数据传输服务，数据单位为报文段；用户数据报协议 UDP，提供无连接、尽最大努力的数据传输服务，数据单位为用户数据报。TCP 主要提供完整性服务，UDP 主要提供及时性服务。 网络层 ：为主">
 <meta name="keywords" content="计算机网络,TCP&#x2F;IP,HTTP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/计算机网络/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta property="og:description" content="前言 TCP/IP协议的体系结构：  应用层 ：为特定应用程序提供数据传输服务，例如 HTTP、DNS 等。数据单位为报文。 运输层 ：提供的是进程间的通用数据传输服务。传输控制协议 TCP，提供面向连接、可靠的数据传输服务，数据单位为报文段；用户数据报协议 UDP，提供无连接、尽最大努力的数据传输服务，数据单位为用户数据报。TCP 主要提供完整性服务，UDP 主要提供及时性服务。 网络层 ：为主">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/计算机网络/计算机网络体系结构图.png">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/计算机网络/TCP.IP四层体系结构.png">
@@ -105,10 +105,10 @@
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/计算机网络/NAT.png">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/计算机网络/TCP三次握手.png">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/计算机网络/TCP四次挥手.jpg">
-<meta property="og:updated_time" content="2018-08-12T14:56:01.234Z">
+<meta property="og:updated_time" content="2018-09-06T08:29:02.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络">
-<meta name="twitter:description" content="前言 前言用&amp;gt;符号标注🖊">
+<meta name="twitter:description" content="前言 TCP/IP协议的体系结构：  应用层 ：为特定应用程序提供数据传输服务，例如 HTTP、DNS 等。数据单位为报文。 运输层 ：提供的是进程间的通用数据传输服务。传输控制协议 TCP，提供面向连接、可靠的数据传输服务，数据单位为报文段；用户数据报协议 UDP，提供无连接、尽最大努力的数据传输服务，数据单位为用户数据报。TCP 主要提供完整性服务，UDP 主要提供及时性服务。 网络层 ：为主">
 <meta name="twitter:image" content="https://uncleaaron.github.io/Blog/计算机网络/计算机网络体系结构图.png">
 
 
@@ -343,7 +343,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,353
+                  3,656
                 </span>
               
 
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  12
+                  13
                 </span>
               
             </div>
@@ -381,7 +381,18 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>前言用<code>&gt;</code>符号标注🖊 </p>
+<p>TCP/IP协议的体系结构：</p>
+<ul>
+<li><strong>应用层</strong> ：为特定应用程序提供数据传输服务，例如 HTTP、DNS 等。数据单位为报文。</li>
+<li><strong>运输层</strong> ：提供的是进程间的通用数据传输服务。传输控制协议 TCP，提供面向连接、可靠的数据传输服务，数据单位为报文段；用户数据报协议 UDP，提供无连接、尽最大努力的数据传输服务，数据单位为用户数据报。TCP 主要提供完整性服务，UDP 主要提供及时性服务。</li>
+<li><strong>网络层</strong> ：为主机间提供数据传输服务，而运输层协议是为主机中的进程提供服务。网络层把运输层传递下来的报文段或者用户数据报封装成分组。<strong>（IP层）</strong></li>
+<li><strong>网络接口层</strong><ul>
+<li><strong>数据链路层</strong> ：网络层针对的还是主机之间的数据传输服务，而主机之间可以有很多链路，链路层协议就是为同一链路的主机提供服务。数据链路层把网络层传下来的分组封装成帧。</li>
+<li><strong>物理层</strong> ：考虑的是怎样在传输媒体上传输数据比特流</li>
+</ul>
+</li>
+</ul>
+<p>🖊 </p>
 </blockquote>
 <a id="more"></a>
 <p><img src="/Blog/计算机网络/计算机网络体系结构图.png" alt="计算机网络体系结构图"></p>
@@ -473,7 +484,7 @@
 <p>在以前，NAT 将本地 IP 和全球 IP 一一对应，这种方式下拥有 n 个全球 IP 地址的专用网内最多只可以同时有 n 台主机接入互联网。为了更有效地利用全球 IP 地址，现在常用的 NAT 转换表把运输层的端口号也用上了，使得多个专用网内部的主机共用一个全球 IP 地址。使用端口号的 NAT 也叫做网络地址与端口转换 NAPT。</p>
 <p><img src="/Blog/计算机网络/NAT.png" alt="NAT"></p>
 <h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><h1 id="运输层"><a href="#运输层" class="headerlink" title="运输层*"></a>运输层*</h1><h2 id="UDP-和-TCP-的特点"><a href="#UDP-和-TCP-的特点" class="headerlink" title="UDP 和 TCP 的特点"></a>UDP 和 TCP 的特点</h2><ul>
-<li>用户数据报协议 UDP（User Datagram Protocol）是无连接的，尽最大可能交付，没有拥塞控制，面向报文（对于应用程序传下来的报文不合并也不拆分，只是添加 UDP 首部），支持一对一、一对多、多对一和多对多的交互通信。</li>
+<li>用户数据报协议 UDP（User Datagram Protocol）是无连接的不可靠的，尽最大可能交付，没有拥塞控制，面向报文（对于应用程序传下来的报文不合并也不拆分，只是添加 UDP 首部），支持一对一、一对多、多对一和多对多的交互通信。</li>
 <li>传输控制协议 TCP（Transmission Control Protocol）是面向连接的，提供可靠交付，有流量控制，拥塞控制，提供全双工通信，面向字节流（把应用层传下来的报文看成字节流，把字节流组织成大小不等的数据块），每一条 TCP 连接只能是点对点的（一对一）。</li>
 </ul>
 <h2 id="TCP首部格式"><a href="#TCP首部格式" class="headerlink" title="TCP首部格式"></a>TCP首部格式</h2><ul>
@@ -527,7 +538,7 @@
   <p><span>本文标题:</span><a href="/Blog/计算机网络/">计算机网络</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年08月12日 - 18:08</p>
-  <p><span>最后更新:</span>2018年08月12日 - 22:08</p>
+  <p><span>最后更新:</span>2018年09月06日 - 16:09</p>
   <p><span>原始链接:</span><a href="/Blog/计算机网络/" title="计算机网络">https://uncleaaron.github.io/Blog/计算机网络/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/计算机网络/"  aria-label="复制成功！"></i></span>
   </p>
@@ -586,6 +597,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/剑指offer/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -666,7 +681,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -688,7 +703,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -783,7 +798,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.3k字</span>
+  <span class="post-count">博客全站共76.8k字</span>
 </div>
 
         
