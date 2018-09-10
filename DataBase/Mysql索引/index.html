@@ -91,7 +91,7 @@
 <meta name="keywords" content="数据库,Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql索引">
-<meta property="og:url" content="https://uncleaaron.github.io/Blog/数据库/Mysql索引/index.html">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/DataBase/Mysql索引/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
 <meta property="og:description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略 使用 Expl">
 <meta property="og:locale" content="zh-Hans">
@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/13.png">
 <meta property="og:image" content="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/14.png">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/874710/201612/874710-20161214144949198-761711481.png">
-<meta property="og:updated_time" content="2018-09-06T08:35:26.725Z">
+<meta property="og:updated_time" content="2018-09-08T00:43:03.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql索引">
 <meta name="twitter:description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略 使用 Expl">
@@ -136,7 +136,7 @@
 
 
 
-  <link rel="canonical" href="https://uncleaaron.github.io/Blog/数据库/Mysql索引/"/>
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/DataBase/Mysql索引/"/>
 
 
 
@@ -279,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/数据库/Mysql索引/">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/DataBase/Mysql索引/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron.H">
@@ -318,6 +318,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/Blog/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -482,11 +504,10 @@
 <p>这里以英文字符的ASCII码作为比较准则。聚集索引这种实现方式使得按主键的搜索十分高效，但是辅助索引搜索需要检索两遍索引：<strong>首先检索辅助索引获得主键，然后用主键到主索引中检索获得记录。</strong></p>
 <h1 id="索引操作"><a href="#索引操作" class="headerlink" title="索引操作"></a>索引操作</h1><p>Mysql索引查询语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW INDEX FROM table_name</span><br></pre></td></tr></table></figure>
-<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>Mysql建表语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX index_name</span><br><span class="line">    [index_type]</span><br><span class="line">    ON tbl_name (index_col_name,...)</span><br><span class="line">    [index_option]</span><br><span class="line">    [algorithm_option | lock_option] ...</span><br><span class="line"></span><br><span class="line"># 下面是创建说明</span><br><span class="line">index_col_name:</span><br><span class="line">    col_name [(length)] [ASC | DESC]</span><br><span class="line"></span><br><span class="line">index_option:</span><br><span class="line">    KEY_BLOCK_SIZE [=] value</span><br><span class="line">  | index_type</span><br><span class="line">  | WITH PARSER parser_name</span><br><span class="line">  | COMMENT &apos;string&apos;</span><br><span class="line">  | &#123;VISIBLE | INVISIBLE&#125;</span><br><span class="line"></span><br><span class="line">index_type:</span><br><span class="line">    USING &#123;BTREE | HASH&#125;</span><br><span class="line"></span><br><span class="line">algorithm_option:</span><br><span class="line">    ALGORITHM [=] &#123;DEFAULT|INPLACE|COPY&#125;</span><br><span class="line"></span><br><span class="line">lock_option:</span><br><span class="line">    LOCK [=] &#123;DEFAULT|NONE|SHARED|EXCLUSIVE&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX index_name ON table_name(col_name)</span><br></pre></td></tr></table></figure>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX index_name ON table_name(col_name)</span><br></pre></td></tr></table></figure>
 <h3 id="Alter"><a href="#Alter" class="headerlink" title="Alter"></a>Alter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE table_name ADD INDEX index_name (col_name)</span><br></pre></td></tr></table></figure>
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="Drop"><a href="#Drop" class="headerlink" title="Drop"></a>Drop</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX index_name ON table_name</span><br></pre></td></tr></table></figure>
+<h2 id="Mysql建表语法："><a href="#Mysql建表语法：" class="headerlink" title="Mysql建表语法："></a>Mysql建表语法：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX index_name</span><br><span class="line">    [index_type]</span><br><span class="line">    ON tbl_name (index_col_name,...)</span><br><span class="line">    [index_option]</span><br><span class="line">    [algorithm_option | lock_option] ...</span><br><span class="line"></span><br><span class="line"># 下面是创建说明</span><br><span class="line">index_col_name:</span><br><span class="line">    col_name [(length)] [ASC | DESC]</span><br><span class="line"></span><br><span class="line">index_option:</span><br><span class="line">    KEY_BLOCK_SIZE [=] value</span><br><span class="line">  | index_type</span><br><span class="line">  | WITH PARSER parser_name</span><br><span class="line">  | COMMENT &apos;string&apos;</span><br><span class="line">  | &#123;VISIBLE | INVISIBLE&#125;</span><br><span class="line"></span><br><span class="line">index_type:</span><br><span class="line">    USING &#123;BTREE | HASH&#125;</span><br><span class="line"></span><br><span class="line">algorithm_option:</span><br><span class="line">    ALGORITHM [=] &#123;DEFAULT|INPLACE|COPY&#125;</span><br><span class="line"></span><br><span class="line">lock_option:</span><br><span class="line">    LOCK [=] &#123;DEFAULT|NONE|SHARED|EXCLUSIVE&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h3><h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="Drop"><a href="#Drop" class="headerlink" title="Drop"></a>Drop</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX index_name ON table_name</span><br></pre></td></tr></table></figure>
 <h3 id="Alter-1"><a href="#Alter-1" class="headerlink" title="Alter"></a>Alter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE table_name DROP INDEX index_name</span><br></pre></td></tr></table></figure>
 <h1 id="索引使用策略"><a href="#索引使用策略" class="headerlink" title="索引使用策略"></a>索引使用策略</h1><h2 id="1-最左前缀原理"><a href="#1-最左前缀原理" class="headerlink" title="1. 最左前缀原理*"></a>1. 最左前缀原理*</h2><p>MySQL 对联合索引的顺序是敏感的。例如我们建立了一个 ( a, b, c, d ) 顺序的索引，假如现在需要执行这样一个 <code>a = 1 and b = 2 and c &gt; 3 and d = 4</code> WHERE 查询语句：</p>
 <ul>
@@ -606,8 +627,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/Java/java类加载-简单总结/" rel="next" title="java类加载-简单总结">
-                <i class="fa fa-chevron-left"></i> java类加载-简单总结
+              <a href="/Blog/Java/java集合框架-汇总复习/" rel="next" title="java集合框架-汇总复习">
+                <i class="fa fa-chevron-left"></i> java集合框架-汇总复习
               </a>
             
           </div>
@@ -616,8 +637,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/Java/java集合框架-汇总复习/" rel="prev" title="java集合框架-汇总复习">
-                java集合框架-汇总复习 <i class="fa fa-chevron-right"></i>
+              <a href="/Blog/Java/java8-lambda表达式-复习/" rel="prev" title="java8其中两个新特性-lambda表达式和Stream流-复习">
+                java8其中两个新特性-lambda表达式和Stream流-复习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -699,7 +720,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -710,7 +731,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -721,7 +742,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -761,7 +782,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是索引"><span class="nav-number">2.</span> <span class="nav-text">什么是索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引分类"><span class="nav-number">3.</span> <span class="nav-text">索引分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主键索引（Primary-Key）"><span class="nav-number">3.0.1.</span> <span class="nav-text">主键索引（Primary Key）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通索引（INDEX）"><span class="nav-number">3.0.2.</span> <span class="nav-text">普通索引（INDEX）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唯一索引（Unique）"><span class="nav-number">3.0.3.</span> <span class="nav-text">唯一索引（Unique）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全文索引（FullText）"><span class="nav-number">3.0.4.</span> <span class="nav-text">全文索引（FullText）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间索引（Spatial）"><span class="nav-number">3.0.5.</span> <span class="nav-text">空间索引（Spatial）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引数据结构类型（Index-Type）"><span class="nav-number">3.0.6.</span> <span class="nav-text">索引数据结构类型（Index Type）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MyISAM-索引实现"><span class="nav-number">3.0.6.1.</span> <span class="nav-text">MyISAM 索引实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB-索引实现"><span class="nav-number">3.0.6.2.</span> <span class="nav-text">InnoDB 索引实现</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引操作"><span class="nav-number">4.</span> <span class="nav-text">索引操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">4.1.</span> <span class="nav-text">创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create"><span class="nav-number">4.1.1.</span> <span class="nav-text">Create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alter"><span class="nav-number">4.1.2.</span> <span class="nav-text">Alter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">4.2.</span> <span class="nav-text">删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop"><span class="nav-number">4.2.1.</span> <span class="nav-text">Drop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alter-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">Alter</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引使用策略"><span class="nav-number">5.</span> <span class="nav-text">索引使用策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-最左前缀原理"><span class="nav-number">5.1.</span> <span class="nav-text">1. 最左前缀原理*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-选择区分度高的列作为索引"><span class="nav-number">5.2.</span> <span class="nav-text">2. 选择区分度高的列作为索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-更新非常频繁的字段不适合创建索引"><span class="nav-number">5.3.</span> <span class="nav-text">3. 更新非常频繁的字段不适合创建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-尽量的扩展索引，不要新建索引"><span class="nav-number">5.4.</span> <span class="nav-text">4. 尽量的扩展索引，不要新建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据量少的表不建立索引"><span class="nav-number">5.5.</span> <span class="nav-text">5. 数据量少的表不建立索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB的主键选择与插入优化"><span class="nav-number">6.</span> <span class="nav-text">InnoDB的主键选择与插入优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的缺点"><span class="nav-number">6.1.</span> <span class="nav-text">索引的缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用Explain分析查询"><span class="nav-number">7.</span> <span class="nav-text">用Explain分析查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#格式："><span class="nav-number">7.1.</span> <span class="nav-text">格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析字段："><span class="nav-number">7.2.</span> <span class="nav-text">分析字段：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Explain解释"><span class="nav-number">7.3.</span> <span class="nav-text">Explain解释</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是索引"><span class="nav-number">2.</span> <span class="nav-text">什么是索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引分类"><span class="nav-number">3.</span> <span class="nav-text">索引分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主键索引（Primary-Key）"><span class="nav-number">3.0.1.</span> <span class="nav-text">主键索引（Primary Key）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通索引（INDEX）"><span class="nav-number">3.0.2.</span> <span class="nav-text">普通索引（INDEX）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唯一索引（Unique）"><span class="nav-number">3.0.3.</span> <span class="nav-text">唯一索引（Unique）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全文索引（FullText）"><span class="nav-number">3.0.4.</span> <span class="nav-text">全文索引（FullText）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间索引（Spatial）"><span class="nav-number">3.0.5.</span> <span class="nav-text">空间索引（Spatial）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引数据结构类型（Index-Type）"><span class="nav-number">3.0.6.</span> <span class="nav-text">索引数据结构类型（Index Type）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MyISAM-索引实现"><span class="nav-number">3.0.6.1.</span> <span class="nav-text">MyISAM 索引实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB-索引实现"><span class="nav-number">3.0.6.2.</span> <span class="nav-text">InnoDB 索引实现</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引操作"><span class="nav-number">4.</span> <span class="nav-text">索引操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">4.1.</span> <span class="nav-text">创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Alter"><span class="nav-number">4.1.1.</span> <span class="nav-text">Alter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql建表语法："><span class="nav-number">4.2.</span> <span class="nav-text">Mysql建表语法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create"><span class="nav-number">4.2.1.</span> <span class="nav-text">Create</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">4.3.</span> <span class="nav-text">删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop"><span class="nav-number">4.3.1.</span> <span class="nav-text">Drop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alter-1"><span class="nav-number">4.3.2.</span> <span class="nav-text">Alter</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引使用策略"><span class="nav-number">5.</span> <span class="nav-text">索引使用策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-最左前缀原理"><span class="nav-number">5.1.</span> <span class="nav-text">1. 最左前缀原理*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-选择区分度高的列作为索引"><span class="nav-number">5.2.</span> <span class="nav-text">2. 选择区分度高的列作为索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-更新非常频繁的字段不适合创建索引"><span class="nav-number">5.3.</span> <span class="nav-text">3. 更新非常频繁的字段不适合创建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-尽量的扩展索引，不要新建索引"><span class="nav-number">5.4.</span> <span class="nav-text">4. 尽量的扩展索引，不要新建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数据量少的表不建立索引"><span class="nav-number">5.5.</span> <span class="nav-text">5. 数据量少的表不建立索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB的主键选择与插入优化"><span class="nav-number">6.</span> <span class="nav-text">InnoDB的主键选择与插入优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的缺点"><span class="nav-number">6.1.</span> <span class="nav-text">索引的缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用Explain分析查询"><span class="nav-number">7.</span> <span class="nav-text">用Explain分析查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#格式："><span class="nav-number">7.1.</span> <span class="nav-text">格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析字段："><span class="nav-number">7.2.</span> <span class="nav-text">分析字段：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Explain解释"><span class="nav-number">7.3.</span> <span class="nav-text">Explain解释</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -816,7 +837,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共76.8k字</span>
+  <span class="post-count">博客全站共87.0k字</span>
 </div>
 
         

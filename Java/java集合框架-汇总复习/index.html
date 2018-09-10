@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/java集合框架-汇总复习/Map类图-简易.png">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/java集合框架-汇总复习/HashMap.jpg">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/java集合框架-汇总复习/Map的是否允许null值.png">
-<meta property="og:updated_time" content="2018-09-06T08:36:41.997Z">
+<meta property="og:updated_time" content="2018-09-09T08:12:52.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java集合框架-汇总复习">
 <meta name="twitter:description" content="前言 Java1.8集合框架索引总结 这里有人整合了一段，可以阅读一下 此外，有人总结的面试题Java集合框架面试总结 这个博主讲的非常精髓，有空也要读一下Java集合框架综述🖊">
@@ -316,6 +316,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/Blog/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -337,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  856
+                  1,566
                 </span>
               
 
@@ -353,7 +375,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  6
                 </span>
               
             </div>
@@ -420,8 +442,27 @@
 <p>存储和查询时<strong>先根据HashCode决定在数组</strong>的位置，<strong>再根据equals决定</strong>其在该数组位置上的<strong>链表</strong>中的存储位置；</p>
 <p>用<strong>链地址法</strong>解决Hash冲突（解决hash冲突的办法有1. 开放地址法 2. 再哈希法 3. 链地址法 4. 建立公共溢出区）</p>
 <p><img src="/Blog/Java/java集合框架-汇总复习/HashMap.jpg" alt="HashMap"></p>
-<p>默认大小16，加载因子为0.75，可以使用Collections.synchronizeMap(hashMap)实现同步</p>
+<p><strong>数组默认大小16，加载因子为0.75，</strong>可以使用Collections.synchronizeMap(hashMap)实现同步</p>
 <p>Java8开始，一个桶存储的链表长度&gt;8时，链表将转为红黑树</p>
+<h4 id="关于HashMap的大小设置的问题"><a href="#关于HashMap的大小设置的问题" class="headerlink" title="关于HashMap的大小设置的问题"></a>关于HashMap的大小设置的问题</h4><p>HashMap的默认数组大小为16，有两个关键的参数：初始容量和加载因子，加载因子为0.75</p>
+<p><strong>初始容量：</strong>哈希表在创建时的容量</p>
+<p><strong>加载因子：</strong>哈希表在其容量自增之前可达到的上限容量</p>
+<p>当哈希表中的条目超过了<code>容量 * 加载因子</code>时，对hashMap进行 rehash 操作，将hashMap扩大到两倍桶数。</p>
+<p><strong>例题：假如HashMap确认只装100个元素，那么 new HashMap(?) 指定多少是最佳的？ 答案：256</strong></p>
+<p><strong>原因：如果使用128的话，128&lt;100/0.75=134，可能会引发rehash()，消耗相当大，所以应该向上取256。</strong></p>
+<p>首先根据加载因子的计算，100/0.75 = 134，但由于134&gt;128，可能会发生哈希碰撞。</p>
+<p>避免哈希碰撞的同时另Hash桶的有效利用：只要将hash表的长度设为2的N次方，那么，所有的哈希桶均有被使用的可能。</p>
+<blockquote>
+<p>（如011&amp;1-1 = 001；001&amp;101=001）他们的值相等了，那么这个时候就会发生哈希碰撞。</p>
+<p>除此之外还有一个更加严重的问题，由于在101中第二位是0，那么，无论我们的key在哈希运算之后得到的值h是什么，那么在&amp;运算之后，得到的结果的倒数第二位均为0；</p>
+<p>因此，对于hash表所有下标的二进制的值而言，只要低位第二位的值为1，（例如0010,0011,0111,1111）那么这个下标所代表的桶将一直是空的，因为代码中的&amp;运算的结果永远不会产生低位第二位为1的值。这就大大地浪费了空间，同时还增加了哈希碰撞的概率。这无疑会降低HashMap的效率。</p>
+<p>那么如何才能减少这种浪费呢？最佳的方法当然是让length-1的二进制值全部位均为1.那么length的值是多少合适呢？没错，length=2^n。</p>
+<p>只要将hash表的长度设为2的N次方，那么，所有的哈希桶均有被使用的可能。</p>
+<p>由于空间加大和有效利用哈希桶，这时的哈希碰撞将大大降低，因此HashMap的读取效率会比较高。</p>
+</blockquote>
+<p>结果的补充：其实在Java中，无论你的HashMap(x)中的x设置为多少，HashMap的大小都是2^n。2^n是大于x的第一个数。因为HashMap的初始化代码中有以下这行代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int capacity = 1;</span><br><span class="line">       while (capacity &lt; initialCapacity)</span><br><span class="line">           capacity &lt;&lt;= 1;</span><br></pre></td></tr></table></figure>
+<p>但是这就带来了一个问题，如果x=100，那么HashMap的初始大小应该是128。但是100/128=0.78，已经超过默认加载因子的大小了。因此会resize一次，变成256。所以最好的结果还是256。</p>
 <p>关于hashMap的总结这里还有更多：<a href="https://blog.csdn.net/weixin_37864013/article/details/77428919" target="_blank" rel="noopener">HashMap总结：链接</a></p>
 <h3 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h3><p><strong>实现：双向链表</strong> 维护元素的顺序，</p>
 <p>顺序：<strong>插入</strong>顺序 或 <strong>最近最少使用</strong>（LRU）顺序。 </p>
@@ -453,7 +494,7 @@
   <p><span>本文标题:</span><a href="/Blog/Java/java集合框架-汇总复习/">java集合框架-汇总复习</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年08月03日 - 15:08</p>
-  <p><span>最后更新:</span>2018年09月06日 - 16:09</p>
+  <p><span>最后更新:</span>2018年09月09日 - 16:09</p>
   <p><span>原始链接:</span><a href="/Blog/Java/java集合框架-汇总复习/" title="java集合框架-汇总复习">https://uncleaaron.github.io/Blog/Java/java集合框架-汇总复习/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/java集合框架-汇总复习/"  aria-label="复制成功！"></i></span>
   </p>
@@ -501,8 +542,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/数据库/Mysql索引/" rel="next" title="Mysql索引">
-                <i class="fa fa-chevron-left"></i> Mysql索引
+              <a href="/Blog/Java/java类加载-简单总结/" rel="next" title="java类加载-简单总结">
+                <i class="fa fa-chevron-left"></i> java类加载-简单总结
               </a>
             
           </div>
@@ -511,8 +552,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/Java/java8-lambda表达式-复习/" rel="prev" title="java8其中两个新特性-lambda表达式和Stream流-复习">
-                java8其中两个新特性-lambda表达式和Stream流-复习 <i class="fa fa-chevron-right"></i>
+              <a href="/Blog/DataBase/Mysql索引/" rel="prev" title="Mysql索引">
+                Mysql索引 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +635,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -605,7 +646,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -616,7 +657,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -656,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">2.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Collection集合"><span class="nav-number">3.</span> <span class="nav-text">Collection集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">3.1.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.1.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vector"><span class="nav-number">3.1.3.</span> <span class="nav-text">Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">3.1.4.</span> <span class="nav-text">Stack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">3.2.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet"><span class="nav-number">3.2.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeSet"><span class="nav-number">3.2.2.</span> <span class="nav-text">TreeSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">3.2.3.</span> <span class="nav-text">LinkedHashSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.2.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue"><span class="nav-number">3.3.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PriorityQueue"><span class="nav-number">3.3.2.</span> <span class="nav-text">PriorityQueue</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">4.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">4.0.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">4.0.2.</span> <span class="nav-text">LinkedHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeMap"><span class="nav-number">4.0.3.</span> <span class="nav-text">TreeMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable"><span class="nav-number">4.0.4.</span> <span class="nav-text">HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">4.0.5.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map类集合K-V能不能存储null值的情况"><span class="nav-number">4.0.6.</span> <span class="nav-text">Map类集合K/V能不能存储null值的情况</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Collections类"><span class="nav-number">5.</span> <span class="nav-text">Collections类</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">2.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Collection集合"><span class="nav-number">3.</span> <span class="nav-text">Collection集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">3.1.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.1.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vector"><span class="nav-number">3.1.3.</span> <span class="nav-text">Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">3.1.4.</span> <span class="nav-text">Stack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">3.2.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet"><span class="nav-number">3.2.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeSet"><span class="nav-number">3.2.2.</span> <span class="nav-text">TreeSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">3.2.3.</span> <span class="nav-text">LinkedHashSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.2.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue"><span class="nav-number">3.3.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PriorityQueue"><span class="nav-number">3.3.2.</span> <span class="nav-text">PriorityQueue</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">4.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">4.0.1.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于HashMap的大小设置的问题"><span class="nav-number">4.0.1.1.</span> <span class="nav-text">关于HashMap的大小设置的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">4.0.2.</span> <span class="nav-text">LinkedHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeMap"><span class="nav-number">4.0.3.</span> <span class="nav-text">TreeMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable"><span class="nav-number">4.0.4.</span> <span class="nav-text">HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">4.0.5.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map类集合K-V能不能存储null值的情况"><span class="nav-number">4.0.6.</span> <span class="nav-text">Map类集合K/V能不能存储null值的情况</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Collections类"><span class="nav-number">5.</span> <span class="nav-text">Collections类</span></a></li></ol></div>
             
 
           </div>
@@ -711,7 +752,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共76.8k字</span>
+  <span class="post-count">博客全站共87.0k字</span>
 </div>
 
         

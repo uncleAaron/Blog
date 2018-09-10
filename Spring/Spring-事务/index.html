@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/Blog/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/Blog/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/Blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/Blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/Blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/Blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/Blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/Blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring,数据库,Mysql,事务," />
+
+
+
+
+
+  <link rel="alternate" href="/Blog/atom.xml" title="StormAaron的技术站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言 Spring的事务隔离级别Spring的事务传播行为Spring的事务实现方式">
+<meta name="keywords" content="Spring,数据库,Mysql,事务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring事务">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/Spring/Spring-事务/index.html">
+<meta property="og:site_name" content="StormAaron的技术站">
+<meta property="og:description" content="前言 Spring的事务隔离级别Spring的事务传播行为Spring的事务实现方式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-07T02:18:59.593Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring事务">
+<meta name="twitter:description" content="前言 Spring的事务隔离级别Spring的事务传播行为Spring的事务实现方式">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/Blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/Spring/Spring-事务/"/>
+
+
+
+
+
+  <title>Spring事务 | StormAaron的技术站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/Blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StormAaron的技术站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/Blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/Blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/Blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/Blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/Blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Spring/Spring-事务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron.H">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/Blog/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StormAaron的技术站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring事务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-04T15:01:55+08:00">
+                2018-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/Blog/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,366
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>Spring的事务隔离级别<br>Spring的事务传播行为<br>Spring的事务实现方式</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="事务ACID特性"><a href="#事务ACID特性" class="headerlink" title="事务ACID特性"></a>事务ACID特性</h1><ol>
+<li>原子性（Atomicity）</li>
+<li>一致性（Consistency）</li>
+<li>隔离性（Isolation）</li>
+<li>持久性（Durability）</li>
+</ol>
+<h1 id="Spring定义的’5’种事务隔离级别-Isolation"><a href="#Spring定义的’5’种事务隔离级别-Isolation" class="headerlink" title="Spring定义的’5’种事务隔离级别 Isolation"></a>Spring定义的’5’种事务隔离级别 Isolation</h1><ul>
+<li><p><strong>READ_UNCOMMITTED ：未提交读</strong>，允许别的事务看到未提交的数据。</p>
+</li>
+<li><p><strong>READ_COMMITTED ：提交读</strong>，保证事务修改的数据提交后别的事务才能读取。</p>
+</li>
+<li><p><strong>REPEATABLE_READ ：可重复读</strong></p>
+</li>
+<li><p><strong>SERIALIZABLE ：可串行化</strong>，事务被处理为顺序执行（代价最高但最可靠）</p>
+</li>
+<li><p><strong>DEFAULT ：使用数据库默认的隔离级别</strong></p>
+</li>
+</ul>
+<h2 id="脏读、不可重复读、幻读"><a href="#脏读、不可重复读、幻读" class="headerlink" title="脏读、不可重复读、幻读"></a>脏读、不可重复读、幻读</h2><h3 id="脏读（修改且未提交引起）"><a href="#脏读（修改且未提交引起）" class="headerlink" title="脏读（修改且未提交引起）"></a>脏读（修改且未提交引起）</h3><p>例如：</p>
+<p>张三的工资为5000,事务A中把他的工资改为8000,但事务A尚未提交。与此同时，事务B正在读取张三的工资，读取到张三的工资为8000。随后，事务A发生异常，而回滚了事务。张三的工资又回滚为5000。最后，事务B读取到的张三工资为8000的数据即为脏数据，事务B做了一次脏读。<br>(大部分数据库缺省的事物隔离级别都不会出现这种状况)</p>
+<h3 id="不可重复读（修改引起）"><a href="#不可重复读（修改引起）" class="headerlink" title="不可重复读（修改引起）"></a>不可重复读（修改引起）</h3><p>例如：<br>在事务A中，读取到张三的工资为5000，操作没有完成，事务还没提交。<br>与此同时，事务B把张三的工资改为8000，并提交了事务。随后，在事务A中，再次读取张三的工资，此时工资变为8000。在一个事务中前后两次读取的结果并不致，导致了不可重复读。<br>(大部分数据库缺省的事物隔离级别都不会出现这种状况) </p>
+<h3 id="幻读（添加删除新记录引起）"><a href="#幻读（添加删除新记录引起）" class="headerlink" title="幻读（添加删除新记录引起）"></a>幻读（添加删除新记录引起）</h3><p>例如:<br>A目前工资为5000的员工有10人，事务A读取所有工资为5000的人数为10人。此时，事务B插入一条工资也为5000的记录。这是，事务A再次读取工资为5000的员工，记录为11人。此时产生了幻读。<br>(大部分数据库缺省的事物隔离级别都会出现这种状况，<strong>此种事物隔离级别将带来表级锁)</strong> </p>
+<h1 id="Spring的7种事务传播行为-Propagation"><a href="#Spring的7种事务传播行为-Propagation" class="headerlink" title="Spring的7种事务传播行为 Propagation"></a>Spring的7种事务传播行为 Propagation</h1><p>传播场景：假设外层事务 Service A 的 Method A() 调用 内层Service B 的 Method B()</p>
+<ol>
+<li>propagation_<strong>required</strong> ：如果<strong>当前没有事务，则新建，若已存在一个事务，则加入</strong>该事务（<strong>Spring默认</strong>）</li>
+<li>propagation_<strong>supports</strong> ：<strong>支持当前事务，若没有事务，则非事务执行</strong></li>
+<li>propagation_<strong>mandatory</strong> ：<strong>使用当前事务</strong>，若没有事务，则抛出异常</li>
+<li>propagation_<strong>required_new</strong> ：<strong>新建事务</strong>，如果当前存在事务，则把当前事务挂起</li>
+<li>propagation_<strong>not_supported</strong> ：<strong>非事务执行</strong>，如果当前存在事务，则把当前事务挂起</li>
+<li>propagation_<strong>never</strong> ：<strong>非事务执行，如果当前存在事务，则抛出异常</strong></li>
+<li>propagation_<strong>nested</strong> ：如果当前存在事务，则<strong>在嵌套事务内执行</strong>。若没有事务，则按照按照默认的propagation_required执行</li>
+</ol>
+<p>方法中抛出异常会回滚数据库，被检查的异常可以用rollbackFor指定。</p>
+<h1 id="事务实现方式"><a href="#事务实现方式" class="headerlink" title="事务实现方式"></a>事务实现方式</h1><ol>
+<li><p>编程式事务管理对基于 POJO 的应用来说是唯一选择。我们需要在代码中调用beginTransaction()、commit()、rollback()等事务管理相关的方法，这就是编程式事务管理。（淘汰了）</p>
+</li>
+<li><p>基于 TransactionProxyFactoryBean的声明式事务管理（Spring1.x的方式）</p>
+</li>
+<li><p>基于 @Transactional 注解的声明式事务管理</p>
+</li>
+<li><p>基于 Aspectj AOP 配置事务</p>
+</li>
+</ol>
+<h1 id="使用事务的注意点"><a href="#使用事务的注意点" class="headerlink" title="使用事务的注意点"></a>使用事务的注意点</h1><ol>
+<li>在需要事务管理的地方加@Transactional 注解。<strong>@Transactional 注解可以被应用于接口定义和接口方法、类定义和类的 public 方法上。</strong></li>
+<li><strong>@Transactional 注解只能应用到 public 的方法上。</strong> 如果你在 protected、private 或者 package-visible 的方法上使用 @Transactional 注解，它也不会报错， 但是这个被注解的方法将不会展示已配置的事务设置。</li>
+<li>Spring团队建议在具体的类（或类的方法）上使用 @Transactional 注解，而不要使用在类所要实现的任何接口上。在接口上使用 @Transactional 注解，只能当你设置了基于接口的代理时它才生效。因为注解是不能继承 的，这就意味着如果正在使用基于类的代理时，那么事务的设置将不能被基于类的代理所识别，而且对象也将不会被事务代理所包装。</li>
+<li>注意仅仅 @Transactional 注解的出现不足于开启事务行为，它仅仅 是一种元数据。必须在配置文件中使用配置元素，才真正开启了事务行为。</li>
+<li>通过元素的 “proxy-target-class” 属性值来控制是基于接口的还是基于类的代理被创建。如果 “proxy-target-class” 属值被设置为 “true”，那么基于类的代理将起作用（这时需要CGLIB库cglib.jar在CLASSPATH中）。如果 “proxy-target-class” 属值被设置为 “false” 或者这个属性被省略，那么标准的JDK基于接口的代理将起作用。</li>
+<li>@Transactional 的事务开启 ，基于接口的或者是基于类的 代理会被创建。<strong>所以在同一个类中一个方法调用另一个有事务的方法，事务是不会起作用的。</strong>如一个类中的无事务A()方法调用有事务的B()方法，事务不会触发。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+	      
+	        
+	      
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/Blog/tags/Spring/" rel="tag"># Spring</a>
+          
+            <a href="/Blog/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/Blog/tags/Mysql/" rel="tag"># Mysql</a>
+          
+            <a href="/Blog/tags/事务/" rel="tag"># 事务</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Blog/Spring/Spring-AOP/" rel="next" title="【笔记】Spring-AOP">
+                <i class="fa fa-chevron-left"></i> 【笔记】Spring-AOP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Blog/Netty/" rel="prev" title="Netty">
+                Netty <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/Blog/images/head.jpg"
+                alt="Aaron.H" />
+            
+              <p class="site-author-name" itemprop="name">Aaron.H</p>
+              <p class="site-description motion-element" itemprop="description">Road endless its long and far, I will seek up and down！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/Blog/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/Blog/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/Blog/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/Blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务ACID特性"><span class="nav-number">2.</span> <span class="nav-text">事务ACID特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring定义的’5’种事务隔离级别-Isolation"><span class="nav-number">3.</span> <span class="nav-text">Spring定义的’5’种事务隔离级别 Isolation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脏读、不可重复读、幻读"><span class="nav-number">3.1.</span> <span class="nav-text">脏读、不可重复读、幻读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脏读（修改且未提交引起）"><span class="nav-number">3.1.1.</span> <span class="nav-text">脏读（修改且未提交引起）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不可重复读（修改引起）"><span class="nav-number">3.1.2.</span> <span class="nav-text">不可重复读（修改引起）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#幻读（添加删除新记录引起）"><span class="nav-number">3.1.3.</span> <span class="nav-text">幻读（添加删除新记录引起）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring的7种事务传播行为-Propagation"><span class="nav-number">4.</span> <span class="nav-text">Spring的7种事务传播行为 Propagation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务实现方式"><span class="nav-number">5.</span> <span class="nav-text">事务实现方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用事务的注意点"><span class="nav-number">6.</span> <span class="nav-text">使用事务的注意点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron.H</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共87.0k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/Blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/Blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/Blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/Blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/Blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
