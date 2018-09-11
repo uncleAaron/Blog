@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Java,Spring,Mybatis," />
+  <meta name="keywords" content="default1,default2," />
 
 
 
@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="前言 我在Mybatis使用中遇到的问题汇总">
-<meta name="keywords" content="Java,Spring,Mybatis">
+<meta name="description" content="前言 对Netty使用的总结（更新中）🖊">
+<meta name="keywords" content="default1,default2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【笔记】我在Mybatis使用中遇到的问题">
-<meta property="og:url" content="https://uncleaaron.github.io/Blog/Mybatis/index.html">
+<meta property="og:title" content="Netty">
+<meta property="og:url" content="https://uncleaaron.github.io/Blog/Java/Netty/index.html">
 <meta property="og:site_name" content="StormAaron的技术站">
-<meta property="og:description" content="前言 我在Mybatis使用中遇到的问题汇总">
+<meta property="og:description" content="前言 对Netty使用的总结（更新中）🖊">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-10T09:27:12.533Z">
+<meta property="og:updated_time" content="2018-09-10T09:27:44.381Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【笔记】我在Mybatis使用中遇到的问题">
-<meta name="twitter:description" content="前言 我在Mybatis使用中遇到的问题汇总">
+<meta name="twitter:title" content="Netty">
+<meta name="twitter:description" content="前言 对Netty使用的总结（更新中）🖊">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://uncleaaron.github.io/Blog/Mybatis/"/>
+  <link rel="canonical" href="https://uncleaaron.github.io/Blog/Java/Netty/"/>
 
 
 
 
 
-  <title>【笔记】我在Mybatis使用中遇到的问题 | StormAaron的技术站</title>
+  <title>Netty | StormAaron的技术站</title>
   
 
 
@@ -271,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Mybatis/">
+    <link itemprop="mainEntityOfPage" href="https://uncleaaron.github.io/Blog/Blog/Java/Netty/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron.H">
@@ -288,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【笔记】我在Mybatis使用中遇到的问题</h1>
+          <h1 class="post-title" itemprop="name headline">Netty</h1>
         
 
         <div class="post-meta">
@@ -300,8 +300,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T18:04:59+08:00">
-                2018-06-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-04T15:22:21+08:00">
+                2018-08-04
               </time>
             
 
@@ -323,8 +323,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/Blog/categories/JavaWeb/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaWeb</span>
+                  <a href="/Blog/categories/default/" itemprop="url" rel="index">
+                    <span itemprop="name">default</span>
                   </a>
                 </span>
 
@@ -354,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  137
+                  152
                 </span>
               
 
@@ -392,17 +392,11 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>我在Mybatis使用中遇到的问题汇总</p>
+<p>对Netty使用的总结（更新中）🖊 </p>
 </blockquote>
 <a id="more"></a>
-<p>Mybatis注意事项</p>
-<p>主键回填：</p>
-<p>主键回填，要使用useGenratedKeys 和设置keyColumn 和 keyProperty</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 主键回填，要使用useGenratedKeys 和设置keyColumn 和 keyProperty --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertEmptyScore"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyColumn</span>=<span class="string">"score_id"</span> <span class="attr">keyProperty</span>=<span class="string">"scoreId"</span>&gt;</span></span><br><span class="line">    INSERT INTO score (score_attend_1)</span><br><span class="line">    VALUES (0)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>多个元素作为参数要在参数上使用<code>@Param</code>注解（一个参数的时候可以不用）</p>
-<p>如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">updateScoreId</span><span class="params">(@Param(<span class="string">"secId"</span>)</span> String secId,@<span class="title">Param</span><span class="params">(<span class="string">"studentId"</span>)</span> String studentId,@<span class="title">Param</span><span class="params">(<span class="string">"scoreId"</span>)</span> <span class="keyword">int</span> scoreId)</span>;</span><br></pre></td></tr></table></figure>
-<p>否则Mybatis检测不到参数，会报<code>Parameter &#39;xxx&#39; not found</code>的错误</p>
+<p>Netty是基于Java NIO的网络应用框架。</p>
+<p>Netty是一个NIO C-S框架，使用Netty可以快速开发网络应用，如服务器和客户端协议。Netty提供了一种新的方式来开发网络应用程序，这种新的方式使它很容易使用和有很强的扩展性。Netty的内部实现是很复杂的，但它提供了简单易用的api从网络处理代码中解耦业务逻辑。Netty是完全基于NIO实现的，所以整个Netty都是异步的（关键）。</p>
 
       
     </div>
@@ -419,12 +413,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/Blog/Mybatis/">【笔记】我在Mybatis使用中遇到的问题</a></p>
+  <p><span>本文标题:</span><a href="/Blog/Java/Netty/">Netty</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
-  <p><span>发布时间:</span>2018年06月12日 - 18:06</p>
+  <p><span>发布时间:</span>2018年08月04日 - 15:08</p>
   <p><span>最后更新:</span>2018年09月10日 - 17:09</p>
-  <p><span>原始链接:</span><a href="/Blog/Mybatis/" title="【笔记】我在Mybatis使用中遇到的问题">https://uncleaaron.github.io/Blog/Mybatis/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Mybatis/"  aria-label="复制成功！"></i></span>
+  <p><span>原始链接:</span><a href="/Blog/Java/Netty/" title="Netty">https://uncleaaron.github.io/Blog/Java/Netty/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Netty/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -455,11 +449,9 @@
       
         <div class="post-tags">
           
-            <a href="/Blog/tags/Java/" rel="tag"># Java</a>
+            <a href="/Blog/tags/default1/" rel="tag"># default1</a>
           
-            <a href="/Blog/tags/Spring/" rel="tag"># Spring</a>
-          
-            <a href="/Blog/tags/Mybatis/" rel="tag"># Mybatis</a>
+            <a href="/Blog/tags/default2/" rel="tag"># default2</a>
           
         </div>
       
@@ -472,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/Linux/Vim简易笔记/" rel="next" title="Linux Vi">
-                <i class="fa fa-chevron-left"></i> Linux Vi
+              <a href="/Blog/Spring/Spring-事务/" rel="next" title="Spring事务">
+                <i class="fa fa-chevron-left"></i> Spring事务
               </a>
             
           </div>
@@ -482,8 +474,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/Linux/Linux程序设计/" rel="prev" title="Linux程序设计">
-                Linux程序设计 <i class="fa fa-chevron-right"></i>
+              <a href="/Blog/Java/Java-IO/" rel="prev" title="Java-IO">
+                Java-IO <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -576,7 +568,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -587,7 +579,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/Blog/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -682,7 +674,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共87.0k字</span>
+  <span class="post-count">博客全站共82.2k字</span>
 </div>
 
         
