@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/数据结构/深度优先搜索.jpg">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/数据结构/插入排序.gif">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/数据结构/希尔排序.png">
-<meta property="og:updated_time" content="2018-09-10T09:24:34.907Z">
+<meta property="og:updated_time" content="2018-09-21T03:01:19.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构">
 <meta name="twitter:description" content="前言 数据结构的复习，涵盖往日学习的树、图、查询、排序算法日后补充链表等顺序表、队列操作🖊">
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,665
+                  2,546
                 </span>
               
 
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10
+                  9
                 </span>
               
             </div>
@@ -417,17 +417,17 @@
 <p>森林：多个不相交的树的集合</p>
 <h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><p>二叉树是个有序树，每个结点至多有两棵子树</p>
 <h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ol>
-<li><p>在二叉树上的第 i 层上至多有 $$2^{i-1}$$个结点</p>
+<li><p>在二叉树上的第 i 层上至多有 <script type="math/tex">2^{i-1}</script>个结点</p>
 </li>
-<li><p>深度为k的二叉树至多有 $$2^k-1$$个结点</p>
+<li><p>深度为k的二叉树至多有 <script type="math/tex">2^k-1</script>个结点</p>
 </li>
-<li><p>对任何一棵二叉树T，如果其叶子数为 $$n_0$$，度为2的结点数为$$n_2$$，则有 $$n_0=n_2+1$$</p>
+<li><p>对任何一棵二叉树T，如果其叶子数为 <script type="math/tex">n_0</script>，度为2的结点数为<script type="math/tex">n_2</script>，则有 <script type="math/tex">n_0=n_2+1</script></p>
 <blockquote>
 <p> 证明3：</p>
 <ol>
 <li>二叉树内所有结点数为 $n=n_0+n_1+n_2$</li>
 <li>二叉树内总分支数都由度为1和2的结点射出，总结点数为 $n_1+2n_2$</li>
-<li>总分支树代表子结点数，再加上根节点（唯一的非子结点）得：$$n=n_1+2n_2+1$$</li>
+<li>总分支树代表子结点数，再加上根节点（唯一的非子结点）得：<script type="math/tex">n=n_1+2n_2+1</script></li>
 <li>结合1，3得 $n_0=n_2+1$</li>
 </ol>
 </blockquote>
@@ -500,19 +500,18 @@
 <ul>
 <li>边</li>
 </ul>
-<p>$$G=(V,{A})$$</p>
-<p>设n为顶点数目，e为边或弧的数目</p>
-<p>无向图中 $0\leq$ $$e\leq\frac{1}{2}n(n-1)$$</p>
-<p>完全图：$$e=\frac{1}{2}n(n-1)$$的无向图</p>
-<p>有向完全图：$$e=n(n-1)$$的有向图</p>
+<script type="math/tex; mode=display">G=(V,\{A\})</script><p>设n为顶点数目，e为边或弧的数目</p>
+<p>无向图中 $0\leq$ <script type="math/tex">e\leq\frac{1}{2}n(n-1)</script></p>
+<p>完全图：<script type="math/tex">e=\frac{1}{2}n(n-1)</script>的无向图</p>
+<p>有向完全图：<script type="math/tex">e=n(n-1)</script>的有向图</p>
 <p>稀疏图：边或弧很少的图</p>
 <p>稠密图</p>
-<p>子图：有两个图$$G=(V,{E})$$和$$G’=(V’,{E’})$$，若$$V’\subseteq V$$且$$E’\subseteq E$$，则 G‘ 是 G 的子图</p>
-<p>邻接点：对于无向图$$G=(V,{E})$$，有边$(v,v’)\in E$，则称顶点 v 和 v’ <strong>互为邻接点</strong>；边$(v,v’)$与顶点 v 和 v’ <strong>相关联</strong>。</p>
-<p>度$$TD(v)$$(degree)：顶点关联的边的数目</p>
-<p>入度$$ID(v)$$(indegree)：</p>
-<p>出度$$OD(v)$$(outdegree)：</p>
-<p>图的度数之和等于边的两倍：$$e=\frac{1}{2}\sum^n_{i=1}TD(v_i)$$</p>
+<p>子图：有两个图<script type="math/tex">G=(V,\{E\})</script>和<script type="math/tex">G'=(V',\{E'\})</script>，若<script type="math/tex">V'\subseteq V</script>且<script type="math/tex">E'\subseteq E</script>，则 G‘ 是 G 的子图</p>
+<p>邻接点：对于无向图<script type="math/tex">G=(V,\{E\})</script>，有边$(v,v’)\in E$，则称顶点 v 和 v’ <strong>互为邻接点</strong>；边$(v,v’)$与顶点 v 和 v’ <strong>相关联</strong>。</p>
+<p>度<script type="math/tex">TD(v)</script>(degree)：顶点关联的边的数目</p>
+<p>入度<script type="math/tex">ID(v)</script>(indegree)：</p>
+<p>出度<script type="math/tex">OD(v)</script>(outdegree)：</p>
+<p>图的度数之和等于边的两倍：<script type="math/tex">e=\frac{1}{2}\sum^n_{i=1}TD(v_i)</script></p>
 <p>路径：</p>
 <p>回路/环：第一个顶点和最后一个顶点相同的路径</p>
 <p>简单路径：顶点不重复出现的路径</p>
@@ -527,17 +526,32 @@
 <ul>
 <li>邻接矩阵：表示序号为0-n的元素之间的邻接关系（两点间是否有弧）</li>
 </ul>
-<p>$$<br>\left[<br>\begin{matrix}<br>0 &amp; 1 &amp; 1 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 1 \<br>1 &amp; 0 &amp; 0 &amp; 0 \<br>0 &amp; 1 &amp; 1 &amp; 0<br>\end{matrix}<br>\right]<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 \\ 
+0 & 1 & 1 & 0
+\end{matrix}
+\right]</script><ul>
 <li>网的邻接矩阵（带权）：</li>
 </ul>
-<p>$$<br>\left[<br>\begin{matrix}<br>∞ &amp; 5 &amp; 7 &amp; ∞ \<br>∞ &amp; ∞ &amp; ∞ &amp; 1 \<br>12 &amp; 4 &amp; ∞ &amp; ∞ \<br>∞ &amp; 2 &amp; 1 &amp; ∞<br>\end{matrix}<br>\right]<br>$$</p>
-<h4 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h4><p>图的一种链式存储结构，反映的是节点的出度邻接情况。</p>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+∞ & 5 & 7 & ∞ \\
+∞ & ∞ & ∞ & 1 \\
+12 & 4 & ∞ & ∞ \\ 
+∞ & 2 & 1 & ∞
+\end{matrix}
+\right]</script><h4 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h4><p>图的一种链式存储结构，反映的是节点的出度邻接情况。</p>
 <h4 id="逆邻接表"><a href="#逆邻接表" class="headerlink" title="逆邻接表"></a>逆邻接表</h4><p>反映的是节点的入度邻接情况</p>
 <p><img src="/Blog/数据结构/邻接表和逆邻接表.png" alt="邻接表和逆邻接表"></p>
 <h4 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h4><p>有向图的一种优化存储结构。</p>
 <p>十字链表的好处就是因为把邻接表和逆邻接表整合在了一起，这样既容易找到以vi为尾的弧，也容易找到以vi为头的弧，因而容易求得顶点的出度和入度。除了结构复杂一点外，其创建图的时间复杂度和邻接表是相同的，因此在某些有向图的应用中，是很有用的工具。</p>
 <p>顶点结点</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -554,7 +568,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>弧结点</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -575,10 +591,12 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p><img src="/Blog/数据结构/图的十字链表结构.jpg" alt="图的十字链表结构"></p>
 <h4 id="邻接多重表"><a href="#邻接多重表" class="headerlink" title="邻接多重表"></a>邻接多重表</h4><p>无向图的一种链式存储结构</p>
-<p>边：<br>| mark     | ivex | ilink                   | jvex | jlink                   | info   |<br>| ——– | —- | ———————– | —- | ———————– | —— |<br>| 搜索标记 | 顶点 | 下一条依附于 i 顶点的边 | 顶点 | 下一条依附与 j 顶点的边 | 边信息 |</p>
+<p>边：<br>| mark     | ivex | ilink                   | jvex | jlink                   | info   |<br>| ———— | —— | ———————————- | —— | ———————————- | ——— |<br>| 搜索标记 | 顶点 | 下一条依附于 i 顶点的边 | 顶点 | 下一条依附与 j 顶点的边 | 边信息 |</p>
 <p>顶点：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -593,11 +611,12 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h3><h4 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h4><p>类似树的先序遍历，先序遍历未被搜索的顶点</p>
-<p>如：下面的顺序是$$v_1→v_2→v_4→v_8→v_5→v_3→v_6→v_7$$</p>
+<p>如：下面的顺序是<script type="math/tex">v_1→v_2→v_4→v_8→v_5→v_3→v_6→v_7</script></p>
 <p><img src="/Blog/数据结构/深度优先搜索.jpg" alt="深度优先搜索"></p>
 <h4 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h4><p>类似树的按层次遍历，从v出发依次访问未被访问过的v的邻接点</p>
-<p>如：上面的广度优先搜索顺序是：$$v_1→v_2→v_3→v_4→v_5→v_6→v_7→v_8$$</p>
+<p>如：上面的广度优先搜索顺序是：<script type="math/tex">v_1→v_2→v_3→v_4→v_5→v_6→v_7→v_8</script></p>
 <h3 id="图的连通性问题"><a href="#图的连通性问题" class="headerlink" title="图的连通性问题"></a>图的连通性问题</h3><h4 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h4><p>最小代价生成树（权值之和最小）</p>
 <p>Prim算法</p>
 <p>适用于求边稠密的网的最小生成树</p>
@@ -644,7 +663,7 @@
   <p><span>本文标题:</span><a href="/Blog/数据结构/">数据结构</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2017年08月06日 - 19:08</p>
-  <p><span>最后更新:</span>2018年09月10日 - 17:09</p>
+  <p><span>最后更新:</span>2018年09月21日 - 11:09</p>
   <p><span>原始链接:</span><a href="/Blog/数据结构/" title="数据结构">https://uncleaaron.github.io/Blog/数据结构/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/数据结构/"  aria-label="复制成功！"></i></span>
   </p>
@@ -692,8 +711,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/Blog/设计模式/" rel="next" title="设计模式">
+                <i class="fa fa-chevron-left"></i> 设计模式
               </a>
             
           </div>
@@ -702,8 +721,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/设计模式/" rel="prev" title="设计模式">
-                设计模式 <i class="fa fa-chevron-right"></i>
+              <a href="/Blog/Spring/Spring/" rel="prev" title="Spring 复习">
+                Spring 复习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -785,7 +804,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -796,7 +815,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -902,7 +921,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共83.7k字</span>
 </div>
 
         
@@ -1062,6 +1081,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

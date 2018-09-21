@@ -404,7 +404,8 @@
 <p>N：向上遍历光标</p>
 <h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>(:s/x/y普通替换本行第一个。最后加/g替换本行全部 , :%s/x/y 替换全部行第一个，这基础上加/g替换全文)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:s/old/new		<span class="comment"># 替换本行首次出现的old</span></span><br><span class="line">:s/old/new/g	<span class="comment"># 替换本行全部</span></span><br><span class="line">:%s/old/new/g	<span class="comment"># 替换全文（全部行全部）</span></span><br><span class="line">:n,m s/old/new/g	<span class="comment">#替换n-m行的全部old</span></span><br></pre></td></tr></table></figure>
-<h2 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h2><table>
+<h2 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">h</th>
@@ -422,6 +423,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">k j h l	<span class="comment"># 上下左右</span></span><br><span class="line">0	<span class="comment"># 行首</span></span><br><span class="line">^	<span class="comment"># 行首</span></span><br><span class="line">$	<span class="comment"># 行尾</span></span><br><span class="line">w	<span class="comment"># 下一个字首</span></span><br><span class="line">b	<span class="comment"># 当前字首，已经在字首则到上个字首</span></span><br><span class="line">e	<span class="comment"># 当前字尾，已经在字尾则到下个字尾</span></span><br><span class="line">nw	<span class="comment"># 右移n字</span></span><br><span class="line">nb	<span class="comment"># 左移n字</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">H	<span class="comment"># 当前屏幕最顶端（Highest）</span></span><br><span class="line">nH	<span class="comment"># 当前屏第n行</span></span><br><span class="line">gg	<span class="comment"># 文首</span></span><br><span class="line">G	<span class="comment"># 文末</span></span><br><span class="line">n+	<span class="comment"># 后跳n行</span></span><br><span class="line">n-	<span class="comment"># 前跳n行</span></span><br><span class="line">nG	<span class="comment"># 跳到第n行</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(	<span class="comment"># 本句首</span></span><br><span class="line">)	<span class="comment"># 下一句首</span></span><br><span class="line">&#123;	<span class="comment"># 本段首</span></span><br><span class="line">&#125;	<span class="comment"># 本段末</span></span><br></pre></td></tr></table></figure>
@@ -562,7 +564,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -573,7 +575,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -679,7 +681,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共83.7k字</span>
 </div>
 
         
@@ -839,6 +841,8 @@
   
 
   
+  
+
 
   
 

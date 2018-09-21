@@ -354,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,148
+                  1,147
                 </span>
               
 
@@ -412,7 +412,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        i = <span class="number">0</span>;	<span class="comment">// 可以给变量赋值</span></span><br><span class="line">        System.out.println(i);	<span class="comment">// 这是错误的，不可以访问定义在static语句块之后的变量</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>父类的类构造器一定会先执行完毕于子类的类构造器（也意味着其静态语句块先于子类的变量赋值操作）</li>
-<li>接口没有静态语句块，但还有变量初始化的赋值操作，也会生成\&lt;client>()方法，但其不需要先执行父接口的类构造器（因为接口只有真正引用到了父接口时，父接口才会初始化)</li>
+<li>接口没有静态语句块，但还有变量初始化的赋值操作，也会生成\<client\>()方法，但其不需要先执行父接口的类构造器（因为接口只有真正引用到了父接口时，父接口才会初始化)</client\></li>
 </ul>
 <h1 id="类加载的时机"><a href="#类加载的时机" class="headerlink" title="类加载的时机"></a>类加载的时机</h1><p>类中有且仅有4种主动引用情况执行类初始化，其他情况（被动引用）都不会初始化类</p>
 <ol>
@@ -601,7 +601,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -612,7 +612,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -718,7 +718,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共83.7k字</span>
 </div>
 
         
@@ -878,6 +878,8 @@
   
 
   
+  
+
 
   
 

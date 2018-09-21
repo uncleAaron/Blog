@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="JavaWeb,Java 开发问题总结,Spring," />
+  <meta name="keywords" content="Java 开发问题总结,JavaWeb,Spring," />
 
 
 
@@ -88,7 +88,7 @@
 
 
 <meta name="description" content="前言 今天用Sping Boot2.0.3写项目编写WebMvc的JavaConfig时，发现WebMvcConfigurerAdapter已经被标注弃用，便去找了下Spring的API，发现官方开始推荐直接实现WebMvcConfigurer接口的方式来配置SpringMVC。（原因在Java8接口默认方法替代了原来适配器的作用）🖊">
-<meta name="keywords" content="JavaWeb,Java 开发问题总结,Spring">
+<meta name="keywords" content="Java 开发问题总结,JavaWeb,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebMvcConfigurerAdapter在Spring5.0中被弃用">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/JavaWeb/WebMvcConfigurerAdaptor在Spring5.0被弃用/index.html">
@@ -376,7 +376,7 @@
 <h2 id="在SpringBoot2-0及Spring-5-0-WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种"><a href="#在SpringBoot2-0及Spring-5-0-WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种" class="headerlink" title="在SpringBoot2.0及Spring 5.0 WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种"></a>在SpringBoot2.0及Spring 5.0 WebMvcConfigurerAdapter已被废弃，目前找到解决方案就有两种</h2><hr>
 <h3 id="1-直接实现WebMvcConfigurer-（官方推荐）"><a href="#1-直接实现WebMvcConfigurer-（官方推荐）" class="headerlink" title="1. 直接实现WebMvcConfigurer （官方推荐）"></a>1. 直接实现WebMvcConfigurer （官方推荐）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfg</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="comment">//todo</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="2-直接继承WebMvcConfigurationSupport"><a href="#2-直接继承WebMvcConfigurationSupport" class="headerlink" title="2. 直接继承WebMvcConfigurationSupport"></a>2. 直接继承WebMvcConfigurationSupport</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfg</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="WebMvcConfigurerAdapter的官方api描述"><a href="#WebMvcConfigurerAdapter的官方api描述" class="headerlink" title="WebMvcConfigurerAdapter的官方api描述"></a>WebMvcConfigurerAdapter的官方api描述</h3><p>WebMvcConfigurerAdapter – Deprecated.<br>as of 5.0 WebMvcConfigurer has default methods (made possible by a Java 8 baseline) and can be implemented directly without the need for this adapter.<br>An implementation of WebMvcConfigurer with empty methods allowing subclasses to override only the methods they’re interested in.</p>
+<h3 id="WebMvcConfigurerAdapter的官方api描述"><a href="#WebMvcConfigurerAdapter的官方api描述" class="headerlink" title="WebMvcConfigurerAdapter的官方api描述"></a>WebMvcConfigurerAdapter的官方api描述</h3><p>WebMvcConfigurerAdapter — Deprecated.<br>as of 5.0 WebMvcConfigurer has default methods (made possible by a Java 8 baseline) and can be implemented directly without the need for this adapter.<br>An implementation of WebMvcConfigurer with empty methods allowing subclasses to override only the methods they’re interested in.</p>
 <blockquote>
 <p>Java8中WebMvcConfigurer实现了默认方法，不需要这个适配器了。</p>
 <p>因为WebMvcConfigurer接口实现了默认方法，使用者可以自由实现想配置的方法</p>
@@ -436,9 +436,9 @@
       
         <div class="post-tags">
           
-            <a href="/Blog/tags/JavaWeb/" rel="tag"># JavaWeb</a>
-          
             <a href="/Blog/tags/Java-开发问题总结/" rel="tag"># Java 开发问题总结</a>
+          
+            <a href="/Blog/tags/JavaWeb/" rel="tag"># JavaWeb</a>
           
             <a href="/Blog/tags/Spring/" rel="tag"># Spring</a>
           
@@ -453,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/Linux/Linux程序设计/" rel="next" title="Linux程序设计">
-                <i class="fa fa-chevron-left"></i> Linux程序设计
+              <a href="/Blog/JavaWeb/SpringBoot2.x中拦截器对静态资源的影响/" rel="next" title="SpringBoot2.x中静态资源会被自定义拦截器拦截">
+                <i class="fa fa-chevron-left"></i> SpringBoot2.x中静态资源会被自定义拦截器拦截
               </a>
             
           </div>
@@ -463,8 +463,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/JavaWeb/SpringBoot2.x中拦截器对静态资源的影响/" rel="prev" title="SpringBoot2.x中静态资源会被自定义拦截器拦截">
-                SpringBoot2.x中静态资源会被自定义拦截器拦截 <i class="fa fa-chevron-right"></i>
+              <a href="/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/" rel="prev" title="领域模型中的实体类的4种类型VO,DTO,DO,PO">
+                领域模型中的实体类的4种类型VO,DTO,DO,PO <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,7 +546,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -557,7 +557,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -663,7 +663,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共83.7k字</span>
 </div>
 
         
@@ -823,6 +823,8 @@
   
 
   
+  
+
 
   
 

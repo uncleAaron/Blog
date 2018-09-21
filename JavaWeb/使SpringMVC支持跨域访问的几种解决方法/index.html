@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="JavaWeb,Java 开发问题总结," />
+  <meta name="keywords" content="Java 开发问题总结,JavaWeb," />
 
 
 
@@ -88,7 +88,7 @@
 
 
 <meta name="description" content="前言 由于最近又开始写博客，刚好碰到的开发问题都重新总结一下。 今天在写Controller的时候又想起跨域访问支持的问题，在这里总结一下我以前用过的方法🖊">
-<meta name="keywords" content="JavaWeb,Java 开发问题总结">
+<meta name="keywords" content="Java 开发问题总结,JavaWeb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使SpringMVC支持跨域访问的几种解决方法">
 <meta property="og:url" content="https://uncleaaron.github.io/Blog/JavaWeb/使SpringMVC支持跨域访问的几种解决方法/index.html">
@@ -385,7 +385,7 @@
 <li>写一个Conroller的基类Cors，继承<strong><code>WebMvcConfigurerAdapter</code></strong>类，并重写<strong><code>addCorsMappings(CorsRegistry)</code></strong>方法</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.CorsRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cors</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addMapping(<span class="string">"/**"</span>)</span><br><span class="line">        .allowedOrigins(<span class="string">"*"</span>)</span><br><span class="line">        .allowedMethods(<span class="string">"GET"</span>, <span class="string">"POST"</span>, <span class="string">"PUT"</span>, <span class="string">"OPTIONS"</span>, <span class="string">"DELETE"</span>, <span class="string">"PATCH"</span>)</span><br><span class="line">          .allowCredentials(<span class="keyword">true</span>).maxAge(<span class="number">3600</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
+<ol>
 <li>实现的Controller继承这个基类Cors</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerStarter</span> <span class="keyword">extends</span> <span class="title">Cors</span> </span>&#123;	<span class="comment">//继承了刚才实现的WebMvcConfigurerAdapter的子类Cors，从而实现支持跨域访问</span></span><br><span class="line">    <span class="comment">// 省略具体方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -442,9 +442,9 @@
       
         <div class="post-tags">
           
-            <a href="/Blog/tags/JavaWeb/" rel="tag"># JavaWeb</a>
-          
             <a href="/Blog/tags/Java-开发问题总结/" rel="tag"># Java 开发问题总结</a>
+          
+            <a href="/Blog/tags/JavaWeb/" rel="tag"># JavaWeb</a>
           
         </div>
       
@@ -457,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Blog/JavaWeb/SpringBoot2.x中拦截器对静态资源的影响/" rel="next" title="SpringBoot2.x中静态资源会被自定义拦截器拦截">
-                <i class="fa fa-chevron-left"></i> SpringBoot2.x中静态资源会被自定义拦截器拦截
+              <a href="/Blog/Linux/Linux程序设计/" rel="next" title="Linux程序设计">
+                <i class="fa fa-chevron-left"></i> Linux程序设计
               </a>
             
           </div>
@@ -467,8 +467,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Blog/Java/领域模型中的实体类的4种类型VO-DTO-DO-PO/" rel="prev" title="领域模型中的实体类的4种类型VO,DTO,DO,PO">
-                领域模型中的实体类的4种类型VO,DTO,DO,PO <i class="fa fa-chevron-right"></i>
+              <a href="/Blog/JavaWeb/SpringBoot2.x中拦截器对静态资源的影响/" rel="prev" title="SpringBoot2.x中静态资源会被自定义拦截器拦截">
+                SpringBoot2.x中静态资源会被自定义拦截器拦截 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -550,7 +550,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -561,7 +561,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -667,7 +667,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共83.7k字</span>
 </div>
 
         
@@ -827,6 +827,8 @@
   
 
   
+  
+
 
   
 

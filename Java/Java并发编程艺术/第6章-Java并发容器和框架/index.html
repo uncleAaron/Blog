@@ -443,8 +443,6 @@
 </ol>
 <blockquote>
 <p> 由上看出，tail不总是尾节点，只有当tail的next不为空，才修改tail为尾节点</p>
-</blockquote>
-<blockquote>
 <p>Java使用一个HOPS变量（默认为1）来控制更新tail的频率，以减少CAS更新tail来提高入队的效率。<br>当tail节点和尾节点的距离大于等于HOPS时，才会更新tail节点。</p>
 </blockquote>
 <p><img src="/Blog/Java/Java并发编程艺术/第6章-Java并发容器和框架/ConcurrentLinkedQueue入队示意.png" alt="ConcurrentLinkedQueue入队示意"></p>
@@ -458,6 +456,7 @@
 <p>阻塞式插入：当队列满时，阻塞插入元素的线程，直到队列不满。</p>
 <p>阻塞式移除：当队列为空时，获取元素的线程会等待队列变非空。</p>
 <p>阻塞队列支持的插入和移除操作的4种处理方式：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -492,10 +491,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <blockquote>
 <p>记忆方式：offer和poll都有o， put和take都有t</p>
-</blockquote>
-<blockquote>
 <p>如果是无界队列，put或offer永远不会被阻塞，使用offer时永远返回true</p>
 </blockquote>
 <p>实现原理：等待-通知机制，用的是native的park方法和unpark方法</p>
@@ -713,7 +711,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -724,7 +722,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -830,7 +828,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共83.7k字</span>
 </div>
 
         
@@ -990,6 +988,8 @@
   
 
   
+  
+
 
   
 

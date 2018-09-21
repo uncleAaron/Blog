@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/13.png">
 <meta property="og:image" content="http://blog.codinglabs.org/uploads/pictures/theory-of-mysql-index/14.png">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/874710/201612/874710-20161214144949198-761711481.png">
-<meta property="og:updated_time" content="2018-09-08T00:43:03.279Z">
+<meta property="og:updated_time" content="2018-09-11T05:51:57.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql索引">
 <meta name="twitter:description" content="前言  索引分为主键 Primary Key、普通索引 Index、唯一索引 Unique、全文索引 FullText、空间索引 Spatial  Mysql的存储引擎分为InnoDB、MyISAM、Memory 其中InnoDB和MyISAM普遍使用B+Tree实现索引，但是InnoDB的索引结构就是数据文件本身，MyISAM的索引文件与数据分离 索引的最左匹配原则和索引使用策略 使用 Expl">
@@ -419,6 +419,7 @@
 <h3 id="全文索引（FullText）"><a href="#全文索引（FullText）" class="headerlink" title="全文索引（FullText）"></a>全文索引（FullText）</h3><p>全文索引是一种特殊类型的索引，通过建立倒排索引，快速匹配文档的方式。它查找的是文本中的关键字，而不是直接比较索引中的值。全文索引跟其它几种索引类型的匹配方式完全不一样。它有许多需要注意的细节，比如停用词、词干和复数、布尔搜索等。另外，<strong>只有字段类型为 <code>char</code>、<code>varchar</code> 和 <code>text</code>的字段才能设置全文索引</strong>。</p>
 <h3 id="空间索引（Spatial）"><a href="#空间索引（Spatial）" class="headerlink" title="空间索引（Spatial）"></a>空间索引（Spatial）</h3><p>空间索引用于地理数据存储，无需前缀查询，而是会从所有维度来索引数据。 </p>
 <p>下表是 MySQL 中常见的存储引擎对索引类型的支持情况：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -461,7 +462,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="索引数据结构类型（Index-Type）"><a href="#索引数据结构类型（Index-Type）" class="headerlink" title="索引数据结构类型（Index Type）"></a>索引数据结构类型（Index Type）</h3><p>前面说到，不同存储引擎的索引的工作方式并不一样，这是因为存储引擎底层使用的数据结构及算法不一样。在 MySQL 中，某些存储引擎允许在创建索引时指定索引的数据结构类型，下表是常见存储引擎支持的索引的数据结构类型：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -484,6 +487,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <blockquote>
 <p>需要注意的是，用户不能为全文索引和空间索引指定数据结构类型：全文索引的实现取决于存储引擎，而空间索引被实现为 RTREE 数据结构。 </p>
 </blockquote>
@@ -720,7 +724,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -731,7 +735,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -837,7 +841,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共83.7k字</span>
 </div>
 
         
@@ -997,6 +1001,8 @@
   
 
   
+  
+
 
   
 

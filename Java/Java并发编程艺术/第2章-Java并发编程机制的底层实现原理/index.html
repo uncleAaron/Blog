@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="StormAaron的技术站">
 <meta property="og:description" content="前言 本章主要讲解了volatile以及synchronized的原理和语义，以及Java中的原子操作CAS等。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-10T09:23:42.077Z">
+<meta property="og:updated_time" content="2018-09-18T04:27:54.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第2章 Java并发编程机制的底层实现原理">
 <meta name="twitter:description" content="前言 本章主要讲解了volatile以及synchronized的原理和语义，以及Java中的原子操作CAS等。">
@@ -354,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,985
+                  1,996
                 </span>
               
 
@@ -415,6 +415,7 @@
 <p>而<strong>synchronized用的锁是存在Java对象头里的</strong></p>
 <h3 id="2-1-Java对象头"><a href="#2-1-Java对象头" class="headerlink" title="2.1. Java对象头"></a>2.1. Java对象头</h3><p>synchronized用的锁是存在Java对象头里的</p>
 <p>对象头里的Mark Word默认存对象的HashCode，分代年龄和锁标记位</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -463,8 +464,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="2-2-锁的升级和对比"><a href="#2-2-锁的升级和对比" class="headerlink" title="2.2. 锁的升级和对比"></a>2.2. 锁的升级和对比</h3><p>为了减少获得锁和释放锁的性能消耗，引入“偏向锁”和“轻量级锁”</p>
-<p>锁从低到高的4个状态：无锁 –&gt; 偏向锁 –&gt; 轻量级锁 –&gt; 重量级锁</p>
+<p>锁从低到高的4个状态：无锁 —&gt; 偏向锁 —&gt; 轻量级锁 —&gt; 重量级锁</p>
 <p>这几个状态会随着竞争逐渐升级（不可以降级，目的是为了提高获得/释放锁的效率）</p>
 <h4 id="1-偏向锁"><a href="#1-偏向锁" class="headerlink" title="1. 偏向锁"></a>1. 偏向锁</h4><p>存在现象：大多数情况下，锁不仅不存在多线程竞争，而且总是由同一个线程多次获得，为了让线程获得锁的代价更低而引入偏向锁。</p>
 <p>原理：当一个线程访问同步块并获取锁时，会在对象头和栈帧中的锁记录里存储锁偏向的线程ID，以后该线程在进出同步块时不需要进行CAS操作来加锁或解锁，只需要简单的测试一下对象头的MarkWord里是否存储着指向当前线程的偏向锁。（偏向锁在Java6和Java7内是默认启用的）</p>
@@ -473,7 +475,8 @@
 <h4 id="2-轻量级锁"><a href="#2-轻量级锁" class="headerlink" title="2. 轻量级锁"></a>2. 轻量级锁</h4><p>加锁：JVM在当前线程的栈帧中创建用于存储锁的空间，并拷贝对象头中的MarkWord到锁记录中，再由线程尝试将对象头中的MarkWord替换为指向锁的指针。成功则获得锁，失败则有竞争，线程会采用自旋来获得锁（消耗CPU，为了避免无用的自旋，有必要升级为重量级锁）</p>
 <p>解锁：使用CAS将拷贝的MarkWord替换回对象头。如果成功，表示没有竞争发生；如果失败，则当前锁存在竞争，锁会膨胀成重量级锁。</p>
 <h4 id="3-重量级锁"><a href="#3-重量级锁" class="headerlink" title="3. 重量级锁"></a>3. 重量级锁</h4><p>线程试图获取重量级锁的时候，都会被阻塞，当持有锁的线程释放锁后会唤醒这些线程，然后进行新一轮的竞争</p>
-<h4 id="锁的优缺点和对比"><a href="#锁的优缺点和对比" class="headerlink" title="锁的优缺点和对比"></a>锁的优缺点和对比</h4><table>
+<h4 id="锁的优缺点和对比"><a href="#锁的优缺点和对比" class="headerlink" title="锁的优缺点和对比"></a>锁的优缺点和对比</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">锁</th>
@@ -503,6 +506,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="三、原子操作的实现原理"><a href="#三、原子操作的实现原理" class="headerlink" title="三、原子操作的实现原理"></a>三、原子操作的实现原理</h2><h4 id="3-1-实现方法："><a href="#3-1-实现方法：" class="headerlink" title="3.1. 实现方法："></a>3.1. 实现方法：</h4><ol>
 <li>缓存加锁/总线加锁：保证基本内存操作原子性</li>
 <li>缓存锁定/总线锁定：保证跨缓存行或跨页表访问等复杂的内存操作的原子性</li>
@@ -515,7 +519,7 @@
 <p>解决思路：使用版本号</p>
 <p>JDK的Atomic包里提供了AtomicStampedRefence来解决ABA问题</p>
 </li>
-<li><p>循环时间长开销大。如果CAS长时间不成功，CPU开销会很大。</p>
+<li><p>循环时间长开销大。如果CAS长时间不成功，CPU开销会很大。（所以一般重试次数要限制）</p>
 </li>
 <li><p>只能保证一个共享变量的原子操作。</p>
 <p>解决办法：</p>
@@ -544,7 +548,7 @@
   <p><span>本文标题:</span><a href="/Blog/Java/Java并发编程艺术/第2章-Java并发编程机制的底层实现原理/">第2章 Java并发编程机制的底层实现原理</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年04月28日 - 20:04</p>
-  <p><span>最后更新:</span>2018年09月10日 - 17:09</p>
+  <p><span>最后更新:</span>2018年09月18日 - 12:09</p>
   <p><span>原始链接:</span><a href="/Blog/Java/Java并发编程艺术/第2章-Java并发编程机制的底层实现原理/" title="第2章 Java并发编程机制的底层实现原理">https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第2章-Java并发编程机制的底层实现原理/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第2章-Java并发编程机制的底层实现原理/"  aria-label="复制成功！"></i></span>
   </p>
@@ -685,7 +689,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -696,7 +700,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -802,7 +806,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共83.7k字</span>
 </div>
 
         
@@ -962,6 +966,8 @@
   
 
   
+  
+
 
   
 

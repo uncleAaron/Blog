@@ -96,7 +96,7 @@
 <meta property="og:description" content="前言 本章主要讲解Java的线程Thread，线程的6个状态，Daemon守护线程，线程的生存周期操作（构造、启动、中断、终止），以及线程的几种通信方式：volatile和synchronized提供的内存可见性保障，等待/通知机制wait/notify，管道流，Thread.join() 以及 ThreadLocal变量。 最后还示例了线程池、数据库连接池的简单实现，篇幅较大，暂时未补充，需要自">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第4章-Java并发编程基础/图4-1%20Java线程状态变迁.jpg">
-<meta property="og:updated_time" content="2018-09-17T05:28:00.794Z">
+<meta property="og:updated_time" content="2018-09-18T05:16:53.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第4章 Java并发编程基础">
 <meta name="twitter:description" content="前言 本章主要讲解Java的线程Thread，线程的6个状态，Daemon守护线程，线程的生存周期操作（构造、启动、中断、终止），以及线程的几种通信方式：volatile和synchronized提供的内存可见性保障，等待/通知机制wait/notify，管道流，Thread.join() 以及 ThreadLocal变量。 最后还示例了线程池、数据库连接池的简单实现，篇幅较大，暂时未补充，需要自">
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,545
+                  3,537
                 </span>
               
 
@@ -410,6 +410,7 @@
 </ul>
 <p>但实际上有些JVM或者操作系统会无视Priority的设定，所以<strong>线程优先级不能作为程序正确性的依赖</strong>。</p>
 <h3 id="1-2-线程的状态"><a href="#1-2-线程的状态" class="headerlink" title="1.2. 线程的状态"></a>1.2. 线程的状态</h3><p><strong>表4-1 Java线程的状态（6种）</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -451,6 +452,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p><img src="/Blog/Java/Java并发编程艺术/第4章-Java并发编程基础/图4-1 Java线程状态变迁.jpg" alt="图4-1 Java线程状态变迁"></p>
 <h3 id="1-3-Daemon线程-守护线程"><a href="#1-3-Daemon线程-守护线程" class="headerlink" title="1.3. Daemon线程(守护线程)"></a>1.3. Daemon线程(守护线程)</h3><p>Daemon线程是一种支持型线程，主要被用作程序的后台调度和支持性工作。</p>
 <p>使用threadA.setDaemon(true)将线程设置为Daemon线程（Daemon需要在启动线程前设置）</p>
@@ -493,6 +495,7 @@
 <p>每个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，执行方法的线程必须先获取到该对象的监视器才能进去同步块或者同步方法，没有获取到监视器的线程将会被阻塞在入口，进入BLOCKED状态和同步队列（释放操作会唤醒同步队列中的线程，使其重新尝试获取监视器）。</p>
 <h3 id="3-2-等待-通知机制（wait-notify）"><a href="#3-2-等待-通知机制（wait-notify）" class="headerlink" title="3.2.等待/通知机制（wait/notify）"></a>3.2.等待/通知机制（wait/notify）</h3><p>简单的<strong>生产者/消费者模式</strong>：一个线程修改了一个对象的值，而另一个线程感知到了变化，进而进行相应操作（开始于一个生产者线程，执行于另一个消费者线程）。隔离了做什么(What)和怎么做(How)，在功能上解耦。</p>
 <p>相关监视器方法：（<code>等待/通知的相关方法都定义在java.lang.Object类上</code>，执行这些方法前，需要配合<code>synchronzied</code>对调用的对象加锁实现等待/通知机制，这些锁是针对同一个Object对象进行操作的，）</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -528,6 +531,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>等待/通知机制的经典范式</p>
 <p><strong>等待方（生产者）：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(Object 对象) &#123;	<span class="comment">// 1. 获得对象锁</span></span><br><span class="line">    <span class="keyword">while</span> (条件不满足) &#123;</span><br><span class="line">        对象.wait();		<span class="comment">// 2. 如果条件不满足，则调用wait()，被通知后仍然要检查条件</span></span><br><span class="line">    &#125;</span><br><span class="line">    对应的处理逻辑		<span class="comment">// 3. 直到条件满足后才执行相应逻辑</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -553,7 +557,7 @@
 </ul>
 <p>示例代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Join</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Thread previous = Thread.currentThread();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			<span class="comment">// 每个线程拥有前一个线程的引用，需要等待前一个线程终止，才能从等待中返回</span></span><br><span class="line">			Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Domino(previous), String.valueOf(i));</span><br><span class="line">			thread.start();</span><br><span class="line">			previous = thread;</span><br><span class="line">		&#125;</span><br><span class="line">		TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">		System.out.println(Thread.currentThread().getName() + <span class="string">" terminate."</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Domino</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Thread thread;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Domino</span><span class="params">(Thread thread)</span> </span>&#123;	<span class="comment">//在此处引入别的进程</span></span><br><span class="line">			<span class="keyword">this</span>.thread = thread;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				thread.join();	<span class="comment">// 此处调用Thread.join()</span></span><br><span class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;&#125;</span><br><span class="line">			System.out.println(Thread.currentThread().getName() + <span class="string">" terminate."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-5-ThreadLocal-线程变量"><a href="#3-5-ThreadLocal-线程变量" class="headerlink" title="3.5. ThreadLocal 线程变量"></a>3.5. ThreadLocal 线程变量</h3><p>ThreadLocal线程变量：是一个以 <strong>\&lt;ThreadLocal为键，任意Object为值></strong> 的key-value结构(Entry)，存放在线程自己的ThreadLocalMap中。（一个线程可以拥有多个ThreadLocal变量）</p>
+<h3 id="3-5-ThreadLocal-线程变量"><a href="#3-5-ThreadLocal-线程变量" class="headerlink" title="3.5. ThreadLocal 线程变量"></a>3.5. ThreadLocal 线程变量</h3><p>ThreadLocal线程变量：是一个以 <strong>\<threadlocal为键，任意object为值\></threadlocal为键，任意object为值\></strong> 的key-value结构(Entry)，存放在线程自己的ThreadLocalMap中。（一个线程可以拥有多个ThreadLocal变量）</p>
 <p>这个Map被附带绑定在线程上，也就是说一个线程可以通过一个ThreadLocal对象查询到绑定在该线程上的一个值。（每个线程的static ThreadLocal都不一样）</p>
 <p>构造后，需先使用set(T)设置值，再使用get()方法获取值，若不调用set(T)，会抛出空指针异常。 如果想在get之前不需要调用set就能正常访问的话，必须重写initialValue()方法：这样如果没有先set的话，即在map中查找不到对应的存储，则会通过调用setInitialValue方法返回。</p>
 <h4 id="注意：ThreadLocal的内存泄漏问题"><a href="#注意：ThreadLocal的内存泄漏问题" class="headerlink" title="注意：ThreadLocal的内存泄漏问题"></a>注意：ThreadLocal的内存泄漏问题</h4><p>ThreadLocalMap的ThreadLocal的key用的是弱引用，这样子的话，在GC的时候就一定会被回收掉，导致只有value还被ThreadLocal强引用，导致内存泄漏。所以使用过后务必要进行remove()</p>
@@ -579,7 +583,7 @@
   <p><span>本文标题:</span><a href="/Blog/Java/Java并发编程艺术/第4章-Java并发编程基础/">第4章 Java并发编程基础</a></p>
   <p><span>文章作者:</span><a href="/Blog" title="访问 Aaron.H 的个人博客">Aaron.H</a></p>
   <p><span>发布时间:</span>2018年05月01日 - 20:05</p>
-  <p><span>最后更新:</span>2018年09月17日 - 13:09</p>
+  <p><span>最后更新:</span>2018年09月18日 - 13:09</p>
   <p><span>原始链接:</span><a href="/Blog/Java/Java并发编程艺术/第4章-Java并发编程基础/" title="第4章 Java并发编程基础">https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第4章-Java并发编程基础/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://uncleaaron.github.io/Blog/Java/Java并发编程艺术/第4章-Java并发编程基础/"  aria-label="复制成功！"></i></span>
   </p>
@@ -720,7 +724,7 @@
               
                 <a href="/Blog/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -731,7 +735,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/Blog/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -837,7 +841,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.2k字</span>
+  <span class="post-count">博客全站共83.7k字</span>
 </div>
 
         
@@ -997,6 +1001,8 @@
   
 
   
+  
+
 
   
 
